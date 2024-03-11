@@ -1,0 +1,93 @@
+name: my_nfc
+description: "Read/Write NFC"
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  # Media
+  iconsax: ^0.0.8
+  nfc_manager: ^3.4.0
+
+  # UI
+  flutter_native_splash : ^2.3.10
+  lottie: ^3.0.0
+
+  # Local DB
+  shared_preferences: ^2.2.2
+
+  # network
+  http: ^1.1.2
+  dio_http_cache: ^0.3.0
+  webview_flutter: ^4.4.4
+
+  # state management
+  provider: ^6.1.1
+
+  # Others
+  go_router: ^13.2.0
+  encrypt: ^5.0.3
+  fluttertoast: ^8.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+    
+  flutter_lints: ^3.0.0
+  
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/animations/
+
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Thin.ttf
+          weight: 100
+          style: normal
+
+        - asset: assets/fonts/Inter-ExtraLight.ttf
+          weight: 200
+          style: normal
+
+        - asset: assets/fonts/Inter-Light.ttf
+          weight: 300
+          style: normal
+
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+          style: normal
+
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+          style: normal
+
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+          style: normal
+
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
+          style: normal
+
+        - asset: assets/fonts/Inter-ExtraBold.ttf
+          weight: 800
+          style: normal
+
+        - asset: assets/fonts/Inter-Black.ttf
+          weight: 900
+          style: normal
