@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import '../services/nfc_service.dart';
 import '../shared/dimens.dart';
 import '../shared/drawables.dart';
@@ -101,6 +102,15 @@ class _ScanViewState extends State<ScanView> {
               onPressed: () {
                 isWritable = false;
                 HapticFeedback.lightImpact();
+                NFC.instance.write(
+                  records: [
+                    NdefRecord.createUri(Uri.parse(
+                        'https://www.facebook.com/diufoysal?mibextid=ZbWKwL'))
+                  ],
+                  callback: (ndef) {
+                    setState(() => isWritable = ndef.isWritable);
+                  },
+                );
               },
               backgroundColor: theme.colorScheme.tertiary,
               shape: const StadiumBorder(),
@@ -123,11 +133,13 @@ class _ScanViewState extends State<ScanView> {
                   ..onTap = () {
                     HapticFeedback.lightImpact();
                     isWritable = false;
-                    NFC.instance.read(
-                      callback: (ndef, data) {
-                        setState(() => isWritable = ndef.isWritable);
-                      },
-                    );
+                    NFC.instance
+                      ..stop()
+                      ..read(
+                        callback: (ndef, data) {
+                          setState(() => isWritable = ndef.isWritable);
+                        },
+                      );
                   },
               ),
             ],

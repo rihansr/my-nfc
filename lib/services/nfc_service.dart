@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import '../shared/strings.dart';
@@ -12,23 +15,28 @@ class NFC {
 
   Future<void> read({Function(Ndef, Map<String, dynamic>)? callback}) async {
     if (await isAvailable()) {
-      stop();
-      NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
-        Ndef? ndef = Ndef.from(tag);
-        if (ndef != null) callback?.call(ndef, tag.data);
-        _log(tag.data.toString(), tag: "Read Data", logOnly: true);
-        stop();
-      });
+      NfcManager.instance.startSession(
+        onDiscovered: (NfcTag tag) async {
+          Ndef? ndef = Ndef.from(tag);
+          if (ndef != null) callback?.call(ndef, tag.data);
+          _log(jsonEncode(tag.data), tag: "Read Data", logOnly: true);
+          _log(utf8.decode(tag.data['nfca']['atqa']),
+              tag: "ATQA", logOnly: true);
+          for (var record
+              in tag.data['ndef']?['cachedMessage']?['records'] ?? []) {
+            _log(String.fromCharCodes(record['payload']),
+                tag: "Record", logOnly: true);
+          }
+          stop();
+        },
+      );
     } else {
       _log(string.nfcNotAvailable);
     }
   }
 
   Future<void> write({
-    String? title,
-    String? url,
-    MapEntry<String, Uint8List>? mime,
-    MapEntry<String, MapEntry<String, Uint8List>>? external,
+    required List<NdefRecord> records,
     Function(Ndef)? callback,
   }) async {
     if (await isAvailable()) {
@@ -41,16 +49,14 @@ class NFC {
           stop();
           return;
         }
+        /*
+          NdefRecord.createText(title!),
+          NdefRecord.createUri(Uri.parse(url!)),
+          NdefRecord.createMime(mime.key, mime.value),
+          NdefRecord.createExternal(external.key, external.value.key, external.value.value),
+        */
 
-        NdefMessage message = NdefMessage([
-          if (title?.trim().isNotEmpty ?? false) NdefRecord.createText(title!),
-          if (url?.trim().isNotEmpty ?? false)
-            NdefRecord.createUri(Uri.parse(url!)),
-          if (mime != null) NdefRecord.createMime(mime.key, mime.value),
-          if (external != null)
-            NdefRecord.createExternal(
-                external.key, external.value.key, external.value.value),
-        ]);
+        NdefMessage message = NdefMessage(records);
 
         if (ndef.maxSize < message.byteLength) {
           _log(string.nfcSizeExceeded);
