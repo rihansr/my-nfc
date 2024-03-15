@@ -9,11 +9,11 @@
                 "label": "Banner",
                 "primary": true,
                 "visibility": true,
+                "dragable": false,
                 "fields": [
                     {
                         "block": "image",
                         "primary": true,
-                        "visibility": true,
                         "data": {
                             "path": ""
                         }
@@ -23,6 +23,7 @@
                         "block": "text",
                         "primary": true,
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "content": "",
                             "typography": "",
@@ -44,24 +45,27 @@
             },
             {
                 "block": "section",
-                "label": "Text",
+                "label": "Profile",
                 "primary": true,
                 "visibility": true,
+                "dragable": false,
                 "fields": [
                     {
                         "block": "image",
                         "label": "Avatar",
                         "primary": true,
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "path": ""
                         }
                     },
                     {
-                        "label": "Text",
                         "block": "text",
+                        "label": "Name",
                         "primary": true,
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "content": "",
                             "typography": "",
@@ -83,6 +87,7 @@
                 "block": "space",
                 "label": "Space",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "height": 10
                 }
@@ -91,6 +96,7 @@
                 "block": "text",
                 "label": "Bio",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "content": "",
                     "typography": "",
@@ -110,6 +116,7 @@
                 "block": "space",
                 "label": "Space",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "height": 10
                 }
@@ -118,6 +125,7 @@
                 "block": "text",
                 "label": "Passion",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "content": "",
                     "typography": "",
@@ -137,6 +145,7 @@
                 "block": "divider",
                 "label": "Line Break",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "marginTop": 0,
                     "marginBottom": 0,
@@ -148,18 +157,20 @@
     "profileInformation": {
         "block": "section",
         "label": "Profile Information",
-        "visibility": true,
+        "primary": true,
         "fields": [
             {
                 "block": "socialMedia",
                 "label": "Public Social Media",
                 "visibility": true,
+                "dragable": false,
                 "data": []
             },
             {
                 "block": "space",
                 "label": "Space",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "height": 10
                 }
@@ -168,12 +179,14 @@
                 "block": "socialMedia",
                 "label": "Social Media",
                 "visibility": true,
+                "dragable": false,
                 "data": []
             },
             {
                 "block": "divider",
                 "label": "Line Break",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "marginTop": 0,
                     "marginBottom": 0,
@@ -184,6 +197,7 @@
                 "block": "section",
                 "label": "Section",
                 "visibility": true,
+                "dragable": false,
                 "backgroundColor": "0xFF000000",
                 "fullWidth": true,
                 "spacing": {
@@ -199,6 +213,7 @@
                         "block": "contact",
                         "label": "Contact",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "phoneNumbers": [
                                 {
@@ -228,6 +243,7 @@
                 "block": "divider",
                 "label": "Line Break",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "marginTop": 0,
                     "marginBottom": 0,
@@ -238,6 +254,7 @@
                 "block": "section",
                 "label": "Section",
                 "visibility": true,
+                "dragable": false,
                 "backgroundColor": "0xFF000000",
                 "fullWidth": true,
                 "spacing": {
@@ -253,6 +270,7 @@
                         "block": "info",
                         "label": "Work",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "title": "",
                             "content": ""
@@ -262,6 +280,7 @@
                         "block": "space",
                         "label": "Space",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "height": 10
                         }
@@ -270,6 +289,7 @@
                         "block": "info",
                         "label": "Education",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "title": "",
                             "content": ""
@@ -279,6 +299,7 @@
                         "block": "space",
                         "label": "Space",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "height": 10
                         }
@@ -287,6 +308,7 @@
                         "block": "info",
                         "label": "Relationship",
                         "visibility": true,
+                        "dragable": false,
                         "data": {
                             "title": ""
                         }
@@ -310,6 +332,7 @@
                 "block": "button",
                 "label": "Save Contact/Contact",
                 "visibility": true,
+                "dragable": false,
                 "data": {
                     "primary": "",
                     "additional": "",

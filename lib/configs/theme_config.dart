@@ -72,6 +72,15 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
         overflow: TextOverflow.ellipsis,
       ),
     ),
+    expansionTileTheme: const ExpansionTileThemeData().copyWith(
+      shape: const Border(),
+      textColor: colorPalette.text,
+      collapsedTextColor: colorPalette.hint,
+      collapsedIconColor: colorPalette.hint,
+      iconColor: colorPalette.icon,
+      tilePadding: const EdgeInsets.symmetric(horizontal: 16),
+      childrenPadding: const EdgeInsets.only(left: 30),
+    ),
     textTheme: TextTheme(
       displayLarge: TextStyle(
         fontSize: 24,

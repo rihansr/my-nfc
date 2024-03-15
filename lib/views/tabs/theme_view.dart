@@ -11,16 +11,21 @@ class ThemeView extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Glassmorphism(
       color: theme.colorScheme.tertiary,
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: [
           ListView(
             shrinkWrap: false,
+            padding: const EdgeInsets.only(top: 24),
             controller: scrollController,
             children: const [],
           ),
-          Positioned(
-            top: 16,
+          Container(
+            padding: const EdgeInsets.only(top: 16),
+            width: double.infinity,
+            height: 32,
+            alignment: Alignment.topCenter,
             child: IgnorePointer(
               ignoring: true,
               child: Clipper(

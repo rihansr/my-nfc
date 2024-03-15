@@ -5,11 +5,13 @@ class Glassmorphism extends StatelessWidget {
   final Widget child;
   final Color color;
   final EdgeInsetsGeometry? padding;
+  final BorderRadiusGeometry? borderRadius;
   const Glassmorphism({
     super.key,
     required this.child,
     required this.color,
     this.padding,
+    this.borderRadius,
   });
 
   @override
@@ -27,6 +29,7 @@ class Glassmorphism extends StatelessWidget {
             begin: AlignmentDirectional.topStart,
             end: AlignmentDirectional.bottomEnd,
           ),
+          borderRadius: borderRadius,
         ),
         child: child,
       ),

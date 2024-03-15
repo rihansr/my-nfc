@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:my_nfc/services/navigation_service.dart';
 import 'package:my_nfc/views/tabs/design_view.dart';
 import 'package:my_nfc/views/tabs/theme_view.dart';
 import '../shared/constants.dart';

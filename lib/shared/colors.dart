@@ -89,7 +89,7 @@ class ColorPalette {
         scaffold: const Color(0xFFFFFFFF),
         surface: const Color(0xFFFFFFFF),
         onSurface: const Color(0xFFFFFFFF),
-        icon: const Color(0xFFFFFFFF),
+        icon: const Color(0xFF222233),
         text: const Color(0xFF222233),
         headline: const Color(0xFF09091a),
         focus: const Color(0xFFFFFFFF),
