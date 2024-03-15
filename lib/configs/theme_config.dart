@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../shared/colors.dart';
 import '../shared/constants.dart';
 
-ThemeData theming(ThemeMode mode) {
+ThemeData theming(BuildContext context, ThemeMode mode) {
   ColorPalette colorPalette;
   switch (mode) {
     case ThemeMode.light:
@@ -162,6 +162,24 @@ ThemeData theming(ThemeMode mode) {
         color: colorPalette.text,
         height: 1.22,
       ),
+    ),
+    tabBarTheme: TabBarTheme(
+      labelStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: const TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+      ),
+      labelColor: colorPalette.headline,
+      unselectedLabelColor: colorPalette.headline,
+      indicator: const UnderlineTabIndicator(borderSide: BorderSide.none),
+    ),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      clipBehavior: Clip.antiAlias,
     ),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.resolveWith<Color?>(

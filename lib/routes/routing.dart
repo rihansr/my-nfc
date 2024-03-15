@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/navigation_service.dart';
 import '../routes/routes.dart';
-import '../views/login_view.dart';
+import '../views/landing_view.dart';
 import '../views/scan_view.dart';
 
 final GoRouter router = GoRouter(
@@ -10,23 +10,17 @@ final GoRouter router = GoRouter(
   initialLocation: '/${Routes.scan}',
   routes: <RouteBase>[
     GoRoute(
-        name: Routes.scan,
-        path: '/${Routes.scan}',
-        builder: (BuildContext context, GoRouterState state) {
-          return const ScanView();
-        },
-      ),
-    GoRoute(
-      name: Routes.login,
-      path: '/${Routes.login}',
+      name: Routes.scan,
+      path: '/${Routes.scan}',
       builder: (BuildContext context, GoRouterState state) {
-        return const LoginView();
+        return const ScanView();
       },
     ),
     GoRoute(
-      path: '/${Routes.login}/:id',
+      name: Routes.design,
+      path: '/${Routes.design}/:uid',
       builder: (BuildContext context, GoRouterState state) {
-        return LoginView(params: state.pathParameters);
+        return LandingView(params: state.pathParameters);
       },
     ),
   ],

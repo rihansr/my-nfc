@@ -10,7 +10,176 @@
   "tryAgain": "Try again",
   "okay": "Okay",
   "write": "Write",
+  "design": "Design",
+  "theme": "Theme",
+  "uploadImage": "Upload image",
+  "resize": "Resize",
+  "overlayOpacity": "Overlay Opacity: {percent}%",
+  "@overlayOpacity": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "loadMore": "Load more",
+  "content": "Content",
+  "typography": "Typography",
+  "fontSize": "Font size: {size}",
+  "@fontSize": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "textColor": "Text Color",
+  "fontWeight": "Font Weight",
+  "selectOne": "Select One",
+  "alignment": "Alignment",
+  "paddingAndMarginSettings": "Padding and margin settings",
+  "horizontalPadding": "Horizontal padding: {padding}px",
+  "@horizontalPadding": {
+    "placeholders": {
+      "padding": {
+        "type": "int"
+      }
+    }
+  },
+  "verticalPadding": "Vertical padding: {padding}px",
+  "@verticalPadding": {
+    "placeholders": {
+      "padding": {
+        "type": "int"
+      }
+    }
+  },
+  "topMargin": "Top margin: {margin}px",
+  "@topMargin": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "bottomMargin": "Bottom margin: {margin}px",
+  "@bottomMargin": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "leftMargin": "Left margin: {margin}px",
+  "@leftMargin": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "rightMargin": "Right margin: {margin}px",
+  "@rightMargin": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "reset": "Reset",
+  "firstName": "First Name",
+  "middleName": "Middle Name",
+  "lastName": "Last Name",
+  "height": "Height: {size}px",
+  "@height": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "marginTop": "Margin Top: {margin}px",
+  "@marginTop": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "marginBottom": "Margin Bottom: {margin}px",
+  "@marginBottom": {
+    "placeholders": {
+      "margin": {
+        "type": "int"
+      }
+    }
+  },
+  "color": "Color",
+  "phoneNumbers": "Phone Numbers",
+  "addANewRow": "Add a new row",
+  "emails": "Emails",
+  "websites": "Websites",
+  "addresses": "Addresses",
+  "work": "Work",
+  "education": "Education",
+  "relationship": "Relationship",
+  "addANewBlock": "Add a new block",
+  "linkWithImage": "Link with Image",
+  "backgroungImage": "Background Image",
+  "backgroundColor": "Background Color",
+  "button": "Button",
+  "buttonText": "Button Text",
+  "learnMore": "Learn more",
+  "linkTo": "Link To",
+  "buttonDesign": "Button Design",
+  "borderCcolor": "Border Color",
+  "borderThickness": "Border Thickness: {size}px",
+  "@borderThickness": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "borderRadius": "Border Radius",
+  "fullWidth": "Full width",
+  "openInNewTab": "Open in new tab",
+  "disabled": "Disabled",
+  "removeBlock": "Remove block",
+  "onlineVideo": "Online Video",
+  "videoLink": "Video Link",
+  "aspectRatio": "Aspect Ratio",
+  "custom": "Custom",
+  "videoSetting": "Video Setting",
+  "autoPlay": "Auto Play",
+  "loop": "Loop",
+  "showControls": "Show Controls",
+  "mute": "Mute",
+  "allowFullscreen": "Allow Fullscreen",
+  "start": "Start",
+  "image": "Image",
+  "additionalItems": "Additional Items",
+  "title": "Title {count}",
+  "@title": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "description": "Description {count}",
+  "@description": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "@_HINTS": "<-----------------HINTS----------------->",
+  "linkToHints": "https://google.com",
+  "videoLinkHints": "(Youtube/Vimeo)",
   "@_MESSAGES": "<-----------------MESSAGES----------------->",
   "networkNotAvailable": "We could not establish an internet connection to our service at the moment. Please make sure that you are connected to your network and try again.",
   "passwordFailed": "Sorry, password protection failed",

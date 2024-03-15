@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_nfc/routes/routes.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import '../services/nfc_service.dart';
 import '../shared/dimens.dart';
@@ -104,8 +106,7 @@ class _ScanViewState extends State<ScanView> {
                 HapticFeedback.lightImpact();
                 NFC.instance.write(
                   records: [
-                    NdefRecord.createUri(Uri.parse(
-                        'https://www.facebook.com/diufoysal?mibextid=ZbWKwL'))
+                    NdefRecord.createUri(Uri.parse('https://www.google.com/'))
                   ],
                   callback: (ndef) {
                     setState(() => isWritable = ndef.isWritable);
@@ -131,6 +132,11 @@ class _ScanViewState extends State<ScanView> {
                 style: theme.textTheme.headlineMedium,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
+                    context.pushReplacementNamed(
+                      Routes.design,
+                      pathParameters: {'uid': 'rihansr'},
+                    );
+                    return;
                     HapticFeedback.lightImpact();
                     isWritable = false;
                     NFC.instance

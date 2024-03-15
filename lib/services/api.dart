@@ -127,7 +127,7 @@ class Api {
                           baseUrl: baseUrl,
                           defaultRequestMethod: method.name,
                         ),
-                      ).interceptor,
+                      ).interceptor, 
                     logInterceptor,
                   ]);
 
