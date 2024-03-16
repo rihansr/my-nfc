@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/shared/strings.dart';
-import 'package:my_nfc/views/tabs/design_view.dart';
+import '../shared/strings.dart';
 import '../viewmodels/design_viewmodel.dart';
 import '../widgets/base_widget.dart';
 
@@ -13,6 +12,10 @@ class LandingView extends StatelessWidget {
         ThemeData theme = Theme.of(context);
         return BaseWidget<DesignViewModel>(
           model: DesignViewModel(context, params: params),
+          onInit: (controller) =>
+              WidgetsBinding.instance.addPersistentFrameCallback((timeStamp) {
+            controller.showsModalBottomSheet(0);
+          }),
           builder: (context, controller, child) => BaseWidget<DesignViewModel>(
             model: DesignViewModel(context, params: params),
             builder: (context, controller, child) => Scaffold(

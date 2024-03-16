@@ -1,54 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../../widgets/glassmorphism.dart';
-import '../../widgets/clipper_widget.dart';
+import 'package:provider/provider.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import '../blocks/section_block.dart';
+import 'components/popup_view.dart';
 
 class DesignView extends StatelessWidget {
   final ScrollController scrollController;
-  final Map<String, dynamic> design;
+  final DesignViewModel controller;
   const DesignView({
     super.key,
     required this.scrollController,
-    required this.design,
+    required this.controller,
   });
 
   @override
-  Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    return Glassmorphism(
-      color: theme.colorScheme.tertiary,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
-      child: Stack(
-        alignment: AlignmentDirectional.topCenter,
-        children: [
-          ListView(
-            shrinkWrap: false,
-            padding: const EdgeInsets.only(top: 24),
-            controller: scrollController,
-            children: design.values
+  Widget build(BuildContext context) =>
+      ChangeNotifierProvider<DesignViewModel>.value(
+        value: controller,
+        child: Consumer<DesignViewModel>(
+          builder: (context, controller, _) => PopupView(
+            scrollController: scrollController,
+            children: controller.designData.entries
                 .map(
-                  (e) => SectionBlock(data: e),
+                  (e) => SectionBlock(
+                    key: Key(e.key),
+                    data: MapEntry(e.key, e.value),
+                  ),
                 )
                 .toList(),
           ),
-          Container(
-            padding: const EdgeInsets.only(top: 16),
-            width: double.infinity,
-            height: 32,
-            alignment: Alignment.topCenter,
-            child: IgnorePointer(
-              ignoring: true,
-              child: Clipper(
-                shape: const StadiumBorder(),
-                height: 4,
-                width: 48,
-                color: theme.disabledColor,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

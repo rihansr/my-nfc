@@ -145,7 +145,7 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
         fontSize: 12,
         fontWeight: FontWeight.w400,
         color: colorPalette.text,
-        height: 1.7,
+        height: 1.3,
       ),
       titleSmall: TextStyle(
         fontSize: 10,

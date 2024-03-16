@@ -18,10 +18,6 @@ class InputField extends StatelessWidget {
   final TextStyle? titleStyle;
   final TextAlign titleAlign;
   final EdgeInsets titleSpacing;
-  final String? subtitle;
-  final TextStyle? subtitleStyle;
-  final TextAlign subtitleAlign;
-  final EdgeInsets subtitleSpacing;
   final bool obscureText;
   final TextAlign textAlign;
   final int? maxCharacters;
@@ -44,7 +40,7 @@ class InputField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final int lengthFilter;
   final double borderRadius;
-  final bool bottomBorderOnly;
+  final bool underlineOnly;
   final FocusNode? focusNode;
   final bool autoFocus;
 
@@ -69,10 +65,6 @@ class InputField extends StatelessWidget {
     this.titleAlign = TextAlign.start,
     this.titleStyle,
     this.titleSpacing = const EdgeInsets.only(bottom: 6),
-    this.subtitle,
-    this.subtitleAlign = TextAlign.start,
-    this.subtitleStyle,
-    this.subtitleSpacing = const EdgeInsets.only(bottom: 4),
     this.obscureText = false,
     this.textAlign = TextAlign.start,
     this.maxLines = 1,
@@ -92,7 +84,7 @@ class InputField extends StatelessWidget {
     this.isDense = false,
     this.isCollapsed = true,
     this.padding = const EdgeInsets.symmetric(vertical: 10),
-    this.margin = const EdgeInsets.symmetric(vertical: 16),
+    this.margin = const EdgeInsets.all(0),
     this.borderFocusable = true,
     this.onTap,
     this.prefixIcon,
@@ -108,7 +100,7 @@ class InputField extends StatelessWidget {
     this.focusNode,
     this.autoFocus = false,
     this.inputAction,
-    this.bottomBorderOnly = false,
+    this.underlineOnly = false,
   });
 
   InputBorder boder(Color color) {
@@ -116,7 +108,7 @@ class InputField extends StatelessWidget {
       color: borderFocusable ? borderTint ?? color : Colors.transparent,
     );
 
-    return bottomBorderOnly
+    return underlineOnly
         ? UnderlineInputBorder(borderSide: borderSide)
         : OutlineInputBorder(
             borderSide: borderSide,
@@ -135,22 +127,13 @@ class InputField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (title?.isNotEmpty ?? false)
+          if (title?.trim().isNotEmpty ?? false)
             Padding(
               padding: titleSpacing,
               child: Text(
                 title ?? '',
                 textAlign: titleAlign,
                 style: titleStyle ?? theme.textTheme.headlineSmall,
-              ),
-            ),
-          if (subtitle?.isNotEmpty ?? false)
-            Padding(
-              padding: subtitleSpacing,
-              child: Text(
-                subtitle ?? '',
-                textAlign: subtitleAlign,
-                style: subtitleStyle ?? theme.textTheme.bodySmall,
               ),
             ),
           TextFormField(
@@ -187,7 +170,7 @@ class InputField extends StatelessWidget {
               fontWeight: fontWeight,
             ),
             decoration: InputDecoration(
-              filled: true,
+              filled: fillColor != null,
               fillColor: fillColor,
               hintText: hint,
               counterStyle: theme.textTheme.titleSmall,
@@ -217,9 +200,9 @@ class InputField extends StatelessWidget {
               isCollapsed: isCollapsed,
               contentPadding: padding,
               disabledBorder: boder(theme.disabledColor),
-              enabledBorder: boder(theme.colorScheme.outline),
-              border: boder(theme.colorScheme.outline),
-              focusedBorder: boder(theme.primaryColor),
+              enabledBorder: boder(theme.dividerColor),
+              border: boder(theme.dividerColor),
+              focusedBorder: boder(theme.textTheme.bodyLarge!.color!),
               errorBorder: boder(theme.colorScheme.error),
               focusedErrorBorder: boder(theme.colorScheme.error),
             ),

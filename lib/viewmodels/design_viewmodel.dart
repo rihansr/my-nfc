@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/views/tabs/design_view.dart';
-import 'package:my_nfc/views/tabs/theme_view.dart';
+import '../views/tabs/design_view.dart';
+import '../views/tabs/theme_view.dart';
 import '../shared/constants.dart';
 import 'base_viewmodel.dart';
 
@@ -29,11 +29,12 @@ class DesignViewModel extends BaseViewModel {
               case 0:
                 return DesignView(
                   scrollController: scrollController,
-                  design: _designData,
+                  controller: this,
                 );
               case 1:
                 return ThemeView(
                   scrollController: scrollController,
+                  controller: this,
                 );
               default:
                 return const SizedBox.shrink();

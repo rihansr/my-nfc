@@ -4,6 +4,7 @@ class ServerEnv {
   ///base url
   static String baseUrl = '${appConfig.configs['base']['url']}/wp-json';
 
-  //auth endpoints
-  //static String loginUrl = "$baseUrl/login";
+  // Unsplash Endpoints
+  static String unsplashUrl = '${appConfig.configs['unsplash']['base_url']}';
+  static String searchPhotos = '$unsplashUrl/search/photos';
 }

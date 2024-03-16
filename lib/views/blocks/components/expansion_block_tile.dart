@@ -6,6 +6,7 @@ class ExpansionBlockTile extends StatelessWidget {
   final IconData? icon;
   final Map<String, dynamic> data;
   final List<Widget> children;
+  final EdgeInsetsGeometry? padding;
   final Function(bool)? onVisible;
   const ExpansionBlockTile(
     this.data, {
@@ -13,19 +14,29 @@ class ExpansionBlockTile extends StatelessWidget {
     this.icon,
     this.onVisible,
     required this.children,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTileTheme(
-      dense: true,
-      horizontalTitleGap: 8.0,
-      minLeadingWidth: 0,
-      child: ExpansionTile(
-        key: key,
-        title: data['label'] == null
-            ? const SizedBox.shrink()
-            : Text(
+    return data['label'] == null
+        ? Padding(
+            padding: padding ?? const EdgeInsets.all(0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: children,
+            ),
+          )
+        : ListTileTheme(
+            dense: true,
+            horizontalTitleGap: 6.0,
+            minLeadingWidth: 0,
+            child: ExpansionTile(
+              key: key,
+              tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+              childrenPadding: padding,
+              title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(
                   fontFamily: kFontFamily,
@@ -33,21 +44,16 @@ class ExpansionBlockTile extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-        controlAffinity: ListTileControlAffinity.leading,
-        leading: icon == null
-            ? null
-            : data['label'] == null
-                ? const SizedBox.shrink()
-                : Icon(icon!, size: 16),
-        initiallyExpanded: data['label'] == null,
-        trailing: BlockActions(
-          visibility: data['visibility'],
-          primary: (data['primary'] as bool?) ?? false,
-          dragable: data['dragable'],
-          onVisible: onVisible,
-        ),
-        children: children,
-      ),
-    );
+              controlAffinity: ListTileControlAffinity.leading,
+              leading: icon == null ? null : Icon(icon!, size: 16),
+              trailing: BlockActions(
+                visibility: data['visibility'],
+                primary: (data['primary'] as bool?) ?? false,
+                dragable: data['dragable'],
+                onVisible: onVisible,
+              ),
+              children: children,
+            ),
+          );
   }
 }

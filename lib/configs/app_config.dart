@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../shared/constants.dart';
 import '../shared/shared_prefs.dart';
-import '../shared/constants.dart';
 
 enum _AppMode { debug, production }
 
@@ -40,7 +39,23 @@ class AppConfig {
   Map<String, dynamic> get configs => config[appMode.name]!;
 
   static const config = {
-    "debug": {"base": {}},
-    "production": {"base": {}}
+    "debug": {
+      "base": {},
+      'unsplash': {
+        'base_url': 'https://api.unsplash.com',
+        'application_id': 579730,
+        'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",
+        'secret_key': "MfJhFteceOnxbt1EPBzRw7B5i-m0qb2gIZ2iF6hhKrg"
+      }
+    },
+    "production": {
+      "base": {},
+      'unsplash': {
+        'base_url': 'https://api.unsplash.com',
+        'application_id': 579730,
+        'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",
+        'secret_key': "MfJhFteceOnxbt1EPBzRw7B5i-m0qb2gIZ2iF6hhKrg"
+      }
+    }
   };
 }
