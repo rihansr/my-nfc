@@ -8,11 +8,13 @@ class ExpansionBlockTile extends StatelessWidget {
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
   final Function(bool)? onVisible;
+  final Function(bool)? onSettingsShown;
   const ExpansionBlockTile(
     this.data, {
     super.key,
     this.icon,
     this.onVisible,
+    this.onSettingsShown,
     required this.children,
     this.padding,
   });
@@ -47,10 +49,12 @@ class ExpansionBlockTile extends StatelessWidget {
               controlAffinity: ListTileControlAffinity.leading,
               leading: icon == null ? null : Icon(icon!, size: 16),
               trailing: BlockActions(
+                settingsExpanded: data['settings']?["initiallyExpand"],
                 visibility: data['visibility'],
                 primary: (data['primary'] as bool?) ?? false,
                 dragable: data['dragable'],
                 onVisible: onVisible,
+                onSettingsShown: onSettingsShown,
               ),
               children: children,
             ),

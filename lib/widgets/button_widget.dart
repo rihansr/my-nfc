@@ -46,7 +46,7 @@ class Button<T> extends StatelessWidget {
     this.fontWeight,
     this.margin = const EdgeInsets.symmetric(vertical: 8),
     this.padding = const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-    this.contentSpacing = 18,
+    this.contentSpacing = 8,
     this.minFontSize,
     this.maxLines,
     this.borderSize = 0.5,

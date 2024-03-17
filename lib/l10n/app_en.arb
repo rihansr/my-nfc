@@ -160,6 +160,7 @@
   "allowFullscreen": "Allow Fullscreen",
   "start": "Start",
   "image": "Image",
+  "copied": "Copied",
   "additionalItems": "Additional Items",
   "title": "Title {count}",
   "@title": {

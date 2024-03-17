@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class SocialMediaBlock extends StatefulWidget {
+class ActionsBlock extends StatefulWidget {
   final MapEntry<Object, Map<String, dynamic>> data;
-  const SocialMediaBlock({super.key, required this.data});
+  const ActionsBlock({super.key, required this.data});
 
   @override
-  State<SocialMediaBlock> createState() => _SocialMediaBlockState();
+  State<ActionsBlock> createState() => _ActionsBlockState();
 }
 
-class _SocialMediaBlockState extends State<SocialMediaBlock> {
+class _ActionsBlockState extends State<ActionsBlock> {
+
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       widget.data.value,
-      icon: Icons.group_outlined,
+      icon: Icons.system_update_alt_outlined,
       children: const [],
     );
   }

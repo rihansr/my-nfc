@@ -1,0 +1,385 @@
+[
+    {
+        "block": "section",
+        "label": "Link with Image",
+        "visibility": true,
+        "dragable": true,
+        "settings": {
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            },
+            "alignment": {
+                "vertical": "top",
+                "horizontal": "left"
+            },
+            "overlay": {
+                "color": "0x00000000",
+                "opacity": 40
+            },
+            "additional": {
+                "altText": "",
+                "linkTo": "",
+                "openInNewTab": true
+            }
+        },
+        "fields": [
+            {
+                "block": "background",
+                "label": "Background Image",
+                "visibility": true,
+                "primary": false,
+                "data": {
+                    "path": ""
+                }
+            },
+            {
+                "block": "text",
+                "label": "Text",
+                "primary": false,
+                "visibility": true,
+                "dragable": false,
+                "data": {
+                    "content": "",
+                    "style": {
+                        "typography": "",
+                        "fontSize": 32,
+                        "color": "0xFFFFFFFF",
+                        "fontWeight": "reqular",
+                        "alignment": "left"
+                    },
+                    "padding": {
+                        "horizontal": 0,
+                        "vertical": 0
+                    },
+                    "margin": {
+                        "top": 0,
+                        "bottom": 0,
+                        "left": 0,
+                        "right": 0
+                    }
+                }
+            },
+            {
+                "block": "text",
+                "label": "Text",
+                "primary": false,
+                "visibility": true,
+                "dragable": false,
+                "data": {
+                    "content": "",
+                    "style": {
+                        "typography": "",
+                        "fontSize": 19,
+                        "color": "0xFFFFFFFF",
+                        "fontWeight": "reqular",
+                        "alignment": "left"
+                    },
+                    "padding": {
+                        "horizontal": 0,
+                        "vertical": 0
+                    },
+                    "margin": {
+                        "top": 0,
+                        "bottom": 0,
+                        "left": 0,
+                        "right": 0
+                    }
+                }
+            },
+            {
+                "block": "button",
+                "label": "Button",
+                "primary": false,
+                "visibility": true,
+                "dragable": false,
+                "data": {
+                    "text": "",
+                    "link": "",
+                    "style": {
+                        "border": {
+                            "color": "0xFFFFFFFF",
+                            "thickness": 1,
+                            "radius": 4
+                        },
+                        "text": {
+                            "color": "0xFFFFFFFF",
+                            "typography": "",
+                            "fontSize": 16,
+                            "fontWeight": "regular"
+                        }
+                    },
+                    "fullWidth": false,
+                    "openInNewTab": true,
+                    "disabled": false
+                }
+            }
+        ]
+    },
+    {
+        "block": "text",
+        "label": "Text",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "content": "",
+            "style": {
+                "typography": "",
+                "fontSize": 16,
+                "color": "0xFFFFFFFF",
+                "fontWeight": "reqular",
+                "alignment": "center"
+            },
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        }
+    },
+    {
+        "block": "video",
+        "label": "Online Video",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "link": "",
+            "aspectRatio": "21:9",
+            "settings": {
+                "autoPlay": false,
+                "loop": false,
+                "showControls": false,
+                "mute": false,
+                "allowFullScreen": false,
+                "startAt": 0
+            },
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        }
+    },
+    {
+        "block": "divider",
+        "label": "Line Break",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "color": "0xFFFFFFFF",
+            "margin": {
+                "top": 0,
+                "bottom": 0
+            }
+        }
+    },
+    {
+        "block": "section",
+        "label": "Section (Image Background)",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "settings": {
+            "initiallyExpand": true,
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            },
+            "alignment": {
+                "vertical": "top",
+                "horizontal": "left"
+            },
+            "overlay": {
+                "color": "0x00000000",
+                "opacity": 40
+            },
+            "additional": {
+                "altText": "",
+                "linkTo": "",
+                "openInNewTab": true
+            }
+        },
+        "fields": [
+            {
+                "block": "background",
+                "label": "Background Image",
+                "visibility": true,
+                "primary": false,
+                "data": {
+                    "path": ""
+                }
+            }
+        ]
+    },
+    {
+        "block": "section",
+        "label": "Section",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "settings": {
+            "backgroundColor": "0x00000000",
+            "fullWidth": true,
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        },
+        "fields": []
+    },
+    {
+        "block": "image",
+        "label": "Image",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "path": ""
+        }
+    },
+    {
+        "block": "button",
+        "label": "Button",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "text": "",
+            "link": "",
+            "style": {
+                "border": {
+                    "color": "0xFFFFFFFF",
+                    "thickness": 1,
+                    "radius": 4
+                },
+                "text": {
+                    "color": "0xFFFFFFFF",
+                    "typography": "",
+                    "fontSize": 16,
+                    "fontWeight": "regular"
+                }
+            },
+            "fullWidth": false,
+            "openInNewTab": true,
+            "disabled": false
+        }
+    },
+    {
+        "block": "links",
+        "label": "Social Media",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "links": []
+        }
+    },
+    {
+        "block": "publicLinks",
+        "label": "Public Social Media",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "links": []
+        }
+    },
+    {
+        "block": "contact",
+        "label": "Contact",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "phoneNumbers": [
+                {
+                    "home": ""
+                }
+            ],
+            "emails": [
+                {
+                    "home": ""
+                }
+            ],
+            "websites": [
+                {
+                    "work": ""
+                }
+            ],
+            "addresses": [
+                {
+                    "Home": ""
+                }
+            ]
+        }
+    },
+    {
+        "block": "actions",
+        "label": "Save Contact/Contact",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "primary": "",
+            "additional": "",
+            "advancedSettings": {
+                "showSaveToPhoneButton": true,
+                "showPrimaryContactButton": true,
+                "showAdditionalContactButton": true,
+                "buttonFixedAtBottom": true
+            }
+        }
+    },
+    {
+        "block": "additional",
+        "label": "Additional Items",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "alignment": "left",
+            "items": []
+        }
+    },
+    {
+        "block": "space",
+        "label": "Space",
+        "primary": false,
+        "visibility": true,
+        "dragable": true,
+        "data": {
+            "height": 10
+        }
+    }
+]

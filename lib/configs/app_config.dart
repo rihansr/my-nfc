@@ -25,15 +25,19 @@ class AppConfig {
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ]),
+        rootBundle
+            .loadString("assets/files/default_design.json")
+            .then((data) => kDefaultDesign = jsonDecode(data)),
+            rootBundle.loadString("assets/files/additional_blocks.json").then(
+          (data) => kAdditionalBlocks = List<Map<String, dynamic>>.from(
+            jsonDecode(data),
+          ),
+        ),
         sharedPrefs.init(),
       ],
     );
+    
     FlutterNativeSplash.remove();
-    await rootBundle
-        .loadString("assets/files/default_design.json")
-        .then((data) {
-      kDefaultDesign = jsonDecode(data);
-    });
   }
 
   Map<String, dynamic> get configs => config[appMode.name]!;
