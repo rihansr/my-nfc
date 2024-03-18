@@ -43,7 +43,7 @@ class ExpansionBlockTile extends StatelessWidget {
                 data['label'] ?? '',
                 style: const TextStyle(
                   fontFamily: kFontFamily,
-                  fontSize: 13,
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),

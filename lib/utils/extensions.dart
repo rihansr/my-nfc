@@ -49,6 +49,15 @@ extension StringExtension on String {
       .join(" ");
   get copy => Clipboard.setData(ClipboardData(text: this))
       .then((value) => style.showToast('$this ${string.copied}'.trim()));
+  get color {
+    var hexColor = replaceAll("#", "");
+    if (hexColor.length == 6) {
+      hexColor = "0xFF$hexColor";
+    }
+    if (hexColor.length == 8) {
+      return Color(int.parse("0x$hexColor"));
+    }
+  }
 }
 
 extension ContextExtension on BuildContext {

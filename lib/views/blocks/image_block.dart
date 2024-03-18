@@ -1,14 +1,11 @@
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_nfc/shared/styles.dart';
-import 'package:my_nfc/utils/extensions.dart';
-import '../../widgets/clipper_widget.dart';
 import 'components/expansion_block_tile.dart';
+import '../../utils/extensions.dart';
+import '../../widgets/clipper_widget.dart';
 
 class ImageBlock extends StatefulWidget {
   final MapEntry<Object, Map<String, dynamic>> data;
@@ -45,7 +42,6 @@ class _ImageBlockState extends State<ImageBlock> {
         if (widget.data.value['label'] != null) ...[
           Text(
             widget.data.value['label'] ?? '',
-            textAlign: TextAlign.left,
             style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),
@@ -83,7 +79,7 @@ class _ImageBlockState extends State<ImageBlock> {
                                   imageUrl: _image,
                                   fit: BoxFit.contain,
                                   placeholder: (context, url) =>
-                                      const CircularProgressIndicator(),
+                                      const CupertinoActivityIndicator(),
                                   errorWidget: (context, url, error) =>
                                       const Placeholder(),
                                 ),

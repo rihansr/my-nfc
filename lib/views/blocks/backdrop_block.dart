@@ -30,7 +30,11 @@ class _BackdropBlockState extends State<BackdropBlock> {
   void initState() {
     searchController = TextEditingController();
     searchController.addListener(() {
-      if (_debounce?.isActive ?? false) _debounce?.cancel();
+      if (_debounce?.isActive ?? false) {
+        _debounce?.cancel();
+      } else if (searchController.text.trim().isEmpty) {
+        return;
+      }
       _debounce = Timer(
         const Duration(milliseconds: 500),
         () => searchPhotos(),
@@ -89,6 +93,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
                 controller: searchController,
                 prefixIcon: const Icon(Icons.search, size: 20),
                 padding: const EdgeInsets.symmetric(vertical: 6),
+                margin: const EdgeInsets.all(0),
                 textStyle: theme.textTheme.bodySmall,
                 underlineOnly: true,
               ),

@@ -50,6 +50,7 @@ class _SectionBlockState extends State<SectionBlock> {
                     case "divider":
                       return DividerBlock(key: key, data: value);
                     case "text":
+                    case "name":
                       return TextBlock(key: key, data: value);
                     case "banner":
                     case "background":

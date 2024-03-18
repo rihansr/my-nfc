@@ -64,7 +64,7 @@ class InputField extends StatelessWidget {
     this.title,
     this.titleAlign = TextAlign.start,
     this.titleStyle,
-    this.titleSpacing = const EdgeInsets.only(bottom: 6),
+    this.titleSpacing = const EdgeInsets.only(bottom: 10),
     this.obscureText = false,
     this.textAlign = TextAlign.start,
     this.maxLines = 1,
@@ -83,15 +83,15 @@ class InputField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.isDense = false,
     this.isCollapsed = true,
-    this.padding = const EdgeInsets.symmetric(vertical: 10),
-    this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+    this.margin = const EdgeInsets.symmetric(vertical: 10),
     this.borderFocusable = true,
     this.onTap,
     this.prefixIcon,
     this.onAction,
     this.onTyping,
     this.lengthFilter = 1,
-    this.borderRadius = 2,
+    this.borderRadius = 4,
     this.onQuery,
     this.fontColor,
     this.hintColor,
@@ -133,7 +133,10 @@ class InputField extends StatelessWidget {
               child: Text(
                 title ?? '',
                 textAlign: titleAlign,
-                style: titleStyle ?? theme.textTheme.headlineSmall,
+                style: titleStyle ??
+                    theme.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ),
           TextFormField(
@@ -164,7 +167,7 @@ class InputField extends StatelessWidget {
             obscureText: obscureText,
             maxLines: maxLines,
             minLines: minLines,
-            style: (textStyle ?? theme.textTheme.bodyMedium)?.copyWith(
+            style: (textStyle ?? theme.textTheme.bodySmall)?.copyWith(
               color: fontColor,
               fontSize: fontSize,
               fontWeight: fontWeight,
@@ -177,21 +180,21 @@ class InputField extends StatelessWidget {
               errorStyle: theme.textTheme.titleSmall
                   ?.copyWith(color: theme.colorScheme.error),
               hintStyle: hintStyle ??
-                  theme.textTheme.bodyMedium?.copyWith(
+                  theme.textTheme.bodySmall?.copyWith(
                     color: hintColor ?? theme.hintColor,
                     fontSize: hintSize ?? fontSize,
                     fontWeight: hintWeight ?? fontWeight,
                   ),
               prefixIconConstraints: BoxConstraints(
                 minWidth: theme.iconTheme.size! + padding.right,
-                maxHeight: (textStyle ?? theme.textTheme.bodyLarge)!.fontSize! +
+                maxHeight: (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
                     padding.vertical,
               ),
               prefixIconColor: hintColor ?? theme.hintColor,
               prefixIcon: prefixIcon,
               suffixIconConstraints: BoxConstraints(
                 minWidth: theme.iconTheme.size! + padding.left,
-                maxHeight: (textStyle ?? theme.textTheme.bodyLarge)!.fontSize! +
+                maxHeight: (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
                     padding.vertical,
               ),
               suffixIconColor: hintColor ?? theme.hintColor,
@@ -200,9 +203,9 @@ class InputField extends StatelessWidget {
               isCollapsed: isCollapsed,
               contentPadding: padding,
               disabledBorder: boder(theme.disabledColor),
-              enabledBorder: boder(theme.dividerColor),
-              border: boder(theme.dividerColor),
-              focusedBorder: boder(theme.textTheme.bodyLarge!.color!),
+              enabledBorder: boder(theme.hintColor),
+              border: boder(theme.hintColor),
+              focusedBorder: boder(theme.textTheme.bodySmall!.color!),
               errorBorder: boder(theme.colorScheme.error),
               focusedErrorBorder: boder(theme.colorScheme.error),
             ),

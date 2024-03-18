@@ -136,19 +136,19 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
         color: colorPalette.text,
       ),
       bodySmall: TextStyle(
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: colorPalette.text,
         height: 1.2,
       ),
       titleMedium: TextStyle(
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: FontWeight.w400,
         color: colorPalette.text,
         height: 1.3,
       ),
       titleSmall: TextStyle(
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: FontWeight.w500,
         color: colorPalette.text,
         height: 1.0,
@@ -174,11 +174,11 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
     ),
     tabBarTheme: TabBarTheme(
       labelStyle: const TextStyle(
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: FontWeight.bold,
       ),
       unselectedLabelStyle: const TextStyle(
-        fontSize: 12,
+        fontSize: 13,
         fontWeight: FontWeight.w300,
       ),
       labelColor: colorPalette.headline,
@@ -211,6 +211,15 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
         }
         return null;
       }),
+    ),
+    sliderTheme: SliderThemeData(
+      activeTrackColor: colorPalette.hint,
+      inactiveTrackColor: colorPalette.hint,
+      trackHeight: 1,
+      thumbColor: colorPalette.primary,
+      overlayShape: SliderComponentShape.noOverlay,
+      thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 4.5),
+      valueIndicatorColor: colorPalette.primary,
     ),
     bottomAppBarTheme: const BottomAppBarTheme(color: Colors.transparent),
   );

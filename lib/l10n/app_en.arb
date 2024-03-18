@@ -178,6 +178,7 @@
       }
     }
   },
+  "fromThemeSettings": "From Theme Settings",
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",
