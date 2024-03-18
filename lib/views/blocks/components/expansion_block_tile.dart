@@ -38,6 +38,7 @@ class ExpansionBlockTile extends StatelessWidget {
               key: key,
               tilePadding: const EdgeInsets.symmetric(horizontal: 12),
               childrenPadding: padding,
+              expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
               title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(

@@ -1,12 +1,8 @@
 import 'dart:io';
 import 'dart:math';
-import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
-import '../configs/app_settings.dart';
-import '../shared/colors.dart';
 import '../shared/strings.dart';
 import '../shared/styles.dart';
 

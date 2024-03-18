@@ -45,12 +45,19 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- NFC -->
 	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
 	<array>
 		<string>0000</string>
 	</array>
 	<key>NFCReaderUsageDescription</key>
 	<string>Need NFC permission for scanning your card</string>
+	<!-- Camera & Gallery -->
+	<key>NSCameraUsageDescription</key>
+	<string>To capture photo please grant camera access</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To select photo please grant gallery access</string>
+	<!-- Deep Linking -->
 	<key>FlutterDeepLinkingEnabled</key>
 	<true/>
 </dict>
