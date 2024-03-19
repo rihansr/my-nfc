@@ -84,7 +84,7 @@ class InputField extends StatelessWidget {
     this.isDense = false,
     this.isCollapsed = true,
     this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-    this.margin = const EdgeInsets.symmetric(vertical: 10),
+    this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.borderFocusable = true,
     this.onTap,
     this.prefixIcon,

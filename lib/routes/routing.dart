@@ -7,7 +7,7 @@ import '../views/scan_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigator.navigatorKey,
-  initialLocation: '/${Routes.scan}',
+  initialLocation: '/${Routes.design}',
   routes: <RouteBase>[
     GoRoute(
       name: Routes.scan,
@@ -18,6 +18,12 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       name: Routes.design,
+      path: '/${Routes.design}',
+      builder: (BuildContext context, GoRouterState state) {
+        return const LandingView();
+      },
+    ),
+    GoRoute(
       path: '/${Routes.design}/:uid',
       builder: (BuildContext context, GoRouterState state) {
         return LandingView(params: state.pathParameters);

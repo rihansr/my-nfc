@@ -7,6 +7,7 @@ class ExpansionBlockTile extends StatelessWidget {
   final Map<String, dynamic> data;
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? titlePadding;
   final Function(bool)? onVisible;
   final Function(bool)? onSettingsShown;
   const ExpansionBlockTile(
@@ -16,6 +17,7 @@ class ExpansionBlockTile extends StatelessWidget {
     this.onVisible,
     this.onSettingsShown,
     required this.children,
+    this.titlePadding,
     this.padding,
   });
 
@@ -36,7 +38,8 @@ class ExpansionBlockTile extends StatelessWidget {
             minLeadingWidth: 0,
             child: ExpansionTile(
               key: key,
-              tilePadding: const EdgeInsets.symmetric(horizontal: 12),
+              maintainState: true,
+              tilePadding: titlePadding ?? const EdgeInsets.symmetric(horizontal: 12),
               childrenPadding: padding,
               expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
               title: Text(

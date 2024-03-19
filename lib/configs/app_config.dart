@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import '../shared/constants.dart';
 import '../shared/shared_prefs.dart';
@@ -18,26 +19,27 @@ class AppConfig {
 
   init() async {
     WidgetsFlutterBinding.ensureInitialized();
+    if(kIsWeb) usePathUrlStrategy();
 
     await Future.wait(
       [
-        SystemChrome.setPreferredOrientations([
-          DeviceOrientation.portraitUp,
-          DeviceOrientation.portraitDown,
-        ]),
+        // SystemChrome.setPreferredOrientations([
+        //   DeviceOrientation.portraitUp,
+        //   DeviceOrientation.portraitDown,
+        // ]),
         rootBundle
             .loadString("assets/files/default_design.json")
             .then((data) => kDefaultDesign = jsonDecode(data)),
-            rootBundle.loadString("assets/files/additional_blocks.json").then(
-          (data) => kAdditionalBlocks = List<Map<String, dynamic>>.from(
-            jsonDecode(data),
-          ),
-        ),
+        rootBundle.loadString("assets/files/additional_blocks.json").then(
+              (data) => kAdditionalBlocks = List<Map<String, dynamic>>.from(
+                jsonDecode(data),
+              ),
+            ),
         sharedPrefs.init(),
       ],
     );
-    
-    FlutterNativeSplash.remove();
+
+    if(!kIsWeb) FlutterNativeSplash.remove();
   }
 
   Map<String, dynamic> get configs => config[appMode.name]!;

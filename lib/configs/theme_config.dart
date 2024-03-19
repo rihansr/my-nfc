@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../shared/colors.dart';
 import '../shared/constants.dart';
@@ -18,13 +19,15 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
     fontFamily: kFontFamily,
     useMaterial3: true,
     visualDensity: VisualDensity.adaptivePlatformDensity,
-    pageTransitionsTheme: Platform.isAndroid
-        ? const PageTransitionsTheme(
-            builders: <TargetPlatform, PageTransitionsBuilder>{
-              TargetPlatform.android: ZoomPageTransitionsBuilder(),
-            },
-          )
-        : null,
+    pageTransitionsTheme: kIsWeb
+        ? null
+        : Platform.isAndroid
+            ? const PageTransitionsTheme(
+                builders: <TargetPlatform, PageTransitionsBuilder>{
+                  TargetPlatform.android: ZoomPageTransitionsBuilder(),
+                },
+              )
+            : null,
     appBarTheme: const AppBarTheme().copyWith(
       titleTextStyle: TextStyle(
         fontSize: 21,

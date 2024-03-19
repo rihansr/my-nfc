@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../configs/app_config.dart';
 import '../../services/api.dart';
 import '../../services/server_env.dart';
+import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/button_widget.dart';
@@ -51,6 +53,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
     setState(() => _isSearching = true);
     api
         .invoke(
+      via: kIsWeb ? InvokeType.http : InvokeType.dio,
       baseUrl: ServerEnv.searchPhotos,
       queryParams: {
         'page': _page,
@@ -111,18 +114,19 @@ class _BackdropBlockState extends State<BackdropBlock> {
         GridView.builder(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: photos.length + (_isSearching ? 10 : 0),
+          itemCount: photos.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
           ),
-          itemBuilder: (context, i) => CachedNetworkImage(
-            imageUrl:
-                photos.length > i ? (photos[i]['urls']?['thumb'] ?? '') : '',
+          itemBuilder: (context, i) => FadeInImage.memoryNetwork(
+            image: photos[i]['urls']?['thumb'] ?? ServerEnv.placeholderImage,
             fit: BoxFit.cover,
-            placeholder: (context, url) => const CupertinoActivityIndicator(),
-            errorWidget: (context, url, error) => _isSearching
+            placeholder: kTransparentImage,
+            placeholderErrorBuilder: (_, __, ___) =>
+                const CupertinoActivityIndicator(),
+            imageErrorBuilder: (_, __, ___) => _isSearching
                 ? const CupertinoActivityIndicator()
                 : const Placeholder(),
           ),

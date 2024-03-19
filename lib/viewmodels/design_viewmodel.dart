@@ -7,10 +7,10 @@ import 'base_viewmodel.dart';
 class DesignViewModel extends BaseViewModel {
   final BuildContext _context;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final Map<String, dynamic> _params;
+  final Map<String, dynamic>? _params;
   final Map<String, dynamic> _designData;
 
-  DesignViewModel(BuildContext context, {required Map<String, dynamic> params})
+  DesignViewModel(BuildContext context, {required Map<String, dynamic>? params})
       : _context = context,
         _params = params,
         scaffoldKey = GlobalKey<ScaffoldState>(),

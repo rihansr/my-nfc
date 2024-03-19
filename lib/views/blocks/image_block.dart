@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,16 +17,16 @@ class ImageBlock extends StatefulWidget {
 }
 
 class _ImageBlockState extends State<ImageBlock> {
-  dynamic _image;
-  set image(dynamic image) => setState(
-        () => _image = image,
+  String? _imagePath;
+  set imagePath(dynamic image) => setState(
+        () => _imagePath = image,
       );
 
   @override
   void initState() {
     String path = widget.data.value['data']?['path']?.toString().trim() ?? '';
     bool isUrl = Uri.tryParse(path)?.hasAbsolutePath ?? false;
-    _image = path.isEmpty ? null : (isUrl ? path : File(path));
+    _imagePath = path.isEmpty ? null : path;
     super.initState();
   }
 
@@ -55,9 +56,9 @@ class _ImageBlockState extends State<ImageBlock> {
             highlightColor: Colors.transparent,
             focusColor: Colors.transparent,
             onTap: () {
-              if (_image != null) return;
-              extension.pickPhoto(ImageSource.gallery).then((file) {
-                image = file.existsSync() ? file : null;
+              if (_imagePath != null) return;
+              extension.pickPhoto(ImageSource.gallery).then((path) {
+                imagePath = path;
               });
             },
             child: Clipper(
@@ -65,24 +66,30 @@ class _ImageBlockState extends State<ImageBlock> {
               size: double.infinity,
               alignment: Alignment.center,
               radius: 6,
-              color: _image != null
+              color: _imagePath != null
                   ? theme.colorScheme.tertiary.withOpacity(0.05)
                   : null,
               border: Border.all(color: theme.disabledColor),
-              child: _image != null
+              child: _imagePath != null
                   ? Stack(
                       children: [
                         Positioned.fill(
-                          child: _image is File
-                              ? Image.file(_image, fit: BoxFit.contain)
-                              : CachedNetworkImage(
-                                  imageUrl: _image,
-                                  fit: BoxFit.contain,
-                                  placeholder: (context, url) =>
-                                      const CupertinoActivityIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      const Placeholder(),
-                                ),
+                          child:
+                              Uri.tryParse(_imagePath ?? '')?.hasAbsolutePath ??
+                                      false
+                                  ? CachedNetworkImage(
+                                      imageUrl: _imagePath!,
+                                      fit: BoxFit.contain,
+                                      placeholder: (context, url) =>
+                                          const CupertinoActivityIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          const Placeholder(),
+                                    )
+                                  : kIsWeb
+                                      ? Image.network(_imagePath!,
+                                          fit: BoxFit.contain)
+                                      : Image.file(File(_imagePath!),
+                                          fit: BoxFit.contain),
                         ),
                         Positioned(
                           right: 2,
@@ -90,7 +97,7 @@ class _ImageBlockState extends State<ImageBlock> {
                           child: SizedBox.square(
                             dimension: 32,
                             child: IconButton(
-                              onPressed: () => image = null,
+                              onPressed: () => imagePath = null,
                               padding: const EdgeInsets.all(0),
                               icon: Icon(Icons.close, color: theme.hintColor),
                             ),

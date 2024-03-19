@@ -12,11 +12,13 @@ class Extension {
   static Extension get function => Extension._();
   Extension._();
 
-  Future<File> pickPhoto(ImageSource source,
-      {Function(File file)? onPicked,
-      double? maxWidth,
-      double? maxHeight,
-      int? imageQuality}) async {
+  Future<String?> pickPhoto(
+    ImageSource source, {
+    Function(String path)? onPicked,
+    double? maxWidth,
+    double? maxHeight,
+    int? imageQuality,
+  }) async {
     var pickedFile = await ImagePicker().pickImage(
       source: source,
       maxWidth: maxWidth,
@@ -24,9 +26,9 @@ class Extension {
       imageQuality: imageQuality,
     );
 
-    File file = File(pickedFile?.path ?? '');
-    if (file.existsSync()) onPicked?.call(file);
-    return file;
+    String path = pickedFile?.path.trim() ?? '';
+    if (path.isNotEmpty) onPicked?.call(path);
+    return path.isEmpty ? null : path;
   }
 
   String generateRandomString({int length = 6, digitsOnly = false}) {

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import '../shared/strings.dart';
+import '../widgets/button_widget.dart';
 
-class Seekbar extends StatelessWidget {
+class Seekbar extends StatefulWidget {
   final String? title;
+  final String? type;
   final TextStyle? titleStyle;
   final TextAlign titleAlign;
   final EdgeInsets titleSpacing;
   final EdgeInsets margin;
   final EdgeInsets padding;
   final num min;
+  final num? defaultValue;
   final num value;
   final num max;
   final Function(int)? onUpdate;
@@ -15,52 +19,120 @@ class Seekbar extends StatelessWidget {
   const Seekbar({
     super.key,
     this.title,
+    this.type,
     this.titleStyle,
     this.titleAlign = TextAlign.start,
     this.titleSpacing = const EdgeInsets.only(bottom: 10),
-    this.margin = const EdgeInsets.symmetric(vertical: 10),
-    this.padding = const EdgeInsets.symmetric(vertical: 8),
+    margin,
+    padding,
     this.min = 0,
     int value = 0,
+    int? defaultValue,
     this.max = 100,
     this.onUpdate,
-  }) : value = value < min
+  })  : value = value < min
             ? min
             : value > max
                 ? max
-                : value;
+                : value,
+        margin = margin ??
+            (defaultValue == null
+                ? const EdgeInsets.symmetric(vertical: 12)
+                : const EdgeInsets.symmetric(vertical: 8)),
+        padding = margin ??
+            (defaultValue == null
+                ? const EdgeInsets.symmetric(vertical: 8)
+                : const EdgeInsets.only(top: 6, bottom: 8)),
+        defaultValue = defaultValue == null
+            ? null
+            : defaultValue < min
+                ? min
+                : defaultValue > max
+                    ? max
+                    : defaultValue;
+
+  @override
+  State<Seekbar> createState() => _SeekbarState();
+}
+
+class _SeekbarState extends State<Seekbar> {
+  late double value;
+
+  @override
+  void initState() {
+    value = widget.value.toDouble();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    TextStyle? titleStyle = widget.titleStyle ??
+        theme.textTheme.bodySmall?.copyWith(
+          fontWeight: FontWeight.w500,
+        );
 
     return Container(
       width: double.infinity,
-      margin: margin,
+      margin: widget.margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (title?.trim().isNotEmpty ?? false)
+          if (widget.title?.trim().isNotEmpty ?? false)
             Padding(
-              padding: titleSpacing,
-              child: Text(
-                title ?? '',
-                textAlign: titleAlign,
-                style: titleStyle ??
-                    theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w500,
+              padding: widget.titleSpacing,
+              child: Text.rich(
+                TextSpan(
+                  text: widget.title,
+                  children: [
+                    const TextSpan(text: ': '),
+                    TextSpan(
+                      text: (() {
+                        switch (widget.type?.toLowerCase()) {
+                          case 'pixel':
+                          case 'px':
+                            return string.pxSize(value.toInt());
+                          case 'percent':
+                          case '%':
+                            return string.percent(value.toInt());
+                          default:
+                            return string.size(value.toInt());
+                        }
+                      }()),
                     ),
+                    if (widget.defaultValue != null)
+                      WidgetSpan(
+                        child: Button(
+                          label: string.reset,
+                          borderSize: 1,
+                          margin: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
+                          onPressed: () {
+                            setState(
+                              () => value = widget.defaultValue!.toDouble(),
+                            );
+                            widget.onUpdate?.call(value.toInt());
+                          },
+                        ),
+                        alignment: PlaceholderAlignment.middle,
+                      ),
+                  ],
+                ),
+                style: titleStyle,
               ),
             ),
           Padding(
-            padding: padding,
+            padding: widget.padding,
             child: Slider(
-              value: value.toDouble(),
-              min: min.toDouble(),
-              max: max.toDouble(),
-              divisions: max.toInt() - min.toInt(),
-              onChanged: (value) => onUpdate?.call(value.toInt()),
+              value: value,
+              min: widget.min.toDouble(),
+              max: widget.max.toDouble(),
+              divisions: widget.max.toInt() - widget.min.toInt(),
+              onChanged: (value) {
+                setState(() => this.value = value);
+                widget.onUpdate?.call(value.toInt());
+              },
             ),
           )
         ],

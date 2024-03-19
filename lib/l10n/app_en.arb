@@ -14,10 +14,11 @@
   "theme": "Theme",
   "uploadImage": "Upload image",
   "resize": "Resize",
-  "overlayOpacity": "Overlay Opacity: {percent}%",
+  "overlayOpacity": "Overlay Opacity",
+  "percent": "{percent}%",
   "@overlayOpacity": {
     "placeholders": {
-      "size": {
+      "percent": {
         "type": "int"
       }
     }
@@ -27,95 +28,25 @@
   "loadMore": "Load more",
   "content": "Content",
   "typography": "Typography",
-  "fontSize": "Font size: {size}",
-  "@fontSize": {
-    "placeholders": {
-      "size": {
-        "type": "int"
-      }
-    }
-  },
+  "fontSize": "Font size",
   "textColor": "Text Color",
   "fontWeight": "Font Weight",
   "selectOne": "Select One",
   "alignment": "Alignment",
   "paddingAndMarginSettings": "Padding and margin settings",
-  "horizontalPadding": "Horizontal padding: {padding}px",
-  "@horizontalPadding": {
-    "placeholders": {
-      "padding": {
-        "type": "int"
-      }
-    }
-  },
-  "verticalPadding": "Vertical padding: {padding}px",
-  "@verticalPadding": {
-    "placeholders": {
-      "padding": {
-        "type": "int"
-      }
-    }
-  },
-  "topMargin": "Top margin: {margin}px",
-  "@topMargin": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
-  "bottomMargin": "Bottom margin: {margin}px",
-  "@bottomMargin": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
-  "leftMargin": "Left margin: {margin}px",
-  "@leftMargin": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
-  "rightMargin": "Right margin: {margin}px",
-  "@rightMargin": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
+  "horizontalPadding": "Horizontal padding",
+  "verticalPadding": "Vertical padding",
+  "topMargin": "Top margin",
+  "bottomMargin": "Bottom margin",
+  "leftMargin": "Left margin",
+  "rightMargin": "Right margin",
   "reset": "Reset",
   "firstName": "First Name",
   "middleName": "Middle Name",
   "lastName": "Last Name",
-  "height": "Height: {size}px",
-  "@height": {
-    "placeholders": {
-      "size": {
-        "type": "int"
-      }
-    }
-  },
-  "marginTop": "Margin Top: {margin}px",
-  "@marginTop": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
-  "marginBottom": "Margin Bottom: {margin}px",
-  "@marginBottom": {
-    "placeholders": {
-      "margin": {
-        "type": "int"
-      }
-    }
-  },
+  "height": "Height",
+  "marginTop": "Margin Top",
+  "marginBottom": "Margin Bottom",
   "color": "Color",
   "phoneNumbers": "Phone Numbers",
   "addANewRow": "Add a new row",
@@ -135,8 +66,17 @@
   "linkTo": "Link To",
   "buttonDesign": "Button Design",
   "borderCcolor": "Border Color",
-  "borderThickness": "Border Thickness: {size}px",
-  "@borderThickness": {
+  "borderThickness": "Border Thickness",
+  "size": "{size}",
+  "@size": {
+    "placeholders": {
+      "size": {
+        "type": "int"
+      }
+    }
+  },
+  "pxSize": "{size}px",
+  "@pxSize": {
     "placeholders": {
       "size": {
         "type": "int"

@@ -52,7 +52,7 @@ class Dropdown<T> extends StatefulWidget {
     this.items = const [],
     this.itemBuilder,
     this.selectedItemBuilder,
-    this.margin = const EdgeInsets.symmetric(vertical: 10),
+    this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.padding = const EdgeInsets.all(8),
     this.fontSize,
     this.dense = true,
