@@ -14,7 +14,7 @@ import '../../widgets/button_widget.dart';
 import 'components/expansion_block_tile.dart';
 
 class BackdropBlock extends StatefulWidget {
-  final MapEntry<Object, Map<String, dynamic>> data;
+  final Map<String, dynamic> data;
   const BackdropBlock({super.key, required this.data});
 
   @override
@@ -42,14 +42,14 @@ class _BackdropBlockState extends State<BackdropBlock> {
         () => searchPhotos(),
       );
     });
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) => searchPhotos());
+    //WidgetsBinding.instance.addPostFrameCallback((timeStamp) => searchPhotos());
     super.initState();
   }
 
   searchPhotos({bool reload = true}) {
     if (reload) _page = 1;
     String? query = searchController.text.trim();
-    query = query.isEmpty ? widget.data.value['label'] ?? 'banner' : query;
+    query = query.isEmpty ? widget.data['label'] ?? 'banner' : query;
     setState(() => _isSearching = true);
     api
         .invoke(
@@ -85,7 +85,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return ExpansionBlockTile(
-      widget.data.value,
+      widget.data,
       icon: Icons.image_outlined,
       padding: const EdgeInsets.fromLTRB(0, 18, 28, 18),
       children: [

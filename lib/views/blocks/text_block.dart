@@ -13,7 +13,8 @@ import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class TextBlock extends StatelessWidget {
-  final MapEntry<Object, Map<String, dynamic>> data;
+  final Map<String, dynamic> data;
+  final Function(Map<String, dynamic>)? onUpdate;
 
   final TextEditingController _contentController;
   final TextEditingController _firstNameController;
@@ -26,31 +27,34 @@ class TextBlock extends StatelessWidget {
   late final String? _selectedFontWeight;
   late final String? _selectedAlignment;
 
-  TextBlock({super.key, required this.data})
-      : _contentController = TextEditingController(text: data.value['content']),
+  TextBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  })  : _contentController = TextEditingController(text: data['content']),
         _firstNameController =
-            TextEditingController(text: data.value['name']?['first']),
+            TextEditingController(text: data['name']?['first']),
         _middleNameController =
-            TextEditingController(text: data.value['name']?['middle']),
+            TextEditingController(text: data['name']?['middle']),
         _lastNameController =
-            TextEditingController(text: data.value['name']?['last']),
-        _selectedFonFamily = data.value['data']?['style']?['fontFamily'],
-        _selectedFontSize = data.value['data']?['style']?['fontSize'] ?? 12,
+            TextEditingController(text: data['name']?['last']),
+        _selectedFonFamily = data['data']?['style']?['fontFamily'],
+        _selectedFontSize = data['data']?['style']?['fontSize'] ?? 12,
         _selectedFontColor =
-            data.value['data']?['style']?['color']?.toString().color,
+            data['data']?['style']?['color']?.toString().color,
         _selectedFontWeight =
-            data.value['data']?['style']?['fotWeight'] ?? 'regular',
+            data['data']?['style']?['fotWeight'] ?? 'regular',
         _selectedAlignment =
-            data.value['data']?['style']?['alignment'] ?? 'left';
+            data['data']?['style']?['alignment'] ?? 'left';
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data.value,
+      data,
       icon: Icons.title,
       padding: const EdgeInsets.fromLTRB(12, 8, 28, 18),
       children: [
-        ...(data.value['block'] == 'name'
+        ...(data['block'] == 'name'
             ? [
                 InputField(
                   controller: _firstNameController,
@@ -118,9 +122,12 @@ class TextBlock extends StatelessWidget {
           value: _selectedAlignment,
         ),
         Spacing(
-          padding: data.value['data']?['padding'],
-          margin: data.value['data']?['margin'],
-          onUpdate: (p0) => debug.print(p0, tag: 'SPACING'),
+          padding: data['data']?['padding'],
+          margin: data['data']?['margin'],
+          onUpdate: (spacing) {
+            data['data'].addEntries([spacing]);
+            onUpdate?.call(data);
+          },
         ),
       ],
     );

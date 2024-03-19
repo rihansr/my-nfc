@@ -9,7 +9,7 @@ import '../../utils/extensions.dart';
 import '../../widgets/clipper_widget.dart';
 
 class ImageBlock extends StatefulWidget {
-  final MapEntry<Object, Map<String, dynamic>> data;
+  final Map<String, dynamic> data;
   const ImageBlock({super.key, required this.data});
 
   @override
@@ -24,8 +24,7 @@ class _ImageBlockState extends State<ImageBlock> {
 
   @override
   void initState() {
-    String path = widget.data.value['data']?['path']?.toString().trim() ?? '';
-    bool isUrl = Uri.tryParse(path)?.hasAbsolutePath ?? false;
+    String path = widget.data['data']?['path']?.toString().trim() ?? '';
     _imagePath = path.isEmpty ? null : path;
     super.initState();
   }
@@ -34,15 +33,15 @@ class _ImageBlockState extends State<ImageBlock> {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return ExpansionBlockTile(
-      widget.data.value,
-      icon: widget.data.value['block'] == 'avatar'
+      widget.data,
+      icon: widget.data['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
       padding: const EdgeInsets.fromLTRB(12, 8, 28, 18),
       children: [
-        if (widget.data.value['label'] != null) ...[
+        if (widget.data['label'] != null) ...[
           Text(
-            widget.data.value['label'] ?? '',
+            widget.data['label'] ?? '',
             style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),

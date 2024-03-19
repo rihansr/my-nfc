@@ -24,7 +24,7 @@ class DesignView extends StatelessWidget {
                 .map(
                   (e) => SectionBlock(
                     key: Key(e.key),
-                    data: MapEntry(e.key, e.value),
+                    data: e.value,
                   ),
                 )
                 .toList(),

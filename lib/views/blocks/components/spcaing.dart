@@ -7,7 +7,7 @@ import 'expansion_block_tile.dart';
 class Spacing extends StatelessWidget {
   final Map<String, dynamic>? padding;
   final Map<String, dynamic>? margin;
-  final Function(Map<String, dynamic>)? onUpdate;
+  final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
 
   late final int _horizontalPadding;
   late final int _verticalPadding;
@@ -43,17 +43,17 @@ class Spacing extends StatelessWidget {
             value: _horizontalPadding,
             onUpdate: (val) {
               padding!['horizontal'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
           Seekbar(
-            title: string.alignment,
+            title: string.verticalPadding,
             type: 'px',
             defaultValue: _verticalPadding,
             value: _verticalPadding,
             onUpdate: (val) {
               padding!['vertical'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
         ],
@@ -65,7 +65,7 @@ class Spacing extends StatelessWidget {
             value: _topMargin,
             onUpdate: (val) {
               margin!['top'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
           Seekbar(
@@ -75,7 +75,7 @@ class Spacing extends StatelessWidget {
             value: _bottomMargin,
             onUpdate: (val) {
               margin!['bottom'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
           Seekbar(
@@ -85,7 +85,7 @@ class Spacing extends StatelessWidget {
             value: _leftMargin,
             onUpdate: (val) {
               margin!['left'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
           Seekbar(
@@ -95,7 +95,7 @@ class Spacing extends StatelessWidget {
             value: _rightMargin,
             onUpdate: (val) {
               margin!['right'] = val;
-              onUpdate?.call(margin!);
+              onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
         ]

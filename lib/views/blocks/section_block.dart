@@ -2,11 +2,12 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
+import '../../utils/debug.dart';
+import 'components/expansion_block_tile.dart';
 import 'actions_block.dart';
 import 'additional_block.dart';
 import 'backdrop_block.dart';
 import 'button_block.dart';
-import 'components/expansion_block_tile.dart';
 import 'contact_block.dart';
 import 'divider_block.dart';
 import 'image_block.dart';
@@ -16,20 +17,17 @@ import 'space_block.dart';
 import 'text_block.dart';
 import 'video_block.dart';
 
-class SectionBlock extends StatefulWidget {
-  final MapEntry<Object, Map<String, dynamic>> data;
-  const SectionBlock({super.key, required this.data});
+class SectionBlock extends StatelessWidget {
+  final Map<String, dynamic> data;
+  final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
 
-  @override
-  State<SectionBlock> createState() => _SectionBlockState();
-}
+  const SectionBlock({super.key, required this.data, this.onUpdate});
 
-class _SectionBlockState extends State<SectionBlock> {
   @override
   Widget build(BuildContext context) {
-    List fields = (widget.data.value['fields'] as List?) ?? [];
+    List fields = (data['fields'] as List?) ?? [];
     return ExpansionBlockTile(
-      widget.data.value,
+      data,
       children: fields.isEmpty
           ? [
               _AddButton(
@@ -40,45 +38,52 @@ class _SectionBlockState extends State<SectionBlock> {
               ...fields.mapIndexed(
                 (i, e) {
                   Key key =
-                      widget.key != null ? Key('${widget.key}/$i') : Key('$i');
-                  MapEntry<Object, Map<String, dynamic>> value = MapEntry(i, e);
+                      this.key != null ? Key('${this.key}/$i') : Key('$i');
                   switch (e['block']) {
                     case "section":
-                      return SectionBlock(key: key, data: value);
+                      return SectionBlock(key: key, data: e);
                     case "space":
-                      return SpaceBlock(key: key, data: value);
+                      return SpaceBlock(key: key, data: e);
                     case "divider":
-                      return DividerBlock(key: key, data: value);
+                      return DividerBlock(key: key, data: e);
                     case "text":
                     case "name":
-                      return TextBlock(key: key, data: value);
+                      return TextBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (entry) {
+                          debug.print(data, tag: "Pre");
+                          data['fields'][i] = entry;
+                          debug.print(data, tag: "Post");
+                        },
+                      );
                     case "banner":
                     case "background":
-                      return BackdropBlock(key: key, data: value);
+                      return BackdropBlock(key: key, data: e);
                     case "avatar":
                     case "image":
-                      return ImageBlock(key: key, data: value);
+                      return ImageBlock(key: key, data: e);
                     case "contact":
-                      return ContactBlock(key: key, data: value);
+                      return ContactBlock(key: key, data: e);
                     case "info":
-                      return InfoBlock(key: key, data: value);
+                      return InfoBlock(key: key, data: e);
                     case "publicLinks":
                     case "links":
-                      return LinksBlock(key: key, data: value);
+                      return LinksBlock(key: key, data: e);
                     case "button":
-                      return ButtonBlock(key: key, data: value);
+                      return ButtonBlock(key: key, data: e);
                     case "video":
-                      return VideoBlock(key: key, data: value);
+                      return VideoBlock(key: key, data: e);
                     case "additional":
-                      return AdditionalBlock(key: key, data: value);
+                      return AdditionalBlock(key: key, data: e);
                     case "actions":
-                      return ActionsBlock(key: key, data: value);
+                      return ActionsBlock(key: key, data: e);
                     default:
                       return SizedBox.shrink(key: key);
                   }
                 },
               ),
-              if (widget.data.value['primary'] == false)
+              if (data['primary'] == false)
                 _AddButton(
                   onSelected: (data) => {},
                 ),
