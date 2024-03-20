@@ -3,7 +3,13 @@ import 'components/expansion_block_tile.dart';
 
 class LinksBlock extends StatelessWidget {
   final Map<String, dynamic> data;
-  const LinksBlock({super.key, required this.data});
+  final Function(Map<String, dynamic>)? onUpdate;
+
+  const LinksBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {

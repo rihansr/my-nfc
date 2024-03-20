@@ -1,7 +1,6 @@
-import 'dart:async';
 import 'dart:io';
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../configs/app_config.dart';
@@ -15,7 +14,13 @@ import 'components/expansion_block_tile.dart';
 
 class BackdropBlock extends StatefulWidget {
   final Map<String, dynamic> data;
-  const BackdropBlock({super.key, required this.data});
+  final Function(Map<String, dynamic>)? onUpdate;
+
+  const BackdropBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  });
 
   @override
   State<BackdropBlock> createState() => _BackdropBlockState();
@@ -26,7 +31,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
   Timer? _debounce;
   int _page = 1;
   bool _isSearching = false;
-  List<Map<String, dynamic>> photos = [];
+  final List<Map<String, dynamic>> _photos = [];
 
   @override
   void initState() {
@@ -42,7 +47,6 @@ class _BackdropBlockState extends State<BackdropBlock> {
         () => searchPhotos(),
       );
     });
-    //WidgetsBinding.instance.addPostFrameCallback((timeStamp) => searchPhotos());
     super.initState();
   }
 
@@ -73,8 +77,8 @@ class _BackdropBlockState extends State<BackdropBlock> {
         _page++;
         setState(() {
           _isSearching = false;
-          if (reload) photos.clear();
-          photos.addAll(
+          if (reload) _photos.clear();
+          _photos.addAll(
               List<Map<String, dynamic>>.from(response.data['results']));
         });
       }
@@ -87,7 +91,8 @@ class _BackdropBlockState extends State<BackdropBlock> {
     return ExpansionBlockTile(
       widget.data,
       icon: Icons.image_outlined,
-      padding: const EdgeInsets.fromLTRB(0, 18, 28, 18),
+      padding:
+          EdgeInsets.fromLTRB(0, widget.data['label'] == null ? 0 : 18, 28, 18),
       children: [
         Row(
           children: [
@@ -110,47 +115,50 @@ class _BackdropBlockState extends State<BackdropBlock> {
             )
           ],
         ),
-        const SizedBox(height: 24),
-        GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: photos.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-          ),
-          itemBuilder: (context, i) => FadeInImage.memoryNetwork(
-            image: photos[i]['urls']?['thumb'] ?? ServerEnv.placeholderImage,
-            fit: BoxFit.cover,
-            placeholder: kTransparentImage,
-            placeholderErrorBuilder: (_, __, ___) =>
-                const CupertinoActivityIndicator(),
-            imageErrorBuilder: (_, __, ___) => _isSearching
-                ? const CupertinoActivityIndicator()
-                : const Placeholder(),
-          ),
-        ),
-        const SizedBox(height: 12),
-        if (!_isSearching)
-          Center(
-            child: Button(
-              label: string.loadMore,
-              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-              margin: const EdgeInsets.all(0),
-              fontColor: theme.hintColor,
-              borderTint: theme.hintColor,
-              onPressed: () => searchPhotos(reload: false),
+        if (_photos.isNotEmpty) ...[
+          const SizedBox(height: 24),
+          GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: _photos.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+            ),
+            itemBuilder: (context, i) => FadeInImage.memoryNetwork(
+              image: _photos[i]['urls']?['thumb'] ?? ServerEnv.placeholderImage,
+              fit: BoxFit.cover,
+              placeholder: kTransparentImage,
+              placeholderErrorBuilder: (_, __, ___) =>
+                  const CupertinoActivityIndicator(),
+              imageErrorBuilder: (_, __, ___) => _isSearching
+                  ? const CupertinoActivityIndicator()
+                  : const Placeholder(),
             ),
           ),
-        const SizedBox(height: 24),
-        Text(
-          string.agreeUnsplashTerms,
-          textAlign: TextAlign.center,
-          style: theme.textTheme.titleMedium?.copyWith(
-            color: theme.disabledColor,
+          const SizedBox(height: 12),
+          if (!_isSearching)
+            Center(
+              child: Button(
+                label: string.loadMore,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                margin: const EdgeInsets.all(0),
+                fontColor: theme.hintColor,
+                borderTint: theme.hintColor,
+                onPressed: () => searchPhotos(reload: false),
+              ),
+            ),
+          const SizedBox(height: 24),
+          Text(
+            string.agreeUnsplashTerms,
+            textAlign: TextAlign.center,
+            style: theme.textTheme.titleMedium?.copyWith(
+              color: theme.disabledColor,
+            ),
           ),
-        )
+        ]
       ],
     );
   }

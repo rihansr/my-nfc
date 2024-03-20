@@ -3,7 +3,13 @@ import 'components/expansion_block_tile.dart';
 
 class ActionsBlock extends StatelessWidget {
   final Map<String, dynamic> data;
-  const ActionsBlock({super.key, required this.data});
+  final Function(Map<String, dynamic>)? onUpdate;
+  
+  const ActionsBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {

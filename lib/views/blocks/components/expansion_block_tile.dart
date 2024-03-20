@@ -8,17 +8,21 @@ class ExpansionBlockTile extends StatelessWidget {
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry? titlePadding;
+  final bool? maintainState;
+  final Function(bool)? onExpansionChanged;
   final Function(bool)? onVisible;
   final Function(bool)? onSettingsShown;
   const ExpansionBlockTile(
     this.data, {
     super.key,
     this.icon,
-    this.onVisible,
-    this.onSettingsShown,
-    required this.children,
     this.titlePadding,
     this.padding,
+    this.onExpansionChanged,
+    this.onVisible,
+    this.onSettingsShown,
+    this.maintainState,
+    required this.children,
   });
 
   @override
@@ -38,10 +42,12 @@ class ExpansionBlockTile extends StatelessWidget {
             minLeadingWidth: 0,
             child: ExpansionTile(
               key: key,
-              maintainState: true,
-              tilePadding: titlePadding ?? const EdgeInsets.symmetric(horizontal: 12),
+              maintainState: maintainState ?? false,
+              tilePadding:
+                  titlePadding ?? const EdgeInsets.symmetric(horizontal: 12),
               childrenPadding: padding,
               expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
+              onExpansionChanged: onExpansionChanged,
               title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(

@@ -3,7 +3,13 @@ import 'components/expansion_block_tile.dart';
 
 class SpaceBlock extends StatelessWidget {
   final Map<String, dynamic> data;
-  const SpaceBlock({super.key, required this.data});
+  final Function(Map<String, dynamic>)? onUpdate;
+
+  const SpaceBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -49,7 +49,7 @@ class InputField extends StatelessWidget {
   final Function()? onTap;
   final TextInputAction? inputAction;
   final Function(String)? onAction;
-  final Function(String?)? onTyping;
+  final Function(String)? onTyping;
   final Function(String?)? onQuery;
 
   const InputField({

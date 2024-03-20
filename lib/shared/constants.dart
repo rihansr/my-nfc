@@ -1,6 +1,7 @@
 // Font
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const String kFontFamily = "Inter";
@@ -124,3 +125,6 @@ final Uint8List kTransparentImage = Uint8List.fromList(<int>[
   0x60,
   0x82,
 ]);
+
+// Other
+Map<Key, bool> kExpansionStates = {};

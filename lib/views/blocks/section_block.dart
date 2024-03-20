@@ -1,9 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'components/expansion_block_tile.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
-import '../../utils/debug.dart';
-import 'components/expansion_block_tile.dart';
 import 'actions_block.dart';
 import 'additional_block.dart';
 import 'backdrop_block.dart';
@@ -19,9 +18,13 @@ import 'video_block.dart';
 
 class SectionBlock extends StatelessWidget {
   final Map<String, dynamic> data;
-  final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
+  final Function(Map<String, dynamic>)? onUpdate;
 
-  const SectionBlock({super.key, required this.data, this.onUpdate});
+  const SectionBlock({
+    super.key,
+    required this.data,
+    this.onUpdate,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,43 +44,139 @@ class SectionBlock extends StatelessWidget {
                       this.key != null ? Key('${this.key}/$i') : Key('$i');
                   switch (e['block']) {
                     case "section":
-                      return SectionBlock(key: key, data: e);
+                      return SectionBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (section) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = section;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "space":
-                      return SpaceBlock(key: key, data: e);
+                      return SpaceBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "divider":
-                      return DividerBlock(key: key, data: e);
+                      return DividerBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "text":
                     case "name":
                       return TextBlock(
                         key: key,
-                        data: e,
-                        onUpdate: (entry) {
-                          debug.print(data, tag: "Pre");
-                          data['fields'][i] = entry;
-                          debug.print(data, tag: "Post");
+                        block: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
                         },
                       );
                     case "banner":
                     case "background":
-                      return BackdropBlock(key: key, data: e);
+                      return BackdropBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "avatar":
                     case "image":
-                      return ImageBlock(key: key, data: e);
+                      return ImageBlock(
+                        key: key,
+                        block: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "contact":
-                      return ContactBlock(key: key, data: e);
+                      return ContactBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "info":
-                      return InfoBlock(key: key, data: e);
+                      return InfoBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "publicLinks":
                     case "links":
-                      return LinksBlock(key: key, data: e);
+                      return LinksBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "button":
-                      return ButtonBlock(key: key, data: e);
+                      return ButtonBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "video":
-                      return VideoBlock(key: key, data: e);
+                      return VideoBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "additional":
-                      return AdditionalBlock(key: key, data: e);
+                      return AdditionalBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     case "actions":
-                      return ActionsBlock(key: key, data: e);
+                      return ActionsBlock(
+                        key: key,
+                        data: e,
+                        onUpdate: (block) {
+                          kExpansionStates[key] = true;
+                          data['fields'][i] = block;
+                          onUpdate?.call(data);
+                        },
+                      );
                     default:
                       return SizedBox.shrink(key: key);
                   }

@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -68,4 +67,14 @@ extension ContextExtension on BuildContext {
         curve: Curves.easeInOut,
         duration: const Duration(milliseconds: 300),
       );
+}
+
+extension MapExtension on Map<String, dynamic> {
+  addEntry(String key, MapEntry<String, dynamic> entry) {
+    if (containsKey(key)) {
+      this[key].addEntries([entry]);
+    } else {
+      this[key] = {}..addEntries([entry]);
+    }
+  }
 }

@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../utils/debug.dart';
 import '../views/tabs/design_view.dart';
 import '../views/tabs/theme_view.dart';
 import '../shared/constants.dart';
@@ -27,9 +29,11 @@ class DesignViewModel extends BaseViewModel {
           builder: (context, scrollController) {
             switch (tab) {
               case 0:
+                kExpansionStates.clear();
                 return DesignView(
                   scrollController: scrollController,
                   controller: this,
+                  data: designData,
                 );
               case 1:
                 return ThemeView(
