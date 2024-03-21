@@ -15,6 +15,7 @@ class InfoBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.info_outline,
       children: const [],
     );

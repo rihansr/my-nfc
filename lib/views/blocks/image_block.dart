@@ -1,17 +1,13 @@
-import 'dart:io';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'components/expansion_block_tile.dart';
-import '../../shared/constants.dart';
+import '../../utils/debug.dart';
 import '../../utils/extensions.dart';
-import '../../widgets/clipper_widget.dart';
+import 'components/image_view.dart';
 
 class ImageBlock extends StatefulWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
-  
+
   const ImageBlock({
     super.key,
     required this.block,
@@ -24,13 +20,16 @@ class ImageBlock extends StatefulWidget {
 
 class _ImageBlockState extends State<ImageBlock> {
   String? _imagePath;
-  set imagePath(dynamic image) {
+  set imagePath(String? image) {
     setState(() => _imagePath = image);
+    widget.block.addEntry('data', MapEntry('path', image));
+    widget.onUpdate?.call(widget.block);
   }
 
   @override
   void initState() {
     String path = widget.block['data']?['path']?.toString().trim() ?? '';
+    debug.print(path);
     _imagePath = path.isEmpty ? null : path;
     super.initState();
   }
@@ -54,69 +53,14 @@ class _ImageBlockState extends State<ImageBlock> {
           ),
           const SizedBox(height: 12),
         ],
-        AspectRatio(
-          aspectRatio: 21 / 9,
-          child: InkWell(
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            onTap: () {
-              if (_imagePath != null) return;
-              extension.pickPhoto(ImageSource.gallery).then((path) {
-                imagePath = path;
-              });
-            },
-            child: Clipper(
-              shape: BoxShape.rectangle,
-              size: double.infinity,
-              alignment: Alignment.center,
-              radius: 6,
-              color: _imagePath != null
-                  ? theme.colorScheme.tertiary.withOpacity(0.05)
-                  : null,
-              border: Border.all(color: theme.disabledColor),
-              child: _imagePath != null
-                  ? Stack(
-                      children: [
-                        Positioned.fill(
-                          child: Uri.tryParse(_imagePath ?? '')?.isAbsolute ??
-                                  false
-                              ? FadeInImage.memoryNetwork(
-                                  image: _imagePath!,
-                                  fit: BoxFit.cover,
-                                  placeholder: kTransparentImage,
-                                  placeholderErrorBuilder: (_, __, ___) =>
-                                      const CupertinoActivityIndicator(),
-                                  imageErrorBuilder: (_, __, ___) =>
-                                      const Placeholder(),
-                                )
-                              : kIsWeb
-                                  ? Image.network(_imagePath!,
-                                      fit: BoxFit.contain)
-                                  : Image.file(File(_imagePath!),
-                                      fit: BoxFit.contain),
-                        ),
-                        Positioned(
-                          right: 2,
-                          top: 2,
-                          child: SizedBox.square(
-                            dimension: 32,
-                            child: IconButton(
-                              onPressed: () => imagePath = null,
-                              padding: const EdgeInsets.all(0),
-                              icon: Icon(Icons.close, color: theme.hintColor),
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  : Icon(
-                      Icons.add_a_photo_outlined,
-                      color: theme.hintColor,
-                    ),
-            ),
-          ),
-        ),
+        ImageView(
+          path: _imagePath,
+          fit: BoxFit.contain,
+          size: widget.block['data']?['style']?['size'],
+          overlayOpacity: widget.block['data']?['style']?['overlayOpacity'],
+          onPick: (path) => imagePath = path,
+          onRemove: () => imagePath = null,
+        )
       ],
     );
   }

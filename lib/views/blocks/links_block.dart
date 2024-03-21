@@ -15,6 +15,7 @@ class LinksBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.group_outlined,
       children: const [],
     );

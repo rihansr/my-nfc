@@ -15,6 +15,7 @@ class Clipper<T> extends StatelessWidget {
   final List<BoxShadow>? shadows;
   final Gradient? gradient;
   final DecorationImage? backdrop;
+  final Color? overlayColor;
   final AlignmentGeometry? alignment;
   final BoxConstraints? constraints;
 
@@ -34,6 +35,7 @@ class Clipper<T> extends StatelessWidget {
     this.shadows,
     this.gradient,
     this.backdrop,
+    this.overlayColor,
     this.alignment,
     this.constraints,
   });
@@ -53,6 +55,7 @@ class Clipper<T> extends StatelessWidget {
     this.shadows,
     this.gradient,
     this.backdrop,
+    this.overlayColor,
     this.alignment,
     this.constraints,
   }) : shape = BoxShape.rectangle as T;
@@ -71,6 +74,7 @@ class Clipper<T> extends StatelessWidget {
     this.shadows,
     this.gradient,
     this.backdrop,
+    this.overlayColor,
     this.alignment,
     this.constraints,
   })  : shape = BoxShape.circle as T,
@@ -90,6 +94,7 @@ class Clipper<T> extends StatelessWidget {
     this.shadows,
     this.gradient,
     this.backdrop,
+    this.overlayColor,
     this.alignment,
     this.constraints,
   })  : height = size,
@@ -108,6 +113,7 @@ class Clipper<T> extends StatelessWidget {
     this.shadows,
     this.gradient,
     this.backdrop,
+    this.overlayColor,
     this.alignment,
     this.constraints,
   })  : size = double.infinity,
@@ -127,6 +133,17 @@ class Clipper<T> extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       alignment: alignment,
       constraints: constraints,
+      foregroundDecoration: overlayColor == null
+          ? null
+          : BoxDecoration(
+              shape: shape == null
+                  ? BoxShape.rectangle
+                  : shape is BoxShape
+                      ? shape as BoxShape
+                      : BoxShape.rectangle,
+              borderRadius: kBorderRadius,
+              color: overlayColor,
+            ),
       decoration: shape == null
           ? BoxDecoration(
               shape: BoxShape.rectangle,

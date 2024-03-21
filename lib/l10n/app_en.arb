@@ -16,13 +16,6 @@
   "resize": "Resize",
   "overlayOpacity": "Overlay Opacity",
   "percent": "{percent}%",
-  "@overlayOpacity": {
-    "placeholders": {
-      "percent": {
-        "type": "int"
-      }
-    }
-  },
   "cancel": "Cancel",
   "confirm": "Confirm",
   "loadMore": "Load more",

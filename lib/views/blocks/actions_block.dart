@@ -15,6 +15,7 @@ class ActionsBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.system_update_alt_outlined,
       children: const [],
     );

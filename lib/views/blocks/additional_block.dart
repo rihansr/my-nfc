@@ -15,6 +15,7 @@ class AdditionalBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.playlist_add_outlined,
       children: const [],
     );

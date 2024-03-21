@@ -15,6 +15,7 @@ class DividerBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.remove_outlined,
       children: const [],
     );

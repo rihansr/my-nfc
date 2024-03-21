@@ -39,9 +39,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.horizontalPadding,
             type: 'px',
-            defaultValue: _verticalPadding,
+            defaultValue: 0,
             value: _horizontalPadding,
-            onUpdate: (val) {
+            onChanged: (val) {
               padding!['horizontal'] = val;
               onUpdate?.call(MapEntry("padding", padding!));
             },
@@ -49,9 +49,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.verticalPadding,
             type: 'px',
-            defaultValue: _verticalPadding,
+            defaultValue: 0,
             value: _verticalPadding,
-            onUpdate: (val) {
+            onChanged: (val) {
               padding!['vertical'] = val;
               onUpdate?.call(MapEntry("padding", padding!));
             },
@@ -61,9 +61,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.topMargin,
             type: 'px',
-            defaultValue: _topMargin,
+            defaultValue: 0,
             value: _topMargin,
-            onUpdate: (val) {
+            onChanged: (val) {
               margin!['top'] = val;
               onUpdate?.call(MapEntry("margin", margin!));
             },
@@ -71,9 +71,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.bottomMargin,
             type: 'px',
-            defaultValue: _bottomMargin,
+            defaultValue: 0,
             value: _bottomMargin,
-            onUpdate: (val) {
+            onChanged: (val) {
               margin!['bottom'] = val;
               onUpdate?.call(MapEntry("margin", margin!));
             },
@@ -81,9 +81,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.leftMargin,
             type: 'px',
-            defaultValue: _leftMargin,
+            defaultValue: 0,
             value: _leftMargin,
-            onUpdate: (val) {
+            onChanged: (val) {
               margin!['left'] = val;
               onUpdate?.call(MapEntry("margin", margin!));
             },
@@ -91,9 +91,9 @@ class Spacing extends StatelessWidget {
           Seekbar(
             title: string.rightMargin,
             type: 'px',
-            defaultValue: _rightMargin,
+            defaultValue: 0,
             value: _rightMargin,
-            onUpdate: (val) {
+            onChanged: (val) {
               margin!['right'] = val;
               onUpdate?.call(MapEntry("margin", margin!));
             },

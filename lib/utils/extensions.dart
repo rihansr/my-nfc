@@ -50,15 +50,7 @@ extension StringExtension on String {
       .join(" ");
   get copy => Clipboard.setData(ClipboardData(text: this))
       .then((value) => style.showToast('$this ${string.copied}'.trim()));
-  get color {
-    var hexColor = replaceAll("#", "");
-    if (hexColor.length == 6) {
-      hexColor = "0xFF$hexColor";
-    }
-    if (hexColor.length == 8) {
-      return Color(int.parse("0x$hexColor"));
-    }
-  }
+  Color get hexColor => HexColor.fromHex(this);
 }
 
 extension ContextExtension on BuildContext {
@@ -77,4 +69,27 @@ extension MapExtension on Map<String, dynamic> {
       this[key] = {}..addEntries([entry]);
     }
   }
+}
+
+extension HexColor on Color {
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    switch (hexString.length) {
+      case 6:
+        buffer.write('FF$hexString');
+      case 7:
+        buffer.write(hexString.replaceFirst('#', 'FF'));
+      case 8:
+        buffer.write(hexString);
+      case 9:
+        buffer.write(hexString.replaceFirst('#', ''));
+    }
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  String get toHex => '#'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }

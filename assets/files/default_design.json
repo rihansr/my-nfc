@@ -10,9 +10,9 @@
                 "primary": true,
                 "visibility": true,
                 "dragable": false,
-                "settings":{
+                "settings": {
                     "initiallyExpand": false,
-                    "backgroundColor": "00000000",
+                    "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
                         "horizontal": 0,
@@ -30,7 +30,11 @@
                         "block": "banner",
                         "primary": true,
                         "data": {
-                            "path": ""
+                            "path": "",
+                            "style": {
+                                "size": 10,
+                                "overlayOpacity": 33
+                            }
                         }
                     },
                     {
@@ -44,7 +48,7 @@
                             "style": {
                                 "typography": null,
                                 "fontSize": 32,
-                                "color": "FFFFFFFF",
+                                "color": "#FFFFFFFF",
                                 "fontWeight": "regular",
                                 "alignment": "left"
                             },
@@ -68,9 +72,9 @@
                 "primary": true,
                 "visibility": true,
                 "dragable": false,
-                "settings":{
+                "settings": {
                     "initiallyExpand": false,
-                    "backgroundColor": "00000000",
+                    "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
                         "horizontal": 0,
@@ -109,7 +113,7 @@
                             "style": {
                                 "typography": null,
                                 "fontSize": 32,
-                                "color": "FFFFFFFF",
+                                "color": "#FFFFFFFF",
                                 "fontWeight": "regular",
                                 "alignment": "left"
                             },
@@ -146,7 +150,7 @@
                     "style": {
                         "typography": null,
                         "fontSize": 16,
-                        "color": "FFFFFFFF",
+                        "color": "#FFFFFFFF",
                         "fontWeight": "regular",
                         "alignment": "left"
                     },
@@ -181,7 +185,7 @@
                     "style": {
                         "typography": null,
                         "fontSize": 14,
-                        "color": "FFFFFFFF",
+                        "color": "#FFFFFFFF",
                         "fontWeight": "regular",
                         "alignment": "left"
                     },
@@ -203,7 +207,7 @@
                 "visibility": true,
                 "dragable": false,
                 "data": {
-                    "color": "FFFFFFFF",
+                    "color": "#FFFFFFFF",
                     "margin": {
                         "top": 0,
                         "bottom": 0
@@ -224,7 +228,7 @@
                 "dragable": false,
                 "data": {
                     "links": []
-                  }
+                }
             },
             {
                 "block": "space",
@@ -248,7 +252,7 @@
                 "visibility": true,
                 "dragable": false,
                 "data": {
-                    "color": "FFFFFFFF",
+                    "color": "#FFFFFFFF",
                     "margin": {
                         "top": 0,
                         "bottom": 0
@@ -260,9 +264,9 @@
                 "label": "Section",
                 "visibility": true,
                 "dragable": false,
-                "settings":{
+                "settings": {
                     "initiallyExpand": false,
-                    "backgroundColor": "00000000",
+                    "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
                         "horizontal": 0,
@@ -312,7 +316,7 @@
                 "visibility": true,
                 "dragable": false,
                 "data": {
-                    "color": "FFFFFFFF",
+                    "color": "#FFFFFFFF",
                     "margin": {
                         "top": 0,
                         "bottom": 0
@@ -324,9 +328,9 @@
                 "label": "Section",
                 "visibility": true,
                 "dragable": false,
-                "settings":{
+                "settings": {
                     "initiallyExpand": false,
-                    "backgroundColor": "00000000",
+                    "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
                         "horizontal": 0,

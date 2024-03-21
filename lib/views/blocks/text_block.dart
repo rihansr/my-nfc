@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../utils/debug.dart';
 import '../../widgets/tab_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/seekbar_widget.dart';
@@ -21,11 +20,11 @@ class TextBlock extends StatelessWidget {
   final TextEditingController _middleNameController;
   final TextEditingController _lastNameController;
 
-  late final String? _selectedFonFamily;
-  late final int _selectedFontSize;
-  late final Color? _selectedFontColor;
-  late final String? _selectedFontWeight;
-  late final String? _selectedAlignment;
+  late String? _selectedFonFamily;
+  late int _selectedFontSize;
+  late Color? _selectedFontColor;
+  late String? _selectedFontWeight;
+  late String? _selectedAlignment;
 
   TextBlock({
     super.key,
@@ -42,19 +41,27 @@ class TextBlock extends StatelessWidget {
         _selectedFonFamily = block['data']?['style']?['fontFamily'],
         _selectedFontSize = block['data']?['style']?['fontSize'] ?? 12,
         _selectedFontColor =
-            block['data']?['style']?['color']?.toString().color,
+            block['data']?['style']?['color']?.toString().hexColor,
         _selectedFontWeight =
             block['data']?['style']?['fontWeight'] ?? 'regular',
         _selectedAlignment = block['data']?['style']?['alignment'] ?? 'left';
 
-  update(MapEntry<String, dynamic> entry) {
-    block['datas'] ??= {};
+  updateBlock(String key, MapEntry<String, dynamic> value) {
+    switch (key) {
+      case 'data':
+        block.addEntry(key, value);
+      default:
+        block['data'] ??= {};
+        (block['data'] as Map<String, dynamic>).addEntry(key, value);
+    }
+    onUpdate?.call(block);
   }
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       block,
+      maintainState: true,
       icon: Icons.title,
       padding: const EdgeInsets.fromLTRB(12, 8, 28, 18),
       children: [
@@ -63,32 +70,26 @@ class TextBlock extends StatelessWidget {
                 InputField(
                   controller: _firstNameController,
                   title: string.firstName,
-                  onTyping: (text) {
-                    block['data'] ??= <String, dynamic>{};
-                    (block['data'] as Map<String, dynamic>).addEntry(
-                        'name', MapEntry('first', text.isEmpty ? null : text));
-                    onUpdate?.call(block);
-                  },
+                  onTyping: (text) => updateBlock(
+                    'name',
+                    MapEntry('first', text.isEmpty ? null : text),
+                  ),
                 ),
                 InputField(
                   controller: _middleNameController,
                   title: string.middleName,
-                  onTyping: (text) {
-                    block['data'] ??= <String, dynamic>{};
-                    (block['data'] as Map<String, dynamic>).addEntry(
-                        'name', MapEntry('middle', text.isEmpty ? null : text));
-                    onUpdate?.call(block);
-                  },
+                  onTyping: (text) => updateBlock(
+                    'name',
+                    MapEntry('middle', text.isEmpty ? null : text),
+                  ),
                 ),
                 InputField(
                   controller: _lastNameController,
                   title: string.lastName,
-                  onTyping: (text) {
-                    block['data'] ??= <String, dynamic>{};
-                    (block['data'] as Map<String, dynamic>).addEntry(
-                        'name', MapEntry('last', text.isEmpty ? null : text));
-                    onUpdate?.call(block);
-                  },
+                  onTyping: (text) => updateBlock(
+                    'name',
+                    MapEntry('last', text.isEmpty ? null : text),
+                  ),
                 ),
               ]
             : [
@@ -97,11 +98,10 @@ class TextBlock extends StatelessWidget {
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
-                  onTyping: (text) {
-                    block.addEntry('data',
-                        MapEntry('content', text.isEmpty ? null : text));
-                    onUpdate?.call(block);
-                  },
+                  onTyping: (text) => updateBlock(
+                    'data',
+                    MapEntry('content', text.isEmpty ? null : text),
+                  ),
                 ),
               ]),
         Dropdown<String?>(
@@ -113,10 +113,8 @@ class TextBlock extends StatelessWidget {
           itemBuilder: (p0) =>
               Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
           onSelected: (String? font) {
-            block['data'] ??= <String, dynamic>{};
-            (block['data'] as Map<String, dynamic>)
-                .addEntry('style', MapEntry('fontFamily', font));
-            onUpdate?.call(block);
+            _selectedFonFamily = font;
+            updateBlock('style', MapEntry('fontFamily', font));
           },
         ),
         Seekbar(
@@ -124,11 +122,9 @@ class TextBlock extends StatelessWidget {
           value: _selectedFontSize,
           min: 8,
           max: 96,
-          onUpdate: (size) {
-            block['data'] ??= <String, dynamic>{};
-            (block['data'] as Map<String, dynamic>)
-                .addEntry('style', MapEntry('fontSize', size));
-            onUpdate?.call(block);
+          onChanged: (size) {
+            _selectedFontSize = size;
+            updateBlock('style', MapEntry('fontSize', size));
           },
         ),
         ColourPicker(
@@ -148,11 +144,8 @@ class TextBlock extends StatelessWidget {
             Colors.brown
           ],
           onPick: (color) {
-            block['data'] ??= <String, dynamic>{};
-            (block['data'] as Map<String, dynamic>)
-                .addEntry('style', MapEntry('color', color));
-            debug.print(block);
-            //onUpdate?.call(block);
+            _selectedFontColor = color;
+            updateBlock('style', MapEntry('color', color.toHex));
           },
         ),
         TabWidget(
@@ -160,28 +153,21 @@ class TextBlock extends StatelessWidget {
             tabs: kFontWeights,
             value: _selectedFontWeight,
             onSelect: (weight) {
-              block['data'] ??= <String, dynamic>{};
-              (block['data'] as Map<String, dynamic>)
-                  .addEntry('style', MapEntry('fontWeight', weight));
-              onUpdate?.call(block);
+              _selectedFontWeight = weight;
+              updateBlock('style', MapEntry('fontWeight', weight));
             }),
         TabWidget(
             title: string.alignment,
             tabs: kAlignments,
             value: _selectedAlignment,
             onSelect: (alignment) {
-              block['data'] ??= <String, dynamic>{};
-              (block['data'] as Map<String, dynamic>)
-                  .addEntry('style', MapEntry('alignment', alignment));
-              onUpdate?.call(block);
+              _selectedAlignment = alignment;
+              updateBlock('style', MapEntry('alignment', alignment));
             }),
         Spacing(
           padding: block['data']?['padding'],
           margin: block['data']?['margin'],
-          onUpdate: (spacing) {
-            block.addEntry('data', spacing);
-            onUpdate?.call(block);
-          },
+          onUpdate: (spacing) => updateBlock('data', spacing),
         ),
       ],
     );

@@ -15,6 +15,7 @@ class SpaceBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.zoom_out_map_outlined,
       children: const [],
     );

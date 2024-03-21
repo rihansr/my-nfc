@@ -15,6 +15,7 @@ class ButtonBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
       data,
+      maintainState: true,
       icon: Icons.add_circle_outline,
       children: const [],
     );

@@ -48,7 +48,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (section) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = section;
                           onUpdate?.call(data);
                         },
@@ -58,7 +57,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -68,7 +66,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -79,7 +76,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         block: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -88,9 +84,8 @@ class SectionBlock extends StatelessWidget {
                     case "background":
                       return BackdropBlock(
                         key: key,
-                        data: e,
+                        block: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -101,7 +96,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         block: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -111,7 +105,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -121,7 +114,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -132,7 +124,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -142,7 +133,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -152,7 +142,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -162,7 +151,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },
@@ -172,7 +160,6 @@ class SectionBlock extends StatelessWidget {
                         key: key,
                         data: e,
                         onUpdate: (block) {
-                          kExpansionStates[key] = true;
                           data['fields'][i] = block;
                           onUpdate?.call(data);
                         },

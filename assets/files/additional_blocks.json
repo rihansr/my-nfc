@@ -20,7 +20,7 @@
                 "horizontal": "left"
             },
             "overlay": {
-                "color": "00000000",
+                "color": "#00000000",
                 "opacity": 40
             },
             "additional": {
@@ -50,7 +50,7 @@
                     "style": {
                         "typography": null,
                         "fontSize": 32,
-                        "color": "FFFFFFFF",
+                        "color": "#FFFFFFFF",
                         "fontWeight": "reqular",
                         "alignment": "left"
                     },
@@ -76,7 +76,7 @@
                     "content": "",
                     "style": {
                         "typography": null,
-                        "color": "FFFFFFFF",
+                        "color": "#FFFFFFFF",
                         "fontSize": 19,
                         "fontWeight": "reqular",
                         "alignment": "left"
@@ -104,13 +104,13 @@
                     "link": "",
                     "style": {
                         "border": {
-                            "color": "FFFFFFFF",
+                            "color": "#FFFFFFFF",
                             "thickness": 1,
                             "radius": 4
                         },
                         "text": {
                             "typography": null,
-                            "color": "FFFFFFFF",
+                            "color": "#FFFFFFFF",
                             "fontSize": 16,
                             "fontWeight": "regular"
                         }
@@ -132,7 +132,7 @@
             "content": "",
             "style": {
                 "typography": null,
-                "color": "FFFFFFFF",
+                "color": "#FFFFFFFF",
                 "fontSize": 16,
                 "fontWeight": "reqular",
                 "alignment": "center"
@@ -185,7 +185,7 @@
         "visibility": true,
         "dragable": true,
         "data": {
-            "color": "FFFFFFFF",
+            "color": "#FFFFFFFF",
             "margin": {
                 "top": 0,
                 "bottom": 0
@@ -215,7 +215,7 @@
                 "horizontal": "left"
             },
             "overlay": {
-                "color": "00000000",
+                "color": "#00000000",
                 "opacity": 40
             },
             "additional": {
@@ -243,7 +243,7 @@
         "visibility": true,
         "dragable": true,
         "settings": {
-            "backgroundColor": "00000000",
+            "backgroundColor": "#00000000",
             "fullWidth": true,
             "padding": {
                 "horizontal": 0,
@@ -279,13 +279,13 @@
             "link": "",
             "style": {
                 "border": {
-                    "color": "FFFFFFFF",
+                    "color": "#FFFFFFFF",
                     "thickness": 1,
                     "radius": 4
                 },
                 "text": {
                     "typography": null,
-                    "color": "FFFFFFFF",
+                    "color": "#FFFFFFFF",
                     "fontSize": 16,
                     "fontWeight": "regular"
                 }

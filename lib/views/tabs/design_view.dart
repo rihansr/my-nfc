@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/utils/debug.dart';
-import '../../shared/constants.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../blocks/section_block.dart';
 import 'components/popup_view.dart';
 
-class DesignView extends StatefulWidget {
+class DesignView extends StatelessWidget {
   final ScrollController scrollController;
   final DesignViewModel controller;
   final Map<String, dynamic> data;
@@ -17,25 +15,14 @@ class DesignView extends StatefulWidget {
   });
 
   @override
-  State<DesignView> createState() => _DesignViewState();
-}
-
-class _DesignViewState extends State<DesignView> {
-  @override
-  void initState() {
-    debug.print(kExpansionStates);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => PopupView(
-        scrollController: widget.scrollController,
-        children: widget.data.entries
+        scrollController: scrollController,
+        children: data.entries
             .map(
               (e) => SectionBlock(
                 key: Key(e.key),
                 data: e.value,
-                onUpdate: (section) => widget.controller.notify,
+                onUpdate: (section) => controller.notify,
               ),
             )
             .toList(),

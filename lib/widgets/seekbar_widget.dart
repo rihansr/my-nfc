@@ -14,7 +14,8 @@ class Seekbar extends StatefulWidget {
   final num? defaultValue;
   final num value;
   final num max;
-  final Function(int)? onUpdate;
+  final bool showCount;
+  final Function(int)? onChanged;
 
   const Seekbar({
     super.key,
@@ -29,18 +30,19 @@ class Seekbar extends StatefulWidget {
     int value = 0,
     int? defaultValue,
     this.max = 100,
-    this.onUpdate,
+    this.showCount = true,
+    this.onChanged,
   })  : value = value < min
             ? min
             : value > max
                 ? max
                 : value,
         margin = margin ??
-            (defaultValue == null
+            (defaultValue == null || !showCount
                 ? const EdgeInsets.symmetric(vertical: 12)
                 : const EdgeInsets.symmetric(vertical: 8)),
         padding = margin ??
-            (defaultValue == null
+            (defaultValue == null || !showCount
                 ? const EdgeInsets.symmetric(vertical: 8)
                 : const EdgeInsets.only(top: 6, bottom: 8)),
         defaultValue = defaultValue == null
@@ -85,39 +87,42 @@ class _SeekbarState extends State<Seekbar> {
               child: Text.rich(
                 TextSpan(
                   text: widget.title,
-                  children: [
-                    const TextSpan(text: ': '),
-                    TextSpan(
-                      text: (() {
-                        switch (widget.type?.toLowerCase()) {
-                          case 'pixel':
-                          case 'px':
-                            return string.pxSize(value.toInt());
-                          case 'percent':
-                          case '%':
-                            return string.percent(value.toInt());
-                          default:
-                            return string.size(value.toInt());
-                        }
-                      }()),
-                    ),
-                    if (widget.defaultValue != null)
-                      WidgetSpan(
-                        child: Button(
-                          label: string.reset,
-                          borderSize: 1,
-                          margin: const EdgeInsets.only(left: 8),
-                          padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-                          onPressed: () {
-                            setState(
-                              () => value = widget.defaultValue!.toDouble(),
-                            );
-                            widget.onUpdate?.call(value.toInt());
-                          },
-                        ),
-                        alignment: PlaceholderAlignment.middle,
-                      ),
-                  ],
+                  children: widget.showCount
+                      ? [
+                          const TextSpan(text: ': '),
+                          TextSpan(
+                            text: (() {
+                              switch (widget.type?.toLowerCase()) {
+                                case 'pixel':
+                                case 'px':
+                                  return string.pxSize(value.toInt());
+                                case 'percent':
+                                case '%':
+                                  return string.percent(value.toInt());
+                                default:
+                                  return string.size(value.toInt());
+                              }
+                            }()),
+                          ),
+                          if (widget.defaultValue != null)
+                            WidgetSpan(
+                              child: Button(
+                                label: string.reset,
+                                borderSize: 1,
+                                margin: const EdgeInsets.only(left: 8),
+                                padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                onPressed: () {
+                                  setState(
+                                    () =>
+                                        value = widget.defaultValue!.toDouble(),
+                                  );
+                                  widget.onChanged?.call(value.toInt());
+                                },
+                              ),
+                              alignment: PlaceholderAlignment.middle,
+                            ),
+                        ]
+                      : [],
                 ),
                 style: titleStyle,
               ),
@@ -131,7 +136,7 @@ class _SeekbarState extends State<Seekbar> {
               divisions: widget.max.toInt() - widget.min.toInt(),
               onChanged: (value) {
                 setState(() => this.value = value);
-                widget.onUpdate?.call(value.toInt());
+                widget.onChanged?.call(value.toInt());
               },
             ),
           )

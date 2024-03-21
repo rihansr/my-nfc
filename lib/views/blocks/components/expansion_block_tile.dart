@@ -42,12 +42,12 @@ class ExpansionBlockTile extends StatelessWidget {
             minLeadingWidth: 0,
             child: ExpansionTile(
               key: key,
-              maintainState: maintainState ?? false,
               tilePadding:
                   titlePadding ?? const EdgeInsets.symmetric(horizontal: 12),
               childrenPadding: padding,
               expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
               onExpansionChanged: onExpansionChanged,
+              maintainState: maintainState ?? false,
               title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(
