@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class SpaceBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class AdditionalSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const SpaceBlock({
+  const AdditionalSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
-      icon: Icons.zoom_out_map_outlined,
+      icon: Icons.playlist_add_outlined,
       children: const [],
     );
   }

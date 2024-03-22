@@ -78,7 +78,7 @@ class ColorPalette {
       );
 
   factory ColorPalette.light() => ColorPalette(
-        primary: const Color(0xFF5CFFF4),
+        primary: const Color(0xFFF45CFF),
         onPrimary: const Color(0xFF9207FF),
         primaryLight: const Color(0xFF573CFE),
         primaryDark: const Color(0xFF074DFF),

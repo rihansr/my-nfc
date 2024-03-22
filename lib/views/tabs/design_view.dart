@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../viewmodels/design_viewmodel.dart';
-import '../blocks/section_block.dart';
+import '../blocks/section_settings.dart';
 import 'components/popup_view.dart';
 
 class DesignView extends StatelessWidget {
@@ -19,9 +19,9 @@ class DesignView extends StatelessWidget {
         scrollController: scrollController,
         children: data.entries
             .map(
-              (e) => SectionBlock(
+              (e) => SectionSettings(
                 key: Key(e.key),
-                data: e.value,
+                settings: e.value,
                 onUpdate: (section) => controller.notify,
               ),
             )

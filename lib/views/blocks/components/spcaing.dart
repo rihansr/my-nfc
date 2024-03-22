@@ -5,6 +5,7 @@ import 'expansion_block_tile.dart';
 
 // ignore: must_be_immutable
 class Spacing extends StatelessWidget {
+  final String? title;
   final Map<String, dynamic>? padding;
   final Map<String, dynamic>? margin;
   final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
@@ -18,6 +19,7 @@ class Spacing extends StatelessWidget {
 
   Spacing({
     super.key,
+    this.title,
     this.padding,
     this.margin,
     this.onUpdate,
@@ -31,11 +33,11 @@ class Spacing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      {'label': string.paddingAndMarginSettings},
+      title == null ? {} : {'label': string.paddingAndMarginSettings},
       padding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),
       children: [
-        if (padding != null) ...[
+        if (padding?['horizontal'] != null)
           Seekbar(
             title: string.horizontalPadding,
             type: 'px',
@@ -46,6 +48,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
+        if (padding?['vertical'] != null)
           Seekbar(
             title: string.verticalPadding,
             type: 'px',
@@ -56,8 +59,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
-        ],
-        if (margin != null) ...[
+        if (margin?['top'] != null)
           Seekbar(
             title: string.topMargin,
             type: 'px',
@@ -68,6 +70,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
+        if (margin?['bottom'] != null)
           Seekbar(
             title: string.bottomMargin,
             type: 'px',
@@ -78,6 +81,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
+        if (margin?['left'] != null)
           Seekbar(
             title: string.leftMargin,
             type: 'px',
@@ -88,6 +92,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
+        if (margin?['right'] != null)
           Seekbar(
             title: string.rightMargin,
             type: 'px',
@@ -98,7 +103,6 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
-        ]
       ],
     );
   }

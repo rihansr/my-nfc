@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class InfoBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class VideoSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const InfoBlock({
+  const VideoSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
-      icon: Icons.info_outline,
+      icon: Icons.video_library_outlined,
       children: const [],
     );
   }

@@ -3,34 +3,34 @@ import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
-import 'actions_block.dart';
-import 'additional_block.dart';
-import 'backdrop_block.dart';
-import 'button_block.dart';
-import 'contact_block.dart';
-import 'divider_block.dart';
-import 'image_block.dart';
-import 'info_block.dart';
-import 'links_block.dart';
-import 'space_block.dart';
-import 'text_block.dart';
-import 'video_block.dart';
+import 'actions_settings.dart';
+import 'additional_settings.dart';
+import 'backdrop_settings.dart';
+import 'button_settings.dart';
+import 'contact_settings.dart';
+import 'divider_settings.dart';
+import 'image_settings.dart';
+import 'info_settings.dart';
+import 'links_settings.dart';
+import 'space_settings.dart';
+import 'text_settings.dart';
+import 'video_settings.dart';
 
-class SectionBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class SectionSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const SectionBlock({
+  const SectionSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
-    List fields = (data['fields'] as List?) ?? [];
+    List fields = (settings['fields'] as List?) ?? [];
     return ExpansionBlockTile(
-      data,
+      settings,
       children: fields.isEmpty
           ? [
               _AddButton(
@@ -44,124 +44,124 @@ class SectionBlock extends StatelessWidget {
                       this.key != null ? Key('${this.key}/$i') : Key('$i');
                   switch (e['block']) {
                     case "section":
-                      return SectionBlock(
+                      return SectionSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (section) {
-                          data['fields'][i] = section;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = section;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "space":
-                      return SpaceBlock(
+                      return SpaceSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "divider":
-                      return DividerBlock(
+                      return DividerSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "text":
                     case "name":
-                      return TextBlock(
+                      return TextSettings(
                         key: key,
-                        block: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "banner":
                     case "background":
-                      return BackdropBlock(
+                      return BackdropSettings(
                         key: key,
-                        block: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "avatar":
                     case "image":
-                      return ImageBlock(
+                      return ImageSettings(
                         key: key,
-                        block: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "contact":
-                      return ContactBlock(
+                      return ContactSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "info":
-                      return InfoBlock(
+                      return InfoSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "publicLinks":
                     case "links":
-                      return LinksBlock(
+                      return LinksSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "button":
-                      return ButtonBlock(
+                      return ButtonSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "video":
-                      return VideoBlock(
+                      return VideoSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "additional":
-                      return AdditionalBlock(
+                      return AdditionalSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     case "actions":
-                      return ActionsBlock(
+                      return ActionsSettings(
                         key: key,
-                        data: e,
+                        settings: e,
                         onUpdate: (block) {
-                          data['fields'][i] = block;
-                          onUpdate?.call(data);
+                          settings['fields'][i] = block;
+                          onUpdate?.call(settings);
                         },
                       );
                     default:
@@ -169,7 +169,7 @@ class SectionBlock extends StatelessWidget {
                   }
                 },
               ),
-              if (data['primary'] == false)
+              if (settings['primary'] == false)
                 _AddButton(
                   onSelected: (data) => {},
                 ),

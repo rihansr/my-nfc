@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class LinksBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class LinksSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const LinksBlock({
+  const LinksSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
       icon: Icons.group_outlined,
       children: const [],

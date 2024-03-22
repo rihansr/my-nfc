@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class AdditionalBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class ActionsSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
-  
-  const AdditionalBlock({
+
+  const ActionsSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
-      icon: Icons.playlist_add_outlined,
+      icon: Icons.system_update_alt_outlined,
       children: const [],
     );
   }

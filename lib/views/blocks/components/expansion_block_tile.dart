@@ -7,8 +7,9 @@ class ExpansionBlockTile extends StatelessWidget {
   final Map<String, dynamic> data;
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
-  final EdgeInsetsGeometry? titlePadding;
-  final bool? maintainState;
+  final EdgeInsetsGeometry titlePadding;
+  final bool maintainState;
+  final bool enableBoder;
   final Function(bool)? onExpansionChanged;
   final Function(bool)? onVisible;
   final Function(bool)? onSettingsShown;
@@ -16,17 +17,19 @@ class ExpansionBlockTile extends StatelessWidget {
     this.data, {
     super.key,
     this.icon,
-    this.titlePadding,
+    this.titlePadding = const EdgeInsets.symmetric(horizontal: 12),
     this.padding,
     this.onExpansionChanged,
+    this.maintainState = false,
+    this.enableBoder = false,
     this.onVisible,
     this.onSettingsShown,
-    this.maintainState,
-    required this.children,
+    this.children = const [],
   });
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return data['label'] == null
         ? Padding(
             padding: padding ?? const EdgeInsets.all(0),
@@ -42,12 +45,16 @@ class ExpansionBlockTile extends StatelessWidget {
             minLeadingWidth: 0,
             child: ExpansionTile(
               key: key,
-              tilePadding:
-                  titlePadding ?? const EdgeInsets.symmetric(horizontal: 12),
+              shape: enableBoder
+                  ? Border.symmetric(
+                      horizontal: BorderSide(color: theme.colorScheme.primary),
+                    )
+                  : const Border(),
+              tilePadding: titlePadding,
               childrenPadding: padding,
               expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
               onExpansionChanged: onExpansionChanged,
-              maintainState: maintainState ?? false,
+              maintainState: maintainState,
               title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(

@@ -76,7 +76,6 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       ),
     ),
     expansionTileTheme: const ExpansionTileThemeData().copyWith(
-      shape: const Border(),
       textColor: colorPalette.text,
       collapsedTextColor: colorPalette.hint,
       collapsedIconColor: colorPalette.hint,

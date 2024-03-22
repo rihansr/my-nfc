@@ -87,42 +87,41 @@ class _SeekbarState extends State<Seekbar> {
               child: Text.rich(
                 TextSpan(
                   text: widget.title,
-                  children: widget.showCount
-                      ? [
-                          const TextSpan(text: ': '),
-                          TextSpan(
-                            text: (() {
-                              switch (widget.type?.toLowerCase()) {
-                                case 'pixel':
-                                case 'px':
-                                  return string.pxSize(value.toInt());
-                                case 'percent':
-                                case '%':
-                                  return string.percent(value.toInt());
-                                default:
-                                  return string.size(value.toInt());
-                              }
-                            }()),
-                          ),
-                          if (widget.defaultValue != null)
-                            WidgetSpan(
-                              child: Button(
-                                label: string.reset,
-                                borderSize: 1,
-                                margin: const EdgeInsets.only(left: 8),
-                                padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
-                                onPressed: () {
-                                  setState(
-                                    () =>
-                                        value = widget.defaultValue!.toDouble(),
-                                  );
-                                  widget.onChanged?.call(value.toInt());
-                                },
-                              ),
-                              alignment: PlaceholderAlignment.middle,
-                            ),
-                        ]
-                      : [],
+                  children: [
+                    if (widget.showCount) ...[
+                      const TextSpan(text: ': '),
+                      TextSpan(
+                        text: (() {
+                          switch (widget.type?.toLowerCase()) {
+                            case 'pixel':
+                            case 'px':
+                              return string.pxSize(value.toInt());
+                            case 'percent':
+                            case '%':
+                              return string.percent(value.toInt());
+                            default:
+                              return string.size(value.toInt());
+                          }
+                        }()),
+                      ),
+                    ],
+                    if (widget.defaultValue != null)
+                      WidgetSpan(
+                        child: Button(
+                          label: string.reset,
+                          borderSize: 1,
+                          margin: const EdgeInsets.only(left: 8),
+                          padding: const EdgeInsets.fromLTRB(8, 2, 8, 2),
+                          onPressed: () {
+                            setState(
+                              () => value = widget.defaultValue!.toDouble(),
+                            );
+                            widget.onChanged?.call(value.toInt());
+                          },
+                        ),
+                        alignment: PlaceholderAlignment.middle,
+                      ),
+                  ],
                 ),
                 style: titleStyle,
               ),

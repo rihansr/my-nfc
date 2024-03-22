@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class ButtonBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class ButtonSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
-  
-  const ButtonBlock({
+
+  const ButtonSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
       icon: Icons.add_circle_outline,
       children: const [],

@@ -95,22 +95,24 @@ class _ImageViewState extends State<ImageView> {
                 shape: BoxShape.rectangle,
                 radius: 6,
                 color: theme.colorScheme.tertiary.withOpacity(0.05),
-                overlayColor: opacity == null
-                    ? null
-                    : Colors.black.withOpacity(opacity! / 100),
                 border: Border.all(color: theme.disabledColor),
                 child: Stack(
                   children: [
-                    size != null
-                        ? Transform.scale(
-                            alignment: Alignment.center,
-                            scale: size! / 10,
-                            child: image,
-                          )
-                        : AspectRatio(
-                            aspectRatio: 21 / 9,
-                            child: image,
-                          ),
+                    Clipper(
+                      overlayColor: opacity == null
+                          ? null
+                          : Colors.black.withOpacity(opacity! / 100),
+                      child: size != null
+                          ? Transform.scale(
+                              alignment: Alignment.center,
+                              scale: size! / 10,
+                              child: image,
+                            )
+                          : AspectRatio(
+                              aspectRatio: 21 / 9,
+                              child: image,
+                            ),
+                    ),
                     Positioned(
                       right: 2,
                       top: 2,
@@ -122,7 +124,7 @@ class _ImageViewState extends State<ImageView> {
                             widget.onRemove?.call();
                           },
                           padding: const EdgeInsets.all(0),
-                          icon: Icon(Icons.close, color: theme.hintColor),
+                          icon: const Icon(Icons.close, color: Colors.white),
                         ),
                       ),
                     ),

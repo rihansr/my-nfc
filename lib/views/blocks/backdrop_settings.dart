@@ -15,21 +15,21 @@ import '../../widgets/button_widget.dart';
 import 'components/expansion_block_tile.dart';
 import 'components/image_view.dart';
 
-class BackdropBlock extends StatefulWidget {
-  final Map<String, dynamic> block;
+class BackdropSettings extends StatefulWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const BackdropBlock({
+  const BackdropSettings({
     super.key,
-    required this.block,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
-  State<BackdropBlock> createState() => _BackdropBlockState();
+  State<BackdropSettings> createState() => _BackdropSettingsState();
 }
 
-class _BackdropBlockState extends State<BackdropBlock> {
+class _BackdropSettingsState extends State<BackdropSettings> {
   late TextEditingController searchController;
   Timer? _debounce;
   int _page = 1;
@@ -39,7 +39,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
 
   @override
   void initState() {
-    String path = widget.block['data']?['path']?.toString().trim() ?? '';
+    String path = widget.settings['data']?['path']?.toString().trim() ?? '';
     _imagePath = path.isEmpty ? null : path;
 
     searchController = TextEditingController();
@@ -60,7 +60,7 @@ class _BackdropBlockState extends State<BackdropBlock> {
   searchPhotos({bool reload = true}) {
     if (reload) _page = 1;
     String? query = searchController.text.trim();
-    query = query.isEmpty ? widget.block['label'] ?? 'banner' : query;
+    query = query.isEmpty ? widget.settings['label'] ?? 'banner' : query;
     setState(() => _isSearching = true);
     api
         .invoke(
@@ -96,25 +96,25 @@ class _BackdropBlockState extends State<BackdropBlock> {
     setState(() {
       _imagePath = image;
     });
-    widget.block.addEntry('data', MapEntry('path', image));
-    widget.onUpdate?.call(widget.block);
+    widget.settings.addEntry('data', MapEntry('path', image));
+    widget.onUpdate?.call(widget.settings);
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return ExpansionBlockTile(
-      widget.block,
+      widget.settings,
       icon: Icons.image_outlined,
       padding: EdgeInsets.fromLTRB(
-          16, widget.block['label'] == null ? 0 : 18, 28, 18),
+          16, widget.settings['label'] == null ? 0 : 18, 28, 18),
       children: [
         _imagePath != null
             ? ImageView(
                 path: _imagePath!,
                 fit: BoxFit.cover,
-                size: widget.block['data']?['style']?['size'],
-                overlayOpacity: widget.block['data']?['style']
+                size: widget.settings['data']?['style']?['size'],
+                overlayOpacity: widget.settings['data']?['style']
                     ?['overlayOpacity'],
                 onRemove: () => imagePath = null,
               )

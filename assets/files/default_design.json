@@ -152,7 +152,7 @@
                         "fontSize": 16,
                         "color": "#FFFFFFFF",
                         "fontWeight": "regular",
-                        "alignment": "left"
+                        "alignment": "center"
                     },
                     "padding": {
                         "horizontal": 0,
@@ -172,7 +172,7 @@
                 "visibility": true,
                 "dragable": false,
                 "data": {
-                    "height": 10
+                    "height": 20
                 }
             },
             {
@@ -187,7 +187,7 @@
                         "fontSize": 14,
                         "color": "#FFFFFFFF",
                         "fontWeight": "regular",
-                        "alignment": "left"
+                        "alignment": "center"
                     },
                     "padding": {
                         "horizontal": 0,
@@ -209,8 +209,8 @@
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
-                        "top": 0,
-                        "bottom": 0
+                        "top": 25,
+                        "bottom": 25
                     }
                 }
             }
@@ -254,8 +254,8 @@
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
-                        "top": 0,
-                        "bottom": 0
+                        "top": 25,
+                        "bottom": 25
                     }
                 }
             },
@@ -318,8 +318,8 @@
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
-                        "top": 0,
-                        "bottom": 0
+                        "top": 25,
+                        "bottom": 25
                     }
                 }
             },

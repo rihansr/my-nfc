@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'components/expansion_block_tile.dart';
 
-class DividerBlock extends StatelessWidget {
-  final Map<String, dynamic> data;
+class ContactSettings extends StatelessWidget {
+  final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
-  
-  const DividerBlock({
+
+  const ContactSettings({
     super.key,
-    required this.data,
+    required this.settings,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionBlockTile(
-      data,
+      settings,
       maintainState: true,
-      icon: Icons.remove_outlined,
+      icon: Icons.call_outlined,
       children: const [],
     );
   }
