@@ -81,7 +81,7 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       collapsedIconColor: colorPalette.hint,
       iconColor: colorPalette.icon,
       tilePadding: const EdgeInsets.symmetric(horizontal: 16),
-      childrenPadding: const EdgeInsets.only(left: 30),
+      childrenPadding: const EdgeInsets.only(left: 28),
     ),
     textTheme: TextTheme(
       displayLarge: TextStyle(

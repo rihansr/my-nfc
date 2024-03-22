@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../shared/constants.dart';
-import 'block_actions.dart';
+import 'settings_actions.dart';
 
-class ExpansionBlockTile extends StatelessWidget {
+class ExpansionSettingsTile extends StatelessWidget {
   final IconData? icon;
   final Map<String, dynamic> data;
   final List<Widget> children;
@@ -13,11 +13,11 @@ class ExpansionBlockTile extends StatelessWidget {
   final Function(bool)? onExpansionChanged;
   final Function(bool)? onVisible;
   final Function(bool)? onSettingsShown;
-  const ExpansionBlockTile(
+  const ExpansionSettingsTile(
     this.data, {
     super.key,
     this.icon,
-    this.titlePadding = const EdgeInsets.symmetric(horizontal: 12),
+    this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
     this.padding,
     this.onExpansionChanged,
     this.maintainState = false,
@@ -41,13 +41,13 @@ class ExpansionBlockTile extends StatelessWidget {
           )
         : ListTileTheme(
             dense: true,
-            horizontalTitleGap: 6.0,
+            horizontalTitleGap: 5.0,
             minLeadingWidth: 0,
             child: ExpansionTile(
               key: key,
               shape: enableBoder
-                  ? Border.symmetric(
-                      horizontal: BorderSide(color: theme.colorScheme.primary),
+                  ? Border(
+                      left: BorderSide(color: theme.colorScheme.primary),
                     )
                   : const Border(),
               tilePadding: titlePadding,
@@ -63,9 +63,11 @@ class ExpansionBlockTile extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              textColor: icon != null ? theme.colorScheme.primary : null,
+              iconColor: icon != null ? theme.colorScheme.primary : null,
               controlAffinity: ListTileControlAffinity.leading,
               leading: icon == null ? null : Icon(icon!, size: 16),
-              trailing: BlockActions(
+              trailing: SettingsActions(
                 settingsExpanded: data['settings']?["initiallyExpand"],
                 visibility: data['visibility'],
                 primary: (data['primary'] as bool?) ?? false,

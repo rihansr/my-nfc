@@ -106,6 +106,7 @@ class InputField extends StatelessWidget {
   InputBorder boder(Color color) {
     BorderSide borderSide = BorderSide(
       color: borderFocusable ? borderTint ?? color : Colors.transparent,
+      width: 0.75,
     );
 
     return underlineOnly

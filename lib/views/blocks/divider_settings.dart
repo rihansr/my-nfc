@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/colour_picker_widget.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -19,22 +19,23 @@ class DividerSettings extends StatelessWidget {
   }) : _selectedColor =
             settings['data']?['color']?.toString().hexColor ?? Colors.grey;
 
-  updateBlock(String key, MapEntry<String, dynamic> value) {
-    settings.addEntry(key, value);
+  updateBlock(MapEntry<String, dynamic> value) {
+    settings.addEntry('data', value);
     onUpdate?.call(settings);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       settings,
       maintainState: true,
-      icon: Icons.zoom_out_map_outlined,
+      icon: Icons.remove_outlined,
       padding: const EdgeInsets.fromLTRB(14, 0, 24, 8),
+      enableBoder: true,
       children: [
         Spacing(
           margin: settings['data']?['margin'],
-          onUpdate: (spacing) => updateBlock('data', spacing),
+          onUpdate: (spacing) => updateBlock(spacing),
         ),
         ColourPicker(
           title: string.color,
@@ -54,7 +55,7 @@ class DividerSettings extends StatelessWidget {
           ],
           onPick: (color) {
             _selectedColor = color;
-            updateBlock('data', MapEntry('color', color.toHex));
+            updateBlock(MapEntry('color', color.toHex));
           },
         ),
       ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/expansion_block_tile.dart';
-import '../../utils/debug.dart';
+import 'components/expansion_settings_tile.dart';
 import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
@@ -29,7 +28,6 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   void initState() {
     String path = widget.settings['data']?['path']?.toString().trim() ?? '';
-    debug.print(path);
     _imagePath = path.isEmpty ? null : path;
     super.initState();
   }
@@ -37,12 +35,13 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       widget.settings,
       icon: widget.settings['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
-      padding: const EdgeInsets.fromLTRB(12, 8, 28, 18),
+      padding: const EdgeInsets.fromLTRB(10, 8, 26, 18),
+      enableBoder: true,
       children: [
         if (widget.settings['label'] != null) ...[
           Text(
@@ -56,8 +55,13 @@ class _ImageSettingsState extends State<ImageSettings> {
         ImageView(
           path: _imagePath,
           fit: BoxFit.contain,
-          size: widget.settings['data']?['style']?['size'],
-          overlayOpacity: widget.settings['data']?['style']?['overlayOpacity'],
+          style: widget.settings['data']?['style'],
+          onStyleChange: (data) {
+            widget.settings['data'] ??= {};
+            (widget.settings['data'] as Map<String, dynamic>)
+                .addEntry('style', data);
+            widget.onUpdate?.call(widget.settings);
+          },
           onPick: (path) => imagePath = path,
           onRemove: () => imagePath = null,
         )

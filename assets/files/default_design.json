@@ -240,7 +240,7 @@
                 }
             },
             {
-                "block": "socialMedia",
+                "block": "links",
                 "label": "Social Media",
                 "visibility": true,
                 "dragable": false,
@@ -350,8 +350,14 @@
                         "visibility": true,
                         "dragable": false,
                         "data": {
-                            "title": "",
-                            "content": ""
+                            "title": {
+                                "text": "",
+                                "hint": "Company"
+                            },
+                            "content": {
+                                "text": "",
+                                "hint": "Position"
+                            }
                         }
                     },
                     {
@@ -369,8 +375,14 @@
                         "visibility": true,
                         "dragable": false,
                         "data": {
-                            "title": "",
-                            "content": ""
+                            "title": {
+                                "text": "",
+                                "hint": "Place"
+                            },
+                            "content": {
+                                "text": "",
+                                "hint": "Degree"
+                            }
                         }
                     },
                     {
@@ -388,7 +400,9 @@
                         "visibility": true,
                         "dragable": false,
                         "data": {
-                            "title": ""
+                            "title": {
+                                "text": ""
+                            }
                         }
                     }
                 ]

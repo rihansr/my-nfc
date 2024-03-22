@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 
 class ContactSettings extends StatelessWidget {
   final Map<String, dynamic> settings;
@@ -13,10 +13,11 @@ class ContactSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       settings,
       maintainState: true,
       icon: Icons.call_outlined,
+      enableBoder: true,
       children: const [],
     );
   }

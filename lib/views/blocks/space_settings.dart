@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/seekbar_widget.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 
 // ignore: must_be_immutable
 class SpaceSettings extends StatelessWidget {
@@ -17,7 +17,7 @@ class SpaceSettings extends StatelessWidget {
     this.onUpdate,
   }) : _selectedHeight = settings['data']?['height'] ?? 20;
 
-  updateBlock(int value) {
+  updateSettings(int value) {
     _selectedHeight = value;
     settings.addEntry('data', MapEntry('height', value));
     onUpdate?.call(settings);
@@ -25,11 +25,12 @@ class SpaceSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       settings,
       maintainState: true,
       icon: Icons.zoom_out_map_outlined,
-      padding: const EdgeInsets.fromLTRB(14, 0, 24, 0),
+      padding: const EdgeInsets.fromLTRB(12, 0, 24, 0),
+      enableBoder: true,
       children: [
         Seekbar(
           title: string.height,
@@ -38,7 +39,7 @@ class SpaceSettings extends StatelessWidget {
           min: 0,
           max: 100,
           defaultValue: 20,
-          onChanged: updateBlock,
+          onChanged: updateSettings,
         ),
       ],
     );

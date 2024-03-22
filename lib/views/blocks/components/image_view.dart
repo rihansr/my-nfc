@@ -13,20 +13,23 @@ import '../../../widgets/seekbar_widget.dart';
 class ImageView extends StatefulWidget {
   final String? path;
   final BoxFit? fit;
-  final int? size;
-  final int? overlayOpacity;
+  final int? _size;
+  final int? _overlayOpacity;
+  final Map<String, dynamic>? style;
+  final Function(MapEntry<String, dynamic>)? onStyleChange;
   final Function(String? path)? onPick;
   final Function()? onRemove;
 
-  const ImageView({
+  ImageView({
     super.key,
     required this.path,
     this.fit,
-    this.size,
-    this.overlayOpacity,
+    this.style,
+    this.onStyleChange,
     this.onPick,
     this.onRemove,
-  });
+  })  : _size = style?['size'],
+        _overlayOpacity = style?['overlayOpacity'];
 
   @override
   State<ImageView> createState() => _ImageViewState();
@@ -39,8 +42,8 @@ class _ImageViewState extends State<ImageView> {
 
   @override
   void initState() {
-    size = widget.size;
-    opacity = widget.overlayOpacity;
+    size = widget._size;
+    opacity = widget._overlayOpacity;
     path = widget.path;
     super.initState();
   }
@@ -141,7 +144,10 @@ class _ImageViewState extends State<ImageView> {
                     defaultValue: 10,
                     min: 1,
                     max: 20,
-                    onChanged: (value) => setState(() => size = value),
+                    onChanged: (value) {
+                      setState(() => size = value);
+                      widget.onStyleChange?.call(MapEntry('size', value));
+                    },
                   ),
                 if (opacity != null)
                   Seekbar(
@@ -150,7 +156,11 @@ class _ImageViewState extends State<ImageView> {
                     type: '%',
                     min: 0,
                     max: 100,
-                    onChanged: (value) => setState(() => opacity = value),
+                    onChanged: (value) {
+                      setState(() => opacity = value);
+                      widget.onStyleChange
+                          ?.call(MapEntry('overlayOpacity', value));
+                    },
                   ),
               ]
             ],

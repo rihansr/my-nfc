@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import 'actions_settings.dart';
@@ -26,10 +26,15 @@ class SectionSettings extends StatelessWidget {
     this.onUpdate,
   });
 
+  updateSettings(int i, Map<String, dynamic> data) {
+    settings['fields'][i] = data;
+    onUpdate?.call(settings);
+  }
+
   @override
   Widget build(BuildContext context) {
     List fields = (settings['fields'] as List?) ?? [];
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       settings,
       children: fields.isEmpty
           ? [
@@ -45,124 +50,84 @@ class SectionSettings extends StatelessWidget {
                   switch (e['block']) {
                     case "section":
                       return SectionSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (section) {
-                          settings['fields'][i] = section;
-                          onUpdate?.call(settings);
-                        },
-                      );
+                          key: key,
+                          settings: e,
+                          onUpdate: (settings) => updateSettings(i, settings));
                     case "space":
                       return SpaceSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "divider":
                       return DividerSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "text":
                     case "name":
                       return TextSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "banner":
                     case "background":
                       return BackdropSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "avatar":
                     case "image":
                       return ImageSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "contact":
                       return ContactSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "info":
                       return InfoSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "publicLinks":
                     case "links":
                       return LinksSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "button":
                       return ButtonSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "video":
                       return VideoSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "additional":
                       return AdditionalSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     case "actions":
                       return ActionsSettings(
                         key: key,
                         settings: e,
-                        onUpdate: (block) {
-                          settings['fields'][i] = block;
-                          onUpdate?.call(settings);
-                        },
+                        onUpdate: (settings) => updateSettings(i, settings),
                       );
                     default:
                       return SizedBox.shrink(key: key);

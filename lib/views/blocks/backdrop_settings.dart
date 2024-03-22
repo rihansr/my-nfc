@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_nfc/utils/debug.dart';
 import '../../utils/extensions.dart';
 import '../../configs/app_config.dart';
 import '../../services/api.dart';
@@ -12,7 +13,7 @@ import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/button_widget.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 import 'components/image_view.dart';
 
 class BackdropSettings extends StatefulWidget {
@@ -93,9 +94,7 @@ class _BackdropSettingsState extends State<BackdropSettings> {
   }
 
   set imagePath(String? image) {
-    setState(() {
-      _imagePath = image;
-    });
+    setState(() => _imagePath = image);
     widget.settings.addEntry('data', MapEntry('path', image));
     widget.onUpdate?.call(widget.settings);
   }
@@ -103,19 +102,24 @@ class _BackdropSettingsState extends State<BackdropSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       widget.settings,
       icon: Icons.image_outlined,
       padding: EdgeInsets.fromLTRB(
-          16, widget.settings['label'] == null ? 0 : 18, 28, 18),
+          12, widget.settings['label'] == null ? 4 : 18, 26, 18),
+          enableBoder: true,
       children: [
         _imagePath != null
             ? ImageView(
                 path: _imagePath!,
                 fit: BoxFit.cover,
-                size: widget.settings['data']?['style']?['size'],
-                overlayOpacity: widget.settings['data']?['style']
-                    ?['overlayOpacity'],
+                style: widget.settings['data']?['style'],
+                onStyleChange: (data) {
+                  widget.settings['data'] ??= {};
+                  (widget.settings['data'] as Map<String, dynamic>)
+                      .addEntry('style', data);
+                  widget.onUpdate?.call(widget.settings);
+                },
                 onRemove: () => imagePath = null,
               )
             : Row(
@@ -124,7 +128,7 @@ class _BackdropSettingsState extends State<BackdropSettings> {
                     child: InputField(
                       controller: searchController,
                       prefixIcon: const Icon(Icons.search, size: 20),
-                      padding: const EdgeInsets.symmetric(vertical: 6),
+                      padding: const EdgeInsets.symmetric(vertical: 5),
                       margin: const EdgeInsets.all(0),
                       textStyle: theme.textTheme.bodySmall,
                       underlineOnly: true,
@@ -135,8 +139,9 @@ class _BackdropSettingsState extends State<BackdropSettings> {
                     shape: BoxShape.rectangle,
                     label: string.uploadImage,
                     padding:
-                        const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     margin: const EdgeInsets.all(0),
+                    radius: 6,
                     onPressed: () {
                       extension.pickPhoto(ImageSource.gallery).then((path) {
                         imagePath = path;

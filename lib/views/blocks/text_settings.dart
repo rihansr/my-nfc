@@ -7,7 +7,7 @@ import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/dropdown_widget.dart';
-import 'components/expansion_block_tile.dart';
+import 'components/expansion_settings_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -46,7 +46,7 @@ class TextSettings extends StatelessWidget {
             settings['data']?['style']?['fontWeight'] ?? 'regular',
         _selectedAlignment = settings['data']?['style']?['alignment'] ?? 'left';
 
-  updateBlock(String key, MapEntry<String, dynamic> value) {
+  updateSettings(String key, MapEntry<String, dynamic> value) {
     switch (key) {
       case 'data':
         settings.addEntry(key, value);
@@ -59,18 +59,19 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       settings,
       maintainState: true,
       icon: Icons.title,
-      padding: const EdgeInsets.fromLTRB(12, 8, 28, 18),
+      padding: const EdgeInsets.fromLTRB(14, 0, 26, 8),
+      enableBoder: true,
       children: [
         ...(settings['block'] == 'name'
             ? [
                 InputField(
                   controller: _firstNameController,
                   title: string.firstName,
-                  onTyping: (text) => updateBlock(
+                  onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('first', text.isEmpty ? null : text),
                   ),
@@ -78,7 +79,7 @@ class TextSettings extends StatelessWidget {
                 InputField(
                   controller: _middleNameController,
                   title: string.middleName,
-                  onTyping: (text) => updateBlock(
+                  onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('middle', text.isEmpty ? null : text),
                   ),
@@ -86,7 +87,7 @@ class TextSettings extends StatelessWidget {
                 InputField(
                   controller: _lastNameController,
                   title: string.lastName,
-                  onTyping: (text) => updateBlock(
+                  onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('last', text.isEmpty ? null : text),
                   ),
@@ -98,7 +99,7 @@ class TextSettings extends StatelessWidget {
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
-                  onTyping: (text) => updateBlock(
+                  onTyping: (text) => updateSettings(
                     'data',
                     MapEntry('content', text.isEmpty ? null : text),
                   ),
@@ -114,7 +115,7 @@ class TextSettings extends StatelessWidget {
               Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
           onSelected: (String? font) {
             _selectedFonFamily = font;
-            updateBlock('style', MapEntry('fontFamily', font));
+            updateSettings('style', MapEntry('fontFamily', font));
           },
         ),
         Seekbar(
@@ -124,7 +125,7 @@ class TextSettings extends StatelessWidget {
           max: 96,
           onChanged: (size) {
             _selectedFontSize = size;
-            updateBlock('style', MapEntry('fontSize', size));
+            updateSettings('style', MapEntry('fontSize', size));
           },
         ),
         ColourPicker(
@@ -145,7 +146,7 @@ class TextSettings extends StatelessWidget {
           ],
           onPick: (color) {
             _selectedFontColor = color;
-            updateBlock('style', MapEntry('color', color.toHex));
+            updateSettings('style', MapEntry('color', color.toHex));
           },
         ),
         TabWidget(
@@ -154,7 +155,7 @@ class TextSettings extends StatelessWidget {
             value: _selectedFontWeight,
             onSelect: (weight) {
               _selectedFontWeight = weight;
-              updateBlock('style', MapEntry('fontWeight', weight));
+              updateSettings('style', MapEntry('fontWeight', weight));
             }),
         TabWidget(
             title: string.alignment,
@@ -162,13 +163,13 @@ class TextSettings extends StatelessWidget {
             value: _selectedAlignment,
             onSelect: (alignment) {
               _selectedAlignment = alignment;
-              updateBlock('style', MapEntry('alignment', alignment));
+              updateSettings('style', MapEntry('alignment', alignment));
             }),
         Spacing(
           title: string.paddingAndMarginSettings,
           padding: settings['data']?['padding'],
           margin: settings['data']?['margin'],
-          onUpdate: (spacing) => updateBlock('data', spacing),
+          onUpdate: (spacing) => updateSettings('data', spacing),
         ),
       ],
     );

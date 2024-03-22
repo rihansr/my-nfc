@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class BlockActions extends StatelessWidget {
+class SettingsActions extends StatelessWidget {
   final bool? settingsExpanded;
   final bool? visibility;
   final bool primary;
   final bool? dragable;
   final Function(bool visible)? onVisible;
   final Function(bool show)? onSettingsShown;
-  const BlockActions({
+
+  const SettingsActions({
     super.key,
     this.settingsExpanded,
     this.visibility,
@@ -19,6 +20,7 @@ class BlockActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -33,9 +35,7 @@ class BlockActions extends StatelessWidget {
               padding: EdgeInsets.zero,
               icon: Icon(
                 Icons.settings,
-                color: settingsExpanded!
-                    ? Theme.of(context).colorScheme.primary
-                    : null,
+                color: settingsExpanded! ? theme.colorScheme.primary : null,
               ),
             ),
           ),
@@ -50,7 +50,7 @@ class BlockActions extends StatelessWidget {
               padding: EdgeInsets.zero,
               icon: Icon(
                 visibility! ? Icons.visibility : Icons.visibility_off,
-                color: primary ? Theme.of(context).disabledColor : null,
+                color: primary ? theme.disabledColor : theme.hintColor,
               ),
             ),
           ),
@@ -63,7 +63,7 @@ class BlockActions extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 icon: Icon(
                   Icons.drag_indicator,
-                  color: dragable! ? null : Theme.of(context).disabledColor,
+                  color: dragable! ? theme.hintColor : theme.disabledColor,
                 )),
           )
       ],

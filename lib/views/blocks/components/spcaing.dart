@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../shared/strings.dart';
 import '../../../widgets/seekbar_widget.dart';
-import 'expansion_block_tile.dart';
+import 'expansion_settings_tile.dart';
 
 // ignore: must_be_immutable
 class Spacing extends StatelessWidget {
@@ -32,12 +32,12 @@ class Spacing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionBlockTile(
+    return ExpansionSettingsTile(
       title == null ? {} : {'label': string.paddingAndMarginSettings},
       padding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),
       children: [
-        if (padding?['horizontal'] != null)
+        if (padding?.containsKey('horizontal') ?? false)
           Seekbar(
             title: string.horizontalPadding,
             type: 'px',
@@ -48,7 +48,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
-        if (padding?['vertical'] != null)
+        if (padding?.containsKey('vertical') ?? false)
           Seekbar(
             title: string.verticalPadding,
             type: 'px',
@@ -59,7 +59,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("padding", padding!));
             },
           ),
-        if (margin?['top'] != null)
+        if (margin?.containsKey('top') ?? false)
           Seekbar(
             title: string.topMargin,
             type: 'px',
@@ -70,7 +70,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
-        if (margin?['bottom'] != null)
+        if (margin?.containsKey('bottom') ?? false)
           Seekbar(
             title: string.bottomMargin,
             type: 'px',
@@ -81,7 +81,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
-        if (margin?['left'] != null)
+        if (margin?.containsKey('left') ?? false)
           Seekbar(
             title: string.leftMargin,
             type: 'px',
@@ -92,7 +92,7 @@ class Spacing extends StatelessWidget {
               onUpdate?.call(MapEntry("margin", margin!));
             },
           ),
-        if (margin?['right'] != null)
+        if (margin?.containsKey('right') ?? false)
           Seekbar(
             title: string.rightMargin,
             type: 'px',
