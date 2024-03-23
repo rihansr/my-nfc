@@ -1,4 +1,6 @@
 import 'dart:typed_data';
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Fonts
@@ -53,6 +55,7 @@ List<String> kAlignments = const [
 // Data
 Map<String, dynamic> kDefaultDesign = {};
 List<Map<String, dynamic>> kAdditionalBlocks = const [];
+List<Map<String, dynamic>> kSocialLinks = const [];
 
 final Uint8List kTransparentImage = Uint8List.fromList(<int>[
   0x89,
@@ -123,3 +126,89 @@ final Uint8List kTransparentImage = Uint8List.fromList(<int>[
   0x60,
   0x82,
 ]);
+
+extension IconExtensions on String {
+  IconData get icon {
+    switch (this) {
+      case "section":
+        return Icons.view_agenda;
+      case "space":
+        return Icons.zoom_out_map_rounded;
+      case "divider":
+        return Icons.remove_outlined;
+      case "text":
+        return Icons.title_outlined;
+      case "image":
+        return Icons.image_outlined;
+      case "contact":
+        return Icons.call_outlined;
+      case "info":
+        return Icons.info;
+      case "publicLinks":
+      case "links":
+        return Icons.group_outlined;
+      case "button":
+        return Icons.add_circle_outline;
+      case "video":
+        return Icons.video_library_outlined;
+      case "additional":
+        return Icons.playlist_add_outlined;
+      case "actions":
+        return Icons.system_update_alt_outlined;
+      default:
+        return FontAwesomeIcons.info;
+    }
+  }
+  IconData get socialIcon {
+    switch (this) {
+      case "facebook":
+        return FontAwesomeIcons.facebook;
+      case "instagram":
+        return FontAwesomeIcons.instagram;
+      case "linkedin":
+        return FontAwesomeIcons.linkedin;
+      case "twitter":
+        return FontAwesomeIcons.twitter;
+      case "whatsapp":
+        return FontAwesomeIcons.whatsapp;
+      case "youtube":
+        return FontAwesomeIcons.youtube;
+      case "snapchat":
+        return FontAwesomeIcons.snapchat;
+      case "tiktok":
+        return FontAwesomeIcons.tiktok;
+      case "telegram":
+        return FontAwesomeIcons.telegram;
+      case "pinterest":
+        return FontAwesomeIcons.pinterest;
+      case "reddit":
+        return FontAwesomeIcons.reddit;
+      case "github":
+        return FontAwesomeIcons.github;
+      case "dribbble":
+        return FontAwesomeIcons.dribbble;
+      case "behance":
+        return FontAwesomeIcons.behance;
+      case "medium":
+        return FontAwesomeIcons.medium;
+      case "tumblr":
+        return FontAwesomeIcons.tumblr;
+      case "soundcloud":
+        return FontAwesomeIcons.soundcloud;
+      case "spotify":
+        return FontAwesomeIcons.spotify;
+      case "discord":
+        return FontAwesomeIcons.discord;
+      case "skype":
+        return FontAwesomeIcons.skype;
+      case "viber":
+        return FontAwesomeIcons.viber;
+      case "line":
+        return FontAwesomeIcons.line;
+      case "threads":
+        return FontAwesomeIcons.threads;
+      default:
+        return FontAwesomeIcons.link;
+    }
+  }
+}

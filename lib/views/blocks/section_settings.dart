@@ -1,5 +1,5 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 import 'components/expansion_settings_tile.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
@@ -165,37 +165,7 @@ class _AddButton extends StatelessWidget {
                   children: [
                     WidgetSpan(
                       child: Icon(
-                        (() {
-                          switch (element['block']) {
-                            case "section":
-                              return Icons.view_agenda;
-                            case "space":
-                              return Icons.zoom_out_map_rounded;
-                            case "divider":
-                              return Icons.remove_outlined;
-                            case "text":
-                              return Icons.title_outlined;
-                            case "image":
-                              return Icons.image_outlined;
-                            case "contact":
-                              return Icons.call_outlined;
-                            case "info":
-                              return Icons.info;
-                            case "publicLinks":
-                            case "links":
-                              return Icons.group_outlined;
-                            case "button":
-                              return Icons.add_circle_outline;
-                            case "video":
-                              return Icons.video_library_outlined;
-                            case "additional":
-                              return Icons.playlist_add_outlined;
-                            case "actions":
-                              return Icons.system_update_alt_outlined;
-                            default:
-                              return Icons.info;
-                          }
-                        }()),
+                        '${element['block']}'.icon,
                         size: 16,
                         color: theme.textTheme.bodySmall?.color,
                       ),
