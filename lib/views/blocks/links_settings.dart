@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:flutter/services.dart';
 import '../../utils/debug.dart';
 import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
@@ -21,17 +22,17 @@ class LinksSettings extends StatefulWidget {
 }
 
 class _LinksSettingsState extends State<LinksSettings> {
-  late List links;
+  late List _links;
 
   @override
   void initState() {
-    links = widget.settings['data']?['links'] ?? [];
+    _links = widget.settings['data']?['links'] ?? [];
     super.initState();
   }
 
-  updateSettings() {
-    setState(() {});
-    widget.settings.addEntry('data', MapEntry('links', links));
+  set links(List list) {
+    _links = list;
+    widget.settings.addEntry('data', MapEntry('links', list));
     widget.onUpdate?.call(widget.settings);
   }
 
@@ -44,8 +45,10 @@ class _LinksSettingsState extends State<LinksSettings> {
       icon: Icons.group_outlined,
       enableBoder: true,
       children: [
-        ...[
-          ...links.mapIndexed(
+        ReorderableListView(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: _links.mapIndexed(
             (i, e) {
               Key key =
                   widget.key != null ? Key('${widget.key}/$i') : Key('$i');
@@ -54,42 +57,49 @@ class _LinksSettingsState extends State<LinksSettings> {
                 contentPadding: const EdgeInsets.only(right: 12),
                 minLeadingWidth: 28,
                 horizontalTitleGap: 0,
-                title: TextFormField(
-                  initialValue: e?['id'],
-                  onChanged: (value) {
-                    links[i] = {}
-                      ..addAll(e)
-                      ..addEntries([
-                        MapEntry('id', value.trim().isEmpty ? null : value)
-                      ]);
-                    updateSettings();
-                  },
-                  maxLines: 1,
-                  style: theme.textTheme.bodySmall,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    hintText: e['hint'],
-                    hintStyle: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.hintColor,
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 6),
-                      child: Text(
-                        e['link'],
-                        maxLines: 1,
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          overflow: TextOverflow.visible,
+                title: Theme(
+                  data: ThemeData(),
+                  child: TextField(
+                    controller: TextEditingController(text: e?['id']),
+                    onChanged: (value) {
+                      _links[i] = {}
+                        ..addAll(e)
+                        ..addEntries(
+                          [
+                            MapEntry('id', value.isEmpty ? null : value),
+                          ],
+                        );
+                      links = _links;
+                    },
+                    maxLines: 1,
+                    style: theme.textTheme.bodySmall,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
+                    decoration: InputDecoration(
+                      hintText: e['hint'],
+                      hintStyle: theme.textTheme.bodySmall?.copyWith(
+                        color: theme.hintColor,
+                      ),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Text(
+                          e['link'],
+                          maxLines: 1,
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            overflow: TextOverflow.visible,
+                          ),
                         ),
                       ),
+                      prefixIconConstraints:
+                          const BoxConstraints(minWidth: 8, minHeight: 0),
+                      prefixStyle: theme.textTheme.bodySmall,
+                      enabledBorder: extension.inputBorder(theme.hintColor),
+                      border: extension.inputBorder(theme.hintColor),
+                      focusedBorder: extension.inputBorder(theme.primaryColor),
+                      contentPadding: const EdgeInsets.fromLTRB(0, 10, 6, 10),
+                      isDense: true,
                     ),
-                    prefixIconConstraints:
-                        const BoxConstraints(minWidth: 8, minHeight: 0),
-                    prefixStyle: theme.textTheme.bodySmall,
-                    enabledBorder: extension.inputBorder(theme.hintColor),
-                    border: extension.inputBorder(theme.hintColor),
-                    focusedBorder: extension.inputBorder(theme.primaryColor),
-                    contentPadding: const EdgeInsets.fromLTRB(0, 10, 6, 10),
-                    isDense: true,
                   ),
                 ),
                 leading: Icon(
@@ -106,15 +116,24 @@ class _LinksSettingsState extends State<LinksSettings> {
                       color: theme.iconTheme.color,
                     ),
                     onPressed: () {
-                      links.removeAt(i);
-                      updateSettings();
+                      _links.removeAt(i);
+                      links = _links;
+                      setState(() => {});
                     },
                   ),
                 ),
               );
             },
-          ),
-        ],
+          ).toList(),
+          onReorder: (i, j) {
+            if (widget.settings['dragable'] != true) return;
+            if (i < j) j--;
+            final item = _links.removeAt(i);
+            _links.insert(j, item);
+            links = _links;
+            setState(() => {});
+          },
+        ),
         PopupMenuButton<Map<String, dynamic>>(
           itemBuilder: (context) {
             return kSocialLinks.mapIndexed((index, element) {
@@ -145,8 +164,9 @@ class _LinksSettingsState extends State<LinksSettings> {
           color: theme.scaffoldBackgroundColor,
           elevation: 2,
           onSelected: (item) {
-            links.add(item);
-            updateSettings();
+            _links.add(item);
+            links = _links;
+            setState(() => {});
           },
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 0),

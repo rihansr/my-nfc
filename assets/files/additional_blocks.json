@@ -2,7 +2,9 @@
     {
         "block": "section",
         "label": "Link with Image",
-        "visibility": true,
+        "primary": false,
+        "visible": true,
+        "removable": true,
         "dragable": true,
         "settings": {
             "padding": {
@@ -33,8 +35,9 @@
             {
                 "block": "background",
                 "label": "Background Image",
-                "visibility": true,
                 "primary": false,
+                "visible": true,
+                "removable": true,
                 "data": {
                     "path": ""
                 }
@@ -43,8 +46,8 @@
                 "block": "text",
                 "label": "Text",
                 "primary": false,
-                "visibility": true,
-                "dragable": false,
+                "visible": true,
+                "removable": true,
                 "data": {
                     "content": "",
                     "style": {
@@ -70,8 +73,8 @@
                 "block": "text",
                 "label": "Text",
                 "primary": false,
-                "visibility": true,
-                "dragable": false,
+                "visible": true,
+                "removable": true,
                 "data": {
                     "content": "",
                     "style": {
@@ -97,8 +100,8 @@
                 "block": "button",
                 "label": "Button",
                 "primary": false,
-                "visibility": true,
-                "dragable": false,
+                "visible": true,
+                "removable": true,
                 "data": {
                     "text": "",
                     "link": "",
@@ -126,8 +129,8 @@
         "block": "text",
         "label": "Text",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "content": "",
             "style": {
@@ -153,8 +156,8 @@
         "block": "video",
         "label": "Online Video",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "link": "",
             "aspectRatio": "21:9",
@@ -182,8 +185,8 @@
         "block": "divider",
         "label": "Line Break",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "color": "#FFFFFFFF",
             "margin": {
@@ -196,8 +199,9 @@
         "block": "section",
         "label": "Section (Image Background)",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
+        "removable": true,
         "settings": {
             "initiallyExpand": true,
             "padding": {
@@ -228,8 +232,9 @@
             {
                 "block": "background",
                 "label": "Background Image",
-                "visibility": true,
                 "primary": false,
+                "visible": true,
+                "removable": true,
                 "data": {
                     "path": ""
                 }
@@ -240,7 +245,7 @@
         "block": "section",
         "label": "Section",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
         "settings": {
             "backgroundColor": "#00000000",
@@ -262,8 +267,8 @@
         "block": "image",
         "label": "Image",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "path": ""
         }
@@ -272,8 +277,8 @@
         "block": "button",
         "label": "Button",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "text": "",
             "link": "",
@@ -299,8 +304,9 @@
         "block": "links",
         "label": "Social Media",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
+        "removable": true,
         "data": {
             "links": []
         }
@@ -309,8 +315,9 @@
         "block": "publicLinks",
         "label": "Public Social Media",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
+        "removable": true,
         "data": {
             "links": []
         }
@@ -319,8 +326,9 @@
         "block": "contact",
         "label": "Contact",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
+        "removable": true,
         "data": {
             "phoneNumbers": [
                 {
@@ -348,8 +356,8 @@
         "block": "actions",
         "label": "Save Contact/Contact",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "primary": "",
             "additional": "",
@@ -365,8 +373,9 @@
         "block": "additional",
         "label": "Additional Items",
         "primary": false,
-        "visibility": true,
+        "visible": true,
         "dragable": true,
+        "removable": true,
         "data": {
             "alignment": "left",
             "items": []
@@ -376,8 +385,8 @@
         "block": "space",
         "label": "Space",
         "primary": false,
-        "visibility": true,
-        "dragable": true,
+        "visible": true,
+        "removable": true,
         "data": {
             "height": 10
         }

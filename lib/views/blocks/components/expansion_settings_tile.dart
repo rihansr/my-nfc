@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_nfc/shared/strings.dart';
 import '../../../shared/constants.dart';
 import 'settings_actions.dart';
 
 class ExpansionSettingsTile extends StatelessWidget {
   final IconData? icon;
-  final Map<String, dynamic> data;
+  final Map<String, dynamic> settings;
   final List<Widget> children;
   final EdgeInsetsGeometry? padding;
   final EdgeInsetsGeometry titlePadding;
@@ -13,8 +14,9 @@ class ExpansionSettingsTile extends StatelessWidget {
   final Function(bool)? onExpansionChanged;
   final Function(bool)? onVisible;
   final Function(bool)? onSettingsShown;
+  final Function()? onRemove;
   const ExpansionSettingsTile(
-    this.data, {
+    this.settings, {
     super.key,
     this.icon,
     this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
@@ -24,13 +26,15 @@ class ExpansionSettingsTile extends StatelessWidget {
     this.enableBoder = false,
     this.onVisible,
     this.onSettingsShown,
+    this.onRemove,
     this.children = const [],
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return data['label'] == null
+
+    return settings['label'] == null
         ? Padding(
             padding: padding ?? const EdgeInsets.all(0),
             child: Column(
@@ -56,7 +60,7 @@ class ExpansionSettingsTile extends StatelessWidget {
               onExpansionChanged: onExpansionChanged,
               maintainState: maintainState,
               title: Text(
-                data['label'] ?? '',
+                settings['label'] ?? '',
                 style: const TextStyle(
                   fontFamily: kFontFamily,
                   fontSize: 14,
@@ -67,15 +71,49 @@ class ExpansionSettingsTile extends StatelessWidget {
               iconColor: icon != null ? theme.colorScheme.primary : null,
               controlAffinity: ListTileControlAffinity.leading,
               leading: icon == null ? null : Icon(icon!, size: 16),
-              trailing: SettingsActions(
-                settingsExpanded: data['settings']?["initiallyExpand"],
-                visibility: data['visibility'],
-                primary: (data['primary'] as bool?) ?? false,
-                dragable: data['dragable'],
-                onVisible: onVisible,
-                onSettingsShown: onSettingsShown,
-              ),
-              children: children,
+              trailing: settings['visible'] == null && settings['dragable'] == null
+                  ? null
+                  : SettingsActions(
+                      settingsExpanded:
+                          (settings['settings']?["initiallyExpand"] as bool?) ??
+                              false,
+                      visible: (settings['visible'] as bool?) ?? false,
+                      primary: (settings['primary'] as bool?) ?? false,
+                      dragable: (settings['dragable'] as bool?) ?? false,
+                      onVisible: onVisible,
+                      onSettingsShown: onSettingsShown,
+                    ),
+              children: [
+                ...children,
+                if(settings['removable'] == true)...[
+                  const SizedBox(height: 16),
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    color: theme.colorScheme.error,
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextButton.icon(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                      ),
+                      icon: Icon(
+                        Icons.delete_outline_outlined,
+                        size: 16,
+                        color: theme.colorScheme.error,
+                      ),
+                      label: Text(
+                        string.removeBlock,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.error,
+                        ),
+                      ),
+                    ),
+                  ),
+                ]
+              ],
             ),
           );
   }

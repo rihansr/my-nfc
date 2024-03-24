@@ -16,7 +16,7 @@ import 'space_settings.dart';
 import 'text_settings.dart';
 import 'video_settings.dart';
 
-class SectionSettings extends StatelessWidget {
+class SectionSettings extends StatefulWidget {
   final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
@@ -26,119 +26,144 @@ class SectionSettings extends StatelessWidget {
     this.onUpdate,
   });
 
+  @override
+  State<SectionSettings> createState() => _SectionSettingsState();
+}
+
+class _SectionSettingsState extends State<SectionSettings> {
+  late List _fields;
+
+  set fields(List list) {
+    setState(() => _fields = list);
+    widget.settings['fields'] = list;
+    widget.onUpdate?.call(widget.settings);
+  }
+
+  @override
+  void initState() {
+    _fields = widget.settings['fields'] ?? [];
+    super.initState();
+  }
+
   updateSettings(int i, Map<String, dynamic> data) {
-    settings['fields'][i] = data;
-    onUpdate?.call(settings);
+    widget.settings['fields'][i] = data;
+    widget.onUpdate?.call(widget.settings);
   }
 
   @override
   Widget build(BuildContext context) {
-    List fields = (settings['fields'] as List?) ?? [];
     return ExpansionSettingsTile(
-      settings,
-      children: fields.isEmpty
-          ? [
-              _AddButton(
-                onSelected: (data) => {},
-              ),
-            ]
-          : [
-              ...fields.mapIndexed(
-                (i, e) {
-                  Key key =
-                      this.key != null ? Key('${this.key}/$i') : Key('$i');
-                  switch (e['block']) {
-                    case "section":
-                      return SectionSettings(
-                          key: key,
-                          settings: e,
-                          onUpdate: (settings) => updateSettings(i, settings));
-                    case "space":
-                      return SpaceSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "divider":
-                      return DividerSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "text":
-                    case "name":
-                      return TextSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "banner":
-                    case "background":
-                      return BackdropSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "avatar":
-                    case "image":
-                      return ImageSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "contact":
-                      return ContactSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "info":
-                      return InfoSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "publicLinks":
-                    case "links":
-                      return LinksSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "button":
-                      return ButtonSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "video":
-                      return VideoSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "additional":
-                      return AdditionalSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    case "actions":
-                      return ActionsSettings(
-                        key: key,
-                        settings: e,
-                        onUpdate: (settings) => updateSettings(i, settings),
-                      );
-                    default:
-                      return SizedBox.shrink(key: key);
-                  }
-                },
-              ),
-              if (settings['primary'] == false)
-                _AddButton(
-                  onSelected: (data) => {},
-                ),
-            ],
+      widget.settings,
+      children: [
+        ReorderableListView(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          onReorder: (i, j) {
+            if (widget.settings['dragable'] != true) return;
+            if (i < j) j--;
+            final item = _fields.removeAt(i);
+            _fields.insert(j, item);
+            fields = _fields;
+          },
+          footer: _fields.isEmpty || widget.settings['primary'] == false
+              ? _AddButton(
+                  onSelected: (data) => fields = [..._fields, data],
+                )
+              : null,
+          children: _fields.mapIndexed(
+            (i, e) {
+              Key key =
+                  widget.key != null ? Key('${widget.key}/$i') : Key('$i');
+              switch (e['block']) {
+                case "section":
+                  return SectionSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "space":
+                  return SpaceSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "divider":
+                  return DividerSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "text":
+                case "name":
+                  return TextSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "banner":
+                case "background":
+                  return BackdropSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "avatar":
+                case "image":
+                  return ImageSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "contact":
+                  return ContactSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "info":
+                  return InfoSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "publicLinks":
+                case "links":
+                  return LinksSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "button":
+                  return ButtonSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "video":
+                  return VideoSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "additional":
+                  return AdditionalSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                case "actions":
+                  return ActionsSettings(
+                    key: key,
+                    settings: e,
+                    onUpdate: (settings) => updateSettings(i, settings),
+                  );
+                default:
+                  return SizedBox.shrink(key: key);
+              }
+            },
+          ).toList(),
+        ),
+      ],
     );
   }
 }

@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:my_nfc/shared/colors.dart';
 
 class SettingsActions extends StatelessWidget {
-  final bool? settingsExpanded;
-  final bool? visibility;
+  final bool settingsExpanded;
+  final bool visible;
   final bool primary;
-  final bool? dragable;
+  final bool dragable;
   final Function(bool visible)? onVisible;
   final Function(bool show)? onSettingsShown;
 
   const SettingsActions({
     super.key,
-    this.settingsExpanded,
-    this.visibility,
+    this.settingsExpanded = false,
+    this.visible = false,
     this.primary = false,
-    this.dragable,
+    this.dragable = false,
     this.onVisible,
     this.onSettingsShown,
   });
@@ -29,43 +30,44 @@ class SettingsActions extends StatelessWidget {
             dimension: 40,
             child: IconButton(
               onPressed: () {
-                if (!primary) onSettingsShown?.call(!settingsExpanded!);
+                if (!primary) onSettingsShown?.call(!settingsExpanded);
               },
               iconSize: 18,
               padding: EdgeInsets.zero,
               icon: Icon(
                 Icons.settings,
-                color: settingsExpanded! ? theme.colorScheme.primary : null,
+                color: settingsExpanded ? theme.colorScheme.primary : null,
               ),
             ),
           ),
-        if (visibility != null)
-          SizedBox.square(
-            dimension: 40,
-            child: IconButton(
-              onPressed: () {
-                if (!primary) onVisible?.call(!visibility!);
-              },
-              iconSize: 18,
-              padding: EdgeInsets.zero,
-              icon: Icon(
-                visibility! ? Icons.visibility : Icons.visibility_off,
-                color: primary ? theme.disabledColor : theme.hintColor,
-              ),
+        SizedBox.square(
+          dimension: 40,
+          child: IconButton(
+            onPressed: () {
+              if (!primary) onVisible?.call(!visible);
+            },
+            iconSize: 18,
+            padding: EdgeInsets.zero,
+            icon: Icon(
+              visible ? Icons.visibility : Icons.visibility_off,
+              color: primary
+                  ? theme.disabledColor
+                  : ColorPalette.current().subtitle,
             ),
           ),
-        if (dragable != null)
-          SizedBox.square(
-            dimension: 40,
-            child: IconButton(
-                onPressed: () {},
-                iconSize: 20,
-                padding: EdgeInsets.zero,
-                icon: Icon(
-                  Icons.drag_indicator,
-                  color: dragable! ? theme.hintColor : theme.disabledColor,
-                )),
-          )
+        ),
+        SizedBox.square(
+          dimension: 40,
+          child: IconButton(
+            onPressed: () {},
+            iconSize: 20,
+            padding: EdgeInsets.zero,
+            icon: Icon(
+              Icons.drag_indicator,
+              color: dragable ? theme.hintColor : theme.disabledColor,
+            ),
+          ),
+        ),
       ],
     );
   }

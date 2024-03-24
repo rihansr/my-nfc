@@ -71,6 +71,7 @@ class TextSettings extends StatelessWidget {
                 InputField(
                   controller: _firstNameController,
                   title: string.firstName,
+                  textCapitalization: TextCapitalization.words,
                   onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('first', text.isEmpty ? null : text),
@@ -79,6 +80,7 @@ class TextSettings extends StatelessWidget {
                 InputField(
                   controller: _middleNameController,
                   title: string.middleName,
+                  textCapitalization: TextCapitalization.words,
                   onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('middle', text.isEmpty ? null : text),
@@ -87,6 +89,7 @@ class TextSettings extends StatelessWidget {
                 InputField(
                   controller: _lastNameController,
                   title: string.lastName,
+                  textCapitalization: TextCapitalization.words,
                   onTyping: (text) => updateSettings(
                     'name',
                     MapEntry('last', text.isEmpty ? null : text),
@@ -99,6 +102,7 @@ class TextSettings extends StatelessWidget {
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
+                  textCapitalization: TextCapitalization.sentences,
                   onTyping: (text) => updateSettings(
                     'data',
                     MapEntry('content', text.isEmpty ? null : text),

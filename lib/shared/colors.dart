@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_nfc/configs/app_settings.dart';
 
 class ColorPalette {
   Color primary;
@@ -13,7 +14,8 @@ class ColorPalette {
   Color surface;
   Color onSurface;
   Color icon;
-  Color text;
+  Color title;
+  Color subtitle;
   Color headline;
   Color focus;
   Color divider;
@@ -38,7 +40,8 @@ class ColorPalette {
     required this.surface,
     required this.onSurface,
     required this.icon,
-    required this.text,
+    required this.title,
+    required this.subtitle,
     required this.headline,
     required this.focus,
     required this.divider,
@@ -64,14 +67,15 @@ class ColorPalette {
         surface: const Color(0xFF09091a),
         onSurface: const Color(0xFF09091a),
         icon: const Color(0xFFFFFFFF),
-        text: const Color(0xFFC1BFCE),
+        title: const Color(0xFFFFFFFF),
+        subtitle: const Color(0xFFD7CACA),
         headline: const Color(0xFFFFFFFF),
         focus: const Color(0xFFFFFFFF),
         divider: const Color(0xFFFFFFFF),
         active: const Color(0xFF6DFF6A),
         success: const Color(0xFF0ED678),
-        hint: const Color(0xFFD7CACA),
-        disable: const Color(0xFF666666),
+        hint: const Color(0xFFFFFFFF).withOpacity(0.5),
+        disable: const Color(0xFFFFFFFF).withOpacity(0.25),
         error: const Color(0xFFFF0707),
         light: const Color(0xFFFFFFFF),
         dark: const Color(0xFF000000),
@@ -90,16 +94,21 @@ class ColorPalette {
         surface: const Color(0xFFFFFFFF),
         onSurface: const Color(0xFFFFFFFF),
         icon: const Color(0xFF222233),
-        text: const Color(0xFF222233),
+        title: const Color(0xFF222233),
+        subtitle: const Color(0xFF797595),
         headline: const Color(0xFF09091a),
         focus: const Color(0xFFFFFFFF),
         divider: const Color(0xFF060B1F),
         active: const Color(0xFF6DFF6A),
         success: const Color(0xFF0ED678),
-        hint: const Color(0xFF797595),
-        disable: const Color(0xFFC1BFCE),
+        hint: const Color(0xFF222233).withOpacity(0.5),
+        disable: const Color(0xFF222233).withOpacity(0.25),
         error: const Color(0xFFFF0707),
         light: const Color(0xFFFFFFFF),
         dark: const Color(0xFF000000),
       );
+
+  factory ColorPalette.current() => appSettings.isDarkTheme
+      ? ColorPalette.dark()
+      : ColorPalette.light();
 }
