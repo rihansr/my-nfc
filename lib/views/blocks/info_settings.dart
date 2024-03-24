@@ -28,6 +28,7 @@ class InfoSettings extends StatelessWidget {
       icon: Icons.info_outline,
       padding: const EdgeInsets.fromLTRB(12, 0, 26, 8),
       enableBoder: true,
+      onUpdate: onUpdate,
       children: (settings['data'] as Map<String, dynamic>?)
               ?.entries
               .map(

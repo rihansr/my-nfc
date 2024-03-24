@@ -53,9 +53,9 @@ List<String> kAlignments = const [
 ];
 
 // Data
-Map<String, dynamic> kDefaultDesign = {};
-List<Map<String, dynamic>> kAdditionalBlocks = const [];
-List<Map<String, dynamic>> kSocialLinks = const [];
+final Map<String, dynamic> kDefaultDesign = {};
+final List<Map<String, dynamic>> kAdditionalBlocks =  [];
+final List<Map<String, dynamic>> kSocialLinks =  [];
 
 final Uint8List kTransparentImage = Uint8List.fromList(<int>[
   0x89,
@@ -130,6 +130,7 @@ final Uint8List kTransparentImage = Uint8List.fromList(<int>[
 extension IconExtensions on String {
   IconData get icon {
     switch (this) {
+      case "section-parent":
       case "section":
         return Icons.view_agenda;
       case "space":
@@ -159,6 +160,7 @@ extension IconExtensions on String {
         return FontAwesomeIcons.info;
     }
   }
+
   IconData get socialIcon {
     switch (this) {
       case "facebook":

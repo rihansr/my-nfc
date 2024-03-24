@@ -1,40 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/shared/strings.dart';
+import '../../../shared/strings.dart';
+import '../../../utils/extensions.dart';
 import '../../../shared/constants.dart';
-import 'settings_actions.dart';
+import 'block_settings.dart';
 
 class ExpansionSettingsTile extends StatelessWidget {
   final IconData? icon;
-  final Map<String, dynamic> settings;
-  final List<Widget> children;
-  final EdgeInsetsGeometry? padding;
+  final Map<String, dynamic> data;
   final EdgeInsetsGeometry titlePadding;
-  final bool maintainState;
+  final EdgeInsetsGeometry? padding;
   final bool enableBoder;
+  final bool maintainState;
+  final List<Widget> children;
+  final Function(Map<String, dynamic>)? onUpdate;
   final Function(bool)? onExpansionChanged;
-  final Function(bool)? onVisible;
-  final Function(bool)? onSettingsShown;
-  final Function()? onRemove;
+
   const ExpansionSettingsTile(
-    this.settings, {
+    this.data, {
     super.key,
     this.icon,
     this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
     this.padding,
-    this.onExpansionChanged,
-    this.maintainState = false,
     this.enableBoder = false,
-    this.onVisible,
-    this.onSettingsShown,
-    this.onRemove,
+    this.maintainState = false,
     this.children = const [],
+    this.onUpdate,
+    this.onExpansionChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return settings['label'] == null
+    return data['label'] == null
         ? Padding(
             padding: padding ?? const EdgeInsets.all(0),
             child: Column(
@@ -60,7 +58,7 @@ class ExpansionSettingsTile extends StatelessWidget {
               onExpansionChanged: onExpansionChanged,
               maintainState: maintainState,
               title: Text(
-                settings['label'] ?? '',
+                data['label'] ?? '',
                 style: const TextStyle(
                   fontFamily: kFontFamily,
                   fontSize: 14,
@@ -71,21 +69,18 @@ class ExpansionSettingsTile extends StatelessWidget {
               iconColor: icon != null ? theme.colorScheme.primary : null,
               controlAffinity: ListTileControlAffinity.leading,
               leading: icon == null ? null : Icon(icon!, size: 16),
-              trailing: settings['visible'] == null && settings['dragable'] == null
+              trailing: data['block'] == 'section-parent'
                   ? null
-                  : SettingsActions(
-                      settingsExpanded:
-                          (settings['settings']?["initiallyExpand"] as bool?) ??
-                              false,
-                      visible: (settings['visible'] as bool?) ?? false,
-                      primary: (settings['primary'] as bool?) ?? false,
-                      dragable: (settings['dragable'] as bool?) ?? false,
-                      onVisible: onVisible,
-                      onSettingsShown: onSettingsShown,
+                  : BlockSettings(
+                      settings: data['settings'],
+                      onUpdate: (entry) {
+                        data.addEntry('settings', entry);
+                        onUpdate?.call(data);
+                      },
                     ),
               children: [
                 ...children,
-                if(settings['removable'] == true)...[
+                if (data['settings']?['removable'] == true) ...[
                   const SizedBox(height: 16),
                   Divider(
                     height: 1,
@@ -95,7 +90,7 @@ class ExpansionSettingsTile extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () => onUpdate?.call({}),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                       ),

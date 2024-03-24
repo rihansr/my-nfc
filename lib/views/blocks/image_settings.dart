@@ -42,6 +42,7 @@ class _ImageSettingsState extends State<ImageSettings> {
           : Icons.image_outlined,
       padding: const EdgeInsets.fromLTRB(10, 8, 26, 18),
       enableBoder: true,
+      onUpdate: widget.onUpdate,
       children: [
         if (widget.settings['label'] != null) ...[
           Text(

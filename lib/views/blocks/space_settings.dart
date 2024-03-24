@@ -31,6 +31,7 @@ class SpaceSettings extends StatelessWidget {
       icon: Icons.zoom_out_map_outlined,
       padding: const EdgeInsets.fromLTRB(12, 0, 24, 0),
       enableBoder: true,
+      onUpdate: onUpdate,
       children: [
         Seekbar(
           title: string.height,

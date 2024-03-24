@@ -29,15 +29,15 @@ class AppConfig {
             DeviceOrientation.portraitDown,
           ]),
         rootBundle.loadString("assets/files/default_design.json").then(
-              (data) => kDefaultDesign = jsonDecode(data),
+              (data) => kDefaultDesign.addAll(jsonDecode(data)),
             ),
         rootBundle.loadString("assets/files/additional_blocks.json").then(
-              (data) => kAdditionalBlocks =
-                  List<Map<String, dynamic>>.from(jsonDecode(data)),
+              (data) => kAdditionalBlocks
+                  .addAll(List<Map<String, dynamic>>.from(jsonDecode(data))),
             ),
         rootBundle.loadString("assets/files/social_links.json").then(
-              (data) => kSocialLinks =
-                  List<Map<String, dynamic>>.from(jsonDecode(data)),
+              (data) => kSocialLinks
+                  .addAll(List<Map<String, dynamic>>.from(jsonDecode(data))),
             ),
         sharedPrefs.init(),
       ],

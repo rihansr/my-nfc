@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
-import '../../utils/debug.dart';
 import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
@@ -44,6 +43,7 @@ class _LinksSettingsState extends State<LinksSettings> {
       maintainState: true,
       icon: Icons.group_outlined,
       enableBoder: true,
+      onUpdate: widget.onUpdate,
       children: [
         ReorderableListView(
           physics: const NeverScrollableScrollPhysics(),
@@ -126,7 +126,7 @@ class _LinksSettingsState extends State<LinksSettings> {
             },
           ).toList(),
           onReorder: (i, j) {
-            if (widget.settings['dragable'] != true) return;
+            if (widget.settings['settings']?['dragable'] != true) return;
             if (i < j) j--;
             final item = _links.removeAt(i);
             _links.insert(j, item);

@@ -1,19 +1,22 @@
 {
     "basicInformation": {
-        "block": "section",
+        "block": "section-parent",
         "label": "Basic Information",
-        "primary": true,
-        "removable": false,
+        "settings": {
+            "primary": true,
+            "removable": false
+        },
         "fields": [
             {
                 "block": "section",
                 "label": "Banner",
-                "primary": true,
-                "visible": true,
-                "dragable": false,
-                "removable": false,
                 "settings": {
-                    "initiallyExpand": false,
+                    "primary": true,
+                    "visible": true,
+                    "dragable": false,
+                    "removable": false
+                },
+                "style": {
                     "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
@@ -30,9 +33,11 @@
                 "fields": [
                     {
                         "block": "banner",
-                        "primary": true,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": true,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "path": "",
                             "style": {
@@ -44,9 +49,11 @@
                     {
                         "label": "Text",
                         "block": "text",
-                        "primary": true,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": true,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "content": "",
                             "style": {
@@ -73,12 +80,13 @@
             {
                 "block": "section",
                 "label": "Profile",
-                "primary": true,
-                "visible": true,
-                "dragable": false,
-                "removable": false,
                 "settings": {
-                    "initiallyExpand": false,
+                    "primary": true,
+                    "visible": true,
+                    "dragable": false,
+                    "removable": false
+                },
+                "style": {
                     "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
@@ -96,9 +104,11 @@
                     {
                         "block": "avatar",
                         "label": "Avatar",
-                        "primary": true,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": true,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "path": ""
                         }
@@ -106,9 +116,11 @@
                     {
                         "block": "name",
                         "label": "Name",
-                        "primary": true,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": true,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "name": {
                                 "first": "",
@@ -139,9 +151,11 @@
             {
                 "block": "space",
                 "label": "Space",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "height": 10
                 }
@@ -149,9 +163,11 @@
             {
                 "block": "text",
                 "label": "Bio",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "content": "",
                     "style": {
@@ -176,9 +192,11 @@
             {
                 "block": "space",
                 "label": "Space",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "height": 20
                 }
@@ -186,9 +204,11 @@
             {
                 "block": "text",
                 "label": "Passion",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "content": "",
                     "style": {
@@ -213,9 +233,11 @@
             {
                 "block": "divider",
                 "label": "Line Break",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
@@ -227,18 +249,22 @@
         ]
     },
     "profileInformation": {
-        "block": "section",
+        "block": "section-parent",
         "label": "Profile Information",
-        "primary": true,
-        "removable": false,
+        "settings": {
+            "primary": true,
+            "removable": false
+        },
         "fields": [
             {
                 "block": "publicLinks",
                 "label": "Public Social Media",
-                "primary": false,
-                "visible": true,
-                "removable": false,
-                "dragable": true,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false,
+                    "dragable": true
+                },
                 "data": {
                     "links": []
                 }
@@ -246,9 +272,11 @@
             {
                 "block": "space",
                 "label": "Space",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "height": 10
                 }
@@ -256,10 +284,12 @@
             {
                 "block": "links",
                 "label": "Social Media",
-                "primary": false,
-                "visible": true,
-                "removable": false,
-                "dragable": true,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false,
+                    "dragable": true
+                },
                 "data": {
                     "links": []
                 }
@@ -267,9 +297,11 @@
             {
                 "block": "divider",
                 "label": "Line Break",
-                "primary": false,
-                "removable": false,
-                "visible": true,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
@@ -281,12 +313,13 @@
             {
                 "block": "section",
                 "label": "Section",
-                "primary": false,
-                "visible": true,
-                "removable": false,
-                "dragable": false,
                 "settings": {
-                    "initiallyExpand": false,
+                    "primary": false,
+                    "visible": true,
+                    "removable": false,
+                    "dragable": false
+                },
+                "style": {
                     "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
@@ -304,10 +337,12 @@
                     {
                         "block": "contact",
                         "label": "Contact",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
-                        "dragable": true,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false,
+                            "dragable": true
+                        },
                         "data": {
                             "phoneNumbers": [
                                 {
@@ -336,9 +371,11 @@
             {
                 "block": "divider",
                 "label": "Line Break",
-                "primary": false,
-                "visible": true,
-                "removable": false,
+                "settings": {
+                    "primary": false,
+                    "visible": true,
+                    "removable": false
+                },
                 "data": {
                     "color": "#FFFFFFFF",
                     "margin": {
@@ -350,12 +387,13 @@
             {
                 "block": "section",
                 "label": "Section",
-                "primary": false,
-                "visible": true,
-                "removable": false,
-                "dragable": false,
                 "settings": {
-                    "initiallyExpand": false,
+                    "primary": false,
+                    "visible": true,
+                    "removable": false,
+                    "dragable": false
+                },
+                "style": {
                     "backgroundColor": "#00000000",
                     "fullWidth": true,
                     "padding": {
@@ -373,9 +411,11 @@
                     {
                         "block": "info",
                         "label": "Work",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "title": {
                                 "text": "",
@@ -390,9 +430,11 @@
                     {
                         "block": "space",
                         "label": "Space",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "height": 10
                         }
@@ -400,9 +442,11 @@
                     {
                         "block": "info",
                         "label": "Education",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "title": {
                                 "text": "",
@@ -417,9 +461,11 @@
                     {
                         "block": "space",
                         "label": "Space",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "height": 10
                         }
@@ -427,9 +473,11 @@
                     {
                         "block": "info",
                         "label": "Relationship",
-                        "primary": false,
-                        "visible": true,
-                        "removable": false,
+                        "settings": {
+                            "primary": false,
+                            "visible": true,
+                            "removable": false
+                        },
                         "data": {
                             "title": {
                                 "text": ""
@@ -441,17 +489,22 @@
         ]
     },
     "additionalInformation": {
-        "block": "section",
+        "block": "section-parent",
         "label": "Additional Information",
-        "primary": false,
-        "removable": false,
+        "settings": {
+            "primary": false,
+            "removable": false,
+            "dragable": true
+        },
         "fields": []
     },
     "footer": {
-        "block": "section",
+        "block": "section-parent",
         "label": "Footer",
-        "primary": true,
-        "removable": false,
+        "settings": {
+            "primary": true,
+            "removable": false
+        },
         "fields": [
             {
                 "block": "actions",

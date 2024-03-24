@@ -18,6 +18,7 @@ class ButtonSettings extends StatelessWidget {
       maintainState: true,
       icon: Icons.add_circle_outline,
       enableBoder: true,
+      onUpdate: onUpdate,
       children: const [],
     );
   }

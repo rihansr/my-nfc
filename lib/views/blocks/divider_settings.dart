@@ -32,6 +32,7 @@ class DividerSettings extends StatelessWidget {
       icon: Icons.remove_outlined,
       padding: const EdgeInsets.fromLTRB(14, 0, 24, 8),
       enableBoder: true,
+      onUpdate: onUpdate,
       children: [
         Spacing(
           margin: settings['data']?['margin'],

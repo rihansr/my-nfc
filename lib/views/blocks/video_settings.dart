@@ -18,6 +18,7 @@ class VideoSettings extends StatelessWidget {
       maintainState: true,
       icon: Icons.video_library_outlined,
       enableBoder: true,
+      onUpdate: onUpdate,
       children: const [],
     );
   }

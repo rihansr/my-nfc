@@ -65,6 +65,7 @@ class TextSettings extends StatelessWidget {
       icon: Icons.title,
       padding: const EdgeInsets.fromLTRB(14, 0, 26, 8),
       enableBoder: true,
+      onUpdate: onUpdate,
       children: [
         ...(settings['block'] == 'name'
             ? [

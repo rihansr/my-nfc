@@ -18,6 +18,7 @@ class AdditionalSettings extends StatelessWidget {
       maintainState: true,
       icon: Icons.playlist_add_outlined,
       enableBoder: true,
+      onUpdate: onUpdate,
       children: const [],
     );
   }

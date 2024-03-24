@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../../utils/debug.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../blocks/section_settings.dart';
 import 'components/popup_view.dart';
@@ -22,7 +24,10 @@ class DesignView extends StatelessWidget {
               (e) => SectionSettings(
                 key: Key(e.key),
                 settings: e.value,
-                onUpdate: (section) => controller.notify,
+                onUpdate: (section) {
+                  controller.designData[e.key] = section;
+                  debug.print(json.encode(controller.designData));
+                },
               ),
             )
             .toList(),

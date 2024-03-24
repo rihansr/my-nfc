@@ -18,6 +18,7 @@ class ContactSettings extends StatelessWidget {
       maintainState: true,
       icon: Icons.call_outlined,
       enableBoder: true,
+      onUpdate: onUpdate,
       children: const [],
     );
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/configs/app_settings.dart';
+import '../configs/app_settings.dart';
 
 class ColorPalette {
   Color primary;

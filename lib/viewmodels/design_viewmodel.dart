@@ -8,15 +8,13 @@ class DesignViewModel extends BaseViewModel {
   final BuildContext _context;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Map<String, dynamic>? _params;
-  final Map<String, dynamic> _designData;
+  final Map<String, dynamic> designData;
 
   DesignViewModel(BuildContext context, {required Map<String, dynamic>? params})
       : _context = context,
         _params = params,
         scaffoldKey = GlobalKey<ScaffoldState>(),
-        _designData = kDefaultDesign;
-
-  Map<String, dynamic> get designData => _designData;
+        designData = kDefaultDesign;
 
   showsModalBottomSheet(int tab) => scaffoldKey.currentState?.showBottomSheet(
         (context) => DraggableScrollableSheet(

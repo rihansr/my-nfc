@@ -17,6 +17,7 @@ class ActionsSettings extends StatelessWidget {
       settings,
       maintainState: true,
       icon: Icons.system_update_alt_outlined,
+      onUpdate: onUpdate,
       children: const [],
     );
   }
