@@ -175,7 +175,7 @@ class InputField extends StatelessWidget {
               errorStyle: theme.textTheme.titleSmall
                   ?.copyWith(color: theme.colorScheme.error),
               hintStyle: hintStyle ??
-                  theme.textTheme.bodySmall?.copyWith(
+                  (textStyle ?? theme.textTheme.bodySmall)?.copyWith(
                     color: hintColor ?? theme.hintColor,
                     fontSize: hintSize ?? fontSize,
                     fontWeight: hintWeight ?? fontWeight,

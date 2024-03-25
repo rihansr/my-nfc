@@ -64,11 +64,6 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       color: colorPalette.icon,
       size: 24,
     ),
-    textSelectionTheme: const TextSelectionThemeData(
-      cursorColor: Colors.yellow,
-      selectionColor: Colors.green,
-      selectionHandleColor: Colors.blue,
-    ),
     primarySwatch: Colors.amber,
     snackBarTheme: const SnackBarThemeData().copyWith(
       backgroundColor: colorPalette.primary,
@@ -197,6 +192,29 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
       clipBehavior: Clip.antiAlias,
+    ),
+    checkboxTheme: CheckboxThemeData(
+      visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      checkColor: MaterialStateProperty.all(colorPalette.onTertiary),
+      fillColor: MaterialStateProperty.resolveWith<Color?>(
+        (Set<MaterialState> states) => states.contains(MaterialState.selected)
+            ? colorPalette.primary
+            : Colors.transparent,
+      ),
+      side: MaterialStateBorderSide.resolveWith(
+        (states) => states.contains(MaterialState.selected)
+            ? BorderSide(
+                color: colorPalette.primary,
+                strokeAlign: 0,
+                width: 5,
+              )
+            : BorderSide(
+                color: colorPalette.title,
+                strokeAlign: 4,
+                width: 0.5,
+              ),
+      ),
     ),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.resolveWith<Color?>(

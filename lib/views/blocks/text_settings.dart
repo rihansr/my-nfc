@@ -63,7 +63,7 @@ class TextSettings extends StatelessWidget {
       settings,
       maintainState: true,
       icon: Icons.title,
-      padding: const EdgeInsets.fromLTRB(14, 0, 26, 8),
+      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       enableBoder: true,
       onUpdate: onUpdate,
       children: [
@@ -136,19 +136,7 @@ class TextSettings extends StatelessWidget {
         ColourPicker(
           title: string.textColor,
           value: _selectedFontColor,
-          colors: const [
-            Colors.white,
-            Colors.black,
-            Colors.red,
-            Colors.green,
-            Colors.blue,
-            Colors.yellow,
-            Colors.orange,
-            Colors.purple,
-            Colors.pink,
-            Colors.teal,
-            Colors.brown
-          ],
+          colors:kColors,
           onPick: (color) {
             _selectedFontColor = color;
             updateSettings('style', MapEntry('color', color.toHex));

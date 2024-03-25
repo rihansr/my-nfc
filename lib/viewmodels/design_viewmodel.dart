@@ -28,7 +28,6 @@ class DesignViewModel extends BaseViewModel {
                 return DesignView(
                   scrollController: scrollController,
                   controller: this,
-                  data: designData,
                 );
               case 1:
                 return ThemeView(

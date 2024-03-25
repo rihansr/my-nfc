@@ -52,10 +52,26 @@ List<String> kAlignments = const [
   'center',
 ];
 
+List<Color> kColors = const [
+  Colors.white,
+  Colors.black,
+  Colors.red,
+  Colors.green,
+  Colors.blue,
+  Colors.yellow,
+  Colors.orange,
+  Colors.purple,
+  Colors.pink,
+  Colors.teal,
+  Colors.brown
+];
+
+List<String> kAspectRatios = const ['21:9', '16:9', '1:1', '4:5', '9:16'];
+
 // Data
 final Map<String, dynamic> kDefaultDesign = {};
-final List<Map<String, dynamic>> kAdditionalBlocks =  [];
-final List<Map<String, dynamic>> kSocialLinks =  [];
+final List<Map<String, dynamic>> kAdditionalBlocks = [];
+final List<Map<String, dynamic>> kSocialLinks = [];
 
 final Uint8List kTransparentImage = Uint8List.fromList(<int>[
   0x89,

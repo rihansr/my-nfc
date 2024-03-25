@@ -37,6 +37,7 @@
   "firstName": "First Name",
   "middleName": "Middle Name",
   "lastName": "Last Name",
+  "width":"Width",
   "height": "Height",
   "color": "Color",
   "phoneNumbers": "Phone Numbers",
@@ -58,6 +59,17 @@
   "buttonDesign": "Button Design",
   "borderCcolor": "Border Color",
   "borderThickness": "Border Thickness",
+  "ratio": "{a}:{b}",
+  "@ratio": {
+    "placeholders": {
+      "a": {
+        "type": "int"
+      },
+      "b": {
+        "type": "int"
+      }
+    }
+  },
   "size": "{size}",
   "@size": {
     "placeholders": {
@@ -89,6 +101,7 @@
   "mute": "Mute",
   "allowFullscreen": "Allow Fullscreen",
   "start": "Start",
+  "end": "End",
   "copied": "Copied",
   "title": "Title {count}",
   "@title": {
@@ -110,6 +123,7 @@
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",
+  "durationHint": "00:00:00",
   "@_MESSAGES": "<-----------------MESSAGES----------------->",
   "networkNotAvailable": "We could not establish an internet connection to our service at the moment. Please make sure that you are connected to your network and try again.",
   "passwordFailed": "Sorry, password protection failed",

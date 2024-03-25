@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/colour_picker_widget.dart';
@@ -41,19 +42,7 @@ class DividerSettings extends StatelessWidget {
         ColourPicker(
           title: string.color,
           value: _selectedColor,
-          colors: const [
-            Colors.white,
-            Colors.black,
-            Colors.red,
-            Colors.green,
-            Colors.blue,
-            Colors.yellow,
-            Colors.orange,
-            Colors.purple,
-            Colors.pink,
-            Colors.teal,
-            Colors.brown
-          ],
+          colors: kColors,
           onPick: (color) {
             _selectedColor = color;
             updateBlock(MapEntry('color', color.toHex));

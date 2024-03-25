@@ -34,19 +34,21 @@ class SectionSettings extends StatefulWidget {
 class _SectionSettingsState extends State<SectionSettings> {
   late List _fields;
 
-  set fields(List list) {
-    setState(() => _fields = list);
-    widget.onUpdate?.call({...widget.settings, 'fields': list});
-  }
-
   @override
   void initState() {
     _fields = widget.settings['fields'] ?? [];
     super.initState();
   }
 
-  update(int i, Map<String, dynamic> data) =>
-      fields = data.isEmpty ? (_fields..removeAt(i)) : (_fields..[i] = data);
+  set fields(List list) {
+    setState(() => _fields = list);
+    widget.onUpdate?.call({...widget.settings, 'fields': list});
+  }
+
+  update(int i, Map<String, dynamic> data) => {
+        _fields = data.isEmpty ? (_fields..removeAt(i)) : (_fields..[i] = data),
+        widget.onUpdate?.call({...widget.settings, 'fields': _fields})
+      };
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,10 @@ class _SectionSettingsState extends State<SectionSettings> {
                   widget.settings['settings']?['primary'] == false
               ? _AddButton(
                   onSelected: (block) {
-                    block.addEntry('settings', MapEntry('dragable', widget.settings['settings']?['dragable'] ?? false));
+                    block.addEntry(
+                        'settings',
+                        MapEntry('dragable',
+                            widget.settings['settings']?['dragable'] ?? false));
                     fields = [..._fields, block];
                   },
                 )

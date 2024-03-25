@@ -69,15 +69,16 @@ class ExpansionSettingsTile extends StatelessWidget {
               iconColor: icon != null ? theme.colorScheme.primary : null,
               controlAffinity: ListTileControlAffinity.leading,
               leading: icon == null ? null : Icon(icon!, size: 16),
-              trailing: data['block'] == 'section-parent'
-                  ? null
-                  : BlockSettings(
-                      settings: data['settings'],
-                      onUpdate: (entry) {
-                        data.addEntry('settings', entry);
-                        onUpdate?.call(data);
-                      },
-                    ),
+              trailing:
+                  data['block'] == null || data['block'] == 'section-parent'
+                      ? null
+                      : BlockSettings(
+                          settings: data['settings'],
+                          onUpdate: (entry) {
+                            data.addEntry('settings', entry);
+                            onUpdate?.call(data);
+                          },
+                        ),
               children: [
                 ...children,
                 if (data['settings']?['removable'] == true) ...[

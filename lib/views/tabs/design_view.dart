@@ -8,18 +8,17 @@ import 'components/popup_view.dart';
 class DesignView extends StatelessWidget {
   final ScrollController scrollController;
   final DesignViewModel controller;
-  final Map<String, dynamic> data;
-  const DesignView({
+  final Map<String, dynamic> _data;
+   DesignView({
     super.key,
     required this.scrollController,
     required this.controller,
-    required this.data,
-  });
+  }) : _data = {}..addAll(controller.designData);
 
   @override
   Widget build(BuildContext context) => PopupView(
         scrollController: scrollController,
-        children: data.entries
+        children: _data.entries
             .map(
               (e) => SectionSettings(
                 key: Key(e.key),

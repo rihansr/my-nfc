@@ -172,17 +172,8 @@
             "visible": true,
             "removable": true
         },
-        "data": {
-            "link": "",
+        "style":{
             "aspectRatio": "21:9",
-            "settings": {
-                "autoPlay": false,
-                "loop": false,
-                "showControls": false,
-                "mute": false,
-                "allowFullScreen": false,
-                "startAt": 0
-            },
             "padding": {
                 "horizontal": 0,
                 "vertical": 0
@@ -192,6 +183,18 @@
                 "bottom": 0,
                 "left": 0,
                 "right": 0
+            }
+        },
+        "data": {
+            "link": "",
+            "configs": {
+                "autoPlay": false,
+                "loop": false,
+                "showControls": false,
+                "mute": false,
+                "allowFullScreen": false,
+                "startAt": null,
+                "endAt": null
             }
         }
     },
