@@ -18,10 +18,12 @@ class DividerSettings extends StatelessWidget {
     required this.settings,
     this.onUpdate,
   }) : _selectedColor =
-            settings['data']?['color']?.toString().hexColor ?? Colors.grey;
+            settings['data']?['style']?['color']?.toString().hexColor ??
+                Colors.grey;
 
-  updateBlock(MapEntry<String, dynamic> value) {
-    settings.addEntry('data', value);
+  update(MapEntry<String, dynamic> value) {
+    settings['data'] ??= {};
+    (settings['data'] as Map<String, dynamic>).addEntry('style', value);
     onUpdate?.call(settings);
   }
 
@@ -36,8 +38,8 @@ class DividerSettings extends StatelessWidget {
       onUpdate: onUpdate,
       children: [
         Spacing(
-          margin: settings['data']?['margin'],
-          onUpdate: (spacing) => updateBlock(spacing),
+          margin: settings['data']?['style']?['margin'],
+          onUpdate: (spacing) => update(spacing),
         ),
         ColourPicker(
           title: string.color,
@@ -45,7 +47,7 @@ class DividerSettings extends StatelessWidget {
           colors: kColors,
           onPick: (color) {
             _selectedColor = color;
-            updateBlock(MapEntry('color', color.toHex));
+            update(MapEntry('color', color.toHex));
           },
         ),
       ],

@@ -38,18 +38,25 @@ class TextSettings extends StatelessWidget {
             TextEditingController(text: settings['data']?['name']?['middle']),
         _lastNameController =
             TextEditingController(text: settings['data']?['name']?['last']),
-        _selectedFonFamily = settings['data']?['style']?['fontFamily'],
-        _selectedFontSize = settings['data']?['style']?['fontSize'] ?? 12,
+        _selectedFonFamily = settings['data']?['style']?['text']?['fontFamily'],
+        _selectedFontSize =
+            settings['data']?['style']?['text']?['fontSize'] ?? 12,
         _selectedFontColor =
-            settings['data']?['style']?['color']?.toString().hexColor,
+            settings['data']?['style']?['text']?['color']?.toString().hexColor,
         _selectedFontWeight =
-            settings['data']?['style']?['fontWeight'] ?? 'regular',
-        _selectedAlignment = settings['data']?['style']?['alignment'] ?? 'left';
+            settings['data']?['style']?['text']?['fontWeight'] ?? 'regular',
+        _selectedAlignment =
+            settings['data']?['style']?['text']?['alignment'] ?? 'left';
 
-  updateSettings(String key, MapEntry<String, dynamic> value) {
+  update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
       case 'data':
         settings.addEntry(key, value);
+      case 'style':
+        settings['data'] ??= {};
+        settings['data']['style'] ??= {};
+        (settings['data']['style'] as Map<String, dynamic>)
+            .addEntry(key, value);
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -73,7 +80,7 @@ class TextSettings extends StatelessWidget {
                   controller: _firstNameController,
                   title: string.firstName,
                   textCapitalization: TextCapitalization.words,
-                  onTyping: (text) => updateSettings(
+                  onTyping: (text) => update(
                     'name',
                     MapEntry('first', text.isEmpty ? null : text),
                   ),
@@ -82,7 +89,7 @@ class TextSettings extends StatelessWidget {
                   controller: _middleNameController,
                   title: string.middleName,
                   textCapitalization: TextCapitalization.words,
-                  onTyping: (text) => updateSettings(
+                  onTyping: (text) => update(
                     'name',
                     MapEntry('middle', text.isEmpty ? null : text),
                   ),
@@ -91,7 +98,7 @@ class TextSettings extends StatelessWidget {
                   controller: _lastNameController,
                   title: string.lastName,
                   textCapitalization: TextCapitalization.words,
-                  onTyping: (text) => updateSettings(
+                  onTyping: (text) => update(
                     'name',
                     MapEntry('last', text.isEmpty ? null : text),
                   ),
@@ -104,7 +111,7 @@ class TextSettings extends StatelessWidget {
                   maxLines: 8,
                   title: string.content,
                   textCapitalization: TextCapitalization.sentences,
-                  onTyping: (text) => updateSettings(
+                  onTyping: (text) => update(
                     'data',
                     MapEntry('content', text.isEmpty ? null : text),
                   ),
@@ -120,7 +127,7 @@ class TextSettings extends StatelessWidget {
               Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
           onSelected: (String? font) {
             _selectedFonFamily = font;
-            updateSettings('style', MapEntry('fontFamily', font));
+            update('style', MapEntry('fontFamily', font));
           },
         ),
         Seekbar(
@@ -130,16 +137,16 @@ class TextSettings extends StatelessWidget {
           max: 96,
           onChanged: (size) {
             _selectedFontSize = size;
-            updateSettings('style', MapEntry('fontSize', size));
+            update('style', MapEntry('fontSize', size));
           },
         ),
         ColourPicker(
           title: string.textColor,
           value: _selectedFontColor,
-          colors:kColors,
+          colors: kColors,
           onPick: (color) {
             _selectedFontColor = color;
-            updateSettings('style', MapEntry('color', color.toHex));
+            update('style', MapEntry('color', color.toHex));
           },
         ),
         TabWidget(
@@ -148,7 +155,7 @@ class TextSettings extends StatelessWidget {
             value: _selectedFontWeight,
             onSelect: (weight) {
               _selectedFontWeight = weight;
-              updateSettings('style', MapEntry('fontWeight', weight));
+              update('style', MapEntry('fontWeight', weight));
             }),
         TabWidget(
             title: string.alignment,
@@ -156,13 +163,13 @@ class TextSettings extends StatelessWidget {
             value: _selectedAlignment,
             onSelect: (alignment) {
               _selectedAlignment = alignment;
-              updateSettings('style', MapEntry('alignment', alignment));
+              update('style', MapEntry('alignment', alignment));
             }),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: settings['data']?['padding'],
-          margin: settings['data']?['margin'],
-          onUpdate: (spacing) => updateSettings('data', spacing),
+          padding: settings['data']?['style']?['padding'],
+          margin: settings['data']?['style']?['margin'],
+          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

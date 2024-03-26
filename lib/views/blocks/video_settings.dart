@@ -17,9 +17,8 @@ class VideoSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  updateSettings(String key, MapEntry<String, dynamic> value) {
+  update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
-      case 'style':
       case 'data':
         settings.addEntry(key, value);
       default:
@@ -45,27 +44,27 @@ class VideoSettings extends StatelessWidget {
           maxLines: 2,
           title: string.videoLink,
           textCapitalization: TextCapitalization.sentences,
-          onTyping: (text) => updateSettings(
+          onTyping: (text) => update(
             'data',
             MapEntry('link', text.isEmpty ? null : text),
           ),
         ),
         AspectRatioSelector(
-          settings['style']?['aspectRatio'],
-          onSelected: (ratio) => updateSettings(
+          settings['data']?['style']?['aspectRatio'],
+          onSelected: (ratio) => update(
             'style',
             MapEntry('aspectRatio', ratio),
           ),
         ),
         VideoConfigs(
           configs: settings['data']?['configs'] ?? {},
-          onUpdate: (entry) => updateSettings('configs', entry),
+          onUpdate: (entry) => update('configs', entry),
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: settings['style']?['padding'],
-          margin: settings['style']?['margin'],
-          onUpdate: (spacing) => updateSettings('style', spacing),
+          padding: settings['data']?['style']?['padding'],
+          margin: settings['data']?['style']?['margin'],
+          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

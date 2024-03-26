@@ -15,11 +15,12 @@ class SpaceSettings extends StatelessWidget {
     super.key,
     required this.settings,
     this.onUpdate,
-  }) : _selectedHeight = settings['data']?['height'] ?? 20;
+  }) : _selectedHeight = settings['data']?['style']?['height'] ?? 20;
 
-  updateSettings(int value) {
+  update(int value) {
     _selectedHeight = value;
-    settings.addEntry('data', MapEntry('height', value));
+    settings['data'] ??= {};
+    (settings['data'] as Map<String, dynamic>).addEntry('style', MapEntry('height', value));
     onUpdate?.call(settings);
   }
 
@@ -40,7 +41,7 @@ class SpaceSettings extends StatelessWidget {
           min: 0,
           max: 100,
           defaultValue: 20,
-          onChanged: updateSettings,
+          onChanged: update,
         ),
       ],
     );

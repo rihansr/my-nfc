@@ -13,7 +13,7 @@ class InfoSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  updateSettings(String key, String value) {
+  update(String key, String value) {
     settings['data'] ??= {};
     (settings['data'] as Map<String, dynamic>)
         .addEntry(key, MapEntry('text', value));
@@ -36,7 +36,7 @@ class InfoSettings extends StatelessWidget {
                   controller: TextEditingController(text: e.value['text']),
                   hint: e.value['hint'],
                   margin: const EdgeInsets.only(top: 8),
-                  onTyping: (text) => updateSettings(e.key, text),
+                  onTyping: (text) => update(e.key, text),
                 ),
               )
               .toList() ??
