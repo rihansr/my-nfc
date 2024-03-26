@@ -49,11 +49,7 @@
                                 "data": {
                                     "content": "",
                                     "style": {
-<<<<<<< HEAD
                                         "text": {
-=======
-                                        "'text": {
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
                                             "typography": null,
                                             "fontSize": 32,
                                             "color": "#FFFFFFFF",

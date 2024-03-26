@@ -38,11 +38,7 @@ class TextSettings extends StatelessWidget {
             TextEditingController(text: settings['data']?['name']?['middle']),
         _lastNameController =
             TextEditingController(text: settings['data']?['name']?['last']),
-<<<<<<< HEAD
         _selectedFonFamily = settings['data']?['style']?['text']?['typography'],
-=======
-        _selectedFonFamily = settings['data']?['style']?['text']?['fontFamily'],
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
         _selectedFontSize =
             settings['data']?['style']?['text']?['fontSize'] ?? 12,
         _selectedFontColor =
@@ -56,14 +52,8 @@ class TextSettings extends StatelessWidget {
     switch (key) {
       case 'data':
         settings.addEntry(key, value);
-<<<<<<< HEAD
       case 'text':
         settings['data'] ??= {};
-=======
-      case 'style':
-        settings['data'] ??= {};
-        settings['data']['style'] ??= {};
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
         (settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
       default:
@@ -136,11 +126,7 @@ class TextSettings extends StatelessWidget {
               Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
           onSelected: (String? font) {
             _selectedFonFamily = font;
-<<<<<<< HEAD
             update('text', MapEntry('typography', font));
-=======
-            update('style', MapEntry('fontFamily', font));
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
           },
         ),
         Seekbar(
@@ -150,11 +136,7 @@ class TextSettings extends StatelessWidget {
           max: 96,
           onChanged: (size) {
             _selectedFontSize = size;
-<<<<<<< HEAD
             update('text', MapEntry('fontSize', size));
-=======
-            update('style', MapEntry('fontSize', size));
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
           },
         ),
         ColourPicker(
@@ -163,37 +145,27 @@ class TextSettings extends StatelessWidget {
           colors: kColors,
           onPick: (color) {
             _selectedFontColor = color;
-<<<<<<< HEAD
             update('text', MapEntry('color', color.toHex));
-=======
-            update('style', MapEntry('color', color.toHex));
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
           },
         ),
         TabWidget(
-            title: string.fontWeight,
-            tabs: kFontWeights,
-            value: _selectedFontWeight,
-            onSelect: (weight) {
-              _selectedFontWeight = weight;
-<<<<<<< HEAD
-              update('text', MapEntry('fontWeight', weight));
-=======
-              update('style', MapEntry('fontWeight', weight));
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
-            }),
+          title: string.fontWeight,
+          tabs: kFontWeights,
+          value: _selectedFontWeight,
+          onSelect: (weight) {
+            _selectedFontWeight = weight;
+            update('text', MapEntry('fontWeight', weight));
+          },
+        ),
         TabWidget(
-            title: string.alignment,
-            tabs: kAlignments,
-            value: _selectedAlignment,
-            onSelect: (alignment) {
-              _selectedAlignment = alignment;
-<<<<<<< HEAD
-              update('text', MapEntry('alignment', alignment));
-=======
-              update('style', MapEntry('alignment', alignment));
->>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
-            }),
+          title: string.alignment,
+          tabs: kAlignments,
+          value: _selectedAlignment,
+          onSelect: (alignment) {
+            _selectedAlignment = alignment;
+            update('text', MapEntry('alignment', alignment));
+          },
+        ),
         Spacing(
           title: string.paddingAndMarginSettings,
           padding: settings['data']?['style']?['padding'],
