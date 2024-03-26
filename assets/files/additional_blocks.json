@@ -8,132 +8,140 @@
             "removable": true,
             "dragable": true
         },
-        "style": {
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
-            },
-            "alignment": {
-                "vertical": "top",
-                "horizontal": "left"
-            },
-            "overlay": {
-                "color": "#00000000",
-                "opacity": 40
-            },
-            "additional": {
-                "altText": "",
-                "linkTo": "",
-                "openInNewTab": true
-            }
-        },
-        "fields": [
-            {
-                "block": "background",
-                "label": "Background Image",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true
-                },
-                "data": {
-                    "path": ""
-                }
-            },
-            {
-                "block": "text",
-                "label": "Text",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true
-                },
-                "data": {
-                    "content": "",
-                    "style": {
-                        "typography": null,
-                        "fontSize": 32,
-                        "color": "#FFFFFFFF",
-                        "fontWeight": "reqular",
-                        "alignment": "left"
+        "data": {
+            "fields": [
+                {
+                    "block": "background",
+                    "label": "Background Image",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true
                     },
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
-                    },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "path": ""
                     }
-                }
-            },
-            {
-                "block": "text",
-                "label": "Text",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true
                 },
-                "data": {
-                    "content": "",
-                    "style": {
-                        "typography": null,
-                        "color": "#FFFFFFFF",
-                        "fontSize": 19,
-                        "fontWeight": "reqular",
-                        "alignment": "left"
+                {
+                    "block": "text",
+                    "label": "Text",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true
                     },
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
-                    },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "content": "",
+                        "style": {
+                            "text": {
+                                "typography": null,
+                                "fontSize": 32,
+                                "color": "#FFFFFFFF",
+                                "fontWeight": "reqular",
+                                "alignment": "left"
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
                     }
-                }
-            },
-            {
-                "block": "button",
-                "label": "Button",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true
                 },
-                "data": {
-                    "text": "",
-                    "link": "",
-                    "style": {
-                        "border": {
-                            "color": "#FFFFFFFF",
-                            "thickness": 1,
-                            "radius": 4
-                        },
-                        "text": {
-                            "typography": null,
-                            "color": "#FFFFFFFF",
-                            "fontSize": 16,
-                            "fontWeight": "regular"
+                {
+                    "block": "text",
+                    "label": "Text",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true
+                    },
+                    "data": {
+                        "content": "",
+                        "style": {
+                            "text": {
+                                "typography": null,
+                                "color": "#FFFFFFFF",
+                                "fontSize": 19,
+                                "fontWeight": "reqular",
+                                "alignment": "left"
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "block": "button",
+                    "label": "Button",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true,
+                        "additional": {
+                            "fullWidth": false,
+                            "openInNewTab": true,
+                            "disabled": false
                         }
                     },
-                    "fullWidth": false,
-                    "openInNewTab": true,
-                    "disabled": false
+                    "data": {
+                        "text": "",
+                        "link": "",
+                        "style": {
+                            "border": {
+                                "color": "#FFFFFFFF",
+                                "thickness": 1,
+                                "radius": 4
+                            },
+                            "text": {
+                                "typography": null,
+                                "color": "#FFFFFFFF",
+                                "fontSize": 16,
+                                "fontWeight": "regular"
+                            }
+                        }
+                    }
+                }
+            ],
+            "style": {
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                },
+                "alignment": {
+                    "vertical": "top",
+                    "horizontal": "left"
+                },
+                "overlay": {
+                    "color": "#00000000",
+                    "opacity": 40
+                },
+                "additional": {
+                    "altText": "",
+                    "linkTo": "",
+                    "openInNewTab": true
                 }
             }
-        ]
+        }
     },
     {
         "block": "text",
@@ -146,21 +154,23 @@
         "data": {
             "content": "",
             "style": {
-                "typography": null,
-                "color": "#FFFFFFFF",
-                "fontSize": 16,
-                "fontWeight": "reqular",
-                "alignment": "center"
-            },
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+                "text": {
+                    "typography": null,
+                    "color": "#FFFFFFFF",
+                    "fontSize": 16,
+                    "fontWeight": "reqular",
+                    "alignment": "center"
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         }
     },
@@ -172,19 +182,6 @@
             "visible": true,
             "removable": true
         },
-        "style":{
-            "aspectRatio": "21:9",
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
-            }
-        },
         "data": {
             "link": "",
             "configs": {
@@ -195,6 +192,19 @@
                 "allowFullScreen": false,
                 "startAt": null,
                 "endAt": null
+            },
+            "style": {
+                "aspectRatio": "21:9",
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         }
     },
@@ -207,10 +217,12 @@
             "removable": true
         },
         "data": {
-            "color": "#FFFFFFFF",
-            "margin": {
-                "top": 0,
-                "bottom": 0
+            "style": {
+                "color": "#FFFFFFFF",
+                "margin": {
+                    "top": 0,
+                    "bottom": 0
+                }
             }
         }
     },
@@ -223,45 +235,22 @@
             "dragable": true,
             "removable": true
         },
-        "style": {
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
-            },
-            "alignment": {
-                "vertical": "top",
-                "horizontal": "left"
-            },
-            "overlay": {
-                "color": "#00000000",
-                "opacity": 40
-            },
-            "additional": {
-                "altText": "",
-                "linkTo": "",
-                "openInNewTab": true
-            }
-        },
-        "fields": [
-            {
-                "block": "background",
-                "label": "Background Image",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true
-                },
-                "data": {
-                    "path": ""
+        "data": {
+            "fields": [
+                {
+                    "block": "background",
+                    "label": "Background Image",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true
+                    },
+                    "data": {
+                        "path": ""
+                    }
                 }
-            }
-        ]
+            ]
+        }
     },
     {
         "block": "section",
@@ -274,19 +263,23 @@
         },
         "style": {
             "backgroundColor": "#00000000",
-            "fullWidth": true,
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
-            }
+            "fullWidth": true
         },
-        "fields": []
+        "data": {
+            "fields": [],
+            "style": {
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
+            }
+        }
     },
     {
         "block": "image",
@@ -306,7 +299,12 @@
         "settings": {
             "primary": false,
             "visible": true,
-            "removable": true
+            "removable": true,
+            "additional": {
+                "fullWidth": false,
+                "openInNewTab": true,
+                "disabled": false
+            }
         },
         "data": {
             "text": "",
@@ -323,10 +321,7 @@
                     "fontSize": 16,
                     "fontWeight": "regular"
                 }
-            },
-            "fullWidth": false,
-            "openInNewTab": true,
-            "disabled": false
+            }
         }
     },
     {
@@ -416,8 +411,10 @@
             "removable": true
         },
         "data": {
-            "alignment": "left",
-            "items": []
+            "items": [],
+            "style":{
+            "alignment": "left"
+            }
         }
     },
     {
@@ -429,7 +426,9 @@
             "removable": true
         },
         "data": {
-            "height": 10
+            "style": {
+                "height": 20
+            }
         }
     }
 ]

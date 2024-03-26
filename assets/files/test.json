@@ -6,62 +6,181 @@
             "primary": true,
             "removable": false
         },
-        "fields": [
-            {
-                "block": "section",
-                "label": "Banner",
-                "settings": {
-                    "primary": true,
-                    "visible": true,
-                    "dragable": false,
-                    "removable": false
-                },
-                "style": {
-                    "backgroundColor": "#00000000",
-                    "fullWidth": true,
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
+        "data": {
+            "fields": [
+                {
+                    "block": "section",
+                    "label": "Banner",
+                    "settings": {
+                        "primary": true,
+                        "visible": true,
+                        "dragable": false,
+                        "removable": false
                     },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+                            {
+                                "block": "banner",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "path": "",
+                                    "style": {
+                                        "size": 10,
+                                        "overlayOpacity": 33
+                                    }
+                                }
+                            },
+                            {
+                                "label": "Text",
+                                "block": "text",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "content": "Rihan",
+                                    "style": {
+                                        "text": {
+                                            "typography": null,
+                                            "fontSize": 43,
+                                            "color": "#fff44336",
+                                            "fontWeight": "semi-bold",
+                                            "alignment": "center",
+                                            "fontFamily": "Montserrat_regular"
+                                        },
+                                        "padding": {
+                                            "horizontal": 28,
+                                            "vertical": 0
+                                        },
+                                        "margin": {
+                                            "top": 0,
+                                            "bottom": 20,
+                                            "left": 0,
+                                            "right": 0
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
                 },
-                "fields": [
-                    {
-                        "block": "banner",
-                        "settings": {
-                            "primary": true,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "path": "",
-                            "style": {
-                                "size": 10,
-                                "overlayOpacity": 33
+                {
+                    "block": "section",
+                    "label": "Profile",
+                    "settings": {
+                        "primary": true,
+                        "visible": true,
+                        "dragable": false,
+                        "removable": false
+                    },
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+                            {
+                                "block": "avatar",
+                                "label": "Avatar",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "path": ""
+                                }
+                            },
+                            {
+                                "block": "name",
+                                "label": "Name",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "name": {
+                                        "first": "",
+                                        "middle": "",
+                                        "last": ""
+                                    },
+                                    "style": {
+                                        "text": {
+                                            "typography": null,
+                                            "fontSize": 32,
+                                            "color": "#FFFFFFFF",
+                                            "fontWeight": "regular",
+                                            "alignment": "left"
+                                        },
+                                        "padding": {
+                                            "horizontal": 0,
+                                            "vertical": 0
+                                        },
+                                        "margin": {
+                                            "top": 0,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "style": {
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
                             }
                         }
+                    }
+                },
+                {
+                    "block": "space",
+                    "label": "Space",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
                     },
-                    {
-                        "label": "Text",
-                        "block": "text",
-                        "settings": {
-                            "primary": true,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "content": "",
-                            "style": {
+                    "data": {
+                        "style": {
+                            "height": 20
+                        }
+                    }
+                },
+                {
+                    "block": "text",
+                    "label": "Bio",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "content": "",
+                        "style": {
+                            "text": {
                                 "typography": null,
-                                "fontSize": 32,
+                                "fontSize": 16,
                                 "color": "#FFFFFFFF",
                                 "fontWeight": "regular",
-                                "alignment": "left"
+                                "alignment": "center"
                             },
                             "padding": {
                                 "horizontal": 0,
@@ -75,64 +194,38 @@
                             }
                         }
                     }
-                ]
-            },
-            {
-                "block": "section",
-                "label": "Profile",
-                "settings": {
-                    "primary": true,
-                    "visible": true,
-                    "dragable": false,
-                    "removable": false
                 },
-                "style": {
-                    "backgroundColor": "#00000000",
-                    "fullWidth": true,
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
+                {
+                    "block": "space",
+                    "label": "Space",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
                     },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "style": {
+                            "height": 20
+                        }
                     }
                 },
-                "fields": [
-                    {
-                        "block": "avatar",
-                        "label": "Avatar",
-                        "settings": {
-                            "primary": true,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "path": ""
-                        }
+                {
+                    "block": "text",
+                    "label": "Passion",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
                     },
-                    {
-                        "block": "name",
-                        "label": "Name",
-                        "settings": {
-                            "primary": true,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "name": {
-                                "first": "",
-                                "middle": "",
-                                "last": ""
-                            },
-                            "style": {
+                    "data": {
+                        "content": "",
+                        "style": {
+                            "text": {
                                 "typography": null,
-                                "fontSize": 32,
+                                "fontSize": 14,
                                 "color": "#FFFFFFFF",
                                 "fontWeight": "regular",
-                                "alignment": "left"
+                                "alignment": "center"
                             },
                             "padding": {
                                 "horizontal": 0,
@@ -146,107 +239,27 @@
                             }
                         }
                     }
-                ]
-            },
-            {
-                "block": "space",
-                "label": "Space",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
                 },
-                "data": {
-                    "height": 10
-                }
-            },
-            {
-                "block": "text",
-                "label": "Bio",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "content": "",
-                    "style": {
-                        "typography": null,
-                        "fontSize": 16,
-                        "color": "#FFFFFFFF",
-                        "fontWeight": "regular",
-                        "alignment": "center"
+                {
+                    "block": "divider",
+                    "label": "Line Break",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
                     },
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
-                    },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "style": {
+                            "color": "#FFFFFFFF",
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
+                        }
                     }
                 }
-            },
-            {
-                "block": "space",
-                "label": "Space",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "height": 20
-                }
-            },
-            {
-                "block": "text",
-                "label": "Passion",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "content": "",
-                    "style": {
-                        "typography": null,
-                        "fontSize": 14,
-                        "color": "#FFFFFFFF",
-                        "fontWeight": "regular",
-                        "alignment": "center"
-                    },
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
-                    },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
-                    }
-                }
-            },
-            {
-                "block": "divider",
-                "label": "Line Break",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "color": "#FFFFFFFF",
-                    "margin": {
-                        "top": 25,
-                        "bottom": 25
-                    }
-                }
-            }
-        ]
+            ]
+        }
     },
     "profileInformation": {
         "block": "section-parent",
@@ -255,238 +268,258 @@
             "primary": true,
             "removable": false
         },
-        "fields": [
-            {
-                "block": "publicLinks",
-                "label": "Public Social Media",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false,
-                    "dragable": true
-                },
-                "data": {
-                    "links": []
-                }
-            },
-            {
-                "block": "space",
-                "label": "Space",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "height": 10
-                }
-            },
-            {
-                "block": "links",
-                "label": "Social Media",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false,
-                    "dragable": true
-                },
-                "data": {
-                    "links": []
-                }
-            },
-            {
-                "block": "divider",
-                "label": "Line Break",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
-                },
-                "data": {
-                    "color": "#FFFFFFFF",
-                    "margin": {
-                        "top": 25,
-                        "bottom": 25
-                    }
-                }
-            },
-            {
-                "block": "section",
-                "label": "Section",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false,
-                    "dragable": false
-                },
-                "style": {
-                    "backgroundColor": "#00000000",
-                    "fullWidth": true,
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
+        "data": {
+            "fields": [
+                {
+                    "block": "publicLinks",
+                    "label": "Public Social Media",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": true
                     },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "links": []
                     }
                 },
-                "fields": [
-                    {
-                        "block": "contact",
-                        "label": "Contact",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false,
-                            "dragable": true
-                        },
-                        "data": {
-                            "phoneNumbers": [
-                                {
-                                    "home": ""
-                                }
-                            ],
-                            "emails": [
-                                {
-                                    "home": ""
-                                }
-                            ],
-                            "websites": [
-                                {
-                                    "work": ""
-                                }
-                            ],
-                            "addresses": [
-                                {
-                                    "Home": ""
-                                }
-                            ]
+                {
+                    "block": "space",
+                    "label": "Space",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "style": {
+                            "height": 20
                         }
                     }
-                ]
-            },
-            {
-                "block": "divider",
-                "label": "Line Break",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false
                 },
-                "data": {
-                    "color": "#FFFFFFFF",
-                    "margin": {
-                        "top": 25,
-                        "bottom": 25
-                    }
-                }
-            },
-            {
-                "block": "section",
-                "label": "Section",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": false,
-                    "dragable": false
-                },
-                "style": {
-                    "backgroundColor": "#00000000",
-                    "fullWidth": true,
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
+                {
+                    "block": "links",
+                    "label": "Social Media",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": true
                     },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
+                    "data": {
+                        "links": []
                     }
                 },
-                "fields": [
-                    {
-                        "block": "info",
-                        "label": "Work",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "title": {
-                                "text": "",
-                                "hint": "Company"
+                {
+                    "block": "divider",
+                    "label": "Line Break",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "style": {
+                            "color": "#FFFFFFFF",
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
+                        }
+                    }
+                },
+                {
+                    "block": "section",
+                    "label": "Section",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": false
+                    },
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+                            {
+                                "block": "contact",
+                                "label": "Contact",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false,
+                                    "dragable": true
+                                },
+                                "data": {
+                                    "phoneNumbers": [
+                                        {
+                                            "home": ""
+                                        }
+                                    ],
+                                    "emails": [
+                                        {
+                                            "home": ""
+                                        }
+                                    ],
+                                    "websites": [
+                                        {
+                                            "work": ""
+                                        }
+                                    ],
+                                    "addresses": [
+                                        {
+                                            "Home": ""
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "style": {
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
                             },
-                            "content": {
-                                "text": "",
-                                "hint": "Position"
-                            }
-                        }
-                    },
-                    {
-                        "block": "space",
-                        "label": "Space",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "height": 10
-                        }
-                    },
-                    {
-                        "block": "info",
-                        "label": "Education",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "title": {
-                                "text": "",
-                                "hint": "Place"
-                            },
-                            "content": {
-                                "text": "",
-                                "hint": "Degree"
-                            }
-                        }
-                    },
-                    {
-                        "block": "space",
-                        "label": "Space",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "height": 10
-                        }
-                    },
-                    {
-                        "block": "info",
-                        "label": "Relationship",
-                        "settings": {
-                            "primary": false,
-                            "visible": true,
-                            "removable": false
-                        },
-                        "data": {
-                            "title": {
-                                "text": ""
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
                             }
                         }
                     }
-                ]
-            }
-        ]
+                },
+                {
+                    "block": "divider",
+                    "label": "Line Break",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "style": {
+                            "color": "#FFFFFFFF",
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
+                        }
+                    }
+                },
+                {
+                    "block": "section",
+                    "label": "Section",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": false
+                    },
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+                            {
+                                "block": "info",
+                                "label": "Work",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "title": {
+                                        "text": "",
+                                        "hint": "Company"
+                                    },
+                                    "content": {
+                                        "text": "",
+                                        "hint": "Position"
+                                    }
+                                }
+                            },
+                            {
+                                "block": "space",
+                                "label": "Space",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "style": {
+                                        "height": 10
+                                    }
+                                }
+                            },
+                            {
+                                "block": "info",
+                                "label": "Education",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "title": {
+                                        "text": "",
+                                        "hint": "Place"
+                                    },
+                                    "content": {
+                                        "text": "",
+                                        "hint": "Degree"
+                                    }
+                                }
+                            },
+                            {
+                                "block": "space",
+                                "label": "Space",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "style": {
+                                        "height": 10
+                                    }
+                                }
+                            },
+                            {
+                                "block": "info",
+                                "label": "Relationship",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "title": {
+                                        "text": ""
+                                    }
+                                }
+                            }
+                        ],
+                        "style": {
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
+                    }
+                }
+            ]
+        }
     },
     "additionalInformation": {
         "block": "section-parent",
@@ -496,43 +529,9 @@
             "removable": false,
             "dragable": true
         },
-        "fields": [
-            {
-                "block": "video",
-                "label": "Online Video",
-                "settings": {
-                    "primary": false,
-                    "visible": true,
-                    "removable": true,
-                    "dragable": true
-                },
-                "style": {
-                    "aspectRatio": "21:9",
-                    "padding": {
-                        "horizontal": 0,
-                        "vertical": 0
-                    },
-                    "margin": {
-                        "top": 0,
-                        "bottom": 0,
-                        "left": 0,
-                        "right": 0
-                    }
-                },
-                "data": {
-                    "link": "",
-                    "configs": {
-                        "autoPlay": false,
-                        "loop": true,
-                        "showControls": false,
-                        "mute": false,
-                        "allowFullScreen": false,
-                        "startAt": "00:00:00",
-                        "endAt": null
-                    }
-                }
-            }
-        ]
+        "data": {
+            "fields": []
+        }
     },
     "footer": {
         "block": "section-parent",
@@ -541,24 +540,28 @@
             "primary": true,
             "removable": false
         },
-        "fields": [
-            {
-                "block": "actions",
-                "label": "Save Contact/Connect",
-                "primary": false,
-                "visible": true,
-                "removable": false,
-                "data": {
-                    "primary": "",
-                    "additional": "",
-                    "advancedSettings": {
-                        "showSaveToPhoneButton": true,
-                        "showPrimaryContactButton": true,
-                        "showAdditionalContactButton": true,
-                        "buttonFixedAtBottom": true
+        "data": {
+            "fields": [
+                {
+                    "block": "actions",
+                    "label": "Save Contact/Connect",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "primary": "",
+                        "additional": "",
+                        "advancedSettings": {
+                            "showSaveToPhoneButton": true,
+                            "showPrimaryContactButton": true,
+                            "showAdditionalContactButton": true,
+                            "buttonFixedAtBottom": true
+                        }
                     }
                 }
-            }
-        ]
+            ]
+        }
     }
 }
