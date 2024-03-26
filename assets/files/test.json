@@ -47,6 +47,7 @@
                                     "removable": false
                                 },
                                 "data": {
+<<<<<<< HEAD
                                     "content": "Rihan",
                                     "style": {
                                         "text": {
@@ -74,6 +75,97 @@
                     }
                 },
                 {
+                    "block": "section",
+                    "label": "Profile",
+                    "settings": {
+                        "primary": true,
+                        "visible": true,
+                        "dragable": false,
+                        "removable": false
+                    },
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+                            {
+                                "block": "avatar",
+                                "label": "Avatar",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "path": ""
+                                }
+                            },
+                            {
+                                "block": "name",
+                                "label": "Name",
+                                "settings": {
+                                    "primary": true,
+                                    "visible": true,
+                                    "removable": false
+                                },
+                                "data": {
+                                    "name": {
+                                        "first": "",
+                                        "middle": "",
+                                        "last": ""
+                                    },
+                                    "style": {
+                                        "text": {
+=======
+                                    "content": "",
+                                    "style": {
+                                        "'text": {
+>>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
+                                            "typography": null,
+                                            "fontSize": 32,
+                                            "color": "#FFFFFFFF",
+                                            "fontWeight": "regular",
+                                            "alignment": "left"
+                                        },
+                                        "padding": {
+                                            "horizontal": 0,
+                                            "vertical": 0
+                                        },
+                                        "margin": {
+                                            "top": 0,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "style": {
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
+                    }
+                },
+                {
+<<<<<<< HEAD
+                    "block": "space",
+                    "label": "Space",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+=======
                     "block": "section",
                     "label": "Profile",
                     "settings": {
@@ -158,6 +250,7 @@
                         "visible": true,
                         "removable": false
                     },
+>>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
                     "data": {
                         "style": {
                             "height": 20
@@ -294,6 +387,8 @@
                     "data": {
                         "style": {
                             "height": 20
+<<<<<<< HEAD
+=======
                         }
                     }
                 },
@@ -343,6 +438,106 @@
                     },
                     "data": {
                         "fields": [
+                            [
+                                {
+                                    "block": "contact",
+                                    "label": "Contact",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false,
+                                        "dragable": true
+                                    },
+                                    "data": {
+                                        "phoneNumbers": [
+                                            {
+                                                "home": ""
+                                            }
+                                        ],
+                                        "emails": [
+                                            {
+                                                "home": ""
+                                            }
+                                        ],
+                                        "websites": [
+                                            {
+                                                "work": ""
+                                            }
+                                        ],
+                                        "addresses": [
+                                            {
+                                                "Home": ""
+                                            }
+                                        ]
+                                    }
+                                }
+                            ]
+                        ],
+                        "style": {
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+>>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
+                        }
+                    }
+                },
+                {
+<<<<<<< HEAD
+                    "block": "links",
+                    "label": "Social Media",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": true
+                    },
+                    "data": {
+                        "links": []
+                    }
+                },
+                {
+=======
+>>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
+                    "block": "divider",
+                    "label": "Line Break",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false
+                    },
+                    "data": {
+                        "style": {
+                            "color": "#FFFFFFFF",
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
+                        }
+                    }
+                },
+                {
+                    "block": "section",
+                    "label": "Section",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": false,
+                        "dragable": false
+                    },
+                    "style": {
+                        "backgroundColor": "#00000000",
+                        "fullWidth": true
+                    },
+                    "data": {
+                        "fields": [
+<<<<<<< HEAD
                             {
                                 "block": "contact",
                                 "label": "Contact",
@@ -503,6 +698,90 @@
                                     }
                                 }
                             }
+=======
+                            [
+                                {
+                                    "block": "info",
+                                    "label": "Work",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false
+                                    },
+                                    "data": {
+                                        "title": {
+                                            "text": "",
+                                            "hint": "Company"
+                                        },
+                                        "content": {
+                                            "text": "",
+                                            "hint": "Position"
+                                        }
+                                    }
+                                },
+                                {
+                                    "block": "space",
+                                    "label": "Space",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false
+                                    },
+                                    "data": {
+                                        "style": {
+                                            "height": 10
+                                        }
+                                    }
+                                },
+                                {
+                                    "block": "info",
+                                    "label": "Education",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false
+                                    },
+                                    "data": {
+                                        "title": {
+                                            "text": "",
+                                            "hint": "Place"
+                                        },
+                                        "content": {
+                                            "text": "",
+                                            "hint": "Degree"
+                                        }
+                                    }
+                                },
+                                {
+                                    "block": "space",
+                                    "label": "Space",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false
+                                    },
+                                    "data": {
+                                        "style": {
+                                            "height": 10
+                                        }
+                                    }
+                                },
+                                {
+                                    "block": "info",
+                                    "label": "Relationship",
+                                    "settings": {
+                                        "primary": false,
+                                        "visible": true,
+                                        "removable": false
+                                    },
+                                    "data": {
+                                        "title": {
+                                            "text": ""
+                                        }
+                                    }
+                                }
+                            ]
+>>>>>>> 1bbbf38dc5ef5b336ca8ce21b0e1b7b13d5dad1b
                         ],
                         "style": {
                             "padding": {
