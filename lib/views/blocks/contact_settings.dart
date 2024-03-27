@@ -15,7 +15,6 @@ class ContactSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.call_outlined,
       enableBoder: true,
       onUpdate: onUpdate,

@@ -24,9 +24,8 @@ class InfoSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.info_outline,
-      padding: const EdgeInsets.fromLTRB(12, 0, 26, 8),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
       enableBoder: true,
       onUpdate: onUpdate,
       children: (settings['data'] as Map<String, dynamic>?)

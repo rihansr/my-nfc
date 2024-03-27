@@ -20,7 +20,8 @@ class SpaceSettings extends StatelessWidget {
   update(int value) {
     _selectedHeight = value;
     settings['data'] ??= {};
-    (settings['data'] as Map<String, dynamic>).addEntry('style', MapEntry('height', value));
+    (settings['data'] as Map<String, dynamic>)
+        .addEntry('style', MapEntry('height', value));
     onUpdate?.call(settings);
   }
 
@@ -28,9 +29,8 @@ class SpaceSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.zoom_out_map_outlined,
-      padding: const EdgeInsets.fromLTRB(12, 0, 24, 0),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 0),
       enableBoder: true,
       onUpdate: onUpdate,
       children: [

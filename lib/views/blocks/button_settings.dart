@@ -15,7 +15,6 @@ class ButtonSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.add_circle_outline,
       enableBoder: true,
       onUpdate: onUpdate,

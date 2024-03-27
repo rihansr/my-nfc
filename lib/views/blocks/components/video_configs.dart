@@ -19,7 +19,6 @@ class VideoConfigs extends StatelessWidget {
     return ExpansionSettingsTile(
       {'label': string.videoSetting},
       titlePadding: const EdgeInsets.all(0),
-      maintainState: true,
       padding: const EdgeInsets.fromLTRB(0, 0, 22, 8),
       children: [
         Wrap(

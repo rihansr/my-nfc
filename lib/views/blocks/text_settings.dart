@@ -12,7 +12,7 @@ import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class TextSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> _settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
   final TextEditingController _contentController;
@@ -28,9 +28,10 @@ class TextSettings extends StatelessWidget {
 
   TextSettings({
     super.key,
-    required this.settings,
+    settings,
     this.onUpdate,
-  })  : _contentController =
+  })  : _settings = {...settings},
+        _contentController =
             TextEditingController(text: settings['data']?['content']),
         _firstNameController =
             TextEditingController(text: settings['data']?['name']?['first']),
@@ -51,29 +52,28 @@ class TextSettings extends StatelessWidget {
   update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
       case 'data':
-        settings.addEntry(key, value);
+        _settings.addEntry(key, value);
       case 'text':
-        settings['data'] ??= {};
-        (settings['data']['style'] as Map<String, dynamic>)
+        _settings['data'] ??= {};
+        (_settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
       default:
-        settings['data'] ??= {};
-        (settings['data'] as Map<String, dynamic>).addEntry(key, value);
+        _settings['data'] ??= {};
+        (_settings['data'] as Map<String, dynamic>).addEntry(key, value);
     }
-    onUpdate?.call(settings);
+   onUpdate?.call(_settings);
   }
 
   @override
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
-      settings,
-      maintainState: true,
+      _settings,
       icon: Icons.title,
       padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       enableBoder: true,
       onUpdate: onUpdate,
       children: [
-        ...(settings['block'] == 'name'
+        ...(_settings['block'] == 'name'
             ? [
                 InputField(
                   controller: _firstNameController,
@@ -168,8 +168,8 @@ class TextSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: settings['data']?['style']?['padding'],
-          margin: settings['data']?['style']?['margin'],
+          padding: _settings['data']?['style']?['padding'],
+          margin: _settings['data']?['style']?['margin'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

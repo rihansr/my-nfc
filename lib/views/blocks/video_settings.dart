@@ -32,7 +32,6 @@ class VideoSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.video_library_outlined,
       enableBoder: true,
       onUpdate: onUpdate,

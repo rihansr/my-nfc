@@ -40,7 +40,6 @@ class _LinksSettingsState extends State<LinksSettings> {
     ThemeData theme = Theme.of(context);
     return ExpansionSettingsTile(
       widget.settings,
-      maintainState: true,
       icon: Icons.group_outlined,
       enableBoder: true,
       onUpdate: widget.onUpdate,

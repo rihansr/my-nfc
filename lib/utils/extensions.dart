@@ -85,6 +85,28 @@ extension MapExtension on Map<String, dynamic> {
       this[key] = {}..addEntries([entry]);
     }
   }
+
+  get nullify {
+    forEach((key, value) {
+      if (value is Map<String, dynamic>) {
+        value.nullify;
+      } else {
+        this[key] = null;
+      }
+    });
+  }
+}
+
+extension DynamicMapExtension on Map {
+  get nullify {
+    forEach((key, value) {
+      if (value is Map) {
+        value.nullify;
+      } else {
+        this[key] = null;
+      }
+    });
+  }
 }
 
 extension HexColor on Color {

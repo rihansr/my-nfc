@@ -105,8 +105,8 @@ class _BackdropSettingsState extends State<BackdropSettings> {
       widget.settings,
       icon: Icons.image_outlined,
       padding: EdgeInsets.fromLTRB(
-          12, widget.settings['label'] == null ? 4 : 18, 26, 18),
-          enableBoder: true,
+          12, widget.settings['label'] == null ? 4 : 18, 22, 18),
+      enableBoder: true,
       onUpdate: widget.onUpdate,
       children: [
         _imagePath != null

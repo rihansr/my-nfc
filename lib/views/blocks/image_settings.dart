@@ -40,7 +40,7 @@ class _ImageSettingsState extends State<ImageSettings> {
       icon: widget.settings['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
-      padding: const EdgeInsets.fromLTRB(10, 8, 26, 18),
+      padding: const EdgeInsets.fromLTRB(10, 8, 22, 18),
       enableBoder: true,
       onUpdate: widget.onUpdate,
       children: [

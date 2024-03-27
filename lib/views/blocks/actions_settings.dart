@@ -15,7 +15,6 @@ class ActionsSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.system_update_alt_outlined,
       onUpdate: onUpdate,
       children: const [],

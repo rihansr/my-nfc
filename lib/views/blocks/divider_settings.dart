@@ -31,9 +31,8 @@ class DividerSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
       settings,
-      maintainState: true,
       icon: Icons.remove_outlined,
-      padding: const EdgeInsets.fromLTRB(14, 0, 24, 8),
+      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       enableBoder: true,
       onUpdate: onUpdate,
       children: [

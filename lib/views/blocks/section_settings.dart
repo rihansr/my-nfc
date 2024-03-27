@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:my_nfc/utils/debug.dart';
+import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import 'components/add_block_button.dart';
 import 'components/expansion_settings_tile.dart';
@@ -40,25 +42,19 @@ class _SectionSettingsState extends State<SectionSettings> {
   }
 
   set fields(List list) {
-    setState(() => _fields = list);
+    _fields = list;
     widget.onUpdate?.call((() {
-      Map<String, dynamic> settings = {...widget.settings};
+      Map<String, dynamic> settings = Map.from(widget.settings);
       settings['data'] = {};
       settings.addEntry('data', MapEntry('fields', _fields));
       return settings;
     }()));
   }
 
-  update(int i, Map<String, dynamic> data) => {
-        _fields = data.isEmpty ? (_fields..removeAt(i)) : (_fields..[i] = data),
-        if (data.isEmpty) setState(() {}),
-        widget.onUpdate?.call((() {
-          Map<String, dynamic> settings = {...widget.settings};
-          settings['data'] = {};
-          settings.addEntry('data', MapEntry('fields', _fields));
-          return settings;
-        }())),
-      };
+  update(int i, Map<String, dynamic> data) {
+    fields = data.isEmpty ? (_fields..removeAt(i)) : (_fields..[i] = data);
+    if (data.isEmpty) setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -154,24 +150,31 @@ class _SectionSettingsState extends State<SectionSettings> {
         }
       },
     ).toList();
+
     Widget? footer =
         _fields.isEmpty || widget.settings['settings']?['primary'] == false
             ? AddBlockButton(
+                blocks: List.unmodifiable(kAdditionalBlocks),
                 onSelected: (block) {
+                  Map<String, dynamic> test = Map.from(block);
+                  debug.print(test['data']..nullify);
                   block.addEntry(
                       'settings',
                       MapEntry('dragable',
                           widget.settings['settings']?['dragable'] ?? false));
-                  fields = [..._fields, block];
+                  setState(() => fields = [..._fields, block]);
                 },
               )
             : null;
+
     return ExpansionSettingsTile(
       widget.settings,
       onUpdate: widget.onUpdate,
-      maintainState: widget.settings['block'] != 'section-parent',
+      onExpansionChanged: (expanded) {
+        if (!expanded) setState(() => {});
+      },
       children: [
-        if (widget.settings['settings']?['dragable'] == true)
+        if (widget.settings['settings']?['dragable'] == null)
           ReorderableListView(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
@@ -179,7 +182,7 @@ class _SectionSettingsState extends State<SectionSettings> {
               if (i < j) j--;
               final item = _fields.removeAt(i);
               _fields.insert(j, item);
-              fields = _fields;
+              setState(() => fields = _fields);
             },
             footer: footer,
             children: children,
