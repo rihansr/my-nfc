@@ -86,10 +86,29 @@ extension MapExtension on Map<String, dynamic> {
     }
   }
 
-  get nullify {
+  void nullify({
+    List<String> excpetKeys = const [],
+    Map<String, dynamic> defaultValues = const {},
+  }) {
     forEach((key, value) {
-      if (value is Map<String, dynamic>) {
-        value.nullify;
+      if (excpetKeys.contains(key)) {
+        return;
+      } else if (defaultValues.containsKey(key)) {
+        this[key] = defaultValues[key];
+      } else if (value is Map) {
+        (value as Map<String, dynamic>).nullify(
+          excpetKeys: excpetKeys,
+          defaultValues: defaultValues,
+        );
+      } else if (key == 'fields') {
+        for (var i = 0; i < value.length; i++) {
+          (value[i] as Map<String, dynamic>).nullify(
+            excpetKeys: excpetKeys,
+            defaultValues: defaultValues,
+          );
+        }
+      } else if (value is List) {
+        this[key] = [];
       } else {
         this[key] = null;
       }
@@ -97,17 +116,7 @@ extension MapExtension on Map<String, dynamic> {
   }
 }
 
-extension DynamicMapExtension on Map {
-  get nullify {
-    forEach((key, value) {
-      if (value is Map) {
-        value.nullify;
-      } else {
-        this[key] = null;
-      }
-    });
-  }
-}
+extension DynamicMapExtension on Map {}
 
 extension HexColor on Color {
   static Color fromHex(String hexString) {

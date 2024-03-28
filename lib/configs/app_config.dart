@@ -31,14 +31,6 @@ class AppConfig {
         rootBundle.loadString("assets/files/default_design.json").then(
               (data) => kDefaultDesign.addAll(jsonDecode(data)),
             ),
-        rootBundle.loadString("assets/files/additional_blocks.json").then(
-              (data) => kAdditionalBlocks
-                  .addAll(List<Map<String, dynamic>>.from(jsonDecode(data))),
-            ),
-        rootBundle.loadString("assets/files/social_links.json").then(
-              (data) => kSocialLinks
-                  .addAll(List<Map<String, dynamic>>.from(jsonDecode(data))),
-            ),
         sharedPrefs.init(),
       ],
     );

@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
+import '../../widgets/popup_button.dart';
 import 'components/expansion_settings_tile.dart';
 
 class LinksSettings extends StatefulWidget {
@@ -133,61 +136,18 @@ class _LinksSettingsState extends State<LinksSettings> {
             setState(() => {});
           },
         ),
-        PopupMenuButton<Map<String, dynamic>>(
-          itemBuilder: (context) {
-            return kSocialLinks.mapIndexed((index, element) {
-              return PopupMenuItem<Map<String, dynamic>>(
-                value: element,
-                child: Text.rich(
-                  TextSpan(
-                    style: theme.textTheme.bodySmall,
-                    children: [
-                      WidgetSpan(
-                        child: Icon(
-                          '${element['name']}'.socialIcon,
-                          size: 16,
-                          color: theme.textTheme.bodySmall?.color,
-                        ),
-                        alignment: PlaceholderAlignment.middle,
-                      ),
-                      const TextSpan(text: "  "),
-                      TextSpan(
-                        text: '${element['name']}'.capitalizeFirstOfEach,
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList();
-          },
-          color: theme.scaffoldBackgroundColor,
-          elevation: 2,
+        PopupButton(
+          items: json.decode(kSocialLinks),
+          label: string.addANewLink,
+          icon: (item) => '${item['name']}'.socialIcon,
+          name: (item) => '${item['name']}'.capitalizeFirstOfEach,
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 0),
           onSelected: (item) {
             _links.add(item);
             links = _links;
             setState(() => {});
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 0),
-            child: Text.rich(
-              TextSpan(
-                style: theme.textTheme.bodySmall,
-                children: [
-                  WidgetSpan(
-                    child: Icon(
-                      Icons.add,
-                      size: 16,
-                      color: theme.textTheme.bodySmall?.color,
-                    ),
-                    alignment: PlaceholderAlignment.middle,
-                  ),
-                  const TextSpan(text: "  "),
-                  TextSpan(text: string.addANewLink),
-                ],
-              ),
-            ),
-          ),
-        )
+        ),
       ],
     );
   }

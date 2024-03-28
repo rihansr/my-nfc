@@ -1,39 +1,51 @@
 import 'package:flutter/material.dart';
-import '../../../shared/constants.dart';
-import '../../../shared/strings.dart';
 
-class AddBlockButton extends StatelessWidget {
-  final List blocks;
+class PopupButton extends StatelessWidget {
+  final String? label;
+  final List items;
   final Function(Map<String, dynamic>)? onSelected;
-  const AddBlockButton({super.key, this.onSelected, required this.blocks});
+  final IconData Function(Map<String, dynamic>)? icon;
+  final String Function(Map<String, dynamic>)? name;
+  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
+  const PopupButton({
+    super.key,
+    this.label,
+    this.onSelected,
+    required this.items,
+    this.icon,
+    this.name,
+    this.margin = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(0),
+  });
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(left: 4, right: 28),
+      padding: margin,
       child: PopupMenuButton<Map<String, dynamic>>(
         itemBuilder: (context) {
-          return blocks.map(
+          return items.map(
             (e) {
-              Map<String, dynamic> block = Map.unmodifiable(e);
+              Map<String, dynamic> item = Map.unmodifiable(e);
               return PopupMenuItem<Map<String, dynamic>>(
-                value: block,
+                value: item,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Text.rich(
-                  TextSpan(
+                child: RichText(
+                  text: TextSpan(
                     style: theme.textTheme.bodySmall,
                     children: [
                       WidgetSpan(
                         child: Icon(
-                          '${block['block']}'.icon,
+                          icon?.call(item),
                           size: 16,
                           color: theme.textTheme.bodySmall?.color,
                         ),
                         alignment: PlaceholderAlignment.middle,
                       ),
                       const TextSpan(text: "  "),
-                      TextSpan(text: block['label'] ?? ""),
+                      TextSpan(text: name?.call(item)),
                     ],
                   ),
                 ),
@@ -44,10 +56,9 @@ class AddBlockButton extends StatelessWidget {
         offset: const Offset(-3, 0),
         color: theme.scaffoldBackgroundColor,
         elevation: 2,
-        onSelected: (block) => onSelected?.call(Map.from(block)),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+        onSelected: (item) => onSelected?.call(Map.from(item)),
+        child: Padding(
+          padding: padding,
           child: Text.rich(
             TextSpan(
               style: theme.textTheme.bodySmall,
@@ -61,7 +72,7 @@ class AddBlockButton extends StatelessWidget {
                   alignment: PlaceholderAlignment.middle,
                 ),
                 const TextSpan(text: "  "),
-                TextSpan(text: string.addANewBlock),
+                TextSpan(text: label),
               ],
             ),
           ),
@@ -70,4 +81,3 @@ class AddBlockButton extends StatelessWidget {
     );
   }
 }
-

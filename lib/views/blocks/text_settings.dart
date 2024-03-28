@@ -55,6 +55,7 @@ class TextSettings extends StatelessWidget {
         _settings.addEntry(key, value);
       case 'text':
         _settings['data'] ??= {};
+        _settings['data']['style'] ??= {};
         (_settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
       default:

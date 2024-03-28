@@ -62,8 +62,10 @@ class ExpansionSettingsTile extends StatelessWidget {
                 style: const TextStyle(
                   fontFamily: kFontFamily,
                   fontSize: 14,
+                  overflow: TextOverflow.ellipsis,
                   fontWeight: FontWeight.w600,
                 ),
+                maxLines: 1,
               ),
               textColor: icon != null ? theme.colorScheme.primary : null,
               iconColor: icon != null ? theme.colorScheme.primary : null,

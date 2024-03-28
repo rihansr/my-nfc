@@ -128,7 +128,7 @@
                                     "style": {
                                         "text": {
                                             "typography": null,
-                                            "fontSize": 32,
+                                            "fontSize": 39,
                                             "color": "#FFFFFFFF",
                                             "fontWeight": "regular",
                                             "alignment": "left"
@@ -143,22 +143,11 @@
                                             "left": 0,
                                             "right": 0
                                         }
-                                    }
+                                    },
+                                    "styles": {}
                                 }
                             }
-                        ],
-                        "style": {
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        }
+                        ]
                     }
                 },
                 {
@@ -541,72 +530,7 @@
             "dragable": true
         },
         "data": {
-            "fields": [
-                {
-                    "block": "text",
-                    "label": "Text",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true,
-                        "dragable": true
-                    },
-                    "data": {
-                        "style": {
-                            "text": {
-                                "typography": null,
-                                "color": "#FFFFFFFF",
-                                "fontSize": 42,
-                                "fontWeight": "reqular",
-                                "alignment": "center"
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        },
-                        "content": "A"
-                    }
-                },
-                {
-                    "block": "text",
-                    "label": "Text",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true,
-                        "dragable": true
-                    },
-                    "data": {
-                        "style": {
-                            "text": {
-                                "typography": null,
-                                "color": "#FFFFFFFF",
-                                "fontSize": 42,
-                                "fontWeight": "reqular",
-                                "alignment": "center"
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        },
-                        "content": "A"
-                    }
-                }
-            ]
+            "fields": []
         }
     },
     "footer": {

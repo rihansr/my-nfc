@@ -56,12 +56,14 @@ class VideoConfigs extends StatelessWidget {
             _DurationField(
               string.start,
               duration: configs?['startAt'],
-              onAction: (duration) => onUpdate?.call(MapEntry('startAt', duration)),
+              onAction: (duration) =>
+                  onUpdate?.call(MapEntry('startAt', duration)),
             ),
             _DurationField(
               string.end,
               duration: configs?['endAt'],
-              onAction: (duration) => onUpdate?.call(MapEntry('endAt', duration)),
+              onAction: (duration) =>
+                  onUpdate?.call(MapEntry('endAt', duration)),
             ),
           ],
         ),
@@ -91,12 +93,13 @@ class _DurationField extends StatelessWidget {
           const TextSpan(text: ' '),
           WidgetSpan(
             child: SizedBox(
-              width: 66,
+              width: 72,
               child: InputField(
                 controller: TextEditingController(text: duration ?? ''),
                 maxLines: 1,
                 hint: string.durationHint,
                 textStyle: theme.textTheme.titleMedium,
+                textAlign: TextAlign.center,
                 margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.all(4),
                 onTyping: (value) {

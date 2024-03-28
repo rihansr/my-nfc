@@ -1,9 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:my_nfc/utils/debug.dart';
+import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
-import 'components/add_block_button.dart';
+import '../../widgets/popup_button.dart';
 import 'components/expansion_settings_tile.dart';
 import 'actions_settings.dart';
 import 'additional_settings.dart';
@@ -43,12 +44,8 @@ class _SectionSettingsState extends State<SectionSettings> {
 
   set fields(List list) {
     _fields = list;
-    widget.onUpdate?.call((() {
-      Map<String, dynamic> settings = Map.from(widget.settings);
-      settings['data'] = {};
-      settings.addEntry('data', MapEntry('fields', _fields));
-      return settings;
-    }()));
+    widget.settings.addEntry('data', MapEntry('fields', _fields));
+    widget.onUpdate?.call(widget.settings);
   }
 
   update(int i, Map<String, dynamic> data) {
@@ -61,88 +58,90 @@ class _SectionSettingsState extends State<SectionSettings> {
     List<Widget> children = _fields.mapIndexed(
       (i, e) {
         Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
+        Map<String, dynamic> blockSettings =
+            Map.from(e);
         switch (e['block']) {
           case "section-parent":
           case "section":
             return SectionSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "space":
             return SpaceSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "divider":
             return DividerSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "text":
           case "name":
             return TextSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "banner":
           case "background":
             return BackdropSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "avatar":
           case "image":
             return ImageSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "contact":
             return ContactSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "info":
             return InfoSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "publicLinks":
           case "links":
             return LinksSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "button":
             return ButtonSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "video":
             return VideoSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "additional":
             return AdditionalSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           case "actions":
             return ActionsSettings(
               key: key,
-              settings: e,
+              settings: blockSettings,
               onUpdate: (settings) => update(i, settings),
             );
           default:
@@ -151,21 +150,18 @@ class _SectionSettingsState extends State<SectionSettings> {
       },
     ).toList();
 
-    Widget? footer =
-        _fields.isEmpty || widget.settings['settings']?['primary'] == false
-            ? AddBlockButton(
-                blocks: List.unmodifiable(kAdditionalBlocks),
-                onSelected: (block) {
-                  Map<String, dynamic> test = Map.from(block);
-                  debug.print(test['data']..nullify);
-                  block.addEntry(
-                      'settings',
-                      MapEntry('dragable',
-                          widget.settings['settings']?['dragable'] ?? false));
-                  setState(() => fields = [..._fields, block]);
-                },
-              )
-            : null;
+    Widget? footer = _fields.isEmpty ||
+            widget.settings['settings']?['primary'] == false
+        ? PopupButton(
+            items: json.decode(kAdditionalBlocks),
+            label: string.addANewBlock,
+            icon: (item) => '${item['block']}'.icon,
+            name: (item) => item['label'],
+            margin: const EdgeInsets.only(left: 4, right: 28),
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+            onSelected: (item) => setState(() => fields = [..._fields, Map.from(item)]),
+          )
+        : null;
 
     return ExpansionSettingsTile(
       widget.settings,
@@ -174,7 +170,7 @@ class _SectionSettingsState extends State<SectionSettings> {
         if (!expanded) setState(() => {});
       },
       children: [
-        if (widget.settings['settings']?['dragable'] == null)
+        if (widget.settings['settings']?['dragable'] == true)
           ReorderableListView(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,

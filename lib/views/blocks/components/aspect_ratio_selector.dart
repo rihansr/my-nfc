@@ -80,12 +80,9 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
             ),
           ),
           const SizedBox(height: 12),
-          GridView(
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: _aspectRatios.length,
-              crossAxisSpacing: 8,
-            ),
+          Wrap(
+            spacing: 24,
+            runSpacing: 16,
             children: _aspectRatios.mapIndexed(
               (i, ratio) {
                 List<String> splitRatio = ratio.split(':');
@@ -99,10 +96,10 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                 return GestureDetector(
                   onTap: () {
                     selectedAspectRatio = ratio;
-                    if (!isCustom) widget.onSelected.call(ratio);
+                    isCustom ? generateRatio() : widget.onSelected.call(ratio);
                   },
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -134,7 +131,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
             ).toList(),
           ),
           if (_aspectRatio == _aspectRatios.last) ...[
-            const SizedBox(height: 4),
+            const SizedBox(height: 16),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -142,22 +139,28 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                   string.width,
                   style: theme.textTheme.bodySmall,
                 ),
+                const SizedBox(width: 8),
                 Expanded(
                   child: InputField(
                     controller: _widthController,
+                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
+                    margin: const EdgeInsets.all(0),
                     onTyping: (text) => generateRatio(),
                   ),
                 ),
-                const Spacer(),
+                const SizedBox(width: 24),
                 Text(
                   string.height,
                   style: theme.textTheme.bodySmall,
                 ),
+                const SizedBox(width: 8),
                 Expanded(
                   child: InputField(
                     controller: _heightController,
+                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
+                    margin: const EdgeInsets.all(0),
                     onTyping: (text) => generateRatio(),
                   ),
                 ),
