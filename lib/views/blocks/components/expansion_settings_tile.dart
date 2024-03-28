@@ -56,7 +56,7 @@ class ExpansionSettingsTile extends StatelessWidget {
               childrenPadding: padding,
               expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
               onExpansionChanged: onExpansionChanged,
-              maintainState: false,
+              maintainState: maintainState,
               title: Text(
                 data['label'] ?? '',
                 style: const TextStyle(

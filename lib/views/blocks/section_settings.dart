@@ -58,8 +58,7 @@ class _SectionSettingsState extends State<SectionSettings> {
     List<Widget> children = _fields.mapIndexed(
       (i, e) {
         Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
-        Map<String, dynamic> blockSettings =
-            Map.from(e);
+        Map<String, dynamic> blockSettings = Map.from(e);
         switch (e['block']) {
           case "section-parent":
           case "section":
@@ -159,7 +158,8 @@ class _SectionSettingsState extends State<SectionSettings> {
             name: (item) => item['label'],
             margin: const EdgeInsets.only(left: 4, right: 28),
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-            onSelected: (item) => setState(() => fields = [..._fields, Map.from(item)]),
+            onSelected: (item) =>
+                setState(() => fields = [..._fields, Map.from(item)]),
           )
         : null;
 

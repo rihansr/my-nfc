@@ -39,7 +39,7 @@ class SpaceSettings extends StatelessWidget {
           value: _selectedHeight,
           type: 'px',
           min: 0,
-          max: 100,
+          max: 200,
           defaultValue: 20,
           onChanged: update,
         ),

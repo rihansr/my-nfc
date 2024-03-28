@@ -52,7 +52,7 @@ List<String> kAlignments = const [
   'center',
 ];
 
-List<Color> kColors = const [
+List<Color> kColors =  [
   Colors.white,
   Colors.black,
   Colors.red,
@@ -662,7 +662,7 @@ const String kAdditionalBlocks = '''
             }
         },
         "data": {
-            "text": "",
+            "text": "Button",
             "link": "",
             "style": {
                 "border": {
@@ -675,6 +675,16 @@ const String kAdditionalBlocks = '''
                     "color": "#FFFFFFFF",
                     "fontSize": 16,
                     "fontWeight": "regular"
+                },
+                "padding": {
+                    "horizontal": 16,
+                    "vertical": 8
+                },
+                "margin": {
+                    "top": 8,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
                 }
             }
         }
