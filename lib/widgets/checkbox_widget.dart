@@ -70,12 +70,18 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                 ? Expanded(
                     child: Text(
                       widget.label!,
-                      style: widget.textStyle ?? theme.textTheme.titleMedium,
+                      style: widget.textStyle ??
+                          (widget._isExpanded
+                              ? theme.textTheme.bodySmall
+                              : theme.textTheme.titleMedium),
                     ),
                   )
                 : Text(
                     widget.label!,
-                    style: widget.textStyle ?? theme.textTheme.titleMedium,
+                    style: widget.textStyle ??
+                        (widget._isExpanded
+                            ? theme.textTheme.bodySmall
+                            : theme.textTheme.titleMedium),
                   ),
           ]
         ],

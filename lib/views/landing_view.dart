@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../shared/strings.dart';
 import '../viewmodels/design_viewmodel.dart';
 import '../widgets/base_widget.dart';
@@ -11,7 +12,7 @@ class LandingView extends StatelessWidget {
   Widget build(BuildContext context) => Builder(builder: (context) {
         ThemeData theme = Theme.of(context);
         return BaseWidget<DesignViewModel>(
-            model: DesignViewModel(context, params: params),
+            model: Provider.of<DesignViewModel>(context),
             builder: (context, controller, child) => Scaffold(
               key: controller.scaffoldKey,
               body: const Column(),

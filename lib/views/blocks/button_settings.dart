@@ -79,7 +79,7 @@ class ButtonSettings extends StatelessWidget {
       icon: Icons.add_circle_outline,
       enableBoder: true,
       onUpdate: onUpdate,
-      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
       maintainState: true,
       children: [
         InputField(
@@ -100,104 +100,109 @@ class ButtonSettings extends StatelessWidget {
             MapEntry('link', text.isEmpty ? null : text),
           ),
         ),
-        ColourPicker(
-          title: string.borderCcolor,
-          value: _selectedBorderColor,
-          colors: kColors,
-          onPick: (color) {
-            _selectedBorderColor = color;
-            update('border', MapEntry('color', color.toHex));
-          },
-        ),
-        Seekbar(
-          title: string.borderThickness,
-          type: 'px',
-          value: _selectedBorderThickness,
-          min: 0,
-          max: 100,
-          onChanged: (size) {
-            _selectedBorderThickness = size;
-            update('border', MapEntry('thickness', size));
-          },
-        ),
-        Seekbar(
-          title: string.borderRadius,
-          type: 'px',
-          value: _selectedBorderRadius,
-          min: 0,
-          max: 50,
-          onChanged: (radius) {
-            _selectedBorderRadius = radius;
-            update('border', MapEntry('radius', radius));
-          },
-        ),
-        CheckboxWidget.expand(
-          value: _fullWidth,
-          label: string.fullWidth,
-          textStyle: theme.textTheme.bodySmall,
-          onChanged: (checked) {
-            _fullWidth = checked;
-            update('additional', MapEntry('fullWidth', checked));
-          },
-        ),
-        Dropdown<String?>(
-          title: string.typography,
-          hint: string.selectOne,
-          items: [null, ...kFontFamilys],
-          value: _selectedFonFamily,
+        ExpansionSettingsTile(
+          {'label': string.buttonDesign},
+          padding: const EdgeInsets.all(0),
+          titlePadding: const EdgeInsets.all(0),
           maintainState: true,
-          itemBuilder: (p0) =>
-              Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
-          onSelected: (String? font) {
-            _selectedFonFamily = font;
-            update('text', MapEntry('typography', font));
-          },
-        ),
-        Seekbar(
-          title: string.fontSize,
-          value: _selectedFontSize,
-          min: 8,
-          max: 96,
-          onChanged: (size) {
-            _selectedFontSize = size;
-            update('text', MapEntry('fontSize', size));
-          },
-        ),
-        ColourPicker(
-          title: string.textColor,
-          value: _selectedFontColor,
-          colors: kColors,
-          onPick: (color) {
-            _selectedFontColor = color;
-            update('text', MapEntry('color', color.toHex));
-          },
-        ),
-        TabWidget(
-          title: string.fontWeight,
-          tabs: kFontWeights,
-          value: _selectedFontWeight,
-          onSelect: (weight) {
-            _selectedFontWeight = weight;
-            update('text', MapEntry('fontWeight', weight));
-          },
-        ),
-        CheckboxWidget.expand(
-          value: _openInNewTab,
-          label: string.fullWidth,
-          textStyle: theme.textTheme.bodySmall,
-          onChanged: (checked) {
-            _openInNewTab = checked;
-            update('additional', MapEntry('openInNewTab', checked));
-          },
-        ),
-        CheckboxWidget.expand(
-          value: _disabled,
-          label: string.disabled,
-          textStyle: theme.textTheme.bodySmall,
-          onChanged: (checked) {
-            _disabled = checked;
-            update('additional', MapEntry('disabled', checked));
-          },
+          children: [
+            ColourPicker(
+              title: string.borderCcolor,
+              value: _selectedBorderColor,
+              colors: kColors,
+              onPick: (color) {
+                _selectedBorderColor = color;
+                update('border', MapEntry('color', color.toHex));
+              },
+            ),
+            Seekbar(
+              title: string.borderThickness,
+              type: 'px',
+              value: _selectedBorderThickness,
+              min: 0,
+              max: 100,
+              onChanged: (size) {
+                _selectedBorderThickness = size;
+                update('border', MapEntry('thickness', size));
+              },
+            ),
+            Seekbar(
+              title: string.borderRadius,
+              type: 'px',
+              value: _selectedBorderRadius,
+              min: 0,
+              max: 50,
+              onChanged: (radius) {
+                _selectedBorderRadius = radius;
+                update('border', MapEntry('radius', radius));
+              },
+            ),
+            CheckboxWidget.expand(
+              value: _fullWidth,
+              label: string.fullWidth,
+              onChanged: (checked) {
+                _fullWidth = checked;
+                update('additional', MapEntry('fullWidth', checked));
+              },
+            ),
+            Dropdown<String?>(
+              title: string.typography,
+              hint: string.selectOne,
+              items: [null, ...kFontFamilys],
+              value: _selectedFonFamily,
+              maintainState: true,
+              itemBuilder: (p0) =>
+                  Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
+              onSelected: (String? font) {
+                _selectedFonFamily = font;
+                update('text', MapEntry('typography', font));
+              },
+            ),
+            Seekbar(
+              title: string.fontSize,
+              value: _selectedFontSize,
+              min: 8,
+              max: 96,
+              onChanged: (size) {
+                _selectedFontSize = size;
+                update('text', MapEntry('fontSize', size));
+              },
+            ),
+            ColourPicker(
+              title: string.textColor,
+              value: _selectedFontColor,
+              colors: kColors,
+              onPick: (color) {
+                _selectedFontColor = color;
+                update('text', MapEntry('color', color.toHex));
+              },
+            ),
+            TabWidget(
+              title: string.fontWeight,
+              tabs: kFontWeights,
+              value: _selectedFontWeight,
+              onSelect: (weight) {
+                _selectedFontWeight = weight;
+                update('text', MapEntry('fontWeight', weight));
+              },
+            ),
+            CheckboxWidget.expand(
+              value: _openInNewTab,
+              label: string.fullWidth,
+              onChanged: (checked) {
+                _openInNewTab = checked;
+                update('additional', MapEntry('openInNewTab', checked));
+              },
+            ),
+            CheckboxWidget.expand(
+              value: _disabled,
+              label: string.disabled,
+              onChanged: (checked) {
+                _disabled = checked;
+                update('additional', MapEntry('disabled', checked));
+              },
+            ),
+          ],
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
