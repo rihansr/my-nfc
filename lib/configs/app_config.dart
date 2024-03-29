@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,8 +29,19 @@ class AppConfig {
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
           ]),
-        rootBundle.loadString("assets/files/default_design.json").then(
-              (data) => kDefaultDesign.addAll(jsonDecode(data)),
+        rootBundle
+            .loadString("assets/files/default_blocks.json")
+            .then((data) => kDefaultBlocks = data),
+        rootBundle
+            .loadString("assets/files/additional_blocks.json")
+            .then((data) => kAdditionalBlocks = data),
+        rootBundle
+            .loadString("assets/files/social_links.json")
+            .then((data) => kSocialLinks = data),
+        rootBundle.loadString("assets/files/country_codes.json").then(
+              (data) => kCountryCodes.addAll(
+                List<Map<String, dynamic>>.from(json.decode(data)),
+              ),
             ),
         sharedPrefs.init(),
       ],

@@ -25,6 +25,7 @@ class InputField extends StatelessWidget {
   final int? maxCharacters;
   final int maxLines;
   final int? minLines;
+  final Widget? prefix;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool typeable;
@@ -85,10 +86,11 @@ class InputField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.isDense = false,
     this.isCollapsed = true,
-    this.padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+    this.padding = const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
     this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.borderFocusable = true,
     this.onTap,
+    this.prefix,
     this.prefixIcon,
     this.onAction,
     this.onTyping,
@@ -186,6 +188,7 @@ class InputField extends StatelessWidget {
                     padding.vertical,
               ),
               prefixIconColor: hintColor ?? theme.hintColor,
+              prefix: prefix,
               prefixIcon: prefixIcon,
               suffixIconConstraints: BoxConstraints(
                 minWidth: theme.iconTheme.size! + padding.left,

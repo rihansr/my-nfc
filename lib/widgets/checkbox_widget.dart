@@ -26,7 +26,7 @@ class CheckboxWidget extends StatefulWidget {
     required this.value,
     this.spacing = 8,
     this.onChanged,
-    this.margin = const EdgeInsets.all(0),
+    this.margin = const EdgeInsets.symmetric(vertical: 8),
   }) : _isExpanded = true;
 
   @override

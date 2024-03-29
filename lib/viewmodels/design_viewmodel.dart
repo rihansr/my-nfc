@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../views/tabs/design_view.dart';
 import '../views/tabs/theme_view.dart';
@@ -14,7 +16,7 @@ class DesignViewModel extends BaseViewModel {
       : _context = context,
         _params = params,
         scaffoldKey = GlobalKey<ScaffoldState>(),
-        designData = kDefaultDesign;
+        designData = jsonDecode(kDefaultBlocks);
 
   showsModalBottomSheet(int tab) => scaffoldKey.currentState?.showBottomSheet(
         (context) => DraggableScrollableSheet(

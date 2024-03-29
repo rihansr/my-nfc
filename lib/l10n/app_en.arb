@@ -120,6 +120,7 @@
     }
   },
   "fromThemeSettings": "From Theme Settings",
+  "customLabelName": "Custom Label Name",
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",

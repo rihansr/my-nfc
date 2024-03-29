@@ -32,6 +32,7 @@ class Dropdown<T> extends StatefulWidget {
   final T? value;
   final bool isExpanded;
   final bool maintainState;
+  final bool borderFocusable;
   final Function(T)? onSelected;
 
   const Dropdown({
@@ -65,8 +66,9 @@ class Dropdown<T> extends StatefulWidget {
     this.iconColor,
     this.icon,
     this.isExpanded = true,
-    this.maintainState = false,
+    this.maintainState = true,
     this.borderRadius = 3,
+    this.borderFocusable = true,
     this.bottomBorderOnly = false,
   });
 
@@ -90,7 +92,9 @@ class _DropdownState<T> extends State<Dropdown<T>> {
       width: widget.width,
       margin: widget.margin,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: widget.isExpanded
+            ? CrossAxisAlignment.stretch
+            : CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           if (widget.title?.trim().isNotEmpty ?? false)
@@ -107,22 +111,25 @@ class _DropdownState<T> extends State<Dropdown<T>> {
             ),
           Container(
             padding: widget.padding,
-            decoration: BoxDecoration(
-              borderRadius: widget.bottomBorderOnly
-                  ? null
-                  : BorderRadius.all(Radius.circular(widget.borderRadius)),
-              border: widget.bottomBorderOnly
-                  ? Border(
-                      bottom: BorderSide(
-                        color: widget.borderTint ?? theme.hintColor,
-                        width: widget.borderSize,
-                      ),
-                    )
-                  : Border.all(
-                      color: widget.borderTint ?? theme.hintColor,
-                      width: widget.borderSize,
-                    ),
-            ),
+            decoration: widget.borderFocusable
+                ? BoxDecoration(
+                    borderRadius: widget.bottomBorderOnly
+                        ? null
+                        : BorderRadius.all(
+                            Radius.circular(widget.borderRadius)),
+                    border: widget.bottomBorderOnly
+                        ? Border(
+                            bottom: BorderSide(
+                              color: widget.borderTint ?? theme.hintColor,
+                              width: widget.borderSize,
+                            ),
+                          )
+                        : Border.all(
+                            color: widget.borderTint ?? theme.hintColor,
+                            width: widget.borderSize,
+                          ),
+                  )
+                : null,
             child: DropdownButton(
               menuMaxHeight: widget.height,
               borderRadius:
@@ -146,6 +153,7 @@ class _DropdownState<T> extends State<Dropdown<T>> {
                 color: widget.fontColor,
                 fontSize: widget.fontSize,
                 fontWeight: widget.fontWeight,
+                overflow: TextOverflow.ellipsis,
               ),
               underline: const SizedBox.shrink(),
               items: widget.itemBuilder == null

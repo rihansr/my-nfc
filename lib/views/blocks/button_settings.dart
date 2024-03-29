@@ -131,11 +131,10 @@ class ButtonSettings extends StatelessWidget {
             update('border', MapEntry('radius', radius));
           },
         ),
-        CheckboxWidget(
+        CheckboxWidget.expand(
           value: _fullWidth,
           label: string.fullWidth,
           textStyle: theme.textTheme.bodySmall,
-          margin: const EdgeInsets.symmetric(vertical: 8),
           onChanged: (checked) {
             _fullWidth = checked;
             update('additional', MapEntry('fullWidth', checked));
@@ -182,21 +181,19 @@ class ButtonSettings extends StatelessWidget {
             update('text', MapEntry('fontWeight', weight));
           },
         ),
-        CheckboxWidget(
+        CheckboxWidget.expand(
           value: _openInNewTab,
           label: string.fullWidth,
           textStyle: theme.textTheme.bodySmall,
-          margin: const EdgeInsets.symmetric(vertical: 8),
           onChanged: (checked) {
             _openInNewTab = checked;
             update('additional', MapEntry('openInNewTab', checked));
           },
         ),
-        CheckboxWidget(
+        CheckboxWidget.expand(
           value: _disabled,
           label: string.disabled,
           textStyle: theme.textTheme.bodySmall,
-          margin: const EdgeInsets.symmetric(vertical: 8),
           onChanged: (checked) {
             _disabled = checked;
             update('additional', MapEntry('disabled', checked));

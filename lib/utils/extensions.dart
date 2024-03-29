@@ -67,6 +67,8 @@ extension StringExtension on String {
   get copy => Clipboard.setData(ClipboardData(text: this))
       .then((value) => style.showToast('$this ${string.copied}'.trim()));
   Color get hexColor => HexColor.fromHex(this);
+  String get camelToNormal =>
+      split(RegExp(r"(?=(?!^)[A-Z])")).join(' ').capitalizeFirstOfEach;
 }
 
 extension ContextExtension on BuildContext {
@@ -115,8 +117,6 @@ extension MapExtension on Map<String, dynamic> {
     });
   }
 }
-
-extension DynamicMapExtension on Map {}
 
 extension HexColor on Color {
   static Color fromHex(String hexString) {

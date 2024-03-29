@@ -112,8 +112,8 @@ class TextSettings extends StatelessWidget {
           items: [null, ...kFontFamilys],
           value: _selectedFonFamily,
           maintainState: true,
-          itemBuilder: (p0) =>
-              Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
+          itemBuilder: (item) =>
+              Text(item?.replaceAll('_', ' ') ?? string.fromThemeSettings),
           onSelected: (String? font) {
             _selectedFonFamily = font;
             update('text', MapEntry('typography', font));
