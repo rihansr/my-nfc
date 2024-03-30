@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../../../widgets/clipper_widget.dart';
 import '../../../widgets/glassmorphism.dart';
 
-class PopupView extends StatelessWidget {
+class ModalBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
   final List<Widget> children;
 
-  const PopupView({
+  const ModalBottomSheet({
     super.key,
     required this.scrollController,
     this.children = const [],

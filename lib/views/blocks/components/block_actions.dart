@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import '../../../shared/colors.dart';
 
-class BlockSettings extends StatefulWidget {
+class BlockActions extends StatefulWidget {
   final Map<String, dynamic>? settings;
   final Function(MapEntry<String, dynamic>)? onUpdate;
 
-  const BlockSettings({
+  const BlockActions({
     super.key,
     this.settings,
     this.onUpdate,
   });
 
   @override
-  State<BlockSettings> createState() => _BlockSettingsState();
+  State<BlockActions> createState() => _BlockActionsState();
 }
 
-class _BlockSettingsState extends State<BlockSettings> {
+class _BlockActionsState extends State<BlockActions> {
   late bool _isExpanded;
   late bool _isVisible;
   late bool _isDragable;

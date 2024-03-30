@@ -1,22 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:my_nfc/services/navigation_service.dart';
-import 'package:my_nfc/shared/constants.dart';
-import 'package:my_nfc/utils/extensions.dart';
 import 'package:provider/provider.dart';
+import '../../shared/constants.dart';
+import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/checkbox_widget.dart';
 import '../../widgets/dropdown_widget.dart';
 import 'components/expansion_settings_tile.dart';
 
 class ActionsSettings extends StatefulWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const ActionsSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   });
 
@@ -26,31 +24,86 @@ class ActionsSettings extends StatefulWidget {
 
 class _ActionsSettingsState extends State<ActionsSettings> {
   late Map<String, dynamic> additionalSettings;
-  late List<Map<String, dynamic>> socialLinks;
+  late Map<dynamic, dynamic>? primary;
+  late Map<dynamic, dynamic>? additional;
+
+  update(String key, Map<dynamic, dynamic>? data) {
+    widget.block.addEntry('data', MapEntry(key, data));
+    widget.onUpdate?.call(widget.block);
+  }
+
+  List<Map<dynamic, dynamic>> findLinks(dynamic data) {
+    List<Map<dynamic, dynamic>> links = [];
+
+    if (data is Map) {
+      data.forEach((key, value) {
+        if (key == "links") {
+          if (value is List) {
+            links.addAll(value
+                .where(
+                  (item) => links
+                      .where((element) =>
+                          item['id'] == null || '$element' == '$item')
+                      .isEmpty,
+                )
+                .map((link) => link as Map<dynamic, dynamic>));
+          }
+        } else {
+          links.addAll(findLinks(value));
+        }
+      });
+    } else if (data is List) {
+      for (var item in data) {
+        links.addAll(findLinks(item));
+      }
+    }
+
+    return links..removeWhere((element) => element['id'] == null);
+  }
 
   @override
   void initState() {
-    Map<String, dynamic> data = Provider.of<Map<String, dynamic>>(navigator.context, listen: false);
-    socialLinks = [];
+    primary = widget.block['data']?['primary'];
+    additional = widget.block['data']?['additional'];
     additionalSettings =
-        Map.from(widget.settings['data']?['advancedSettings'] ?? {});
+        Map.from(widget.block['settings']?['additional'] ?? {});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile(
-      widget.settings,
+    List<Map<dynamic, dynamic>> links = findLinks(
+        Provider.of<DesignViewModel>(context, listen: true).designData);
+
+    return ExpansionSettingsTile.settings(
+      widget.block['settings'],
       icon: Icons.system_update_alt_outlined,
-      onUpdate: widget.onUpdate,
-      padding: const EdgeInsets.fromLTRB(12, 0, 22, 12),
+      label: widget.block['label'],
       enableBoder: true,
+      onUpdate: (entry) {
+        widget.block.addEntry('settings', entry);
+        widget.onUpdate?.call(widget.block);
+      },
+      onRemove: () => widget.onUpdate?.call({}),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 12),
       children: [
-        Dropdown<Map<String, dynamic>>(
+        Dropdown<Map<dynamic, dynamic>?>(
           title: string.primaryConnectButton,
-          items: [...socialLinks, const {}],
-          value: const {},
+          items: [...links, null],
+          value: (() {
+            if (primary == null) {
+              return null;
+            } else {
+              if (links.where((element) => '$element' == '$primary').isEmpty) {
+                primary = null;
+                update('primary', null);
+                return null;
+              } else {
+                return primary;
+              }
+            }
+          }()),
           maintainState: true,
           itemBuilder: (item) => Text.rich(
             TextSpan(
@@ -58,7 +111,7 @@ class _ActionsSettingsState extends State<ActionsSettings> {
               children: [
                 WidgetSpan(
                   child: Icon(
-                    item['name']?.toString().socialIcon ??
+                    item?['name']?.toString().socialIcon ??
                         Icons.remove_circle_outline,
                     size: 16,
                     color: theme.textTheme.bodySmall?.color,
@@ -67,19 +120,36 @@ class _ActionsSettingsState extends State<ActionsSettings> {
                 ),
                 const TextSpan(text: "  "),
                 TextSpan(
-                  text: item['name'] == null
+                  text: item?['name'] == null
                       ? string.none
-                      : '${'${item['name']}'.capitalizeFirstOfEach} - ${item['id'] ?? ''}',
+                      : '${'${item!['name']}'.capitalizeFirstOfEach} - ${item['id'] ?? ''}',
                 ),
               ],
             ),
           ),
-          onSelected: (data) {},
+          onSelected: (data) {
+            primary = data;
+            update('primary', data);
+          },
         ),
-        Dropdown<Map<String, dynamic>>(
+        Dropdown<Map<dynamic, dynamic>?>(
           title: string.additionalConnectButtons,
-          items: [...json.decode(kSocialLinks), const {}],
-          value: const {},
+          items: [...links, null],
+          value: (() {
+            if (additional == null) {
+              return null;
+            } else {
+              if (links
+                  .where((element) => '$element' == '$additional')
+                  .isEmpty) {
+                additional = null;
+                update('additional', null);
+                return null;
+              } else {
+                return additional;
+              }
+            }
+          }()),
           maintainState: true,
           itemBuilder: (item) => Text.rich(
             TextSpan(
@@ -87,7 +157,7 @@ class _ActionsSettingsState extends State<ActionsSettings> {
               children: [
                 WidgetSpan(
                   child: Icon(
-                    item['name']?.toString().socialIcon ??
+                    item?['name']?.toString().socialIcon ??
                         Icons.remove_circle_outline,
                     size: 16,
                     color: theme.textTheme.bodySmall?.color,
@@ -96,16 +166,19 @@ class _ActionsSettingsState extends State<ActionsSettings> {
                 ),
                 const TextSpan(text: "  "),
                 TextSpan(
-                    text: item['name'] == null
+                    text: item?['name'] == null
                         ? string.none
-                        : '${'${item['name']}'.capitalizeFirstOfEach} - ${item['id'] ?? ''}'),
+                        : '${'${item!['name']}'.capitalizeFirstOfEach} - ${item['id'] ?? ''}'),
               ],
             ),
           ),
-          onSelected: (data) {},
+          onSelected: (data) {
+            additional = data;
+            update('additional', data);
+          },
         ),
         ExpansionSettingsTile(
-          {'label': string.advancedSettings},
+          label: string.advancedSettings,
           padding: const EdgeInsets.all(0),
           titlePadding: const EdgeInsets.all(0),
           maintainState: true,

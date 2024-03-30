@@ -10,12 +10,12 @@ import '../../widgets/input_field_widget.dart';
 import 'components/expansion_settings_tile.dart';
 
 class ContactSettings extends StatefulWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const ContactSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   });
 
@@ -28,15 +28,15 @@ class _ContactSettingsState extends State<ContactSettings> {
 
   @override
   void initState() {
-    _data = Map.from(widget.settings['data'] ?? {});
+    _data = Map.from(widget.block['data'] ?? {});
     super.initState();
   }
 
   update(String key, List value) {
     _data[key] = value;
-    widget.settings.addEntries([MapEntry('data', _data)]);
-    debug.print(json.encode(widget.settings));
-    widget.onUpdate?.call(widget.settings);
+    widget.block.addEntries([MapEntry('data', _data)]);
+    debug.print(json.encode(widget.block));
+    widget.onUpdate?.call(widget.block);
   }
 
   openCustomField(Function(String) onUpdate) => showDialog(
@@ -82,11 +82,16 @@ class _ContactSettingsState extends State<ContactSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile(
-      widget.settings,
+    return ExpansionSettingsTile.settings(
+      widget.block['settings'],
       icon: Icons.group_outlined,
+      label: widget.block['label'],
       enableBoder: true,
-      onUpdate: widget.onUpdate,
+      onUpdate: (entry) {
+        widget.block.addEntry('settings', entry);
+        widget.onUpdate?.call(widget.block);
+      },
+      onRemove: () => widget.onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(12, 0, 2, 0),
       children: _data.entries.map(
         (e) {

@@ -6,22 +6,44 @@
             "primary": false,
             "visible": true,
             "removable": true,
-            "dragable": true
+            "dragable": true,
+            "additional": {
+                "altText": "",
+                "linkTo": "",
+                "openInNewTab": true
+            }
+        },
+        "style": {
+            "background": {
+                "image": {
+                    "path": "",
+                    "style": {
+                        "size": 10,
+                        "overlayopacity": 40
+                    }
+                }
+            },
+            "alignment": {
+                "vertical": "top",
+                "horizontal": "left"
+            },
+            "overlay": {
+                "color": "#00000000",
+                "opacity": 40
+            },
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
         },
         "data": {
             "fields": [
-                {
-                    "block": "background",
-                    "label": "Background Image",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true
-                    },
-                    "data": {
-                        "path": ""
-                    }
-                },
                 {
                     "block": "text",
                     "label": "Text",
@@ -29,6 +51,18 @@
                         "primary": false,
                         "visible": true,
                         "removable": true
+                    },
+                    "style": {
+                        "padding": {
+                            "horizontal": 0,
+                            "vertical": 0
+                        },
+                        "margin": {
+                            "top": 0,
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0
+                        }
                     },
                     "data": {
                         "content": "",
@@ -39,16 +73,6 @@
                                 "color": "#FFFFFFFF",
                                 "fontWeight": "reqular",
                                 "alignment": "left"
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
                             }
                         }
                     }
@@ -61,6 +85,18 @@
                         "visible": true,
                         "removable": true
                     },
+                    "style": {
+                        "padding": {
+                            "horizontal": 0,
+                            "vertical": 0
+                        },
+                        "margin": {
+                            "top": 0,
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0
+                        }
+                    },
                     "data": {
                         "content": "",
                         "style": {
@@ -70,16 +106,6 @@
                                 "fontSize": 19,
                                 "fontWeight": "reqular",
                                 "alignment": "left"
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
                             }
                         }
                     }
@@ -97,60 +123,39 @@
                             "disabled": false
                         }
                     },
+                    "style": {
+                        "border": {
+                            "color": "#FFFFFFFF",
+                            "thickness": 1,
+                            "radius": 4
+                        },
+                        "padding": {
+                            "horizontal": 0,
+                            "vertical": 0
+                        },
+                        "margin": {
+                            "top": 0,
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0
+                        }
+                    },
                     "data": {
-                        "text": "",
+                        "label": {
+                            "text": "Button"
+                        },
                         "link": "",
                         "style": {
-                            "border": {
-                                "color": "#FFFFFFFF",
-                                "thickness": 1,
-                                "radius": 4
-                            },
                             "text": {
                                 "typography": null,
                                 "color": "#FFFFFFFF",
                                 "fontSize": 16,
                                 "fontWeight": "regular"
-                            },
-                            "padding": {
-                                "horizontal": 16,
-                                "vertical": 8
-                            },
-                            "margin": {
-                                "top": 8,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
                             }
                         }
                     }
                 }
-            ],
-            "style": {
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                },
-                "alignment": {
-                    "vertical": "top",
-                    "horizontal": "left"
-                },
-                "overlay": {
-                    "color": "#00000000",
-                    "opacity": 40
-                },
-                "additional": {
-                    "altText": "",
-                    "linkTo": "",
-                    "openInNewTab": true
-                }
-            }
+            ]
         }
     },
     {
@@ -161,6 +166,18 @@
             "visible": true,
             "removable": true
         },
+        "style": {
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        },
         "data": {
             "content": "",
             "style": {
@@ -170,16 +187,6 @@
                     "fontSize": 16,
                     "fontWeight": "reqular",
                     "alignment": "center"
-                },
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
                 }
             }
         }
@@ -192,6 +199,19 @@
             "visible": true,
             "removable": true
         },
+        "style": {
+            "aspectRatio": "21:9",
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        },
         "data": {
             "link": "",
             "configs": {
@@ -202,19 +222,6 @@
                 "allowFullScreen": false,
                 "startAt": null,
                 "endAt": null
-            },
-            "style": {
-                "aspectRatio": "21:9",
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
             }
         }
     },
@@ -226,13 +233,15 @@
             "visible": true,
             "removable": true
         },
+        "style": {
+            "margin": {
+                "top": 0,
+                "bottom": 0
+            }
+        },
         "data": {
             "style": {
-                "color": "#FFFFFFFF",
-                "margin": {
-                    "top": 0,
-                    "bottom": 0
-                }
+                "color": "#FFFFFFFF"
             }
         }
     },
@@ -245,21 +254,21 @@
             "dragable": true,
             "removable": true
         },
-        "data": {
-            "fields": [
-                {
-                    "block": "background",
-                    "label": "Background Image",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true
-                    },
-                    "data": {
-                        "path": ""
+        "style": {
+            "background": {
+                "image": {
+                    "path": "",
+                    "style": {
+                        "size": 10,
+                        "overlay": {
+                            "opacity": 40
+                        }
                     }
                 }
-            ]
+            }
+        },
+        "data": {
+            "fields": []
         }
     },
     {
@@ -272,23 +281,23 @@
             "removable": true
         },
         "style": {
-            "backgroundColor": "#00000000",
-            "fullWidth": true
+            "background": {
+                "color": "#00000000"
+            },
+            "fullWidth": true,
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
         },
         "data": {
-            "fields": [],
-            "style": {
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
+            "fields": []
         }
     },
     {
@@ -316,30 +325,32 @@
                 "disabled": false
             }
         },
+        "style": {
+            "border": {
+                "color": "#FFFFFFFF",
+                "thickness": 1,
+                "radius": 4
+            },
+            "padding": {
+                "horizontal": 16,
+                "vertical": 8
+            },
+            "margin": {
+                "top": 8,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        },
         "data": {
             "text": "Button",
             "link": "",
             "style": {
-                "border": {
-                    "color": "#FFFFFFFF",
-                    "thickness": 1,
-                    "radius": 4
-                },
                 "text": {
                     "typography": null,
                     "color": "#FFFFFFFF",
                     "fontSize": 16,
                     "fontWeight": "regular"
-                },
-                "padding": {
-                    "horizontal": 16,
-                    "vertical": 8
-                },
-                "margin": {
-                    "top": 8,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
                 }
             }
         }
@@ -413,17 +424,17 @@
         "settings": {
             "primary": false,
             "visible": true,
-            "removable": true
-        },
-        "data": {
-            "primary": "",
-            "additional": "",
-            "advancedSettings": {
+            "removable": true,
+            "advanced": {
                 "showSaveToPhoneButton": true,
                 "showPrimaryContactButton": true,
                 "showAdditionalContactButton": true,
                 "buttonFixedAtBottom": true
             }
+        },
+        "data": {
+            "primary": {},
+            "additional": {}
         }
     },
     {
@@ -435,11 +446,11 @@
             "dragable": true,
             "removable": true
         },
-        "data": {
-            "items": [],
-            "style":{
+        "style": {
             "alignment": "left"
-            }
+        },
+        "data": {
+            "items": []
         }
     },
     {

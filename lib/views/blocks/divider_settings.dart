@@ -8,37 +8,49 @@ import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class DividerSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   late Color _selectedColor;
 
   DividerSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   }) : _selectedColor =
-            settings['data']?['style']?['color']?.toString().hexColor ??
+            block['data']?['style']?['color']?.toString().hexColor ??
                 Colors.grey;
 
-  update(MapEntry<String, dynamic> value) {
-    settings['data'] ??= {};
-    (settings['data'] as Map<String, dynamic>).addEntry('style', value);
-    onUpdate?.call(settings);
+  update(String key, MapEntry<String, dynamic> value) {
+    switch (key) {
+      case "style":
+        block.addEntry(key, value);
+        return;
+      case "data":
+        block[key] ??= {};
+        (block[key] as Map<String, dynamic>).addEntry('style', value);
+        return;
+    }
+    onUpdate?.call(block);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.remove_outlined,
-      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
+      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
         Spacing(
-          margin: settings['data']?['style']?['margin'],
-          onUpdate: (spacing) => update(spacing),
+          margin: block['style']?['margin'],
+          onUpdate: (spacing) => update('style', spacing),
         ),
         ColourPicker(
           title: string.color,
@@ -46,7 +58,7 @@ class DividerSettings extends StatelessWidget {
           colors: kColors,
           onPick: (color) {
             _selectedColor = color;
-            update(MapEntry('color', color.toHex));
+            update('data', MapEntry('color', color.toHex));
           },
         ),
       ],

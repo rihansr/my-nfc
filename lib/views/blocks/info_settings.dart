@@ -4,31 +4,36 @@ import '../../widgets/input_field_widget.dart';
 import 'components/expansion_settings_tile.dart';
 
 class InfoSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const InfoSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   });
 
   update(String key, String value) {
-    settings['data'] ??= {};
-    (settings['data'] as Map<String, dynamic>)
+    block['data'] ??= {};
+    (block['data'] as Map<String, dynamic>)
         .addEntry(key, MapEntry('text', value));
-    onUpdate?.call(settings);
+    onUpdate?.call(block);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.info_outline,
-      padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
-      children: (settings['data'] as Map<String, dynamic>?)
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
+      children: (block['data'] as Map<String, dynamic>?)
               ?.entries
               .map(
                 (e) => InputField(

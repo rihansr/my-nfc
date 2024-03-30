@@ -6,33 +6,37 @@ import 'components/expansion_settings_tile.dart';
 
 // ignore: must_be_immutable
 class SpaceSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   late int _selectedHeight;
 
   SpaceSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
-  }) : _selectedHeight = settings['data']?['style']?['height'] ?? 20;
+  }) : _selectedHeight = block['data']?['style']?['height'] ?? 20;
 
-  update(int value) {
-    _selectedHeight = value;
-    settings['data'] ??= {};
-    (settings['data'] as Map<String, dynamic>)
+  update(String key, int value) {
+    block[key] ??= {};
+    (block[key] as Map<String, dynamic>)
         .addEntry('style', MapEntry('height', value));
-    onUpdate?.call(settings);
+    onUpdate?.call(block);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.zoom_out_map_outlined,
-      padding: const EdgeInsets.fromLTRB(12, 0, 22, 0),
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
+      padding: const EdgeInsets.fromLTRB(12, 0, 22, 0),
       children: [
         Seekbar(
           title: string.height,
@@ -41,7 +45,10 @@ class SpaceSettings extends StatelessWidget {
           min: 0,
           max: 200,
           defaultValue: 20,
-          onChanged: update,
+          onChanged: (value) {
+            _selectedHeight = value;
+            update('data', value);
+          },
         ),
       ],
     );

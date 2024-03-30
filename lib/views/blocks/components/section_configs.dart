@@ -4,32 +4,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../utils/extensions.dart';
-import '../../configs/app_config.dart';
-import '../../services/api.dart';
-import '../../services/server_env.dart';
-import '../../shared/constants.dart';
-import '../../shared/strings.dart';
-import '../../widgets/input_field_widget.dart';
-import '../../widgets/button_widget.dart';
-import 'components/expansion_settings_tile.dart';
-import 'components/image_view.dart';
+import '../../../utils/extensions.dart';
+import '../../../configs/app_config.dart';
+import '../../../services/api.dart';
+import '../../../services/server_env.dart';
+import '../../../shared/constants.dart';
+import '../../../shared/strings.dart';
+import '../../../widgets/input_field_widget.dart';
+import '../../../widgets/button_widget.dart';
+import 'image_view.dart';
 
-class BackdropSettings extends StatefulWidget {
+class SectionConfigs extends StatefulWidget {
   final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const BackdropSettings({
+  const SectionConfigs(
+    this.settings, {
     super.key,
-    required this.settings,
     this.onUpdate,
   });
 
   @override
-  State<BackdropSettings> createState() => _BackdropSettingsState();
+  State<SectionConfigs> createState() => _SectionConfigsState();
 }
 
-class _BackdropSettingsState extends State<BackdropSettings> {
+class _SectionConfigsState extends State<SectionConfigs> {
   late TextEditingController searchController;
   Timer? _debounce;
   int _page = 1;
@@ -39,7 +38,9 @@ class _BackdropSettingsState extends State<BackdropSettings> {
 
   @override
   void initState() {
-    String path = widget.settings['data']?['path']?.toString().trim() ?? '';
+    String path =
+        widget.settings['background']?['image']?['path']?.toString().trim() ??
+            '';
     _imagePath = path.isEmpty ? null : path;
 
     searchController = TextEditingController();
@@ -94,29 +95,28 @@ class _BackdropSettingsState extends State<BackdropSettings> {
 
   set imagePath(String? image) {
     setState(() => _imagePath = image);
-    widget.settings.addEntry('data', MapEntry('path', image));
+    Map<String, dynamic> background =
+        Map<String, dynamic>.from(widget.settings['background'] ??= {});
+    background.addEntry('image', MapEntry('path', image));
+    widget.settings['background'] = background;
     widget.onUpdate?.call(widget.settings);
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile(
-      widget.settings,
-      icon: Icons.image_outlined,
-      padding: EdgeInsets.fromLTRB(
-          12, widget.settings['label'] == null ? 4 : 18, 22, 18),
-      enableBoder: true,
-      onUpdate: widget.onUpdate,
+    return Column(
       children: [
         _imagePath != null
             ? ImageView(
                 path: _imagePath!,
                 fit: BoxFit.cover,
-                style: widget.settings['data']?['style'],
+                style: widget.settings['background']?['image']?['style'],
                 onStyleChange: (data) {
-                  widget.settings['data'] ??= {};
-                  (widget.settings['data'] as Map<String, dynamic>)
+                  widget.settings['background'] ??= {};
+                  widget.settings['background']['image'] ??= {};
+                  (widget.settings['background']['image']
+                          as Map<String, dynamic>)
                       .addEntry('style', data);
                   widget.onUpdate?.call(widget.settings);
                 },

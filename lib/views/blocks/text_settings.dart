@@ -12,7 +12,7 @@ import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class TextSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   late String? _selectedFonFamily;
@@ -23,23 +23,22 @@ class TextSettings extends StatelessWidget {
 
   TextSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
-  })  : 
-        _selectedFonFamily = settings['data']?['style']?['text']?['typography'],
-        _selectedFontSize =
-            settings['data']?['style']?['text']?['fontSize'] ?? 12,
+  })  : _selectedFonFamily = block['data']?['style']?['text']?['typography'],
+        _selectedFontSize = block['data']?['style']?['text']?['fontSize'] ?? 12,
         _selectedFontColor =
-            settings['data']?['style']?['text']?['color']?.toString().hexColor,
+            block['data']?['style']?['text']?['color']?.toString().hexColor,
         _selectedFontWeight =
-            settings['data']?['style']?['text']?['fontWeight'] ?? 'regular',
+            block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
         _selectedAlignment =
-            settings['data']?['style']?['text']?['alignment'] ?? 'left';
+            block['data']?['style']?['text']?['alignment'] ?? 'left';
 
   update(String key, MapEntry<String, dynamic> value) {
-    Map<String, dynamic> settings = Map.from(this.settings);
+    Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
+      case 'style':
         settings.addEntry(key, value);
       case 'text':
         settings['data'] ??= {};
@@ -50,23 +49,29 @@ class TextSettings extends StatelessWidget {
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
     }
-   onUpdate?.call(settings);
+    onUpdate?.call(settings);
   }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.title,
-      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
       maintainState: true,
+      padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
-        ...(settings['block'] == 'name'
+        ...(block['block'] == 'name'
             ? [
                 InputField(
-                  controller: TextEditingController(text: settings['data']?['name']?['first']),
+                  controller: TextEditingController(
+                      text: block['data']?['name']?['first']),
                   title: string.firstName,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
@@ -75,7 +80,8 @@ class TextSettings extends StatelessWidget {
                   ),
                 ),
                 InputField(
-                  controller: TextEditingController(text: settings['data']?['name']?['middle']),
+                  controller: TextEditingController(
+                      text: block['data']?['name']?['middle']),
                   title: string.middleName,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
@@ -84,7 +90,8 @@ class TextSettings extends StatelessWidget {
                   ),
                 ),
                 InputField(
-                  controller: TextEditingController(text: settings['data']?['name']?['last']),
+                  controller: TextEditingController(
+                      text: block['data']?['name']?['last']),
                   title: string.lastName,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
@@ -95,7 +102,8 @@ class TextSettings extends StatelessWidget {
               ]
             : [
                 InputField(
-                  controller: TextEditingController(text: settings['data']?['content']),
+                  controller:
+                      TextEditingController(text: block['data']?['content']),
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
@@ -158,8 +166,8 @@ class TextSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: settings['data']?['style']?['padding'],
-          margin: settings['data']?['style']?['margin'],
+          padding: block['style']?['padding'],
+          margin: block['style']?['margin'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

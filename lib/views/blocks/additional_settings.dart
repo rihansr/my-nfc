@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
+import '../../utils/extensions.dart';
 import 'components/expansion_settings_tile.dart';
 
 class AdditionalSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const AdditionalSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.playlist_add_outlined,
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
       children: const [],
     );
   }

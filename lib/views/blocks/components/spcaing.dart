@@ -33,7 +33,7 @@ class Spacing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
-      title == null ? {} : {'label': string.paddingAndMarginSettings},
+      label: string.paddingAndMarginSettings,
       padding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),
       children: [

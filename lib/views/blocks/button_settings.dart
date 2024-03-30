@@ -13,7 +13,7 @@ import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class ButtonSettings extends StatelessWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   late Color? _selectedBorderColor;
@@ -29,41 +29,46 @@ class ButtonSettings extends StatelessWidget {
 
   ButtonSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
-  })  : _selectedBorderColor = settings['data']?['style']?['border']?['color']
-            ?.toString()
-            .hexColor,
+  })  : _selectedBorderColor =
+            block['data']?['style']?['border']?['color']?.toString().hexColor,
         _selectedBorderThickness =
-            settings['data']?['style']?['border']?['thickness'] ?? 1,
+            block['data']?['style']?['border']?['thickness'] ?? 1,
         _selectedBorderRadius =
-            settings['data']?['style']?['border']?['radius'] ?? 4,
-        _fullWidth = settings['settings']?['additional']?['fullWidth'] ?? false,
-        _selectedFonFamily = settings['data']?['style']?['text']?['typography'],
+            block['data']?['style']?['border']?['radius'] ?? 4,
+        _fullWidth = block['settings']?['additional']?['fullWidth'] ?? false,
+        _selectedFonFamily = block['data']?['style']?['text']?['typography'],
         _selectedFontColor =
-            settings['data']?['style']?['text']?['color']?.toString().hexColor,
-        _selectedFontSize =
-            settings['data']?['style']?['text']?['fontSize'] ?? 16,
+            block['data']?['style']?['text']?['color']?.toString().hexColor,
+        _selectedFontSize = block['data']?['style']?['text']?['fontSize'] ?? 16,
         _selectedFontWeight =
-            settings['data']?['style']?['text']?['fontWeight'] ?? 'regular',
+            block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
         _openInNewTab =
-            settings['settings']?['additional']?['openInNewTab'] ?? true,
-        _disabled = settings['settings']?['additional']?['disabled'] ?? false;
+            block['settings']?['additional']?['openInNewTab'] ?? true,
+        _disabled = block['settings']?['additional']?['disabled'] ?? false;
 
   update(String key, MapEntry<String, dynamic> value) {
-    Map<String, dynamic> settings = Map.from(this.settings);
+    Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
+      case 'style':
         settings.addEntry(key, value);
+        return;
       case 'border':
+        settings['style'] ??= {};
+        (settings['style'] as Map<String, dynamic>).addEntry(key, value);
+        return;
       case 'text':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
         (settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
+        return;
       case 'additional':
         settings['settings'] ??= {};
         (settings['settings'] as Map<String, dynamic>).addEntry(key, value);
+        return;
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -73,27 +78,31 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile(
-      settings,
+    return ExpansionSettingsTile.settings(
+      block['settings'],
       icon: Icons.add_circle_outline,
+      label: block['label'],
       enableBoder: true,
-      onUpdate: onUpdate,
+      onUpdate: (entry) {
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
+      },
+      onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
       maintainState: true,
       children: [
         InputField(
-          controller: TextEditingController(text: settings['data']?['text']),
+          controller: TextEditingController(text: block['data']?['text']),
           title: string.buttonText,
           textCapitalization: TextCapitalization.sentences,
           maxLines: 2,
           onTyping: (text) => update(
-            'data',
+            'label',
             MapEntry('text', text.isEmpty ? null : text),
           ),
         ),
         InputField(
-          controller: TextEditingController(text: settings['data']?['link']),
+          controller: TextEditingController(text: block['data']?['link']),
           title: string.linkTo,
           onTyping: (text) => update(
             'data',
@@ -101,7 +110,7 @@ class ButtonSettings extends StatelessWidget {
           ),
         ),
         ExpansionSettingsTile(
-          {'label': string.buttonDesign},
+          label: string.buttonDesign,
           padding: const EdgeInsets.all(0),
           titlePadding: const EdgeInsets.all(0),
           maintainState: true,
@@ -206,8 +215,8 @@ class ButtonSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: settings['data']?['style']?['padding'],
-          margin: settings['data']?['style']?['margin'],
+          padding: block['data']?['style']?['padding'],
+          margin: block['data']?['style']?['margin'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

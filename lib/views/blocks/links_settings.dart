@@ -10,12 +10,12 @@ import '../../widgets/popup_button.dart';
 import 'components/expansion_settings_tile.dart';
 
 class LinksSettings extends StatefulWidget {
-  final Map<String, dynamic> settings;
+  final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const LinksSettings({
     super.key,
-    required this.settings,
+    required this.block,
     this.onUpdate,
   });
 
@@ -28,24 +28,29 @@ class _LinksSettingsState extends State<LinksSettings> {
 
   @override
   void initState() {
-    _links = widget.settings['data']?['links'] ?? [];
+    _links = widget.block['data']?['links'] ?? [];
     super.initState();
   }
 
   set links(List list) {
     _links = list;
-    widget.settings.addEntry('data', MapEntry('links', list));
-    widget.onUpdate?.call(widget.settings);
+    widget.block.addEntry('data', MapEntry('links', list));
+    widget.onUpdate?.call(widget.block);
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile(
-      widget.settings,
+    return ExpansionSettingsTile.settings(
+      widget.block['settings'],
       icon: Icons.group_outlined,
+      label: widget.block['label'],
       enableBoder: true,
-      onUpdate: widget.onUpdate,
+      onUpdate: (entry) {
+        widget.block.addEntry('settings', entry);
+        widget.onUpdate?.call(widget.block);
+      },
+      onRemove: () => widget.onUpdate?.call({}),
       children: [
         ReorderableListView(
           physics: const NeverScrollableScrollPhysics(),
@@ -128,7 +133,7 @@ class _LinksSettingsState extends State<LinksSettings> {
             },
           ).toList(),
           onReorder: (i, j) {
-            if (widget.settings['settings']?['dragable'] != true) return;
+            if (widget.block['settings']?['dragable'] != true) return;
             if (i < j) j--;
             final item = _links.removeAt(i);
             _links.insert(j, item);

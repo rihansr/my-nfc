@@ -162,7 +162,7 @@ extension IconExtensions on String {
         return Icons.call_outlined;
       case "info":
         return Icons.info;
-      case "publicLinks":
+      case "links-public":
       case "links":
         return Icons.group_outlined;
       case "button":

@@ -17,7 +17,7 @@ class VideoConfigs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionSettingsTile(
-      {'label': string.videoSetting},
+      label: string.videoSetting,
       titlePadding: const EdgeInsets.all(0),
       padding: const EdgeInsets.fromLTRB(0, 0, 22, 8),
       children: [

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../views/tabs/design_view.dart';
 import '../views/tabs/theme_view.dart';
@@ -22,16 +21,12 @@ class DesignViewModel extends BaseViewModel {
           minChildSize: 0,
           maxChildSize: .7,
           expand: true,
-          builder: (context, scrollController) {
+          builder: (_, scrollController) {
             switch (tab) {
               case 0:
-                return DesignView(
-                  scrollController: scrollController,
-                );
+                return DesignView(scrollController: scrollController);
               case 1:
-                return ThemeView(
-                  scrollController: scrollController,
-                );
+                return ThemeView(scrollController: scrollController);
               default:
                 return const SizedBox.shrink();
             }

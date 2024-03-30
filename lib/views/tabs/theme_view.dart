@@ -9,9 +9,8 @@ class ThemeView extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) =>
-   PopupView(
-          scrollController: scrollController,
-          children: const [],
-        );
+  Widget build(BuildContext context) => ModalBottomSheet(
+        scrollController: scrollController,
+        children: const [],
+      );
 }
