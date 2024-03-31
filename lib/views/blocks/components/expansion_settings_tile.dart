@@ -57,7 +57,7 @@ class ExpansionSettingsTile extends StatelessWidget {
       horizontalTitleGap: 5.0,
       minLeadingWidth: 0,
       child: ExpansionTile(
-        key: key,
+        key: Key('$key/expansion_tile'),
         shape: enableBoder
             ? Border(
                 left: BorderSide(color: theme.colorScheme.primary),

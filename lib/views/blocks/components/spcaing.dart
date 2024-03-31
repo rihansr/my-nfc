@@ -36,6 +36,7 @@ class Spacing extends StatelessWidget {
       label: string.paddingAndMarginSettings,
       padding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),
+      maintainState: true,
       children: [
         if (padding?.containsKey('horizontal') ?? false)
           Seekbar(

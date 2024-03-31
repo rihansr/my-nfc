@@ -1,6 +1,6 @@
 {
     "basicInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Basic Information",
         "settings": {
             "primary": true,
@@ -23,9 +23,7 @@
                                 "path": "",
                                 "style": {
                                     "size": 10,
-                                    "overlay": {
-                                        "opacity": 40
-                                    }
+                                    "overlayOpacity": 40
                                 }
                             }
                         }
@@ -254,7 +252,7 @@
         }
     },
     "profileInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Profile Information",
         "settings": {
             "primary": true,
@@ -272,13 +270,7 @@
                         "dragable": true
                     },
                     "data": {
-                        "links": [
-                            {
-                                "name": "telegram",
-                                "link": "t.me/",
-                                "id": "y"
-                            }
-                        ]
+                        "links": []
                     }
                 },
                 {
@@ -508,7 +500,7 @@
         }
     },
     "additionalInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Additional Information",
         "settings": {
             "primary": false,
@@ -516,11 +508,46 @@
             "dragable": true
         },
         "data": {
-            "fields": []
+            "fields": [
+                {
+                    "block": "video",
+                    "label": "Online Video",
+                    "settings": {
+                        "primary": false,
+                        "visible": true,
+                        "removable": true
+                    },
+                    "style": {
+                        "aspectRatio": "9:16",
+                        "padding": {
+                            "horizontal": 31,
+                            "vertical": 34
+                        },
+                        "margin": {
+                            "top": 32,
+                            "bottom": 40,
+                            "left": 32,
+                            "right": 41
+                        }
+                    },
+                    "data": {
+                        "link": "Hhhh",
+                        "configs": {
+                            "autoPlay": true,
+                            "loop": true,
+                            "showControls": true,
+                            "mute": true,
+                            "allowFullScreen": true,
+                            "startAt": "89:89:98",
+                            "endAt": "89:88:90"
+                        }
+                    }
+                }
+            ]
         }
     },
     "footer": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Footer",
         "settings": {
             "primary": true,
@@ -543,11 +570,7 @@
                         }
                     },
                     "data": {
-                        "primary": {
-                            "name": "telegram",
-                            "link": "t.me/",
-                            "id": "y"
-                        },
+                        "primary": null,
                         "additional": null
                     }
                 }

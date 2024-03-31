@@ -37,6 +37,7 @@ class _ImageSettingsState extends State<ImageSettings> {
     ThemeData theme = Theme.of(context);
     return ExpansionSettingsTile.settings(
       widget.block['settings'],
+      key: Key('$widget.key'),
       icon: widget.block['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,

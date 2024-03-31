@@ -32,11 +32,9 @@ class ButtonSettings extends StatelessWidget {
     required this.block,
     this.onUpdate,
   })  : _selectedBorderColor =
-            block['data']?['style']?['border']?['color']?.toString().hexColor,
-        _selectedBorderThickness =
-            block['data']?['style']?['border']?['thickness'] ?? 1,
-        _selectedBorderRadius =
-            block['data']?['style']?['border']?['radius'] ?? 4,
+            block['style']?['border']?['color']?.toString().hexColor,
+        _selectedBorderThickness = block['style']?['border']?['thickness'] ?? 1,
+        _selectedBorderRadius = block['style']?['border']?['radius'] ?? 4,
         _fullWidth = block['settings']?['additional']?['fullWidth'] ?? false,
         _selectedFonFamily = block['data']?['style']?['text']?['typography'],
         _selectedFontColor =
@@ -54,21 +52,17 @@ class ButtonSettings extends StatelessWidget {
       case 'data':
       case 'style':
         settings.addEntry(key, value);
-        return;
       case 'border':
         settings['style'] ??= {};
         (settings['style'] as Map<String, dynamic>).addEntry(key, value);
-        return;
       case 'text':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
         (settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
-        return;
       case 'additional':
         settings['settings'] ??= {};
         (settings['settings'] as Map<String, dynamic>).addEntry(key, value);
-        return;
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -80,6 +74,7 @@ class ButtonSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.add_circle_outline,
       label: block['label'],
       enableBoder: true,
@@ -92,7 +87,8 @@ class ButtonSettings extends StatelessWidget {
       maintainState: true,
       children: [
         InputField(
-          controller: TextEditingController(text: block['data']?['text']),
+          controller:
+              TextEditingController(text: block['data']?['label']?['text']),
           title: string.buttonText,
           textCapitalization: TextCapitalization.sentences,
           maxLines: 2,
@@ -215,8 +211,8 @@ class ButtonSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: block['data']?['style']?['padding'],
-          margin: block['data']?['style']?['margin'],
+          padding: block['style']?['padding'],
+          margin: block['style']?['margin'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

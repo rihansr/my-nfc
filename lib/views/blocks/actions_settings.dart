@@ -78,6 +78,7 @@ class _ActionsSettingsState extends State<ActionsSettings> {
 
     return ExpansionSettingsTile.settings(
       widget.block['settings'],
+      key: Key('${widget.key}'),
       icon: Icons.system_update_alt_outlined,
       label: widget.block['label'],
       enableBoder: true,

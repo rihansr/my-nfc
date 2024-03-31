@@ -56,6 +56,7 @@ class TextSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.title,
       label: block['label'],
       enableBoder: true,
@@ -157,7 +158,7 @@ class TextSettings extends StatelessWidget {
         ),
         TabWidget(
           title: string.alignment,
-          tabs: kAlignments,
+          tabs: kHorizontalAlignments,
           value: _selectedAlignment,
           onSelect: (alignment) {
             _selectedAlignment = alignment;

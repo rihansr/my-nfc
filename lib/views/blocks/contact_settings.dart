@@ -84,6 +84,7 @@ class _ContactSettingsState extends State<ContactSettings> {
     ThemeData theme = Theme.of(context);
     return ExpansionSettingsTile.settings(
       widget.block['settings'],
+      key: Key('${widget.key}'),
       icon: Icons.group_outlined,
       label: widget.block['label'],
       enableBoder: true,

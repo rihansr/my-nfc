@@ -16,6 +16,7 @@ class AdditionalSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.playlist_add_outlined,
       label: block['label'],
       enableBoder: true,

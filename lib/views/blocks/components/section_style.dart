@@ -10,25 +10,110 @@ import '../../../services/api.dart';
 import '../../../services/server_env.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';
+import '../../../widgets/colour_picker_widget.dart';
 import '../../../widgets/input_field_widget.dart';
 import '../../../widgets/button_widget.dart';
+import '../../../widgets/seekbar_widget.dart';
+import '../../../widgets/tab_widget.dart';
 import 'image_view.dart';
 
-class SectionConfigs extends StatefulWidget {
+class SectionStyle extends StatelessWidget {
+  final Map<String, dynamic> style;
+  final Function(Map<String, dynamic>)? onUpdate;
+
+  late final String? _selectedVerticalAlignment;
+  late final String? _selectedHorizontalAlignment;
+  late final Color? _selectedOverlayColor;
+  late final int _selectedOverlayOpacity;
+
+  SectionStyle(
+    this.style, {
+    super.key,
+    this.onUpdate,
+  })  : _selectedVerticalAlignment = style['alignment']?['vertical'],
+        _selectedHorizontalAlignment = style['alignment']?['horizontal'],
+        _selectedOverlayColor = style['overlay']?['color']?.toString().hexColor,
+        _selectedOverlayOpacity = style['overlay']?['opacity'] ?? 0;
+
+  update(String key, MapEntry<String, dynamic> entry) {
+    Map<String, dynamic> style = Map<String, dynamic>.from(this.style);
+    style.addEntry(key, entry);
+    onUpdate?.call(style);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        if ((style['background'] as Map?)?.containsKey('image') ?? false)
+          _BackgroundImage(
+            style['background']?['image'] ?? {},
+            onUpdate: (map) {
+              style['background']?['image'] = map;
+              onUpdate?.call(style);
+            },
+          ),
+        if (style.containsKey('alignment')) ...[
+          TabWidget(
+            title: string.contentVerticalAlignment,
+            tabs: kVerticalAlignments,
+            value: _selectedVerticalAlignment,
+            onSelect: (alignment) {
+              _selectedVerticalAlignment = alignment;
+              update('alignment', MapEntry('vertical', alignment));
+            },
+          ),
+          TabWidget(
+            title: string.contentHorizontalAlignment,
+            tabs: kHorizontalAlignments,
+            value: _selectedHorizontalAlignment,
+            onSelect: (alignment) {
+              _selectedHorizontalAlignment = alignment;
+              update('alignment', MapEntry('horizontal', alignment));
+            },
+          ),
+        ],
+        if (style.containsKey('overlay')) ...[
+          ColourPicker(
+            title: string.overlayColor,
+            value: _selectedOverlayColor,
+            colors: kColors,
+            onPick: (color) {
+              _selectedOverlayColor = color;
+              update('overlay', MapEntry('color', color.toHex));
+            },
+          ),
+          Seekbar(
+            title: string.overlayOpacity,
+            value: _selectedOverlayOpacity,
+            type: '%',
+            min: 0,
+            max: 100,
+            onChanged: (opacity) {
+              _selectedOverlayOpacity = opacity;
+              update('overlay', MapEntry('opacity', opacity));
+            },
+          ),
+        ]
+      ],
+    );
+  }
+}
+
+class _BackgroundImage extends StatefulWidget {
   final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const SectionConfigs(
+  const _BackgroundImage(
     this.settings, {
-    super.key,
     this.onUpdate,
   });
 
   @override
-  State<SectionConfigs> createState() => _SectionConfigsState();
+  State<_BackgroundImage> createState() => _BackgroundImageState();
 }
 
-class _SectionConfigsState extends State<SectionConfigs> {
+class _BackgroundImageState extends State<_BackgroundImage> {
   late TextEditingController searchController;
   Timer? _debounce;
   int _page = 1;
@@ -38,9 +123,7 @@ class _SectionConfigsState extends State<SectionConfigs> {
 
   @override
   void initState() {
-    String path =
-        widget.settings['background']?['image']?['path']?.toString().trim() ??
-            '';
+    String path = widget.settings['path']?.toString().trim() ?? '';
     _imagePath = path.isEmpty ? null : path;
 
     searchController = TextEditingController();
@@ -95,10 +178,7 @@ class _SectionConfigsState extends State<SectionConfigs> {
 
   set imagePath(String? image) {
     setState(() => _imagePath = image);
-    Map<String, dynamic> background =
-        Map<String, dynamic>.from(widget.settings['background'] ??= {});
-    background.addEntry('image', MapEntry('path', image));
-    widget.settings['background'] = background;
+    widget.settings['path'] = image;
     widget.onUpdate?.call(widget.settings);
   }
 
@@ -111,13 +191,9 @@ class _SectionConfigsState extends State<SectionConfigs> {
             ? ImageView(
                 path: _imagePath!,
                 fit: BoxFit.cover,
-                style: widget.settings['background']?['image']?['style'],
+                style: widget.settings['style'],
                 onStyleChange: (data) {
-                  widget.settings['background'] ??= {};
-                  widget.settings['background']['image'] ??= {};
-                  (widget.settings['background']['image']
-                          as Map<String, dynamic>)
-                      .addEntry('style', data);
+                  widget.settings.addEntry('style', data);
                   widget.onUpdate?.call(widget.settings);
                 },
                 onRemove: () => imagePath = null,
@@ -143,9 +219,9 @@ class _SectionConfigsState extends State<SectionConfigs> {
                     margin: const EdgeInsets.all(0),
                     radius: 6,
                     onPressed: () {
-                      extension.pickPhoto(ImageSource.gallery).then((path) {
-                        imagePath = path;
-                      });
+                      extension
+                          .pickPhoto(ImageSource.gallery)
+                          .then((path) => imagePath = path);
                     },
                   )
                 ],

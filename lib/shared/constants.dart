@@ -51,11 +51,16 @@ List<String> kFontWeights = const [
   'bold',
   'extra bold',
 ];
-
-List<String> kAlignments = const [
-  'left',
-  'right',
+List<String> kVerticalAlignments = const [
+  'top',
   'center',
+  'bottom',
+];
+
+List<String> kHorizontalAlignments = const [
+  'left',
+  'center',
+  'right',
 ];
 
 List<Color> kColors = [
@@ -147,7 +152,6 @@ final Uint8List kTransparentImage = Uint8List.fromList(<int>[
 extension IconExtensions on String {
   IconData get icon {
     switch (this) {
-      case "section-parent":
       case "section":
         return Icons.view_agenda;
       case "space":

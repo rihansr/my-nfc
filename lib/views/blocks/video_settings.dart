@@ -22,7 +22,6 @@ class VideoSettings extends StatelessWidget {
       case 'data':
       case 'style':
         block.addEntry(key, value);
-        block.addEntry(key, value);
       default:
         block['data'] ??= {};
         (block['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -34,9 +33,11 @@ class VideoSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.video_library_outlined,
       label: block['label'],
       enableBoder: true,
+      maintainState: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);
         onUpdate?.call(block);

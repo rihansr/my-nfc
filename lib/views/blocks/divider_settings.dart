@@ -25,11 +25,9 @@ class DividerSettings extends StatelessWidget {
     switch (key) {
       case "style":
         block.addEntry(key, value);
-        return;
-      case "data":
-        block[key] ??= {};
-        (block[key] as Map<String, dynamic>).addEntry('style', value);
-        return;
+      default:
+        block['data'] ??= {};
+        (block['data'] as Map<String, dynamic>).addEntry('style', value);
     }
     onUpdate?.call(block);
   }
@@ -38,6 +36,7 @@ class DividerSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.remove_outlined,
       label: block['label'],
       enableBoder: true,

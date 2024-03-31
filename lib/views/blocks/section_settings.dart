@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:my_nfc/utils/debug.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
@@ -10,7 +9,7 @@ import 'components/expansion_settings_tile.dart';
 import 'actions_settings.dart';
 import 'additional_settings.dart';
 import 'button_settings.dart';
-import 'components/section_configs.dart';
+import 'components/section_style.dart';
 import 'contact_settings.dart';
 import 'divider_settings.dart';
 import 'image_settings.dart';
@@ -61,7 +60,6 @@ class _SectionSettingsState extends State<SectionSettings> {
         Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
         Map<String, dynamic> block = Map.from(e);
         switch (e['block']) {
-          case "section-parent":
           case "section":
             return SectionSettings(
               key: key,
@@ -158,8 +156,8 @@ class _SectionSettingsState extends State<SectionSettings> {
         : null;
 
     return ExpansionSettingsTile.settings(
-      key: widget.key,
       widget.block['settings'],
+      key: Key('${widget.key}'),
       label: widget.block['label'],
       onUpdate: (entry) {
         widget.block.addEntry('settings', entry);
@@ -170,7 +168,7 @@ class _SectionSettingsState extends State<SectionSettings> {
         if (!expanded) setState(() => {});
       },
       child: widget.block.containsKey('style')
-          ? SectionConfigs(
+          ? SectionStyle(
               widget.block['style'],
               onUpdate: (settings) {
                 widget.block['style'] = settings;

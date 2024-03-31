@@ -24,6 +24,7 @@ class InfoSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionSettingsTile.settings(
       block['settings'],
+      key: Key('$key'),
       icon: Icons.info_outline,
       label: block['label'],
       enableBoder: true,

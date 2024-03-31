@@ -1,6 +1,6 @@
 {
     "basicInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Basic Information",
         "settings": {
             "primary": true,
@@ -23,10 +23,8 @@
                                 "path": "",
                                 "style": {
                                     "size": 10,
-                                    "overlay": {
-                                        "opacity": 40
-                                    }
-                                }
+                                    "overlayOpacity": 40
+                                } 
                             }
                         }
                     },
@@ -254,7 +252,7 @@
         }
     },
     "profileInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Profile Information",
         "settings": {
             "primary": true,
@@ -502,7 +500,7 @@
         }
     },
     "additionalInformation": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Additional Information",
         "settings": {
             "primary": false,
@@ -514,7 +512,7 @@
         }
     },
     "footer": {
-        "block": "section-parent",
+        "block": "section",
         "label": "Footer",
         "settings": {
             "primary": true,

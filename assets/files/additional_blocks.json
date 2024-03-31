@@ -19,7 +19,7 @@
                     "path": "",
                     "style": {
                         "size": 10,
-                        "overlayopacity": 40
+                        "overlayOpacity": 40
                     }
                 }
             },
@@ -260,9 +260,7 @@
                     "path": "",
                     "style": {
                         "size": 10,
-                        "overlay": {
-                            "opacity": 40
-                        }
+                        "overlayOpacity": 40
                     }
                 }
             }
@@ -343,7 +341,9 @@
             }
         },
         "data": {
-            "text": "Button",
+            "label": {
+                "text": "Button"
+            },
             "link": "",
             "style": {
                 "text": {
