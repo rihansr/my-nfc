@@ -9,7 +9,6 @@ class Seekbar extends StatefulWidget {
   final TextAlign titleAlign;
   final EdgeInsets titleSpacing;
   final EdgeInsets margin;
-  final EdgeInsets padding;
   final num min;
   final num? defaultValue;
   final num value;
@@ -41,10 +40,6 @@ class Seekbar extends StatefulWidget {
             (defaultValue == null || !showCount
                 ? const EdgeInsets.symmetric(vertical: 12)
                 : const EdgeInsets.symmetric(vertical: 8)),
-        padding = margin ??
-            (defaultValue == null || !showCount
-                ? const EdgeInsets.symmetric(vertical: 8)
-                : const EdgeInsets.only(top: 6, bottom: 8)),
         defaultValue = defaultValue == null
             ? null
             : defaultValue < min
@@ -126,8 +121,8 @@ class _SeekbarState extends State<Seekbar> {
                 style: titleStyle,
               ),
             ),
-          Padding(
-            padding: widget.padding,
+          Transform.scale(
+            scale: 1.075,
             child: Slider(
               value: value,
               min: widget.min.toDouble(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/extensions.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 
 class AdditionalSettings extends StatelessWidget {
   final Map<String, dynamic> block;
@@ -14,12 +14,12 @@ class AdditionalSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.playlist_add_outlined,
       label: block['label'],
-      enableBoder: true,
+      enableBorder: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);
         onUpdate?.call(block);

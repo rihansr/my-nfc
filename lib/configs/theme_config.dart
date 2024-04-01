@@ -243,7 +243,7 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       inactiveTrackColor: colorPalette.hint,
       trackHeight: 1,
       thumbColor: colorPalette.primary,
-      overlayShape: SliderComponentShape.noOverlay,
+      overlayShape: const RoundSliderOverlayShape(overlayRadius: 18.0),
       thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 4.5),
       valueIndicatorColor: colorPalette.primary,
     ),

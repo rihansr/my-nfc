@@ -4,7 +4,8 @@
         "label": "Basic Information",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [
@@ -15,7 +16,8 @@
                         "primary": true,
                         "visible": true,
                         "dragable": false,
-                        "removable": false
+                        "removable": false,
+                        "expandConfigs": true 
                     },
                     "style": {
                         "background": {
@@ -74,11 +76,6 @@
                         "visible": true,
                         "dragable": false,
                         "removable": false
-                    },
-                    "style": {
-                        "background": {
-                            "color": "#00000000"
-                        }
                     },
                     "data": {
                         "fields": [
@@ -256,7 +253,8 @@
         "label": "Profile Information",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [
@@ -408,7 +406,9 @@
                         "dragable": false
                     },
                     "style": {
-                        "backgroundColor": "#00000000",
+                        "background": {
+                            "color": "#00000000"
+                        },
                         "fullWidth": true
                     },
                     "data": {
@@ -505,6 +505,7 @@
         "settings": {
             "primary": false,
             "removable": false,
+            "hideControllers": true,
             "dragable": true
         },
         "data": {
@@ -516,7 +517,8 @@
         "label": "Footer",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [

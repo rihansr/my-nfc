@@ -3,7 +3,7 @@ import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/colour_picker_widget.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -34,12 +34,12 @@ class DividerSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.remove_outlined,
       label: block['label'],
-      enableBoder: true,
+      enableBorder: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);
         onUpdate?.call(block);

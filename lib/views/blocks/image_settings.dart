@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
@@ -35,14 +35,14 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       widget.block['settings'],
       key: Key('$widget.key'),
       icon: widget.block['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
       label: widget.block['label'],
-      enableBoder: true,
+      enableBorder: true,
       onUpdate: (entry) {
         widget.block.addEntry('settings', entry);
         widget.onUpdate?.call(widget.block);

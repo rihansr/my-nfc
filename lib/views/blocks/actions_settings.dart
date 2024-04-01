@@ -6,7 +6,7 @@ import '../../shared/strings.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/checkbox_widget.dart';
 import '../../widgets/dropdown_widget.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 
 class ActionsSettings extends StatefulWidget {
   final Map<String, dynamic> block;
@@ -76,12 +76,12 @@ class _ActionsSettingsState extends State<ActionsSettings> {
     List<Map<dynamic, dynamic>> links = findLinks(
         Provider.of<DesignViewModel>(context, listen: true).designData);
 
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
       icon: Icons.system_update_alt_outlined,
       label: widget.block['label'],
-      enableBoder: true,
+      enableBorder: true,
       onUpdate: (entry) {
         widget.block.addEntry('settings', entry);
         widget.onUpdate?.call(widget.block);
@@ -178,7 +178,7 @@ class _ActionsSettingsState extends State<ActionsSettings> {
             update('additional', data);
           },
         ),
-        ExpansionSettingsTile(
+        SettingsExpansionTile(
           label: string.advancedSettings,
           padding: const EdgeInsets.all(0),
           titlePadding: const EdgeInsets.all(0),

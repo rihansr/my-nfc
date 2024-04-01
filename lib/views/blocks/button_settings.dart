@@ -8,7 +8,7 @@ import '../../widgets/dropdown_widget.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/seekbar_widget.dart';
 import '../../widgets/tab_widget.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -72,12 +72,12 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.add_circle_outline,
       label: block['label'],
-      enableBoder: true,
+      enableBorder: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);
         onUpdate?.call(block);
@@ -105,7 +105,7 @@ class ButtonSettings extends StatelessWidget {
             MapEntry('link', text.isEmpty ? null : text),
           ),
         ),
-        ExpansionSettingsTile(
+        SettingsExpansionTile(
           label: string.buttonDesign,
           padding: const EdgeInsets.all(0),
           titlePadding: const EdgeInsets.all(0),

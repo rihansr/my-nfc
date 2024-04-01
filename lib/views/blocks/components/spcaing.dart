@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../shared/strings.dart';
 import '../../../widgets/seekbar_widget.dart';
-import 'expansion_settings_tile.dart';
+import 'settings_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class Spacing extends StatelessWidget {
@@ -32,7 +32,7 @@ class Spacing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile(
+    return SettingsExpansionTile(
       label: string.paddingAndMarginSettings,
       padding: const EdgeInsets.all(0),
       titlePadding: const EdgeInsets.all(0),

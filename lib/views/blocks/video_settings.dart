@@ -5,7 +5,7 @@ import '../../widgets/input_field_widget.dart';
 import 'components/aspect_ratio_selector.dart';
 import 'components/spcaing.dart';
 import 'components/video_configs.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 
 class VideoSettings extends StatelessWidget {
   final Map<String, dynamic> block;
@@ -31,12 +31,12 @@ class VideoSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.video_library_outlined,
       label: block['label'],
-      enableBoder: true,
+      enableBorder: true,
       maintainState: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);

@@ -5,7 +5,7 @@ import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/popup_button.dart';
-import 'components/expansion_settings_tile.dart';
+import 'components/settings_expansion_tile.dart';
 import 'actions_settings.dart';
 import 'additional_settings.dart';
 import 'button_settings.dart';
@@ -155,7 +155,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           )
         : null;
 
-    return ExpansionSettingsTile.settings(
+    return SettingsExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
       label: widget.block['label'],

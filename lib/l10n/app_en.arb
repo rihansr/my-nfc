@@ -128,6 +128,7 @@
   "primaryConnectButton": "Primary connect button",
   "additionalConnectButtons": "Additional connect buttons",
   "advancedSettings": "Advanced settings",
+  "loading": "Loading...",
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",
