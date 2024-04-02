@@ -7,6 +7,7 @@
             "visible": true,
             "removable": true,
             "dragable": true,
+            "expandConfigs": true,
             "additional": {
                 "altText": "",
                 "linkTo": "",
@@ -251,7 +252,8 @@
             "primary": false,
             "visible": true,
             "dragable": true,
-            "removable": true
+            "removable": true,
+            "expandConfigs": true
         },
         "style": {
             "background": {
@@ -262,6 +264,24 @@
                         "overlayOpacity": 40
                     }
                 }
+            },
+            "alignment": {
+                "vertical": "top",
+                "horizontal": "left"
+            },
+            "overlay": {
+                "color": "#00000000",
+                "opacity": 40
+            },
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
             }
         },
         "data": {
@@ -271,6 +291,35 @@
     {
         "block": "section",
         "label": "Section",
+        "settings": {
+            "primary": false,
+            "visible": true,
+            "dragable": true,
+            "removable": true
+        },
+        "style": {
+            "background": {
+                "color": "#00000000"
+            },
+            "fullWidth": true,
+            "padding": {
+                "horizontal": 0,
+                "vertical": 0
+            },
+            "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+            }
+        },
+        "data": {
+            "fields": []
+        }
+    },
+    {
+        "block": "section-secure",
+        "label": "Secure Section",
         "settings": {
             "primary": false,
             "visible": true,
@@ -368,7 +417,7 @@
         }
     },
     {
-        "block": "publicLinks",
+        "block": "links-public",
         "label": "Public Social Media",
         "settings": {
             "primary": false,
@@ -442,13 +491,17 @@
         "settings": {
             "primary": false,
             "visible": true,
-            "dragable": true,
+            "dragable": false,
             "removable": true
         },
-        "style": {
-            "alignment": "left"
-        },
         "data": {
+            "style": {
+                "alignment": "left",
+                "hints": {
+                    "title": "e.g. Awards",
+                    "description": "e.g. Good employee"
+                }
+            },
             "items": []
         }
     },

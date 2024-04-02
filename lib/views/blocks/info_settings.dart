@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/input_field_widget.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 
 class InfoSettings extends StatelessWidget {
   final Map<String, dynamic> block;
@@ -22,7 +22,7 @@ class InfoSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.info_outline,

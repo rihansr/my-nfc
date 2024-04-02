@@ -3,7 +3,7 @@ import '../../../shared/strings.dart';
 import '../../../widgets/input_field_widget.dart';
 import '../../../widgets/checkbox_widget.dart';
 import '../../../widgets/mask_text_field.dart';
-import 'settings_expansion_tile.dart';
+import 'block_expansion_tile.dart';
 
 class VideoConfigs extends StatelessWidget {
   final Map<String, dynamic>? configs;
@@ -16,7 +16,7 @@ class VideoConfigs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsExpansionTile(
+    return BlockExpansionTile(
       label: string.videoSetting,
       titlePadding: const EdgeInsets.all(0),
       padding: const EdgeInsets.fromLTRB(0, 0, 22, 8),

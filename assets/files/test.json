@@ -4,7 +4,8 @@
         "label": "Basic Information",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [
@@ -15,7 +16,8 @@
                         "primary": true,
                         "visible": true,
                         "dragable": false,
-                        "removable": false
+                        "removable": false,
+                        "expandConfigs": true
                     },
                     "style": {
                         "background": {
@@ -74,11 +76,6 @@
                         "visible": true,
                         "dragable": false,
                         "removable": false
-                    },
-                    "style": {
-                        "background": {
-                            "color": "#00000000"
-                        }
                     },
                     "data": {
                         "fields": [
@@ -256,7 +253,8 @@
         "label": "Profile Information",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [
@@ -408,7 +406,9 @@
                         "dragable": false
                     },
                     "style": {
-                        "backgroundColor": "#00000000",
+                        "background": {
+                            "color": "#00000000"
+                        },
                         "fullWidth": true
                     },
                     "data": {
@@ -505,42 +505,167 @@
         "settings": {
             "primary": false,
             "removable": false,
+            "hideControllers": true,
             "dragable": true
         },
         "data": {
             "fields": [
                 {
-                    "block": "video",
-                    "label": "Online Video",
+                    "block": "section",
+                    "label": "Link with Image",
                     "settings": {
                         "primary": false,
                         "visible": true,
-                        "removable": true
+                        "removable": true,
+                        "dragable": true,
+                        "additional": {
+                            "altText": "R",
+                            "linkTo": "r",
+                            "openInNewTab": true
+                        }
                     },
                     "style": {
-                        "aspectRatio": "9:16",
+                        "background": {
+                            "image": {
+                                "path": "",
+                                "style": {
+                                    "size": 10
+                                }
+                            }
+                        },
+                        "alignment": {
+                            "vertical": "top",
+                            "horizontal": "left"
+                        },
+                        "overlay": {
+                            "color": "#00000000",
+                            "opacity": 40
+                        },
                         "padding": {
-                            "horizontal": 31,
-                            "vertical": 34
+                            "horizontal": 0,
+                            "vertical": 0
                         },
                         "margin": {
-                            "top": 32,
-                            "bottom": 40,
-                            "left": 32,
-                            "right": 41
+                            "top": 0,
+                            "bottom": 0,
+                            "left": 0,
+                            "right": 0
                         }
                     },
                     "data": {
-                        "link": "Hhhh",
-                        "configs": {
-                            "autoPlay": true,
-                            "loop": true,
-                            "showControls": true,
-                            "mute": true,
-                            "allowFullScreen": true,
-                            "startAt": "89:89:98",
-                            "endAt": "89:88:90"
-                        }
+                        "fields": [
+                            {
+                                "block": "text",
+                                "label": "Text",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": true
+                                },
+                                "style": {
+                                    "padding": {
+                                        "horizontal": 0,
+                                        "vertical": 0
+                                    },
+                                    "margin": {
+                                        "top": 0,
+                                        "bottom": 0,
+                                        "left": 0,
+                                        "right": 0
+                                    }
+                                },
+                                "data": {
+                                    "content": "",
+                                    "style": {
+                                        "text": {
+                                            "typography": null,
+                                            "fontSize": 32,
+                                            "color": "#FFFFFFFF",
+                                            "fontWeight": "reqular",
+                                            "alignment": "left"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "block": "text",
+                                "label": "Text",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": true
+                                },
+                                "style": {
+                                    "padding": {
+                                        "horizontal": 0,
+                                        "vertical": 0
+                                    },
+                                    "margin": {
+                                        "top": 0,
+                                        "bottom": 0,
+                                        "left": 0,
+                                        "right": 0
+                                    }
+                                },
+                                "data": {
+                                    "content": "",
+                                    "style": {
+                                        "text": {
+                                            "typography": null,
+                                            "color": "#FFFFFFFF",
+                                            "fontSize": 19,
+                                            "fontWeight": "reqular",
+                                            "alignment": "left"
+                                        }
+                                    }
+                                }
+                            },
+                            {
+                                "block": "button",
+                                "label": "Button",
+                                "settings": {
+                                    "primary": false,
+                                    "visible": true,
+                                    "removable": true,
+                                    "additional": {
+                                        "fullWidth": false,
+                                        "openInNewTab": true,
+                                        "disabled": false
+                                    }
+                                },
+                                "style": {
+                                    "border": {
+                                        "color": "#FFFFFFFF",
+                                        "thickness": 1,
+                                        "radius": 4
+                                    },
+                                    "padding": {
+                                        "horizontal": 0,
+                                        "vertical": 0
+                                    },
+                                    "margin": {
+                                        "top": 0,
+                                        "bottom": 0,
+                                        "left": 0,
+                                        "right": 0
+                                    }
+                                },
+                                "data": {
+                                    "label": {
+                                        "text": "Button"
+                                    },
+                                    "link": "",
+                                    "style": {
+                                        "text": {
+                                            "typography": null,
+                                            "color": "#FFFFFFFF",
+                                            "fontSize": 16,
+                                            "fontWeight": "regular"
+                                        }
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             ]
@@ -551,7 +676,8 @@
         "label": "Footer",
         "settings": {
             "primary": true,
-            "removable": false
+            "removable": false,
+            "hideControllers": true
         },
         "data": {
             "fields": [

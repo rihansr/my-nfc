@@ -5,11 +5,11 @@ import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/popup_button.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 import 'actions_settings.dart';
 import 'additional_settings.dart';
 import 'button_settings.dart';
-import 'components/section_style.dart';
+import 'components/block_style.dart';
 import 'contact_settings.dart';
 import 'divider_settings.dart';
 import 'image_settings.dart';
@@ -61,6 +61,7 @@ class _SectionSettingsState extends State<SectionSettings> {
         Map<String, dynamic> block = Map.from(e);
         switch (e['block']) {
           case "section":
+          case "section-secure":
             return SectionSettings(
               key: key,
               block: block,
@@ -155,7 +156,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           )
         : null;
 
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
       label: widget.block['label'],
@@ -168,8 +169,9 @@ class _SectionSettingsState extends State<SectionSettings> {
         if (!expanded) setState(() => {});
       },
       child: widget.block.containsKey('style')
-          ? SectionStyle(
+          ? BlockStyle(
               widget.block['style'],
+              settings: widget.block['settings']?['additional'],
               onUpdate: (settings) {
                 widget.block['style'] = settings;
                 widget.onUpdate?.call(widget.block);

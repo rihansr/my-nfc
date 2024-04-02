@@ -63,7 +63,7 @@ List<String> kHorizontalAlignments = const [
   'right',
 ];
 
-List<Color> kColors = [
+List<Color> kColors = const [
   Colors.white,
   Colors.black,
   Colors.red,
@@ -153,6 +153,7 @@ extension IconExtensions on String {
   IconData get icon {
     switch (this) {
       case "section":
+      case "section-secure":
         return Icons.view_agenda;
       case "space":
         return Icons.zoom_out_map_rounded;

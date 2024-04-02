@@ -7,7 +7,7 @@ import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/dropdown_widget.dart';
 import '../../widgets/input_field_widget.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 
 class ContactSettings extends StatefulWidget {
   final Map<String, dynamic> block;
@@ -82,7 +82,7 @@ class _ContactSettingsState extends State<ContactSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
       icon: Icons.group_outlined,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../shared/strings.dart';
 import '../../../shared/constants.dart';
 
-class SettingsExpansionTile extends StatelessWidget {
+class BlockExpansionTile extends StatelessWidget {
   final IconData? icon;
   final String? label;
   final Widget? child;
@@ -16,15 +16,15 @@ class SettingsExpansionTile extends StatelessWidget {
   final Function()? onRemove;
   final Function(bool)? onExpansionChanged;
 
-  SettingsExpansionTile({
+  BlockExpansionTile({
     super.key,
     this.icon,
     this.label,
     this.child,
-    this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
-    this.padding,
+    this.titlePadding = const EdgeInsets.all(0),
+    this.padding = const EdgeInsets.all(0),
     this.enableBorder = false,
-    this.maintainState = false,
+    this.maintainState = true,
     this.children = const [],
     this.onExpansionChanged,
   })  : controllers = null,
@@ -34,7 +34,7 @@ class SettingsExpansionTile extends StatelessWidget {
         childExpanded = ValueNotifier(false),
         childrenExpanded = ValueNotifier(false);
 
-  SettingsExpansionTile.settings(
+  BlockExpansionTile.settings(
     this.controllers, {
     super.key,
     this.icon,

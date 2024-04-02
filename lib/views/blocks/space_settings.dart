@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/seekbar_widget.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class SpaceSettings extends StatelessWidget {
@@ -26,7 +26,7 @@ class SpaceSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.zoom_out_map_outlined,

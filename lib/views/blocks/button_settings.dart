@@ -8,7 +8,7 @@ import '../../widgets/dropdown_widget.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/seekbar_widget.dart';
 import '../../widgets/tab_widget.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -72,7 +72,7 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.add_circle_outline,
@@ -105,16 +105,13 @@ class ButtonSettings extends StatelessWidget {
             MapEntry('link', text.isEmpty ? null : text),
           ),
         ),
-        SettingsExpansionTile(
+        BlockExpansionTile(
           label: string.buttonDesign,
-          padding: const EdgeInsets.all(0),
-          titlePadding: const EdgeInsets.all(0),
-          maintainState: true,
           children: [
             ColourPicker(
               title: string.borderCcolor,
               value: _selectedBorderColor,
-              colors: kColors,
+              colors: [Colors.transparent, ...kColors],
               onPick: (color) {
                 _selectedBorderColor = color;
                 update('border', MapEntry('color', color.toHex));

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
@@ -35,7 +35,7 @@ class _ImageSettingsState extends State<ImageSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('$widget.key'),
       icon: widget.block['block'] == 'avatar'

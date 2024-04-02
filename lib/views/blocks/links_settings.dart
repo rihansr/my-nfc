@@ -7,7 +7,7 @@ import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../widgets/popup_button.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 
 class LinksSettings extends StatefulWidget {
   final Map<String, dynamic> block;
@@ -41,7 +41,7 @@ class _LinksSettingsState extends State<LinksSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
       icon: Icons.group_outlined,

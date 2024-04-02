@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:iconsax/iconsax.dart';
+import '../shared/drawables.dart';
 import 'clipper_widget.dart';
 
 class ColourPicker extends StatefulWidget {
@@ -86,7 +88,11 @@ class _ColourPickerState extends State<ColourPicker> {
                 isSelected:
                     _chooseFromPicker && (_selectedColor == _pickerColor),
                 color: _pickerColor,
-                child: const Icon(Icons.edit, size: 16, color: Colors.grey),
+                child: const Icon(
+                  Iconsax.brush_4,
+                  size: 16,
+                  color: Colors.black,
+                ),
                 onTap: (_) => showDialog(
                   context: context,
                   builder: (context) => SimpleDialog(
@@ -137,21 +143,27 @@ class _ColorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return InkWell(
-      radius: 32,
+      radius: 34,
       highlightColor: color.withOpacity(0.25),
       onTap: () => onTap?.call(color),
       child: Clipper(
         shape: BoxShape.circle,
-        border: isSelected
-            ? Border.all(
-                color: color == theme.colorScheme.tertiary
-                    ? theme.colorScheme.primary
-                    : theme.colorScheme.tertiary,
-                width: 2,
+        backdrop: color == Colors.transparent
+            ? DecorationImage(
+                image: AssetImage(drawable.transparentBG),
+                fit: BoxFit.fill,
               )
             : null,
+        border: Border.all(
+          color: isSelected
+              ? color == theme.colorScheme.tertiary
+                  ? theme.primaryColor
+                  : theme.colorScheme.tertiary
+              : Colors.grey,
+          width: isSelected ? 2 : 1,
+        ),
+        size: 34,
         color: color,
-        size: 32,
         child: child,
       ),
     );

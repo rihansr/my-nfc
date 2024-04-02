@@ -7,7 +7,7 @@ import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/dropdown_widget.dart';
-import 'components/settings_expansion_tile.dart';
+import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
@@ -54,7 +54,7 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SettingsExpansionTile.settings(
+    return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
       icon: Icons.title,
@@ -141,7 +141,7 @@ class TextSettings extends StatelessWidget {
         ColourPicker(
           title: string.textColor,
           value: _selectedFontColor,
-          colors: kColors,
+          colors: [...kColors, Colors.transparent],
           onPick: (color) {
             _selectedFontColor = color;
             update('text', MapEntry('color', color.toHex));
