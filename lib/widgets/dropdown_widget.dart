@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Dropdown<T> extends StatefulWidget {
+class Dropdown<T> extends StatelessWidget {
   final Color? fillColor;
   final double? width;
   final double? height;
@@ -33,9 +33,9 @@ class Dropdown<T> extends StatefulWidget {
   final bool isExpanded;
   final bool maintainState;
   final bool borderFocusable;
-  final Function(T)? onSelected;
+  final Function(T?)? onSelected;
 
-  const Dropdown({
+  Dropdown({
     super.key,
     this.fillColor,
     this.onSelected,
@@ -43,7 +43,7 @@ class Dropdown<T> extends StatefulWidget {
     this.height,
     this.hint,
     this.maxLines,
-    this.borderSize = 1,
+    this.borderSize = 0.75,
     this.borderTint,
     this.title,
     this.titleAlign = TextAlign.start,
@@ -70,112 +70,108 @@ class Dropdown<T> extends StatefulWidget {
     this.borderRadius = 3,
     this.borderFocusable = true,
     this.bottomBorderOnly = false,
-  });
+  }) : _selectedItem = ValueNotifier(value);
 
-  @override
-  State<Dropdown<T>> createState() => _DropdownState<T>();
-}
-
-class _DropdownState<T> extends State<Dropdown<T>> {
-  T? selectedItem;
-  @override
-  void initState() {
-    selectedItem = widget.value;
-    super.initState();
-  }
+  final ValueNotifier<T?> _selectedItem;
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
     return Container(
-      width: widget.width,
-      margin: widget.margin,
+      width: width,
+      margin: margin,
       child: Column(
-        crossAxisAlignment: widget.isExpanded
-            ? CrossAxisAlignment.stretch
-            : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isExpanded ? CrossAxisAlignment.stretch : CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.title?.trim().isNotEmpty ?? false)
+          if (title?.trim().isNotEmpty ?? false)
             Padding(
-              padding: widget.titleSpacing,
+              padding: titleSpacing,
               child: Text(
-                widget.title ?? '',
-                textAlign: widget.titleAlign,
-                style: widget.titleStyle ??
+                title ?? '',
+                textAlign: titleAlign,
+                style: titleStyle ??
                     theme.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
               ),
             ),
           Container(
-            padding: widget.padding,
-            decoration: widget.borderFocusable
+            padding: padding,
+            decoration: borderFocusable
                 ? BoxDecoration(
-                    borderRadius: widget.bottomBorderOnly
+                    borderRadius: bottomBorderOnly
                         ? null
-                        : BorderRadius.all(
-                            Radius.circular(widget.borderRadius)),
-                    border: widget.bottomBorderOnly
+                        : BorderRadius.all(Radius.circular(borderRadius)),
+                    border: bottomBorderOnly
                         ? Border(
                             bottom: BorderSide(
-                              color: widget.borderTint ?? theme.hintColor,
-                              width: widget.borderSize,
+                              color: borderTint ?? theme.hintColor,
+                              width: borderSize,
                             ),
                           )
                         : Border.all(
-                            color: widget.borderTint ?? theme.hintColor,
-                            width: widget.borderSize,
+                            color: borderTint ?? theme.hintColor,
+                            width: borderSize,
                           ),
                   )
                 : null,
-            child: DropdownButton(
-              menuMaxHeight: widget.height,
-              borderRadius:
-                  BorderRadius.all(Radius.circular(widget.borderRadius)),
-              isDense: widget.dense,
-              isExpanded: widget.isExpanded,
-              dropdownColor: widget.fillColor,
-              hint: widget.hintWidget ??
-                  Text(
-                    widget.hint ?? '',
-                    maxLines: widget.maxLines,
-                    style: widget.hintStyle ??
-                        theme.textTheme.bodySmall?.copyWith(
-                          color: widget.hintColor ?? theme.hintColor,
-                          fontSize: widget.fontSize,
-                          fontWeight: widget.fontWeight,
+            child: ValueListenableBuilder(
+                valueListenable: _selectedItem,
+                builder: (_, selectedItem, __) {
+                  return DropdownButton<T?>(
+                    menuMaxHeight: height,
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(borderRadius)),
+                    isDense: dense,
+                    isExpanded: isExpanded,
+                    dropdownColor: fillColor,
+                    hint: hintWidget ??
+                        Text(
+                          hint ?? '',
+                          maxLines: maxLines,
+                          style: hintStyle ??
+                              theme.textTheme.bodySmall?.copyWith(
+                                color: hintColor ?? theme.hintColor,
+                                fontSize: fontSize,
+                                fontWeight: fontWeight,
+                              ),
                         ),
-                  ),
-              value: widget.maintainState ? selectedItem : widget.value,
-              style: (widget.textStyle ?? theme.textTheme.bodySmall)?.copyWith(
-                color: widget.fontColor,
-                fontSize: widget.fontSize,
-                fontWeight: widget.fontWeight,
-                overflow: TextOverflow.ellipsis,
-              ),
-              underline: const SizedBox.shrink(),
-              items: widget.itemBuilder == null
-                  ? null
-                  : widget.items.map((item) {
-                      return DropdownMenuItem(
-                        value: item,
-                        child: widget.itemBuilder!(item),
-                      );
-                    }).toList(),
-              selectedItemBuilder: widget.selectedItemBuilder == null
-                  ? null
-                  : (_) => widget.items.map<Widget>((item) {
-                        return Align(
-                            alignment: Alignment.centerLeft,
-                            child: widget.selectedItemBuilder!(item));
-                      }).toList(),
-              onChanged: (T? item) => {
-                if (widget.maintainState) setState(() => selectedItem = item),
-                if (item != null) widget.onSelected?.call(item),
-              },
-            ),
+                    value: selectedItem,
+                    style: (textStyle ?? theme.textTheme.bodySmall)?.copyWith(
+                      color: fontColor,
+                      fontSize: fontSize,
+                      fontWeight: fontWeight,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    underline: const SizedBox.shrink(),
+                    items: itemBuilder == null
+                        ? null
+                        : items.map((item) {
+                            return DropdownMenuItem(
+                              value: item,
+                              child: itemBuilder!(item),
+                            );
+                          }).toList(),
+                    selectedItemBuilder: selectedItemBuilder == null
+                        ? null
+                        : (_) => items.map<Widget>((item) {
+                              return Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: selectedItemBuilder!(item));
+                            }).toList(),
+                    onChanged: (T? item) {
+                      if (_selectedItem.value == item) {
+                        return;
+                      } else if (maintainState) {
+                        _selectedItem.value = item;
+                      }
+                      onSelected?.call(item);
+                    },
+                  );
+                }),
           ),
         ],
       ),

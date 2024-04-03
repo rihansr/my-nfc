@@ -93,7 +93,9 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                     ? theme.colorScheme.primary
                     : theme.iconTheme.color!;
 
-                return GestureDetector(
+                return InkWell(
+                  focusColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
                   onTap: () {
                     selectedAspectRatio = ratio;
                     isCustom ? generateRatio() : widget.onSelected.call(ratio);
@@ -118,11 +120,17 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                           ),
                         ),
                       if (!isCustom) const SizedBox(height: 4),
-                      Text(
-                        isCustom ? string.custom : string.ratio(width, height),
-                        textAlign: TextAlign.center,
-                        style: theme.textTheme.titleMedium
-                            ?.copyWith(color: selectedColor),
+                      Center(
+                        widthFactor: 1,
+                        heightFactor: isCustom ? 2 : 1,
+                        child: Text(
+                          isCustom
+                              ? string.custom
+                              : string.ratio(width, height),
+                          textAlign: TextAlign.center,
+                          style: theme.textTheme.titleMedium
+                              ?.copyWith(color: selectedColor),
+                        ),
                       ),
                     ],
                   ),

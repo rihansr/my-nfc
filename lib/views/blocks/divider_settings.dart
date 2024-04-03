@@ -11,15 +11,11 @@ class DividerSettings extends StatelessWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  late Color _selectedColor;
-
-  DividerSettings({
+  const DividerSettings({
     super.key,
     required this.block,
     this.onUpdate,
-  }) : _selectedColor =
-            block['data']?['style']?['color']?.toString().hexColor ??
-                Colors.grey;
+  });
 
   update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
@@ -53,12 +49,10 @@ class DividerSettings extends StatelessWidget {
         ),
         ColourPicker(
           title: string.color,
-          value: _selectedColor,
+          value: block['data']?['style']?['color']?.toString().hexColor ??
+              const Color(0xff9e9e9e),
           colors: kColors,
-          onPick: (color) {
-            _selectedColor = color;
-            update('data', MapEntry('color', color.toHex));
-          },
+          onPick: (color) => update('data', MapEntry('color', color.toHex)),
         ),
       ],
     );

@@ -4,18 +4,15 @@ import '../../shared/strings.dart';
 import '../../widgets/seekbar_widget.dart';
 import 'components/block_expansion_tile.dart';
 
-// ignore: must_be_immutable
 class SpaceSettings extends StatelessWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  late int _selectedHeight;
-
-  SpaceSettings({
+  const SpaceSettings({
     super.key,
     required this.block,
     this.onUpdate,
-  }) : _selectedHeight = block['data']?['style']?['height'] ?? 20;
+  });
 
   update(String key, int value) {
     block[key] ??= {};
@@ -41,15 +38,12 @@ class SpaceSettings extends StatelessWidget {
       children: [
         Seekbar(
           title: string.height,
-          value: _selectedHeight,
+          value: block['data']?['style']?['height'] ?? 20,
           type: 'px',
           min: 0,
           max: 200,
           defaultValue: 20,
-          onChanged: (value) {
-            _selectedHeight = value;
-            update('data', value);
-          },
+          onChanged: (value) => update('data', value),
         ),
       ],
     );

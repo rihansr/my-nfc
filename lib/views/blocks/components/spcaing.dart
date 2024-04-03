@@ -34,6 +34,7 @@ class Spacing extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlockExpansionTile(
       label: string.paddingAndMarginSettings,
+      maintainState: false,
       children: [
         if (padding?.containsKey('horizontal') ?? false)
           Seekbar(

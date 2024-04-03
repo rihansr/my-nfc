@@ -164,6 +164,7 @@ class _ContactSettingsState extends State<ContactSettings> {
                         InputField(
                           controller: TextEditingController(text: item['text']),
                           margin: const EdgeInsets.only(top: 8, right: 18),
+                          keyboardType: e.key.keyboardType,
                           padding: e.key == 'phoneNumbers'
                               ? const EdgeInsets.only(right: 8)
                               : const EdgeInsets.fromLTRB(8, 12, 8, 12),
@@ -243,6 +244,21 @@ extension _StringExtension on String {
         return ['home', 'mailing', 'work', 'other', 'custom'];
       default:
         return ['other', 'custom'];
+    }
+  }
+
+  TextInputType? get keyboardType {
+    switch (this) {
+      case 'phoneNumbers':
+        return TextInputType.phone;
+      case 'emails':
+        return TextInputType.emailAddress;
+      case 'websites':
+        return TextInputType.url;
+      case 'addresses':
+        return TextInputType.streetAddress;
+      default:
+        return TextInputType.text;
     }
   }
 }

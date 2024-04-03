@@ -64,17 +64,8 @@ List<String> kHorizontalAlignments = const [
 ];
 
 List<Color> kColors = const [
-  Colors.white,
-  Colors.black,
-  Colors.red,
-  Colors.green,
-  Colors.blue,
-  Colors.yellow,
-  Colors.orange,
-  Colors.purple,
-  Colors.pink,
-  Colors.teal,
-  Colors.brown
+  Color(0xFF000000),
+  Color(0xFFFFFFFF),
 ];
 
 List<String> kAspectRatios = const ['21:9', '16:9', '1:1', '4:5', '9:16'];

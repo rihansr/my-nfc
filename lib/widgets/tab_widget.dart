@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'clipper_widget.dart';
 
-class TabWidget extends StatefulWidget {
+class TabWidget extends StatelessWidget {
   final String? title;
   final String? type;
   final TextStyle? titleStyle;
@@ -10,9 +10,11 @@ class TabWidget extends StatefulWidget {
   final EdgeInsets margin;
   final List<String> tabs;
   final String? value;
-  final Function(String)? onSelect;
+  final bool maintainState;
+  final bool reselectable;
+  final Function(String?)? onSelect;
 
-  const TabWidget({
+  TabWidget({
     super.key,
     this.title,
     this.type,
@@ -22,21 +24,12 @@ class TabWidget extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.tabs = const [],
     this.value,
+    this.maintainState = true,
+    this.reselectable = false,
     this.onSelect,
-  });
+  }) : _selectedTab = ValueNotifier(value);
 
-  @override
-  State<TabWidget> createState() => _TabWidgetState();
-}
-
-class _TabWidgetState extends State<TabWidget> {
-  late String? _selectedTab;
-
-  @override
-  void initState() {
-    _selectedTab = widget.value;
-    super.initState();
-  }
+  final ValueNotifier<String?> _selectedTab;
 
   @override
   Widget build(BuildContext context) {
@@ -44,39 +37,74 @@ class _TabWidgetState extends State<TabWidget> {
 
     return Container(
       width: double.infinity,
-      margin: widget.margin,
+      margin: margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.title?.trim().isNotEmpty ?? false)
+          if (title?.trim().isNotEmpty ?? false)
             Padding(
-              padding: widget.titleSpacing,
+              padding: titleSpacing,
               child: Text(
-                widget.title ?? '',
-                textAlign: widget.titleAlign,
-                style: widget.titleStyle ??
+                title ?? '',
+                textAlign: titleAlign,
+                style: titleStyle ??
                     theme.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
               ),
             ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              ...widget.tabs.map(
-                (tab) => _TabItem(
-                  isSelected: tab == _selectedTab,
-                  tab: tab,
-                  onTap: (tab) {
-                    setState(() => _selectedTab = tab);
-                    widget.onSelect?.call(tab);
+          maintainState
+              ? ValueListenableBuilder(
+                  valueListenable: _selectedTab,
+                  builder: (_, selectedTab, __) {
+                    return Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        ...tabs.map(
+                          (tab) => _TabItem(
+                            isSelected: tab == selectedTab,
+                            tab: tab,
+                            onTap: (tab) {
+                              if (reselectable) {
+                                _selectedTab.value =
+                                    _selectedTab.value == tab ? null : tab;
+                              } else if (_selectedTab.value == tab) {
+                                return;
+                              } else {
+                                _selectedTab.value = tab;
+                              }
+                              onSelect?.call(tab);
+                            },
+                          ),
+                        ),
+                      ],
+                    );
                   },
+                )
+              : Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: [
+                    ...tabs.map(
+                      (tab) => _TabItem(
+                        isSelected: tab == value,
+                        tab: tab,
+                        onTap: (tab) {
+                          if (reselectable) {
+                            onSelect
+                                ?.call(_selectedTab.value == tab ? null : tab);
+                          } else if (_selectedTab.value == tab) {
+                            return;
+                          } else {
+                            onSelect?.call(tab);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ],
       ),
     );

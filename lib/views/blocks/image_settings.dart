@@ -1,75 +1,72 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
-class ImageSettings extends StatefulWidget {
+class ImageSettings extends StatelessWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const ImageSettings({
+  ImageSettings({
     super.key,
     required this.block,
     this.onUpdate,
-  });
+  }) : _imagePath = ValueNotifier(() {
+          String path = block['data']?['path']?.toString().trim() ?? '';
+          return path.isEmpty ? null : path;
+        }());
 
-  @override
-  State<ImageSettings> createState() => _ImageSettingsState();
-}
+  final ValueNotifier<String?> _imagePath;
 
-class _ImageSettingsState extends State<ImageSettings> {
-  String? _imagePath;
   set imagePath(String? image) {
-    setState(() => _imagePath = image);
-    widget.block.addEntry('data', MapEntry('path', image));
-    widget.onUpdate?.call(widget.block);
-  }
-
-  @override
-  void initState() {
-    String path = widget.block['data']?['path']?.toString().trim() ?? '';
-    _imagePath = path.isEmpty ? null : path;
-    super.initState();
+    _imagePath.value = image;
+    block.addEntry('data', MapEntry('path', image));
+    onUpdate?.call(block);
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return BlockExpansionTile.settings(
-      widget.block['settings'],
-      key: Key('$widget.key'),
-      icon: widget.block['block'] == 'avatar'
+      block['settings'],
+      key: Key('$key'),
+      icon: block['block'] == 'avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
-      label: widget.block['label'],
+      label: block['label'],
       enableBorder: true,
       onUpdate: (entry) {
-        widget.block.addEntry('settings', entry);
-        widget.onUpdate?.call(widget.block);
+        block.addEntry('settings', entry);
+        onUpdate?.call(block);
       },
-      onRemove: () => widget.onUpdate?.call({}),
+      onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(10, 8, 22, 18),
       children: [
-        if (widget.block['label'] != null) ...[
+        if (block['label'] != null) ...[
           Text(
-            widget.block['label'] ?? '',
+            block['label'] ?? '',
             style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(height: 12),
         ],
-        ImageView(
-          path: _imagePath,
-          fit: BoxFit.contain,
-          onStyleChange: (data) {
-            widget.block['data'] ??= {};
-            (widget.block['data'] as Map<String, dynamic>)
-                .addEntry('style', data);
-            widget.onUpdate?.call(widget.block);
+        ValueListenableBuilder(
+          valueListenable: _imagePath,
+          builder: (context, path, _) {
+            return ImageView(
+              path: path,
+              fit: BoxFit.contain,
+              onStyleChange: (data) {
+                block['data'] ??= {};
+                (block['data'] as Map<String, dynamic>).addEntry('style', data);
+                onUpdate?.call(block);
+              },
+              onPick: (path) => imagePath = path,
+              onRemove: () => imagePath = null,
+            );
           },
-          onPick: (path) => imagePath = path,
-          onRemove: () => imagePath = null,
         )
       ],
     );

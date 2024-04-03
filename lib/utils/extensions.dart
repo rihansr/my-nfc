@@ -121,6 +121,7 @@ extension MapExtension on Map<String, dynamic> {
 extension HexColor on Color {
   static Color fromHex(String hexString) {
     final buffer = StringBuffer();
+    hexString = hexString.toUpperCase();
     switch (hexString.length) {
       case 6:
         buffer.write('FF$hexString');

@@ -28,7 +28,14 @@ class _ActionsSettingsState extends State<ActionsSettings> {
   late Map<dynamic, dynamic>? additional;
 
   update(String key, Map<dynamic, dynamic>? data) {
-    widget.block.addEntry('data', MapEntry(key, data));
+    switch (key) {
+      case 'settings':
+        widget.block.addEntry('settings', MapEntry('additional', data));
+        break;
+      default:
+        widget.block.addEntry('data', MapEntry(key, data));
+        break;
+    }
     widget.onUpdate?.call(widget.block);
   }
 
@@ -187,6 +194,7 @@ class _ActionsSettingsState extends State<ActionsSettings> {
                   label: e.key.camelToNormal,
                   onChanged: (checked) {
                     additionalSettings[e.key] = checked;
+                    update('settings', additionalSettings);
                   },
                 ),
               )

@@ -439,31 +439,10 @@
             "removable": true
         },
         "data": {
-            "phoneNumbers": [
-                {
-                    "type": "main",
-                    "prefix": "",
-                    "text": ""
-                }
-            ],
-            "emails": [
-                {
-                    "type": "work",
-                    "text": ""
-                }
-            ],
-            "websites": [
-                {
-                    "type": "work",
-                    "text": ""
-                }
-            ],
-            "addresses": [
-                {
-                    "type": "work",
-                    "text": ""
-                }
-            ]
+            "phoneNumbers": [],
+            "emails": [],
+            "websites": [],
+            "addresses": []
         }
     },
     {

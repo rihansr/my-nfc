@@ -10,29 +10,15 @@ import '../../widgets/dropdown_widget.dart';
 import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
 
-// ignore: must_be_immutable
 class TextSettings extends StatelessWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  late String? _selectedFonFamily;
-  late int _selectedFontSize;
-  late Color? _selectedFontColor;
-  late String? _selectedFontWeight;
-  late String? _selectedAlignment;
-
-  TextSettings({
+  const TextSettings({
     super.key,
     required this.block,
     this.onUpdate,
-  })  : _selectedFonFamily = block['data']?['style']?['text']?['typography'],
-        _selectedFontSize = block['data']?['style']?['text']?['fontSize'] ?? 12,
-        _selectedFontColor =
-            block['data']?['style']?['text']?['color']?.toString().hexColor,
-        _selectedFontWeight =
-            block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
-        _selectedAlignment =
-            block['data']?['style']?['text']?['alignment'] ?? 'left';
+  });
 
   update(String key, MapEntry<String, dynamic> value) {
     Map<String, dynamic> settings = Map.from(block);
@@ -60,12 +46,12 @@ class TextSettings extends StatelessWidget {
       icon: Icons.title,
       label: block['label'],
       enableBorder: true,
+      maintainState: true,
       onUpdate: (entry) {
         block.addEntry('settings', entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
-      maintainState: true,
       padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
         ...(block['block'] == 'name'
@@ -119,51 +105,39 @@ class TextSettings extends StatelessWidget {
           title: string.typography,
           hint: string.selectOne,
           items: [null, ...kFontFamilys],
-          value: _selectedFonFamily,
+          value: block['data']?['style']?['text']?['typography'],
           maintainState: true,
           itemBuilder: (item) =>
               Text(item?.replaceAll('_', ' ') ?? string.fromThemeSettings),
-          onSelected: (String? font) {
-            _selectedFonFamily = font;
-            update('text', MapEntry('typography', font));
-          },
+          onSelected: (String? font) =>
+              update('text', MapEntry('typography', font)),
         ),
         Seekbar(
           title: string.fontSize,
-          value: _selectedFontSize,
+          value: block['data']?['style']?['text']?['fontSize'] ?? 12,
           min: 8,
           max: 96,
-          onChanged: (size) {
-            _selectedFontSize = size;
-            update('text', MapEntry('fontSize', size));
-          },
+          onChanged: (size) => update('text', MapEntry('fontSize', size)),
         ),
         ColourPicker(
           title: string.textColor,
-          value: _selectedFontColor,
-          colors: [...kColors, Colors.transparent],
-          onPick: (color) {
-            _selectedFontColor = color;
-            update('text', MapEntry('color', color.toHex));
-          },
+          value:
+              block['data']?['style']?['text']?['color']?.toString().hexColor,
+          colors: kColors,
+          onPick: (color) => update('text', MapEntry('color', color.toHex)),
         ),
         TabWidget(
           title: string.fontWeight,
           tabs: kFontWeights,
-          value: _selectedFontWeight,
-          onSelect: (weight) {
-            _selectedFontWeight = weight;
-            update('text', MapEntry('fontWeight', weight));
-          },
+          value: block['data']?['style']?['text']?['fontWeight'],
+          onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
         TabWidget(
           title: string.alignment,
           tabs: kHorizontalAlignments,
-          value: _selectedAlignment,
-          onSelect: (alignment) {
-            _selectedAlignment = alignment;
-            update('text', MapEntry('alignment', alignment));
-          },
+          value: block['data']?['style']?['text']?['alignment'] ?? 'left',
+          onSelect: (alignment) =>
+              update('text', MapEntry('alignment', alignment)),
         ),
         Spacing(
           title: string.paddingAndMarginSettings,

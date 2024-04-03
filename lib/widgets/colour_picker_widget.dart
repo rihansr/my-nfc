@@ -12,6 +12,7 @@ class ColourPicker extends StatefulWidget {
   final EdgeInsets margin;
   final List<Color> colors;
   final Color? value;
+  final bool reselectable;
   final Function(Color)? onPick;
 
   const ColourPicker({
@@ -23,6 +24,7 @@ class ColourPicker extends StatefulWidget {
     this.margin = const EdgeInsets.symmetric(vertical: 12),
     this.colors = const [],
     this.value,
+    this.reselectable = false,
     this.onPick,
   });
 
@@ -75,11 +77,16 @@ class _ColourPickerState extends State<ColourPicker> {
                   isSelected: !_chooseFromPicker && (_selectedColor == color),
                   color: color,
                   onTap: (color) {
-                    setState(
-                      () => this
-                        .._chooseFromPicker = false
-                        .._selectedColor = color,
-                    );
+                    _chooseFromPicker = false;
+                    if (widget.reselectable) {
+                      _selectedColor = _selectedColor == color ? null : color;
+                    } else if (_selectedColor == color) {
+                      setState((){});
+                      return;
+                    } else {
+                      _selectedColor = color;
+                    }
+                    setState((){});
                     widget.onPick?.call(color);
                   },
                 ),
