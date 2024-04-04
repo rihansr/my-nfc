@@ -16,7 +16,7 @@ class ModalBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Glassmorphism(
-      color: theme.colorScheme.tertiary,
+      color: theme.scaffoldBackgroundColor,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
       child: Stack(
         alignment: AlignmentDirectional.topCenter,

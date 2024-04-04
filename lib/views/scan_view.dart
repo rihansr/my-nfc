@@ -1,10 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-import '../routes/routes.dart';
 import '../services/nfc_service.dart';
 import '../shared/dimens.dart';
 import '../shared/drawables.dart';
@@ -132,11 +130,6 @@ class _ScanViewState extends State<ScanView> {
                 style: theme.textTheme.headlineMedium,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    context.pushReplacementNamed(
-                      Routes.design,
-                      pathParameters: {'uid': 'rihansr'},
-                    );
-                    return;
                     HapticFeedback.lightImpact();
                     isWritable = false;
                     NFC.instance

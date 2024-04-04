@@ -130,6 +130,7 @@
   "additionalConnectButtons": "Additional connect buttons",
   "advancedSettings": "Advanced settings",
   "loading": "Loading...",
+  "current": "Current",
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",

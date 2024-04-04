@@ -27,6 +27,7 @@ dependencies:
   lottie: ^3.0.0
   google_fonts: ^6.2.0
   flutter_colorpicker: ^1.0.3
+  flex_color_picker: ^3.4.1
 
   # Local DB
   shared_preferences: ^2.2.2

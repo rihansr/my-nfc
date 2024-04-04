@@ -133,23 +133,32 @@ class Clipper<T> extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       alignment: alignment,
       constraints: constraints,
-      foregroundDecoration: overlayColor == null
-          ? null
-          : BoxDecoration(
-              shape: shape == null
-                  ? BoxShape.rectangle
-                  : shape is BoxShape
-                      ? shape as BoxShape
-                      : BoxShape.rectangle,
-              borderRadius: kBorderRadius,
-              color: overlayColor,
-            ),
+      foregroundDecoration: overlayColor != null || border != null
+          ? shape == null
+              ? BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: kBorderRadius,
+                  color: overlayColor,
+                  border: border,
+                )
+              : shape is BoxShape
+                  ? BoxDecoration(
+                      shape: shape as BoxShape,
+                      borderRadius:
+                          shape == BoxShape.circle ? null : kBorderRadius,
+                      color: overlayColor,
+                      border: border,
+                    )
+                  : ShapeDecoration(
+                      shape: shape as ShapeBorder,
+                      color: overlayColor,
+                    )
+          : null,
       decoration: shape == null
           ? BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: kBorderRadius,
               color: color,
-              border: border,
               boxShadow: shadows,
               image: backdrop,
               gradient: gradient,
@@ -159,7 +168,6 @@ class Clipper<T> extends StatelessWidget {
                   shape: shape as BoxShape,
                   borderRadius: shape == BoxShape.circle ? null : kBorderRadius,
                   color: color,
-                  border: border,
                   boxShadow: shadows,
                   image: backdrop,
                   gradient: gradient,
@@ -168,6 +176,8 @@ class Clipper<T> extends StatelessWidget {
                   shape: shape as ShapeBorder,
                   color: color,
                   shadows: shadows,
+                  image: backdrop,
+                  gradient: gradient,
                 ),
       child: child,
     );

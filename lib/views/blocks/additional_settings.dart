@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';

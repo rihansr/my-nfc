@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
 import 'components/image_view.dart';

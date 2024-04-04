@@ -23,11 +23,11 @@ class Glassmorphism extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              color.withOpacity(.025),
-              color.withOpacity(.075),
+              color.withOpacity(.7),
+              color.withOpacity(.8),
             ],
-            begin: AlignmentDirectional.topStart,
-            end: AlignmentDirectional.bottomEnd,
+            begin: AlignmentDirectional.topCenter,
+            end: AlignmentDirectional.bottomCenter,
           ),
           borderRadius: borderRadius,
         ),

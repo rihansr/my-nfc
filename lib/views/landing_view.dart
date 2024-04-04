@@ -19,7 +19,15 @@ class LandingView extends StatelessWidget {
           },
           builder: (context, controller, child) => Scaffold(
             key: controller.scaffoldKey,
-            body: const Column(),
+            body: SingleChildScrollView(
+              physics: const ClampingScrollPhysics(),
+              child: Container(
+                width: double.infinity,
+                height: 1200,
+                decoration:
+                    BoxDecoration(gradient: controller.theme.background),
+              ),
+            ),
             bottomNavigationBar: Container(
               color: theme.colorScheme.background,
               child: SafeArea(

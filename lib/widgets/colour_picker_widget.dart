@@ -81,12 +81,12 @@ class _ColourPickerState extends State<ColourPicker> {
                     if (widget.reselectable) {
                       _selectedColor = _selectedColor == color ? null : color;
                     } else if (_selectedColor == color) {
-                      setState((){});
+                      setState(() {});
                       return;
                     } else {
                       _selectedColor = color;
                     }
-                    setState((){});
+                    setState(() {});
                     widget.onPick?.call(color);
                   },
                 ),
@@ -100,6 +100,71 @@ class _ColourPickerState extends State<ColourPicker> {
                   size: 16,
                   color: Colors.black,
                 ),
+                /*
+                  onTap: (_) async {
+                    ColorPicker(
+                    color: _pickerColor,
+                    onColorChanged: (Color color) {
+                      setState(
+                        () => this
+                          .._chooseFromPicker = true
+                          .._pickerColor = color
+                          .._selectedColor = color,
+                      );
+                      widget.onPick?.call(color);
+                    },
+                    width: 40,
+                    height: 40,
+                    borderRadius: 4,
+                    spacing: 5,
+                    runSpacing: 5,
+                    wheelDiameter: 155,
+                    heading: Text(
+                      'Select color',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    subheading: Text(
+                      'Select color shade',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    wheelSubheading: Text(
+                      'Selected color and its shades',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    showColorName: true,
+                    showColorCode: true,
+                    showRecentColors: true,
+                    elevation: 0.5,
+                    enableOpacity: true,
+                    selectedColorIcon: Iconsax.brush_4,
+                    copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+                      copyButton: true,
+                      pasteButton: true,
+                      longPressMenu: true,
+                    ),
+                    materialNameTextStyle:
+                        Theme.of(context).textTheme.bodySmall,
+                    colorNameTextStyle: Theme.of(context).textTheme.bodySmall,
+                    colorCodeTextStyle: Theme.of(context).textTheme.bodyMedium,
+                    colorCodePrefixStyle: Theme.of(context).textTheme.bodySmall,
+                    selectedPickerTypeColor:
+                        Theme.of(context).colorScheme.primary,
+                    pickersEnabled: const <ColorPickerType, bool>{
+                      ColorPickerType.both: true,
+                      ColorPickerType.primary: false,
+                      ColorPickerType.accent: false,
+                      ColorPickerType.bw: true,
+                      ColorPickerType.custom: false,
+                      ColorPickerType.wheel: true,
+                    },
+                  ).showPickerDialog(
+                    context,
+                    actionsPadding: const EdgeInsets.all(16),
+                    constraints: const BoxConstraints(
+                        minHeight: 480, minWidth: 300, maxWidth: 320),
+                  );
+                },
+                */
                 onTap: (_) => showDialog(
                   context: context,
                   builder: (context) => SimpleDialog(
@@ -120,6 +185,7 @@ class _ColourPickerState extends State<ColourPicker> {
                           );
                           widget.onPick?.call(color);
                         },
+                        hexInputBar: true,
                         pickerAreaHeightPercent: 0.8,
                       ),
                     ],
