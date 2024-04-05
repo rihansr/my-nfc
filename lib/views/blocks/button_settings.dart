@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/checkbox_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/dropdown_widget.dart';
@@ -47,6 +50,7 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -85,8 +89,8 @@ class ButtonSettings extends StatelessWidget {
           children: [
             ColourPicker(
               title: string.borderCcolor,
-              value: block['style']?['border']?['color']?.toString().hexColor,
-              colors: [Colors.transparent, ...kColors],
+              value: block['style']?['border']?['borderColor']?.toString().hexColor ?? defaultTheme.iconColor,
+              colors: const [Colors.transparent, ...kColors],
               onPick: (color) => update('border', MapEntry('color', color.toHex)),
             ),
             Seekbar(
@@ -114,7 +118,7 @@ class ButtonSettings extends StatelessWidget {
               title: string.typography,
               hint: string.selectOne,
               items: [null, ...kFontFamilys],
-              value: block['data']?['style']?['text']?['typography'],
+              value: block['data']?['style']?['text']?['typography'] ?? defaultTheme.typography,
               maintainState: true,
               itemBuilder: (p0) =>
                   Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
@@ -129,9 +133,9 @@ class ButtonSettings extends StatelessWidget {
             ),
             ColourPicker(
               title: string.textColor,
-              value: block['data']?['style']?['text']?['color']?.toString().hexColor,
+              value: block['data']?['style']?['text']?['textColor']?.toString().hexColor ?? defaultTheme.iconColor,
               colors: kColors,
-              onPick: (color) => update('text', MapEntry('color', color.toHex)),
+              onPick: (color) => update('text', MapEntry('textColor', color.toHex)),
             ),
             TabWidget(
               title: string.fontWeight,

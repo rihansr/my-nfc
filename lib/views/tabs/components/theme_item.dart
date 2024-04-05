@@ -12,7 +12,8 @@ class ThemeItem extends StatelessWidget {
   final Function(ThemeModel)? onSelected;
   final bool _isSelected;
 
-  const ThemeItem({super.key, 
+  const ThemeItem({
+    super.key,
     required this.groupValue,
     required this.value,
     this.onSelected,
@@ -21,15 +22,25 @@ class ThemeItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => onSelected?.call(groupValue),
+      onTap: _isSelected ? null : () => onSelected?.call(groupValue),
       child: Clipper(
         width: 140,
         radius: 12,
+        shadows: [
+          BoxShadow(
+            color: _isSelected
+                ? Theme.of(context).primaryColor.withOpacity(0.12)
+                : Colors.black12,
+            blurRadius: 2,
+            offset: const Offset(0, 2),
+          ),
+        ],
+        margin: const EdgeInsets.symmetric(vertical: 2),
         border: Border.all(
-          color: _isSelected
-              ? Theme.of(context).disabledColor
-              : Colors.transparent,
-          width: 2,
+          color:
+              _isSelected ? Theme.of(context).primaryColor : Colors.transparent,
+          width: 1,
+          strokeAlign: BorderSide.strokeAlignOutside,
         ),
         gradient: groupValue.background,
         alignment: Alignment.bottomCenter,
@@ -90,7 +101,7 @@ class ThemeItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                        LineBreak(top: 2, color: groupValue.dividerColor),
+                        LineBreak(top: 1, color: groupValue.dividerColor),
                         Transform.translate(
                           offset: const Offset(0, 10),
                           child: Wrap(
@@ -131,11 +142,13 @@ class ThemeItem extends StatelessWidget {
                 bottom: 18,
                 child: Clipper(
                   shape: const StadiumBorder(),
-                  color: Colors.white,
+                  color: Colors.black54,
                   padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
                   child: Text(
                     string.current,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
               )

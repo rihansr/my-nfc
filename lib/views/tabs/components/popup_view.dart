@@ -4,11 +4,13 @@ import '../../../widgets/glassmorphism.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
+  final EdgeInsets padding;
   final List<Widget> children;
 
   const ModalBottomSheet({
     super.key,
     required this.scrollController,
+    this.padding = const EdgeInsets.only(top: 24),
     this.children = const [],
   });
 
@@ -23,7 +25,7 @@ class ModalBottomSheet extends StatelessWidget {
         children: [
           ListView(
             shrinkWrap: false,
-            padding: const EdgeInsets.only(top: 24),
+            padding: padding,
             controller: scrollController,
             children: children,
           ),

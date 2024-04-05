@@ -13,7 +13,7 @@ final List<Map<String, dynamic>> kCountryCodes = [];
 // Fonts
 const String kFontFamily = "Inter";
 List<String?> kFontFamilys = [
-  GoogleFonts.montserrat().fontFamily,
+  GoogleFonts.roboto().fontFamily,
   GoogleFonts.openSans().fontFamily,
   GoogleFonts.workSans().fontFamily,
   GoogleFonts.dmSans().fontFamily,
@@ -65,8 +65,19 @@ const List<String> kHorizontalAlignments = [
 ];
 
 const List<Color> kColors = [
+  Color(0xFF2D2D2D),
+  Color(0xFF606060),
   Color(0xFF000000),
   Color(0xFFFFFFFF),
+  Color(0xFFF8F0B3),
+  Color(0xFFFBD8BE),
+  Color(0xFFBA7C72),
+  Color(0xFFD33211),
+  Color(0xFF004A3B),
+  Color(0xFF25E4B3),
+  Color(0xFFC2E0EF),
+  Color(0xFF053493),
+  Color(0xFFEB8F00),
 ];
 
 const List<String> kAspectRatios = ['21:9', '16:9', '1:1', '4:5', '9:16'];
@@ -75,8 +86,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 1,
     background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+      transform: GradientRotation(2.37),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFFFFFFF),
         Color(0xFF5998d6),
@@ -92,6 +104,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 2,
     background: LinearGradient(
+      transform: GradientRotation(2.1),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFefefee),
         Color(0xFFffffff),
@@ -106,6 +121,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 3,
     background: LinearGradient(
+      transform: GradientRotation(2.37),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFfdfcfb),
         Color(0xFFE3D3C5),
@@ -119,6 +137,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 4,
     background: LinearGradient(
+      transform: GradientRotation(5.5),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFF414141),
         Color(0xFF161616),
@@ -132,6 +153,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 5,
     background: LinearGradient(
+      transform: GradientRotation(4.2),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFF000000),
         Color(0xFF615f5f),
@@ -146,6 +170,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 6,
     background: LinearGradient(
+      transform: GradientRotation(2.9),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFf7f7f3),
         Color(0xFFfdf1e3),
@@ -160,6 +187,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 7,
     background: LinearGradient(
+      transform: GradientRotation(0.8),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFf0d5d5),
         Color(0xFFe2b4a7),
@@ -174,6 +204,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 8,
     background: LinearGradient(
+      transform: GradientRotation(2.1),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFF385138),
         Color(0xFF0d210d),
@@ -188,6 +221,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 9,
     background: LinearGradient(
+      transform: GradientRotation(0.8),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFF78421b),
         Color(0xFF451f12),
@@ -203,6 +239,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 10,
     background: LinearGradient(
+      transform: GradientRotation(0.8),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFFf9f8f8),
         Color(0xFFd6d6d6),
@@ -218,6 +257,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 11,
     background: LinearGradient(
+      transform: GradientRotation(1.04),
+      begin: Alignment.bottomCenter,
+      end: Alignment.topCenter,
       colors: [
         Color(0xFF131e34),
         Color(0xFF020817),

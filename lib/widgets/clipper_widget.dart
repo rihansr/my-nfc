@@ -139,7 +139,6 @@ class Clipper<T> extends StatelessWidget {
                   shape: BoxShape.rectangle,
                   borderRadius: kBorderRadius,
                   color: overlayColor,
-                  border: border,
                 )
               : shape is BoxShape
                   ? BoxDecoration(
@@ -147,7 +146,6 @@ class Clipper<T> extends StatelessWidget {
                       borderRadius:
                           shape == BoxShape.circle ? null : kBorderRadius,
                       color: overlayColor,
-                      border: border,
                     )
                   : ShapeDecoration(
                       shape: shape as ShapeBorder,
@@ -158,6 +156,7 @@ class Clipper<T> extends StatelessWidget {
           ? BoxDecoration(
               shape: BoxShape.rectangle,
               borderRadius: kBorderRadius,
+              border: border,
               color: color,
               boxShadow: shadows,
               image: backdrop,
@@ -167,6 +166,7 @@ class Clipper<T> extends StatelessWidget {
               ? BoxDecoration(
                   shape: shape as BoxShape,
                   borderRadius: shape == BoxShape.circle ? null : kBorderRadius,
+                  border: border,
                   color: color,
                   boxShadow: shadows,
                   image: backdrop,

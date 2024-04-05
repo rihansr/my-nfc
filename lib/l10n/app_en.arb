@@ -123,6 +123,8 @@
       }
     }
   },
+  "iconColor": "Icon Color",
+  "lineBreakColor": "Line Break Color",
   "fromThemeSettings": "From Theme Settings",
   "customLabelName": "Custom Label Name",
   "none": "None",
@@ -131,6 +133,9 @@
   "advancedSettings": "Advanced settings",
   "loading": "Loading...",
   "current": "Current",
+  "selectColor": "Select color",
+  "selectColorShade": "Select color shade",
+  "selectedColor": "Selected color and its shades",
   "@_HINTS": "<-----------------HINTS----------------->",
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",

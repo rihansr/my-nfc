@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/colour_picker_widget.dart';
 import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
@@ -30,6 +33,7 @@ class DividerSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -49,10 +53,10 @@ class DividerSettings extends StatelessWidget {
         ),
         ColourPicker(
           title: string.color,
-          value: block['data']?['style']?['color']?.toString().hexColor ??
-              const Color(0xff9e9e9e),
+          value: block['data']?['style']?['dividerColor']?.toString().hexColor ??
+              defaultTheme.dividerColor,
           colors: kColors,
-          onPick: (color) => update('data', MapEntry('color', color.toHex)),
+          onPick: (color) => update('data', MapEntry('dividerColor', color.toHex)),
         ),
       ],
     );

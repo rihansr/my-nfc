@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ThemeModel {
   final int id;
-  final LinearGradient background;
+  final Gradient background;
   final Color textColor;
   final Color iconColor;
   final Color dividerColor;
@@ -24,7 +24,7 @@ class ThemeModel {
 
   ThemeModel copyWith({
     int? id,
-    LinearGradient? background,
+    Gradient? background,
     Color? textColor,
     Color? iconColor,
     Color? dividerColor,
@@ -39,6 +39,17 @@ class ThemeModel {
         dividerColor: dividerColor ?? this.dividerColor,
         horizontalPadding: horizontalPadding ?? this.horizontalPadding,
         fontFamily: fontFamily ?? this.fontFamily,
+      );
+
+  ThemeModel inheritFrom(ThemeModel theme) =>
+      ThemeModel(
+        id: id,
+        background: background,
+        textColor: textColor,
+        iconColor: iconColor,
+        dividerColor: dividerColor,
+        horizontalPadding: theme.horizontalPadding,
+        fontFamily: theme.fontFamily,
       );
 
    @override

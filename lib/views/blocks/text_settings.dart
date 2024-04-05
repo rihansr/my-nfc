@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../models/theme_model.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/tab_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/seekbar_widget.dart';
@@ -40,6 +43,7 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -105,7 +109,7 @@ class TextSettings extends StatelessWidget {
           title: string.typography,
           hint: string.selectOne,
           items: [null, ...kFontFamilys],
-          value: block['data']?['style']?['text']?['typography'],
+          value: block['data']?['style']?['text']?['typography'] ?? defaultTheme.typography,
           maintainState: true,
           itemBuilder: (item) =>
               Text(item?.replaceAll('_', ' ') ?? string.fromThemeSettings),
@@ -121,10 +125,11 @@ class TextSettings extends StatelessWidget {
         ),
         ColourPicker(
           title: string.textColor,
-          value:
-              block['data']?['style']?['text']?['color']?.toString().hexColor,
+          value: block['data']?['style']?['text']?['textColor']
+              ?.toString()
+              .hexColor ?? defaultTheme.textColor,
           colors: kColors,
-          onPick: (color) => update('text', MapEntry('color', color.toHex)),
+          onPick: (color) => update('text', MapEntry('textColor', color.toHex)),
         ),
         TabWidget(
           title: string.fontWeight,

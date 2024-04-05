@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
+import 'package:provider/provider.dart';
 import '../shared/drawables.dart';
+import '../shared/strings.dart';
 import 'clipper_widget.dart';
 
-class ColourPicker extends StatefulWidget {
+class ColourPicker extends StatelessWidget {
   final String? title;
   final TextStyle? titleStyle;
   final TextAlign titleAlign;
@@ -29,170 +31,115 @@ class ColourPicker extends StatefulWidget {
   });
 
   @override
-  State<ColourPicker> createState() => _ColourPickerState();
-}
-
-class _ColourPickerState extends State<ColourPicker> {
-  late bool _chooseFromPicker;
-  late Color? _selectedColor;
-  late Color _pickerColor;
-
-  @override
-  void initState() {
-    _chooseFromPicker = false;
-    _selectedColor = widget.value;
-    _pickerColor = Colors.white;
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
     return Container(
       width: double.infinity,
-      margin: widget.margin,
+      margin: margin,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (widget.title?.trim().isNotEmpty ?? false)
+          if (title?.trim().isNotEmpty ?? false)
             Padding(
-              padding: widget.titleSpacing,
+              padding: titleSpacing,
               child: Text(
-                widget.title ?? '',
-                textAlign: widget.titleAlign,
-                style: widget.titleStyle ??
+                title ?? '',
+                textAlign: titleAlign,
+                style: titleStyle ??
                     theme.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
               ),
             ),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: [
-              ...widget.colors.map(
-                (color) => _ColorItem(
-                  isSelected: !_chooseFromPicker && (_selectedColor == color),
-                  color: color,
-                  onTap: (color) {
-                    _chooseFromPicker = false;
-                    if (widget.reselectable) {
-                      _selectedColor = _selectedColor == color ? null : color;
-                    } else if (_selectedColor == color) {
-                      setState(() {});
-                      return;
-                    } else {
-                      _selectedColor = color;
-                    }
-                    setState(() {});
-                    widget.onPick?.call(color);
-                  },
-                ),
-              ),
-              _ColorItem(
-                isSelected:
-                    _chooseFromPicker && (_selectedColor == _pickerColor),
-                color: _pickerColor,
-                child: const Icon(
-                  Iconsax.brush_4,
-                  size: 16,
-                  color: Colors.black,
-                ),
-                /*
-                  onTap: (_) async {
-                    ColorPicker(
-                    color: _pickerColor,
-                    onColorChanged: (Color color) {
-                      setState(
-                        () => this
-                          .._chooseFromPicker = true
-                          .._pickerColor = color
-                          .._selectedColor = color,
-                      );
-                      widget.onPick?.call(color);
-                    },
-                    width: 40,
-                    height: 40,
-                    borderRadius: 4,
-                    spacing: 5,
-                    runSpacing: 5,
-                    wheelDiameter: 155,
-                    heading: Text(
-                      'Select color',
-                      style: Theme.of(context).textTheme.titleMedium,
+          ChangeNotifierProvider<_ColourViewModel>.value(
+            value: _ColourViewModel(colors, reselectable, value),
+            child: Consumer<_ColourViewModel>(
+              builder: (context, controller, _) => Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: [
+                  ...colors.map(
+                    (color) => _ColorItem(
+                      isSelected: controller.isColorSelected(color),
+                      color: color,
+                      onTap: (color) {
+                        controller.select = color;
+                        onPick?.call(color);
+                      },
                     ),
-                    subheading: Text(
-                      'Select color shade',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    wheelSubheading: Text(
-                      'Selected color and its shades',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    showColorName: true,
-                    showColorCode: true,
-                    showRecentColors: true,
-                    elevation: 0.5,
-                    enableOpacity: true,
-                    selectedColorIcon: Iconsax.brush_4,
-                    copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-                      copyButton: true,
-                      pasteButton: true,
-                      longPressMenu: true,
-                    ),
-                    materialNameTextStyle:
-                        Theme.of(context).textTheme.bodySmall,
-                    colorNameTextStyle: Theme.of(context).textTheme.bodySmall,
-                    colorCodeTextStyle: Theme.of(context).textTheme.bodyMedium,
-                    colorCodePrefixStyle: Theme.of(context).textTheme.bodySmall,
-                    selectedPickerTypeColor:
-                        Theme.of(context).colorScheme.primary,
-                    pickersEnabled: const <ColorPickerType, bool>{
-                      ColorPickerType.both: true,
-                      ColorPickerType.primary: false,
-                      ColorPickerType.accent: false,
-                      ColorPickerType.bw: true,
-                      ColorPickerType.custom: false,
-                      ColorPickerType.wheel: true,
-                    },
-                  ).showPickerDialog(
-                    context,
-                    actionsPadding: const EdgeInsets.all(16),
-                    constraints: const BoxConstraints(
-                        minHeight: 480, minWidth: 300, maxWidth: 320),
-                  );
-                },
-                */
-                onTap: (_) => showDialog(
-                  context: context,
-                  builder: (context) => SimpleDialog(
-                    contentPadding: const EdgeInsets.only(top: 18),
-                    insetPadding: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    children: [
-                      ColorPicker(
-                        pickerColor: _pickerColor,
-                        onColorChanged: (color) {
-                          setState(
-                            () => this
-                              .._chooseFromPicker = true
-                              .._pickerColor = color
-                              .._selectedColor = color,
-                          );
-                          widget.onPick?.call(color);
-                        },
-                        hexInputBar: true,
-                        pickerAreaHeightPercent: 0.8,
-                      ),
-                    ],
                   ),
-                ),
+                  _ColorItem(
+                    isSelected: controller.isColorPicked,
+                    color: controller.pickerColor,
+                    child: const Icon(
+                      Iconsax.brush_4,
+                      size: 16,
+                      color: Colors.black,
+                    ),
+                    onTap: (_) => ColorPicker(
+                      color: controller.pickerColor,
+                      onColorChanged: (Color color) {
+                        controller.pick = color;
+                        onPick?.call(color);
+                      },
+                      width: 40,
+                      height: 40,
+                      borderRadius: 4,
+                      spacing: 5,
+                      runSpacing: 5,
+                      wheelDiameter: 155,
+                      heading: Text(
+                        string.selectColor,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      subheading: Text(
+                        string.selectColorShade,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      wheelSubheading: Text(
+                        string.selectedColor,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      showColorName: true,
+                      showColorCode: true,
+                      showRecentColors: true,
+                      elevation: 0.5,
+                      enableOpacity: true,
+                      selectedColorIcon: Iconsax.brush_4,
+                      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+                        copyButton: true,
+                        pasteButton: true,
+                        longPressMenu: true,
+                      ),
+                      materialNameTextStyle:
+                          Theme.of(context).textTheme.bodySmall,
+                      colorNameTextStyle: Theme.of(context).textTheme.bodySmall,
+                      colorCodeTextStyle:
+                          Theme.of(context).textTheme.bodyMedium,
+                      colorCodePrefixStyle:
+                          Theme.of(context).textTheme.bodySmall,
+                      selectedPickerTypeColor:
+                          Theme.of(context).colorScheme.primary,
+                      pickersEnabled: const <ColorPickerType, bool>{
+                        ColorPickerType.both: true,
+                        ColorPickerType.primary: false,
+                        ColorPickerType.accent: false,
+                        ColorPickerType.bw: true,
+                        ColorPickerType.custom: false,
+                        ColorPickerType.wheel: true,
+                      },
+                    ).showPickerDialog(
+                      context,
+                      actionsPadding: const EdgeInsets.all(16),
+                      constraints: const BoxConstraints(
+                          minHeight: 480, minWidth: 300, maxWidth: 320),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),
@@ -216,11 +163,10 @@ class _ColorItem extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return InkWell(
-      radius: 34,
+      radius: 36,
       highlightColor: color.withOpacity(0.25),
       onTap: () => onTap?.call(color),
-      child: Clipper(
-        shape: BoxShape.circle,
+      child: Clipper.circle(
         backdrop: color == Colors.transparent
             ? DecorationImage(
                 image: AssetImage(drawable.transparentBG),
@@ -228,17 +174,62 @@ class _ColorItem extends StatelessWidget {
               )
             : null,
         border: Border.all(
-          color: isSelected
-              ? color == theme.colorScheme.tertiary
-                  ? theme.primaryColor
-                  : theme.colorScheme.tertiary
-              : Colors.grey,
-          width: isSelected ? 2 : 1,
+          color: isSelected ? theme.primaryColor : theme.disabledColor,
+          width: 2,
+          strokeAlign: isSelected
+              ? BorderSide.strokeAlignOutside
+              : BorderSide.strokeAlignInside,
         ),
-        size: 34,
-        color: color,
-        child: child,
+        size: 36,
+        padding: const EdgeInsets.all(1.5),
+        child: CircleAvatar(
+          backgroundColor: color,
+          child: child,
+        ),
       ),
     );
   }
+}
+
+class _ColourViewModel extends ChangeNotifier {
+  late final bool _reselectable;
+  late bool _chooseFromPicker;
+  late Color? _selectedColor;
+  late Color _pickerColor;
+
+  _ColourViewModel(List<Color> colors, this._reselectable, [Color? color])
+      : _chooseFromPicker = !(color == null || colors.contains(color)),
+        _selectedColor = color,
+        _pickerColor =
+            color == null || colors.contains(color) ? Colors.white : color;
+
+  bool get chooseFromPicker => _chooseFromPicker;
+
+  Color? get selectedColor => _selectedColor;
+
+  Color get pickerColor => _pickerColor;
+
+  bool isColorSelected(Color color) =>
+      !_chooseFromPicker && (_selectedColor == color);
+
+  bool get isColorPicked =>
+      _chooseFromPicker && (_selectedColor == _pickerColor);
+
+  set select(Color color) {
+    _chooseFromPicker = false;
+    if (_reselectable) {
+      _selectedColor = _selectedColor == color ? null : color;
+    } else if (_selectedColor == color) {
+      notifyListeners();
+      return;
+    } else {
+      _selectedColor = color;
+    }
+    notifyListeners();
+  }
+
+  set pick(Color color) => this
+    .._chooseFromPicker = true
+    .._pickerColor = color
+    .._selectedColor = color;
 }

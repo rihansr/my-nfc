@@ -70,7 +70,7 @@
                             "text": {
                                 "typography": null,
                                 "fontSize": 32,
-                                "color": "#FFFFFFFF",
+                                "textColor": null,
                                 "fontWeight": "reqular",
                                 "alignment": "left"
                             }
@@ -102,7 +102,7 @@
                         "style": {
                             "text": {
                                 "typography": null,
-                                "color": "#FFFFFFFF",
+                                "textColor": null,
                                 "fontSize": 19,
                                 "fontWeight": "reqular",
                                 "alignment": "left"
@@ -125,7 +125,7 @@
                     },
                     "style": {
                         "border": {
-                            "color": "#FFFFFFFF",
+                            "borderColor": null,
                             "thickness": 1,
                             "radius": 4
                         },
@@ -148,7 +148,7 @@
                         "style": {
                             "text": {
                                 "typography": null,
-                                "color": "#FFFFFFFF",
+                                "textColor": null,
                                 "fontSize": 16,
                                 "fontWeight": "regular"
                             }
@@ -183,7 +183,7 @@
             "style": {
                 "text": {
                     "typography": null,
-                    "color": "#FFFFFFFF",
+                    "textColor": null,
                     "fontSize": 16,
                     "fontWeight": "reqular",
                     "alignment": "center"
@@ -241,7 +241,7 @@
         },
         "data": {
             "style": {
-                "color": "#FFFFFFFF"
+                "dividerColor": null
             }
         }
     },
@@ -373,7 +373,7 @@
         },
         "style": {
             "border": {
-                "color": "#FFFFFFFF",
+                "borderColor": null,
                 "thickness": 1,
                 "radius": 4
             },
@@ -396,7 +396,7 @@
             "style": {
                 "text": {
                     "typography": null,
-                    "color": "#FFFFFFFF",
+                    "textColor": null,
                     "fontSize": 16,
                     "fontWeight": "regular"
                 }

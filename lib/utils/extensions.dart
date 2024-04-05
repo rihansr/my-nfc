@@ -87,32 +87,28 @@ extension MapExtension on Map<String, dynamic> {
       this[key] = {}..addEntries([entry]);
     }
   }
+}
 
-  void nullify({
-    List<String> excpetKeys = const [],
-    Map<String, dynamic> defaultValues = const {},
-  }) {
+extension DynamicMapExtension on Map {
+  addEntry(String key, MapEntry entry) {
+    if (containsKey(key)) {
+      this[key].addEntries([entry]);
+    } else {
+      this[key] = {}..addEntries([entry]);
+    }
+  }
+
+  void modify(Map values) {
     forEach((key, value) {
-      if (excpetKeys.contains(key)) {
-        return;
-      } else if (defaultValues.containsKey(key)) {
-        this[key] = defaultValues[key];
+      if (values.containsKey(key)) {
+        this[key] = values[key];
       } else if (value is Map) {
-        (value as Map<String, dynamic>).nullify(
-          excpetKeys: excpetKeys,
-          defaultValues: defaultValues,
-        );
-      } else if (key == 'fields') {
+        value.modify(values);
+      }
+      if (value is List) {
         for (var i = 0; i < value.length; i++) {
-          (value[i] as Map<String, dynamic>).nullify(
-            excpetKeys: excpetKeys,
-            defaultValues: defaultValues,
-          );
+          (value[i] as Map).modify(values);
         }
-      } else if (value is List) {
-        this[key] = [];
-      } else {
-        this[key] = null;
       }
     });
   }
