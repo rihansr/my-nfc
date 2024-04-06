@@ -17,9 +17,9 @@
         "style": {
             "background": {
                 "image": {
-                    "path": "",
+                    "path": null,
                     "style": {
-                        "size": 10
+                        "scale": 1.0
                     }
                 }
             },
@@ -258,10 +258,9 @@
         "style": {
             "background": {
                 "image": {
-                    "path": "",
+                    "path": null,
                     "style": {
-                        "size": 10,
-                        "overlayOpacity": 40
+                        "scale": 1.0
                     }
                 }
             },
@@ -355,7 +354,7 @@
             "removable": true
         },
         "data": {
-            "path": ""
+            "path": null
         }
     },
     {

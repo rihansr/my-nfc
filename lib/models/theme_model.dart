@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ThemeModel {
   final int id;
@@ -8,9 +7,8 @@ class ThemeModel {
   final Color iconColor;
   final Color dividerColor;
   final double horizontalPadding;
-  final String? fontFamily;
+  final String fontFamily;
 
-  String get typography => fontFamily ?? GoogleFonts.openSans().fontFamily!;
 
   const ThemeModel({
     required this.id,
@@ -19,7 +17,7 @@ class ThemeModel {
     required this.iconColor,
     required this.dividerColor,
     this.horizontalPadding = 20,
-    this.fontFamily,
+    this.fontFamily = 'Open Sans',
   });
 
   ThemeModel copyWith({

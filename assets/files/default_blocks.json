@@ -22,12 +22,16 @@
                     "style": {
                         "background": {
                             "image": {
-                                "path": "",
+                                "path": null,
                                 "style": {
-                                    "size": 10,
-                                    "overlayOpacity": 40
-                                } 
+                                    "scale": 1.0
+                                }
                             }
+                        }
+                        ,
+                        "overlay": {
+                            "color": "#FF000000",
+                            "opacity": 40
                         }
                     },
                     "data": {
@@ -53,7 +57,7 @@
                                     }
                                 },
                                 "data": {
-                                    "content": "",
+                                    "content": null,
                                     "style": {
                                         "text": {
                                             "typography": null,
@@ -88,7 +92,7 @@
                                     "removable": false
                                 },
                                 "data": {
-                                    "path": ""
+                                    "path": null
                                 }
                             },
                             {
@@ -113,9 +117,9 @@
                                 },
                                 "data": {
                                     "name": {
-                                        "first": "",
-                                        "middle": "",
-                                        "last": ""
+                                        "first": null,
+                                        "middle": null,
+                                        "last": null
                                     },
                                     "style": {
                                         "text": {
@@ -166,7 +170,7 @@
                         }
                     },
                     "data": {
-                        "content": "",
+                        "content": null,
                         "style": {
                             "text": {
                                 "typography": null,

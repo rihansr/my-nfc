@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../views/blocks/components/block_expansion_tile.dart';
-import '../../../views/blocks/components/backdrop.dart';
+import 'block_expansion_tile.dart';
+import 'backdrop.dart';
 import '../../../utils/extensions.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';

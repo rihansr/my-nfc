@@ -28,7 +28,7 @@ class ImageView extends StatefulWidget {
     this.onStyleChange,
     this.onPick,
     this.onRemove,
-  })  : _size = style?['size'],
+  })  : _size = style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
         _overlayOpacity = style?['overlayOpacity'];
 
   @override
@@ -146,7 +146,7 @@ class _ImageViewState extends State<ImageView> {
                     max: 20,
                     onChanged: (value) {
                       setState(() => size = value);
-                      widget.onStyleChange?.call(MapEntry('size', value));
+                      widget.onStyleChange?.call(MapEntry('scale', value/10));
                     },
                   ),
                 if (opacity != null)

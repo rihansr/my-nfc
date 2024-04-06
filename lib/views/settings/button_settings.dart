@@ -117,8 +117,8 @@ class ButtonSettings extends StatelessWidget {
             Dropdown<String?>(
               title: string.typography,
               hint: string.selectOne,
-              items: [null, ...kFontFamilys],
-              value: block['data']?['style']?['text']?['typography'] ?? defaultTheme.typography,
+              items: const [null, ...kFontFamilys],
+              value: block['data']?['style']?['text']?['typography'],
               maintainState: true,
               itemBuilder: (p0) =>
                   Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),

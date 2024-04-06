@@ -58,7 +58,7 @@ class ThemeView extends StatelessWidget {
                       'textColor': theme.textColor.toHex,
                       'borderColor': theme.iconColor.toHex,
                       'dividerColor': theme.dividerColor.toHex,
-                      'typography': theme.typography,
+                      'typography': theme.fontFamily,
                     });
                     controller.theme = theme.inheritFrom(controller.theme);
                   },
@@ -142,7 +142,7 @@ class ThemeView extends StatelessWidget {
               title: string.typography,
               hint: string.selectOne,
               items: kFontFamilys,
-              value: controller.theme.typography,
+              value: controller.theme.fontFamily,
               maintainState: false,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               itemBuilder: (item) =>

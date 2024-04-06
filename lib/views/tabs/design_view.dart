@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/debug.dart';
 import '../../viewmodels/design_viewmodel.dart';
-import '../blocks/section_settings.dart';
+import '../settings/section_settings.dart';
 import 'components/popup_view.dart';
 
 class DesignView extends StatelessWidget {

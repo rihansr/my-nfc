@@ -108,11 +108,11 @@ class TextSettings extends StatelessWidget {
         Dropdown<String?>(
           title: string.typography,
           hint: string.selectOne,
-          items: [null, ...kFontFamilys],
-          value: block['data']?['style']?['text']?['typography'] ?? defaultTheme.typography,
+          items: const [null, ...kFontFamilys],
+          value: block['data']?['style']?['text']?['typography'],
           maintainState: true,
           itemBuilder: (item) =>
-              Text(item?.replaceAll('_', ' ') ?? string.fromThemeSettings),
+              Text(item ?? string.fromThemeSettings),
           onSelected: (String? font) =>
               update('text', MapEntry('typography', font)),
         ),

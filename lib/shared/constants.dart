@@ -1,7 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../models/theme_model.dart';
 
 // Data
@@ -12,35 +11,35 @@ final List<Map<String, dynamic>> kCountryCodes = [];
 
 // Fonts
 const String kFontFamily = "Inter";
-List<String?> kFontFamilys = [
-  GoogleFonts.roboto().fontFamily,
-  GoogleFonts.openSans().fontFamily,
-  GoogleFonts.workSans().fontFamily,
-  GoogleFonts.dmSans().fontFamily,
-  GoogleFonts.roboto().fontFamily,
-  GoogleFonts.bebasNeue().fontFamily,
-  GoogleFonts.robotoCondensed().fontFamily,
-  GoogleFonts.robotoSlab().fontFamily,
-  GoogleFonts.lato().fontFamily,
-  GoogleFonts.poppins().fontFamily,
-  GoogleFonts.playfairDisplay().fontFamily,
-  GoogleFonts.oswald().fontFamily,
-  GoogleFonts.sourceSans3().fontFamily,
-  GoogleFonts.lora().fontFamily,
-  GoogleFonts.raleway().fontFamily,
-  GoogleFonts.merriweather().fontFamily,
-  GoogleFonts.rubik().fontFamily,
-  GoogleFonts.firaSans().fontFamily,
-  GoogleFonts.nunito().fontFamily,
-  GoogleFonts.quicksand().fontFamily,
-  GoogleFonts.ubuntu().fontFamily,
-  GoogleFonts.alegreya().fontFamily,
-  GoogleFonts.inter().fontFamily,
-  GoogleFonts.ptSerif().fontFamily,
-  GoogleFonts.leagueSpartan().fontFamily,
-  GoogleFonts.titilliumWeb().fontFamily,
-  GoogleFonts.alegreya().fontFamily,
-  GoogleFonts.inconsolata().fontFamily,
+
+const List<String?> kFontFamilys = [
+  'Roboto',
+  'Open Sans',
+  'Work Sans',
+  'DM Sans',
+  'Bebas Neue',
+  'Roboto Condensed',
+  'Roboto Slab',
+  'Lato',
+  'Poppins',
+  'Playfair Display',
+  'Oswald',
+  'Source Sans 3',
+  'Lora',
+  'Raleway',
+  'Merriweather',
+  'Rubik',
+  'Fira Sans',
+  'Nunito',
+  'Montserrat',
+  'Quicksand',
+  'Ubuntu',
+  'Inter',
+  'PT Serif',
+  'League Spartan',
+  'Titillium Web',
+  'Alegreya',
+  'Inconsolata',
 ];
 
 const List<String> kFontWeights = [
@@ -52,6 +51,7 @@ const List<String> kFontWeights = [
   'bold',
   'extra bold',
 ];
+
 const List<String> kVerticalAlignments = [
   'top',
   'center',
@@ -86,9 +86,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 1,
     background: LinearGradient(
-      transform: GradientRotation(2.37),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFFFFFFF),
         Color(0xFF5998d6),
@@ -104,9 +103,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 2,
     background: LinearGradient(
-      transform: GradientRotation(2.1),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFefefee),
         Color(0xFFffffff),
@@ -121,9 +119,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 3,
     background: LinearGradient(
-      transform: GradientRotation(2.37),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFfdfcfb),
         Color(0xFFE3D3C5),
@@ -137,9 +134,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 4,
     background: LinearGradient(
-      transform: GradientRotation(5.5),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFF414141),
         Color(0xFF161616),
@@ -153,9 +149,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 5,
     background: LinearGradient(
-      transform: GradientRotation(4.2),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFF000000),
         Color(0xFF615f5f),
@@ -170,9 +165,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 6,
     background: LinearGradient(
-      transform: GradientRotation(2.9),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFf7f7f3),
         Color(0xFFfdf1e3),
@@ -187,9 +181,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 7,
     background: LinearGradient(
-      transform: GradientRotation(0.8),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFf0d5d5),
         Color(0xFFe2b4a7),
@@ -204,9 +197,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 8,
     background: LinearGradient(
-      transform: GradientRotation(2.1),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFF385138),
         Color(0xFF0d210d),
@@ -221,9 +213,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 9,
     background: LinearGradient(
-      transform: GradientRotation(0.8),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFF78421b),
         Color(0xFF451f12),
@@ -239,9 +230,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 10,
     background: LinearGradient(
-      transform: GradientRotation(0.8),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFFf9f8f8),
         Color(0xFFd6d6d6),
@@ -257,9 +247,8 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 11,
     background: LinearGradient(
-      transform: GradientRotation(1.04),
-      begin: Alignment.bottomCenter,
-      end: Alignment.topCenter,
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
       colors: [
         Color(0xFF131e34),
         Color(0xFF020817),
