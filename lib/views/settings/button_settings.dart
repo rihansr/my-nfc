@@ -110,9 +110,9 @@ class ButtonSettings extends StatelessWidget {
               onChanged: (radius) => update('border', MapEntry('radius', radius)),
             ),
             CheckboxWidget.expand(
-              value: block['settings']?['additional']?['fullWidth'] ?? false,
+              value: block['style']?['fullWidth'] ?? false,
               label: string.fullWidth,
-              onChanged: (checked) => update('additional', MapEntry('fullWidth', checked)),
+              onChanged: (checked) => update('style', MapEntry('fullWidth', checked)),
             ),
             Dropdown<String?>(
               title: string.typography,
@@ -157,8 +157,7 @@ class ButtonSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: block['style']?['padding'],
-          margin: block['style']?['margin'],
+          spacing: block['style']?['spacing'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

@@ -69,8 +69,7 @@ class VideoSettings extends StatelessWidget {
         ),
         Spacing(
           title: string.paddingAndMarginSettings,
-          padding: block['style']?['padding'],
-          margin: block['style']?['margin'],
+          spacing: block['style']?['spacing'],
           onUpdate: (spacing) => update('style', spacing),
         ),
       ],

@@ -48,7 +48,7 @@ class DividerSettings extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
         Spacing(
-          margin: block['style']?['margin'],
+          spacing: block['style']?['spacing'],
           onUpdate: (spacing) => update('style', spacing),
         ),
         ColourPicker(

@@ -13,7 +13,7 @@ import '../../../widgets/seekbar_widget.dart';
 class ImageView extends StatefulWidget {
   final String? path;
   final BoxFit? fit;
-  final int? _size;
+  final int? _scale;
   final int? _overlayOpacity;
   final Map<String, dynamic>? style;
   final Function(MapEntry<String, dynamic>)? onStyleChange;
@@ -28,7 +28,7 @@ class ImageView extends StatefulWidget {
     this.onStyleChange,
     this.onPick,
     this.onRemove,
-  })  : _size = style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
+  })  : _scale = style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
         _overlayOpacity = style?['overlayOpacity'];
 
   @override
@@ -36,13 +36,13 @@ class ImageView extends StatefulWidget {
 }
 
 class _ImageViewState extends State<ImageView> {
-  late int? size;
+  late int? scale;
   late int? opacity;
   late String? path;
 
   @override
   void initState() {
-    size = widget._size;
+    scale = widget._scale;
     opacity = widget._overlayOpacity;
     path = widget.path;
     super.initState();
@@ -105,10 +105,10 @@ class _ImageViewState extends State<ImageView> {
                       overlayColor: opacity == null
                           ? null
                           : Colors.black.withOpacity(opacity! / 100),
-                      child: size != null
+                      child: scale != null
                           ? Transform.scale(
                               alignment: Alignment.center,
-                              scale: size! / 10,
+                              scale: scale! / 10,
                               child: image,
                             )
                           : AspectRatio(
@@ -134,18 +134,18 @@ class _ImageViewState extends State<ImageView> {
                   ],
                 ),
               ),
-              if (size != null || opacity != null) ...[
+              if (scale != null || opacity != null) ...[
                 const SizedBox(height: 16),
-                if (size != null)
+                if (scale != null)
                   Seekbar(
                     title: string.resize,
-                    value: size!,
+                    value: scale!,
                     showCount: false,
                     defaultValue: 10,
                     min: 1,
                     max: 20,
                     onChanged: (value) {
-                      setState(() => size = value);
+                      setState(() => scale = value);
                       widget.onStyleChange?.call(MapEntry('scale', value/10));
                     },
                   ),

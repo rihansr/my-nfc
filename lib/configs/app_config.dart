@@ -20,7 +20,13 @@ class AppConfig {
 
   init() async {
     WidgetsFlutterBinding.ensureInitialized();
-    if (kIsWeb) usePathUrlStrategy();
+    if (kIsWeb) {
+      usePathUrlStrategy();
+    } else {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ));
+    }
 
     await Future.wait(
       [

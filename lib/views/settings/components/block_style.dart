@@ -131,8 +131,7 @@ class BlockStyle extends StatelessWidget {
         if (style.containsKey('padding') || style.containsKey('margin'))
           Spacing(
             title: string.paddingAndMarginSettings,
-            padding: style['padding'],
-            margin: style['margin'],
+            spacing: style['spacing'],
             onUpdate: (spacing) => update('style', spacing),
           ),
         if (settings != null) ...[

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../utils/extensions.dart';
 import '../../../shared/strings.dart';
 import '../../../widgets/seekbar_widget.dart';
 import 'block_expansion_tile.dart';
@@ -6,29 +7,15 @@ import 'block_expansion_tile.dart';
 // ignore: must_be_immutable
 class Spacing extends StatelessWidget {
   final String? title;
-  final Map<String, dynamic>? padding;
-  final Map<String, dynamic>? margin;
+  final Map<String, dynamic>? spacing;
   final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
 
-  late final int _horizontalPadding;
-  late final int _verticalPadding;
-  late final int _leftMargin;
-  late final int _topMargin;
-  late final int _rightMargin;
-  late final int _bottomMargin;
-
-  Spacing({
+  const Spacing({
     super.key,
     this.title,
-    this.padding,
-    this.margin,
+    this.spacing,
     this.onUpdate,
-  })  : _horizontalPadding = padding?['horizontal'] ?? 0,
-        _verticalPadding = padding?['vertical'] ?? 0,
-        _leftMargin = margin?['left'] ?? 0,
-        _topMargin = margin?['top'] ?? 0,
-        _rightMargin = margin?['right'] ?? 0,
-        _bottomMargin = margin?['bottom'] ?? 0;
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,72 +23,44 @@ class Spacing extends StatelessWidget {
       label: string.paddingAndMarginSettings,
       maintainState: false,
       children: [
-        if (padding?.containsKey('horizontal') ?? false)
-          Seekbar(
-            title: string.horizontalPadding,
-            type: 'px',
-            defaultValue: 0,
-            value: _horizontalPadding,
-            onChanged: (val) {
-              padding!['horizontal'] = val;
-              onUpdate?.call(MapEntry("padding", padding!));
-            },
-          ),
-        if (padding?.containsKey('vertical') ?? false)
-          Seekbar(
-            title: string.verticalPadding,
-            type: 'px',
-            defaultValue: 0,
-            value: _verticalPadding,
-            onChanged: (val) {
-              padding!['vertical'] = val;
-              onUpdate?.call(MapEntry("padding", padding!));
-            },
-          ),
-        if (margin?.containsKey('top') ?? false)
-          Seekbar(
-            title: string.topMargin,
-            type: 'px',
-            defaultValue: 0,
-            value: _topMargin,
-            onChanged: (val) {
-              margin!['top'] = val;
-              onUpdate?.call(MapEntry("margin", margin!));
-            },
-          ),
-        if (margin?.containsKey('bottom') ?? false)
-          Seekbar(
-            title: string.bottomMargin,
-            type: 'px',
-            defaultValue: 0,
-            value: _bottomMargin,
-            onChanged: (val) {
-              margin!['bottom'] = val;
-              onUpdate?.call(MapEntry("margin", margin!));
-            },
-          ),
-        if (margin?.containsKey('left') ?? false)
-          Seekbar(
-            title: string.leftMargin,
-            type: 'px',
-            defaultValue: 0,
-            value: _leftMargin,
-            onChanged: (val) {
-              margin!['left'] = val;
-              onUpdate?.call(MapEntry("margin", margin!));
-            },
-          ),
-        if (margin?.containsKey('right') ?? false)
-          Seekbar(
-            title: string.rightMargin,
-            type: 'px',
-            defaultValue: 0,
-            value: _rightMargin,
-            onChanged: (val) {
-              margin!['right'] = val;
-              onUpdate?.call(MapEntry("margin", margin!));
-            },
-          ),
+        if (spacing?.containsKey('padding') ?? false)
+          ...(() {
+            Map<String, dynamic> padding =
+                Map<String, dynamic>.from(spacing?['padding'] ?? {});
+            return padding.entries.map(
+              (entry) => Seekbar(
+                title: '${entry.key.capitalizeFirstOfEach} ${string.padding}',
+                type: 'px',
+                value: entry.value,
+                defaultValue: spacing?['default'] ?? 0,
+                min: spacing?['limit']?['padding']?['min'] ?? 0,
+                max: spacing?['limit']?['padding']?['max'] ?? 100,
+                onChanged: (val) {
+                  spacing?.addEntry('padding', MapEntry(entry.key, val));
+                  onUpdate?.call(MapEntry("spacing", spacing!));
+                },
+              ),
+            );
+          }()),
+        if (spacing?.containsKey('margin') ?? false)
+          ...(() {
+            Map<String, dynamic> margin =
+                Map<String, dynamic>.from(spacing?['margin'] ?? {});
+            return margin.entries.map(
+              (entry) => Seekbar(
+                title: '${entry.key.capitalizeFirstOfEach} ${string.margin}',
+                type: 'px',
+                value: entry.value,
+                defaultValue: spacing?['default'] ?? 0,
+                min: spacing?['limit']?['margin']?['min'] ?? 0,
+                max: spacing?['limit']?['margin']?['max'] ?? 100,
+                onChanged: (val) {
+                  spacing?.addEntry('margin', MapEntry(entry.key, val));
+                  onUpdate?.call(MapEntry("spacing", spacing!));
+                },
+              ),
+            );
+          }()),
       ],
     );
   }

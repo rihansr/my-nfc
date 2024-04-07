@@ -9,8 +9,8 @@
             "dragable": true,
             "expandConfigs": true,
             "additional": {
-                "altText": "",
-                "linkTo": "",
+                "altText": null,
+                "linkTo": null,
                 "openInNewTab": true
             }
         },
@@ -31,15 +31,28 @@
                 "color": "#00000000",
                 "opacity": 40
             },
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
@@ -53,19 +66,32 @@
                         "removable": true
                     },
                     "style": {
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
-                        "content": "",
+                        "content": null,
                         "style": {
                             "text": {
                                 "typography": null,
@@ -86,19 +112,32 @@
                         "removable": true
                     },
                     "style": {
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
-                        "content": "",
+                        "content": null,
                         "style": {
                             "text": {
                                 "typography": null,
@@ -118,26 +157,39 @@
                         "visible": true,
                         "removable": true,
                         "additional": {
-                            "fullWidth": false,
                             "openInNewTab": true,
                             "disabled": false
                         }
                     },
                     "style": {
+                        "fullWidth": false,
                         "border": {
                             "borderColor": null,
                             "thickness": 1,
                             "radius": 4
                         },
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
@@ -167,19 +219,32 @@
             "removable": true
         },
         "style": {
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
-            "content": "",
+            "content": null,
             "style": {
                 "text": {
                     "typography": null,
@@ -201,15 +266,28 @@
         },
         "style": {
             "aspectRatio": "21:9",
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
@@ -234,9 +312,18 @@
             "removable": true
         },
         "style": {
-            "margin": {
-                "top": 0,
-                "bottom": 0
+            "spacing": {
+                "default": 25,
+                "limit": {
+                    "margin": {
+                        "min": 0,
+                        "max": 120
+                    }
+                },
+                "margin": {
+                    "top": 25,
+                    "bottom": 25
+                }
             }
         },
         "data": {
@@ -272,15 +359,28 @@
                 "color": "#00000000",
                 "opacity": 40
             },
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
@@ -301,15 +401,28 @@
                 "color": "#00000000"
             },
             "fullWidth": true,
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
@@ -330,15 +443,28 @@
                 "color": "#00000000"
             },
             "fullWidth": true,
-            "padding": {
-                "horizontal": 0,
-                "vertical": 0
-            },
-            "margin": {
-                "top": 0,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
@@ -365,33 +491,46 @@
             "visible": true,
             "removable": true,
             "additional": {
-                "fullWidth": false,
                 "openInNewTab": true,
                 "disabled": false
             }
         },
         "style": {
+            "fullWidth": false,
             "border": {
                 "borderColor": null,
                 "thickness": 1,
                 "radius": 4
             },
-            "padding": {
-                "horizontal": 16,
-                "vertical": 8
-            },
-            "margin": {
-                "top": 8,
-                "bottom": 0,
-                "left": 0,
-                "right": 0
+            "spacing": {
+                "default": 0,
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 0,
+                    "vertical": 0
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
             }
         },
         "data": {
             "label": {
                 "text": "Button"
             },
-            "link": "",
+            "link": null,
             "style": {
                 "text": {
                     "typography": null,

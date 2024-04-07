@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../widgets/clipper_widget.dart';
-import '../../../widgets/glassmorphism.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   final ScrollController scrollController;
@@ -17,9 +16,25 @@ class ModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Glassmorphism(
-      color: theme.scaffoldBackgroundColor,
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            theme.scaffoldBackgroundColor.withOpacity(.7),
+            theme.scaffoldBackgroundColor.withOpacity(.8),
+          ],
+          begin: AlignmentDirectional.topCenter,
+          end: AlignmentDirectional.bottomCenter,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: theme.shadowColor.withOpacity(.1),
+            blurRadius: 16,
+            offset: const Offset(0, -8),
+          )
+        ],
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+      ),
       child: Stack(
         alignment: AlignmentDirectional.topCenter,
         children: [

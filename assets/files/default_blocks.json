@@ -17,7 +17,7 @@
                         "visible": true,
                         "dragable": false,
                         "removable": false,
-                        "expandConfigs": true 
+                        "expandConfigs": true
                     },
                     "style": {
                         "background": {
@@ -27,8 +27,7 @@
                                     "scale": 1.0
                                 }
                             }
-                        }
-                        ,
+                        },
                         "overlay": {
                             "color": "#FF000000",
                             "opacity": 40
@@ -45,15 +44,28 @@
                                     "removable": false
                                 },
                                 "style": {
-                                    "padding": {
-                                        "horizontal": 0,
-                                        "vertical": 0
-                                    },
-                                    "margin": {
-                                        "top": 0,
-                                        "bottom": 0,
-                                        "left": 0,
-                                        "right": 0
+                                    "spacing": {
+                                        "default": 0,
+                                        "limit": {
+                                            "padding": {
+                                                "min": 0,
+                                                "max": 200
+                                            },
+                                            "margin": {
+                                                "min": -200,
+                                                "max": 200
+                                            }
+                                        },
+                                        "padding": {
+                                            "horizontal": 0,
+                                            "vertical": 0
+                                        },
+                                        "margin": {
+                                            "top": 0,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
+                                        }
                                     }
                                 },
                                 "data": {
@@ -104,15 +116,28 @@
                                     "removable": false
                                 },
                                 "style": {
-                                    "padding": {
-                                        "horizontal": 0,
-                                        "vertical": 0
-                                    },
-                                    "margin": {
-                                        "top": 0,
-                                        "bottom": 0,
-                                        "left": 0,
-                                        "right": 0
+                                    "spacing": {
+                                        "default": 0,
+                                        "limit": {
+                                            "padding": {
+                                                "min": 0,
+                                                "max": 200
+                                            },
+                                            "margin": {
+                                                "min": -200,
+                                                "max": 200
+                                            }
+                                        },
+                                        "padding": {
+                                            "horizontal": 0,
+                                            "vertical": 0
+                                        },
+                                        "margin": {
+                                            "top": 0,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
+                                        }
                                     }
                                 },
                                 "data": {
@@ -127,7 +152,7 @@
                                             "fontSize": 32,
                                             "textColor": null,
                                             "fontWeight": "regular",
-                                            "alignment": "left"
+                                            "alignment": "center"
                                         }
                                     }
                                 }
@@ -158,15 +183,28 @@
                         "removable": false
                     },
                     "style": {
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
@@ -205,15 +243,28 @@
                         "removable": false
                     },
                     "style": {
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
@@ -238,9 +289,18 @@
                         "removable": false
                     },
                     "style": {
-                        "margin": {
-                            "top": 25,
-                            "bottom": 25
+                        "spacing": {
+                            "default": 25,
+                            "limit": {
+                                "margin": {
+                                    "min": 0,
+                                    "max": 120
+                                }
+                            },
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
                         }
                     },
                     "data": {
@@ -311,9 +371,18 @@
                         "removable": false
                     },
                     "style": {
-                        "margin": {
-                            "top": 25,
-                            "bottom": 25
+                        "spacing": {
+                            "default": 25,
+                            "limit": {
+                                "margin": {
+                                    "min": 0,
+                                    "max": 120
+                                }
+                            },
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
                         }
                     },
                     "data": {
@@ -332,15 +401,28 @@
                         "dragable": false
                     },
                     "style": {
-                        "padding": {
-                            "horizontal": 0,
-                            "vertical": 0
-                        },
-                        "margin": {
-                            "top": 0,
-                            "bottom": 0,
-                            "left": 0,
-                            "right": 0
+                        "spacing": {
+                            "default": 0,
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
                         }
                     },
                     "data": {
@@ -389,9 +471,18 @@
                         "removable": false
                     },
                     "style": {
-                        "margin": {
-                            "top": 25,
-                            "bottom": 25
+                        "spacing": {
+                            "default": 25,
+                            "limit": {
+                                "margin": {
+                                    "min": 0,
+                                    "max": 120
+                                }
+                            },
+                            "margin": {
+                                "top": 25,
+                                "bottom": 25
+                            }
                         }
                     },
                     "data": {
@@ -427,11 +518,11 @@
                                 },
                                 "data": {
                                     "title": {
-                                        "text": "",
+                                        "text": null,
                                         "hint": "Company"
                                     },
                                     "content": {
-                                        "text": "",
+                                        "text": null,
                                         "hint": "Position"
                                     }
                                 }
@@ -460,11 +551,11 @@
                                 },
                                 "data": {
                                     "title": {
-                                        "text": "",
+                                        "text": null,
                                         "hint": "Place"
                                     },
                                     "content": {
-                                        "text": "",
+                                        "text": null,
                                         "hint": "Degree"
                                     }
                                 }
@@ -493,7 +584,7 @@
                                 },
                                 "data": {
                                     "title": {
-                                        "text": ""
+                                        "text": null
                                     }
                                 }
                             }
