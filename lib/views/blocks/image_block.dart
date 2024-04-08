@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/shared/drawables.dart';
+import '../../shared/drawables.dart';
 import 'components.dart';
 
 class ImageBlock extends StatelessWidget {

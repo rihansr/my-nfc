@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/views/blocks/components.dart';
+import '../../views/blocks/components.dart';
 
 class TextBlock extends StatelessWidget {
   final Map<String, dynamic> configs;

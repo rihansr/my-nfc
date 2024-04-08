@@ -257,7 +257,7 @@ const List<ThemeModel> kThemes = [
       stops: [0, 54, 100],
     ),
     textColor: Color(0xFFFFFFFF),
-    iconColor: Color(0xFF020817),
+    iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFF606060),
   ),
 ];

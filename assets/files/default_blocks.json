@@ -380,7 +380,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -394,8 +394,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,
@@ -475,7 +475,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -489,8 +489,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,
@@ -590,7 +590,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -604,8 +604,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,

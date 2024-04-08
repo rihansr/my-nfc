@@ -36,13 +36,14 @@ Alignment alignment(Map? alignment) {
 
 CrossAxisAlignment horizontalAlignment(Object? alignment) {
   switch (alignment) {
+    case 'start':
+      return CrossAxisAlignment.start;
     case 'center':
       return CrossAxisAlignment.center;
     case 'end':
       return CrossAxisAlignment.end;
-    case 'start':
     default:
-      return CrossAxisAlignment.start;
+      return CrossAxisAlignment.stretch;
   }
 }
 
