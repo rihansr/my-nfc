@@ -58,15 +58,16 @@ MainAxisAlignment verticalAlignment(Object? alignment) {
   }
 }
 
-TextAlign textAlign(Object? alignment) {
+TextAlign? textAlign(Object? alignment) {
   switch (alignment) {
+    case 'left':
+      return TextAlign.left;
     case 'center':
       return TextAlign.center;
     case 'right':
       return TextAlign.right;
-    case 'left':
     default:
-      return TextAlign.left;
+      return null;
   }
 }
 

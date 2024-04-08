@@ -142,7 +142,8 @@ class TextSettings extends StatelessWidget {
           TabWidget(
             title: string.alignment,
             tabs: kHorizontalAlignments,
-            value: block['data']?['style']?['text']?['alignment'] ?? 'left',
+            reselectable: true,
+            value: block['data']?['style']?['text']?['alignment'],
             onSelect: (alignment) =>
                 update('text', MapEntry('alignment', alignment)),
           ),

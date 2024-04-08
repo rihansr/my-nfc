@@ -38,11 +38,11 @@ class SpaceSettings extends StatelessWidget {
       children: [
         Seekbar(
           title: string.height,
-          value: block['data']?['style']?['height'] ?? 20,
+          value: block['data']?['style']?['height'] ?? 0,
           type: 'px',
           min: 0,
           max: 200,
-          defaultValue: 20,
+          defaultValue: block['data']?['style']?['default'],
           onChanged: (value) => update('data', value),
         ),
       ],

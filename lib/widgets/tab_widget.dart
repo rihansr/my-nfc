@@ -69,13 +69,13 @@ class TabWidget extends StatelessWidget {
                             onTap: (tab) {
                               if (reselectable) {
                                 _selectedTab.value =
-                                    _selectedTab.value == tab ? null : tab;
-                              } else if (_selectedTab.value == tab) {
+                                    selectedTab == tab ? null : tab;
+                              } else if (selectedTab == tab) {
                                 return;
                               } else {
                                 _selectedTab.value = tab;
                               }
-                              onSelect?.call(tab);
+                              onSelect?.call(_selectedTab.value);
                             },
                           ),
                         ),

@@ -29,12 +29,13 @@ class SectionBlock extends StatelessWidget {
       children: [
         (() {
           String? path = configs['style']?['background']?['image']?['path'];
-          if (path == null) {
-            return SizedBox(height: configs['label'] == 'Banner' ? 100 : 0);
-          }
           double scale = configs['style']?['background']?['image']?['style']
                   ?['scale'] ??
               1.0;
+          
+          if (path == null) {
+            return SizedBox(height: configs['label'] == 'Banner' ? 100 : 0);
+          }
           Widget image = Clipper(
             overlayColor:
                 configs['style']?['overlay']?['color']?.toString().hexColor ??
@@ -104,18 +105,18 @@ class SectionBlock extends StatelessWidget {
         ),
       ],
     );
-    return InkWell(
-      focusColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      onTap: configs['settings']?['additional']?['openInNewTab'] == true
-          ? () => {}
-          : null,
-      child: Container(
-        width: configs['style']?['fullWidth'] == false ? null : double.infinity,
-        color: configs['style']?['background']?['color']?.toString().hexColor,
-        transform: transform(configs['style']?['spacing']?['margin']),
-        margin: margin(configs['style']?['spacing']?['margin']),
+    return Container(
+      width: configs['style']?['fullWidth'] == false ? null : double.infinity,
+      color: configs['style']?['background']?['color']?.toString().hexColor,
+      transform: transform(configs['style']?['spacing']?['margin']),
+      margin: margin(configs['style']?['spacing']?['margin']),
+      child: InkWell(
+        focusColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
+        onTap: configs['settings']?['additional']?['openInNewTab'] == true
+            ? () => {}
+            : null,
         child: configs['label'] == 'Banner'
             ? NegativePadding(
                 padding: EdgeInsets.symmetric(
