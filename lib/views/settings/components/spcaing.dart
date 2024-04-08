@@ -24,34 +24,27 @@ class Spacing extends StatelessWidget {
       maintainState: false,
       children: [
         if (spacing?.containsKey('padding') ?? false)
-          ...(() {
-            Map<String, dynamic> padding =
-                Map<String, dynamic>.from(spacing?['padding'] ?? {});
-            return padding.entries.map(
-              (entry) => Seekbar(
-                title: '${entry.key.capitalizeFirstOfEach} ${string.padding}',
-                type: 'px',
-                value: entry.value,
-                defaultValue: spacing?['default'] ?? 0,
-                min: spacing?['limit']?['padding']?['min'] ?? 0,
-                max: spacing?['limit']?['padding']?['max'] ?? 100,
-                onChanged: (val) {
-                  spacing?.addEntry('padding', MapEntry(entry.key, val));
-                  onUpdate?.call(MapEntry("spacing", spacing!));
-                },
+          ...Map<String, dynamic>.from(spacing?['padding'] ?? {}).entries.map(
+                (entry) => Seekbar(
+                  title: '${entry.key.capitalizeFirstOfEach} ${string.padding}',
+                  type: 'px',
+                  value: entry.value,
+                  defaultValue: spacing?['default']?['padding'] ?? 0,
+                  min: spacing?['limit']?['padding']?['min'] ?? 0,
+                  max: spacing?['limit']?['padding']?['max'] ?? 100,
+                  onChanged: (val) {
+                    spacing?.addEntry('padding', MapEntry(entry.key, val));
+                    onUpdate?.call(MapEntry("spacing", spacing!));
+                  },
+                ),
               ),
-            );
-          }()),
         if (spacing?.containsKey('margin') ?? false)
-          ...(() {
-            Map<String, dynamic> margin =
-                Map<String, dynamic>.from(spacing?['margin'] ?? {});
-            return margin.entries.map(
+          ...Map<String, dynamic>.from(spacing?['margin'] ?? {}).entries.map(
               (entry) => Seekbar(
                 title: '${entry.key.capitalizeFirstOfEach} ${string.margin}',
                 type: 'px',
                 value: entry.value,
-                defaultValue: spacing?['default'] ?? 0,
+                defaultValue: spacing?['default']?['margin'] ?? 0,
                 min: spacing?['limit']?['margin']?['min'] ?? 0,
                 max: spacing?['limit']?['margin']?['max'] ?? 100,
                 onChanged: (val) {
@@ -59,8 +52,7 @@ class Spacing extends StatelessWidget {
                   onUpdate?.call(MapEntry("spacing", spacing!));
                 },
               ),
-            );
-          }()),
+            ),
       ],
     );
   }

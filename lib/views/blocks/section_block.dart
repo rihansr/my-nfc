@@ -95,6 +95,9 @@ class SectionBlock extends StatelessWidget {
                             : Key('$i');
                         Map<String, dynamic> configs =
                             Map<String, dynamic>.from(e);
+                        if (configs['settings']?['visible'] == false) {
+                          return SizedBox.shrink(key: key);
+                        }
                         switch (configs['block']) {
                           case "section":
                           case "section-secure":

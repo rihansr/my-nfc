@@ -6,6 +6,7 @@ import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/colour_picker_widget.dart';
+import '../../widgets/seekbar_widget.dart';
 import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
 
@@ -33,7 +34,8 @@ class DividerSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme =
+        Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -47,16 +49,27 @@ class DividerSettings extends StatelessWidget {
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
-        Spacing(
-          spacing: block['style']?['spacing'],
-          onUpdate: (spacing) => update('style', spacing),
+        Seekbar(
+          title: string.height,
+          value: block['data']?['style']?['height'] ?? 1.0,
+          type: 'px',
+          min: 1,
+          max: 10,
+          defaultValue: 1,
+          onChanged: (size) => update('data', MapEntry('height', size)),
         ),
         ColourPicker(
           title: string.color,
-          value: block['data']?['style']?['dividerColor']?.toString().hexColor ??
-              defaultTheme.dividerColor,
+          value:
+              block['data']?['style']?['dividerColor']?.toString().hexColor ??
+                  defaultTheme.dividerColor,
           colors: kColors,
-          onPick: (color) => update('data', MapEntry('dividerColor', color.toHex)),
+          onPick: (color) =>
+              update('data', MapEntry('dividerColor', color.toHex)),
+        ),
+        Spacing(
+          spacing: block['style']?['spacing'],
+          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

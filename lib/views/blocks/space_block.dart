@@ -6,6 +6,6 @@ class SpaceBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(height: configs['style']?['height']?.toDouble() ?? 0.0);
   }
 }

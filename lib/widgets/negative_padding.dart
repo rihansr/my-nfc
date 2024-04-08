@@ -41,13 +41,13 @@ class IntrinsicSizeOverflowBox extends SingleChildRenderObjectWidget {
   /// be infinite, which allows IntrinsicSizeOverflowBox to be used in a 
   /// `Scrollable` widget.
   const IntrinsicSizeOverflowBox({
-    Key? key,
+    super.key,
     this.minWidth,
     this.maxWidth,
     this.minHeight,
     this.maxHeight,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required Widget super.child,
+  });
 
   final double? minWidth;
   final double? maxWidth;
