@@ -176,6 +176,11 @@ class _SectionSettingsState extends State<SectionSettings> {
                 widget.block['style'] = settings;
                 widget.onUpdate?.call(widget.block);
               },
+              onSettingsUpdate: (settings) {
+                widget.block
+                    .addEntry('settings', MapEntry('additional', settings));
+                widget.onUpdate?.call(widget.block);
+              },
             )
           : null,
       children: [

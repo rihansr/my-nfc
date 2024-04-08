@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
+import 'components/block_style.dart';
 import 'components/image_view.dart';
 
 class ImageSettings extends StatelessWidget {
@@ -41,6 +42,15 @@ class ImageSettings extends StatelessWidget {
       },
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(10, 8, 22, 18),
+      child: block.containsKey('style')
+          ? BlockStyle(
+              block['style'],
+              onUpdate: (settings) {
+                block['style'] = settings;
+                onUpdate?.call(block);
+              },
+            )
+          : null,
       children: [
         if (block['label'] != null) ...[
           Text(

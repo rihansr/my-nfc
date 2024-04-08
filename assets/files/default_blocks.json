@@ -31,6 +31,28 @@
                         "overlay": {
                             "color": "#FF000000",
                             "opacity": 40
+                        },
+                        "alignment": {
+                            "horizontal": "center",
+                            "vertical": "center"
+                        }
+                        ,
+                        "spacing": {
+                            "default": {
+                                "padding": 0
+                            },
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "top": 0,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
+                            }
                         }
                     },
                     "data": {
@@ -96,6 +118,35 @@
                         "dragable": false,
                         "removable": false
                     },
+                    "style": {
+                        "spacing": {
+                            "initiallyExpanded": true,
+                            "default": {
+                                "margin": 0,
+                                "padding": 0
+                            },
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": -50,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
+                    },
                     "data": {
                         "fields": [
                             {
@@ -106,8 +157,32 @@
                                     "visible": true,
                                     "removable": false
                                 },
+                                "style": {
+                                    "alignment": {
+                                        "horizontal": "center"
+                                    },
+                                    "spacing": {
+                                        "initiallyExpanded": true,
+                                        "default": {
+                                            "margin": 0
+                                        },
+                                        "limit": {
+                                            "margin": {
+                                                "min": 0,
+                                                "max": 200
+                                            }
+                                        },
+                                        "margin": {
+                                            "left": 0,
+                                            "right": 0
+                                        }
+                                    }
+                                },
                                 "data": {
-                                    "path": null
+                                    "path": null,
+                                    "style": {
+                                        "size": 100 
+                                    }
                                 }
                             },
                             {

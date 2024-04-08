@@ -7,4 +7,5 @@ class Drawable {
   final String scanning = "assets/animations/scanning.json";
   final String transparentBG = "assets/images/transparent_bg.png";
   final String imagePlaceholder = "assets/images/image_placeholder.jpg";
+  final String avatar = "assets/images/avatar.png";
 }

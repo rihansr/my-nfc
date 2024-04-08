@@ -11,6 +11,7 @@ class BlockExpansionTile extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool enableBorder;
   final bool maintainState;
+  final bool initiallyExpanded;
   final List<Widget> children;
   final Function(MapEntry<String, dynamic>)? onUpdate;
   final Function()? onRemove;
@@ -25,6 +26,7 @@ class BlockExpansionTile extends StatelessWidget {
     this.padding = const EdgeInsets.all(0),
     this.enableBorder = false,
     this.maintainState = true,
+    this.initiallyExpanded = false,
     this.children = const [],
     this.onExpansionChanged,
   })  : controllers = null,
@@ -44,6 +46,7 @@ class BlockExpansionTile extends StatelessWidget {
     this.padding,
     this.enableBorder = false,
     this.maintainState = false,
+    this.initiallyExpanded = false,
     this.children = const [],
     this.onUpdate,
     this.onRemove,
@@ -73,6 +76,7 @@ class BlockExpansionTile extends StatelessWidget {
             : const Border(),
         tilePadding: titlePadding,
         childrenPadding: padding,
+        initiallyExpanded: initiallyExpanded,
         expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
         onExpansionChanged: (state) {
           childrenExpanded.value = state;
@@ -169,7 +173,7 @@ class BlockExpansionTile extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 8, 22, 0),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 22, 0),
                               child: child!,
                             ),
                             const SizedBox(height: 16)

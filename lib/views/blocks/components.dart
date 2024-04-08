@@ -1,8 +1,38 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/extensions.dart';
 import '../../../viewmodels/design_viewmodel.dart';
+import '../../shared/constants.dart';
+
+Alignment alignment(Map? alignment) {
+  switch (
+      '${alignment?['vertical'] ?? 'top'}-${alignment?['horizontal'] ?? 'left'}') {
+    case 'top-left':
+      return Alignment.topLeft;
+    case 'top-center':
+      return Alignment.topCenter;
+    case 'top-right':
+      return Alignment.topRight;
+    case 'center-left':
+      return Alignment.centerLeft;
+    case 'center-center':
+      return Alignment.center;
+    case 'center-right':
+      return Alignment.centerRight;
+    case 'bottom-left':
+      return Alignment.bottomLeft;
+    case 'bottom-center':
+      return Alignment.bottomCenter;
+    case 'bottom-right':
+      return Alignment.bottomRight;
+    default:
+      return Alignment.topLeft;
+  }
+}
 
 CrossAxisAlignment horizontalAlignment(Object? alignment) {
   switch (alignment) {
@@ -40,6 +70,34 @@ TextAlign textAlign(Object? alignment) {
   }
 }
 
+ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
+    (() {
+      if (img?.isNotEmpty == true) {
+        if ((Uri.tryParse(img!)?.isAbsolute ?? false) || kIsWeb) {
+          return NetworkImage(img) as ImageProvider<Object>;
+        } else {
+          return FileImage(File(img));
+        }
+      } else {
+        return placeholder?.isNotEmpty == true
+            ? AssetImage(placeholder!)
+            : null;
+      }
+    }());
+
+Widget? photo(String? path, {String? placeholder}) =>
+    path?.isNotEmpty == true || placeholder?.isNotEmpty == true
+        ? Uri.tryParse(path ?? placeholder!)?.isAbsolute ?? false
+            ? FadeInImage.memoryNetwork(
+                image: path ?? placeholder!,
+                fit: BoxFit.cover,
+                placeholder: kTransparentImage,
+              )
+            : kIsWeb
+                ? Image.network(path ?? placeholder!, fit: BoxFit.cover)
+                : Image.file(File(path ?? placeholder!), fit: BoxFit.cover)
+        : null;
+
 TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
       style?['typography'] ??
           Provider.of<DesignViewModel>(context).theme.fontFamily,
@@ -70,16 +128,18 @@ TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
       }()),
     );
 
-EdgeInsets margin(Map? margin) => EdgeInsets.only(
-      top: _abs(margin?['top'] ?? 0),
-      bottom: _abs(margin?['bottom'] ?? 0),
-      left: _abs(margin?['left'] ?? 0),
-      right: _abs(margin?['right'] ?? 0),
+EdgeInsets margin(Map? spacing) => EdgeInsets.only(
+      top: _abs(spacing?['top'] ?? spacing?['vertical'] ?? 0),
+      bottom: _abs(spacing?['bottom'] ?? spacing?['vertical'] ?? 0),
+      left: _abs(spacing?['left'] ?? spacing?['horizontal'] ?? 0),
+      right: _abs(spacing?['right'] ?? spacing?['horizontal'] ?? 0),
     );
 
-EdgeInsets padding(Map? padding) => EdgeInsets.symmetric(
-      vertical: _abs(padding?['vertical'] ?? 0),
-      horizontal: _abs(padding?['horizontal'] ?? 0),
+EdgeInsets padding(Map? spacing) => EdgeInsets.only(
+      top: _abs(spacing?['top'] ?? spacing?['vertical'] ?? 0),
+      bottom: _abs(spacing?['bottom'] ?? spacing?['vertical'] ?? 0),
+      left: _abs(spacing?['left'] ?? spacing?['horizontal'] ?? 0),
+      right: _abs(spacing?['right'] ?? spacing?['horizontal'] ?? 0),
     );
 
 Matrix4 transform(Map? margin) {

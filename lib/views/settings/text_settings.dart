@@ -43,7 +43,8 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme =
+        Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -111,8 +112,7 @@ class TextSettings extends StatelessWidget {
           items: const [null, ...kFontFamilys],
           value: block['data']?['style']?['text']?['typography'],
           maintainState: true,
-          itemBuilder: (item) =>
-              Text(item ?? string.fromThemeSettings),
+          itemBuilder: (item) => Text(item ?? string.fromThemeSettings),
           onSelected: (String? font) =>
               update('text', MapEntry('typography', font)),
         ),
@@ -126,8 +126,9 @@ class TextSettings extends StatelessWidget {
         ColourPicker(
           title: string.textColor,
           value: block['data']?['style']?['text']?['textColor']
-              ?.toString()
-              .hexColor ?? defaultTheme.textColor,
+                  ?.toString()
+                  .hexColor ??
+              defaultTheme.textColor,
           colors: kColors,
           onPick: (color) => update('text', MapEntry('textColor', color.toHex)),
         ),
@@ -137,13 +138,14 @@ class TextSettings extends StatelessWidget {
           value: block['data']?['style']?['text']?['fontWeight'],
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
-        TabWidget(
-          title: string.alignment,
-          tabs: kHorizontalAlignments,
-          value: block['data']?['style']?['text']?['alignment'] ?? 'left',
-          onSelect: (alignment) =>
-              update('text', MapEntry('alignment', alignment)),
-        ),
+        if ((block['data']?['style']?['text'] as Map?)?.containsKey('alignment') ?? false)
+          TabWidget(
+            title: string.alignment,
+            tabs: kHorizontalAlignments,
+            value: block['data']?['style']?['text']?['alignment'] ?? 'left',
+            onSelect: (alignment) =>
+                update('text', MapEntry('alignment', alignment)),
+          ),
         Spacing(
           title: string.paddingAndMarginSettings,
           spacing: block['style']?['spacing'],

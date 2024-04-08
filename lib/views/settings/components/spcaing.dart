@@ -22,6 +22,7 @@ class Spacing extends StatelessWidget {
     return BlockExpansionTile(
       label: string.paddingAndMarginSettings,
       maintainState: false,
+      initiallyExpanded: spacing?['initiallyExpanded'] == true,
       children: [
         if (spacing?.containsKey('padding') ?? false)
           ...Map<String, dynamic>.from(spacing?['padding'] ?? {}).entries.map(

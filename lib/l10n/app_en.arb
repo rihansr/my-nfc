@@ -28,7 +28,7 @@
   "selectOne": "Select One",
   "alignment": "Alignment",
   "contentVerticalAlignment": "Content vertical alignment",
-  "contentHorizontalAlignment": "Content vertical alignment",
+  "contentHorizontalAlignment": "Content horizontal alignment",
   "paddingAndMarginSettings": "Padding & Margin Settings",
   "horizontalPadding": "Horizontal Padding",
   "padding": "Padding",

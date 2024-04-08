@@ -15,11 +15,11 @@ class TextBlock extends StatelessWidget {
     return text.isEmpty
         ? const SizedBox.shrink()
         : Container(
-            width: (configs['data']?['style']?['text'] as Map?)
-                        ?.containsKey('alignment') ??
-                    false
-                ? double.infinity
-                : null,
+            // width: (configs['data']?['style']?['text'] as Map?)
+            //             ?.containsKey('alignment') ??
+            //         false
+            //     ? double.infinity
+            //     : null,
             padding: padding(configs['style']?['spacing']?['padding']),
             margin: margin(configs['style']?['spacing']?['margin']),
             transform: transform(configs['style']?['spacing']?['margin']),

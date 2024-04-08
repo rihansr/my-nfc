@@ -20,8 +20,6 @@ class BlockStyle extends StatelessWidget {
   final Function(Map<String, dynamic>)? onSettingsUpdate;
 
   late Color? _selectedBackgroudColor;
-  late String? _selectedVerticalAlignment;
-  late String? _selectedHorizontalAlignment;
   late Color? _selectedOverlayColor;
   late int _selectedOverlayOpacity;
   late bool _fullWidth;
@@ -35,8 +33,6 @@ class BlockStyle extends StatelessWidget {
     this.onSettingsUpdate,
   })  : _selectedBackgroudColor =
             style['background']?['color']?.toString().hexColor,
-        _selectedVerticalAlignment = style['alignment']?['vertical'],
-        _selectedHorizontalAlignment = style['alignment']?['horizontal'],
         _selectedOverlayColor = style['overlay']?['color']?.toString().hexColor,
         _selectedOverlayOpacity = style['overlay']?['opacity'] ?? 0,
         _fullWidth = style['fullWidth'] ?? true,
@@ -47,12 +43,15 @@ class BlockStyle extends StatelessWidget {
     switch (key) {
       case 'settings':
         settings?.addEntries([entry]);
+        onSettingsUpdate?.call(settings!);
       case 'style':
         style.addEntries([entry]);
+        onUpdate?.call(style);
+
       default:
         style.addEntry(key, entry);
+        onUpdate?.call(style);
     }
-    onUpdate?.call(style);
   }
 
   @override
@@ -77,26 +76,28 @@ class BlockStyle extends StatelessWidget {
               update('background', MapEntry('color', color.toHex));
             },
           ),
-        if (style.containsKey('alignment')) ...[
-          TabWidget(
-            title: string.contentVerticalAlignment,
-            tabs: kVerticalAlignments,
-            value: _selectedVerticalAlignment,
-            onSelect: (alignment) {
-              _selectedVerticalAlignment = alignment;
-              update('alignment', MapEntry('vertical', alignment));
-            },
-          ),
-          TabWidget(
-            title: string.contentHorizontalAlignment,
-            tabs: kHorizontalAlignments,
-            value: _selectedHorizontalAlignment,
-            onSelect: (alignment) {
-              _selectedHorizontalAlignment = alignment;
-              update('alignment', MapEntry('horizontal', alignment));
-            },
-          ),
-        ],
+        ...(style['alignment'] as Map?)
+                ?.entries
+                .map((entry) => TabWidget(
+                      title:
+                          '${entry.key} ${string.alignment}'.capitalizeFirstOfEach,
+                      tabs: (() {
+                        switch (entry.key) {
+                          case 'horizontal':
+                            return kHorizontalAlignments;
+                          case 'vertical':
+                            return kVerticalAlignments;
+                          default:
+                            return List<String>.from([]);
+                        }
+                      }()),
+                      value: entry.value,
+                      onSelect: (alignment) {
+                        update('alignment', MapEntry(entry.key, alignment));
+                      },
+                    ))
+                .toList() ??
+            [],
         if (style.containsKey('overlay')) ...[
           ColourPicker(
             title: string.overlayColor,
@@ -128,7 +129,7 @@ class BlockStyle extends StatelessWidget {
               update('style', MapEntry('fullWidth', checked));
             },
           ),
-        if (style.containsKey('padding') || style.containsKey('margin'))
+        if (style.containsKey('spacing'))
           Spacing(
             title: string.paddingAndMarginSettings,
             spacing: style['spacing'],
@@ -170,8 +171,8 @@ class BlockStyle extends StatelessWidget {
                   },
                 ),
             ],
-          )
-        ]
+          ),
+        ],
       ],
     );
   }
