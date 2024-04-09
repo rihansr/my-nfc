@@ -654,8 +654,8 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 10,
-                                        "default": 10
+                                        "height": 20,
+                                        "default": 20
                                     }
                                 }
                             },
@@ -688,8 +688,8 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 10,
-                                        "default": 10
+                                        "height": 20,
+                                        "default": 20
                                     }
                                 }
                             },
@@ -702,7 +702,7 @@
                                     "removable": false
                                 },
                                 "data": {
-                                    "title": {
+                                    "content": {
                                         "text": null
                                     }
                                 }

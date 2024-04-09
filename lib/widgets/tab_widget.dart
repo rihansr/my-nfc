@@ -12,6 +12,7 @@ class TabWidget extends StatelessWidget {
   final String? value;
   final bool maintainState;
   final bool reselectable;
+  final Widget Function(String, bool)? itemBuilder;
   final Function(String?)? onSelect;
 
   TabWidget({
@@ -27,6 +28,7 @@ class TabWidget extends StatelessWidget {
     this.maintainState = true,
     this.reselectable = false,
     this.onSelect,
+    this.itemBuilder,
   }) : _selectedTab = ValueNotifier(value);
 
   final ValueNotifier<String?> _selectedTab;
@@ -66,6 +68,7 @@ class TabWidget extends StatelessWidget {
                           (tab) => _TabItem(
                             isSelected: tab == selectedTab,
                             tab: tab,
+                            itemBuilder: itemBuilder,
                             onTap: (tab) {
                               if (reselectable) {
                                 _selectedTab.value =
@@ -91,6 +94,7 @@ class TabWidget extends StatelessWidget {
                       (tab) => _TabItem(
                         isSelected: tab == value,
                         tab: tab,
+                        itemBuilder: itemBuilder,
                         onTap: (tab) {
                           if (reselectable) {
                             onSelect
@@ -114,10 +118,13 @@ class TabWidget extends StatelessWidget {
 class _TabItem extends StatelessWidget {
   final String tab;
   final bool isSelected;
+  final Widget Function(String, bool)? itemBuilder;
   final Function(String)? onTap;
+  
   const _TabItem({
     required this.tab,
     this.isSelected = false,
+    this.itemBuilder,
     this.onTap,
   });
 
@@ -136,7 +143,7 @@ class _TabItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 12),
         border: Border.all(color: tint, width: 1),
         radius: 6,
-        child: Text(
+        child: itemBuilder?.call(tab, isSelected) ?? Text(
           tab,
           style: theme.textTheme.bodySmall?.copyWith(color: tint),
         ),

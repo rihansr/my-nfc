@@ -198,14 +198,7 @@ class _ContactSettingsState extends State<ContactSettings> {
                               : null,
                           onTyping: (text) {
                             items[i].addEntries(
-                              [
-                                if (e.key == 'phoneNumbers')
-                                  MapEntry(
-                                    'prefix',
-                                    kCountryCodes.first['code'],
-                                  ),
-                                MapEntry('content', text.isEmpty ? null : text),
-                              ],
+                              [MapEntry('content', text.isEmpty ? null : text)],
                             );
                             update(e.key, items);
                           },
@@ -219,7 +212,12 @@ class _ContactSettingsState extends State<ContactSettings> {
                     padding: const EdgeInsets.fromLTRB(0, 24, 18, 12),
                   ),
                   onPressed: () {
-                    items.add({'label': types.first});
+                    items.add({
+                      'label': types.first,
+                      'prefix': e.key == 'phoneNumbers'
+                          ? kCountryCodes.first['code']
+                          : null
+                    });
                     setState(() => update(e.key, items));
                   },
                   icon: Icon(

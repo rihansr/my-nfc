@@ -106,8 +106,11 @@ TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
       fontSize: style?['fontSize']?.toDouble() ?? 16,
       color: style?['textColor']?.toString().hexColor ??
           Provider.of<DesignViewModel>(context).theme.textColor,
-      fontWeight: (() {
-        switch (style?['fontWeight']) {
+      fontWeight: fontWeight(style?['fontWeight']),
+    );
+
+FontWeight fontWeight(Object? fontWeight) {
+  switch (fontWeight) {
           case 'thin':
             return FontWeight.w200;
           case 'light':
@@ -127,8 +130,7 @@ TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
           default:
             return FontWeight.normal;
         }
-      }()),
-    );
+}
 
 EdgeInsets margin(Map? spacing) => EdgeInsets.only(
       top: _abs(spacing?['top'] ?? spacing?['vertical'] ?? 0),

@@ -12,6 +12,7 @@ import '../../widgets/dropdown_widget.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/seekbar_widget.dart';
 import '../../widgets/tab_widget.dart';
+import '../blocks/components.dart';
 import 'components/block_expansion_tile.dart';
 import 'components/spcaing.dart';
 
@@ -51,6 +52,7 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     ThemeModel defaultTheme =
         Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
@@ -164,6 +166,14 @@ class ButtonSettings extends StatelessWidget {
               tabs: kFontWeights,
               value:
                   block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
+              itemBuilder: (item, isSelected) => Text(
+                item,
+                style: theme.textTheme.bodySmall?.copyWith(
+                    color: isSelected
+                        ? theme.colorScheme.primary
+                        : theme.dividerColor,
+                    fontWeight: fontWeight(item)),
+              ),
               onSelect: (weight) =>
                   update('text', MapEntry('fontWeight', weight)),
             ),

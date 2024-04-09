@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../views/blocks/components.dart';
 import '../../models/theme_model.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/tab_widget.dart';
@@ -44,6 +45,7 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     ThemeModel defaultTheme =
         Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
@@ -66,6 +68,7 @@ class TextSettings extends StatelessWidget {
                   controller: TextEditingController(
                       text: block['data']?['name']?['first']),
                   title: string.firstName,
+                  keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
                     'name',
@@ -76,6 +79,7 @@ class TextSettings extends StatelessWidget {
                   controller: TextEditingController(
                       text: block['data']?['name']?['middle']),
                   title: string.middleName,
+                  keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
                     'name',
@@ -86,6 +90,7 @@ class TextSettings extends StatelessWidget {
                   controller: TextEditingController(
                       text: block['data']?['name']?['last']),
                   title: string.lastName,
+                  keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
                   onTyping: (text) => update(
                     'name',
@@ -100,6 +105,7 @@ class TextSettings extends StatelessWidget {
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
+                  keyboardType: TextInputType.multiline,
                   textCapitalization: TextCapitalization.sentences,
                   onTyping: (text) => update(
                     'data',
@@ -145,6 +151,13 @@ class TextSettings extends StatelessWidget {
           title: string.fontWeight,
           tabs: kFontWeights,
           value: block['data']?['style']?['text']?['fontWeight'],
+          itemBuilder: (item, isSelected) => Text(
+            item,
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: isSelected ? theme.colorScheme.primary : theme.dividerColor,
+              fontWeight: fontWeight(item)
+            ),
+          ),
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
         if ((block['data']?['style']?['text'] as Map?)
