@@ -144,10 +144,10 @@ class InputField extends StatelessWidget {
             enableInteractiveSelection: selectable,
             textCapitalization: textCapitalization,
             onChanged: (value) {
-              onTyping?.call(value);
+              onTyping?.call(value.trim());
               int length = value.trim().length;
               if (length == 0 || length >= lengthFilter) {
-                onQuery?.call(value);
+                onQuery?.call(value.trim());
               }
             },
             textInputAction: inputAction,

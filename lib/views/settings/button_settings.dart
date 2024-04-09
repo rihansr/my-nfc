@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
@@ -50,7 +51,8 @@ class ButtonSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeModel defaultTheme = Provider.of<DesignViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme =
+        Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
@@ -89,9 +91,13 @@ class ButtonSettings extends StatelessWidget {
           children: [
             ColourPicker(
               title: string.borderCcolor,
-              value: block['style']?['border']?['borderColor']?.toString().hexColor ?? defaultTheme.iconColor,
+              value: block['style']?['border']?['borderColor']
+                      ?.toString()
+                      .hexColor ??
+                  defaultTheme.iconColor,
               colors: const [Colors.transparent, ...kColors],
-              onPick: (color) => update('border', MapEntry('color', color.toHex)),
+              onPick: (color) =>
+                  update('border', MapEntry('color', color.toHex)),
             ),
             Seekbar(
               title: string.borderThickness,
@@ -99,7 +105,8 @@ class ButtonSettings extends StatelessWidget {
               value: block['style']?['border']?['thickness'] ?? 1,
               min: 0,
               max: 100,
-              onChanged: (size) => update('border', MapEntry('thickness', size)),
+              onChanged: (size) =>
+                  update('border', MapEntry('thickness', size)),
             ),
             Seekbar(
               title: string.borderRadius,
@@ -107,22 +114,33 @@ class ButtonSettings extends StatelessWidget {
               value: block['style']?['border']?['radius'] ?? 4,
               min: 0,
               max: 50,
-              onChanged: (radius) => update('border', MapEntry('radius', radius)),
+              onChanged: (radius) =>
+                  update('border', MapEntry('radius', radius)),
             ),
             CheckboxWidget.expand(
               value: block['style']?['fullWidth'] ?? false,
               label: string.fullWidth,
-              onChanged: (checked) => update('style', MapEntry('fullWidth', checked)),
+              onChanged: (checked) =>
+                  update('style', MapEntry('fullWidth', checked)),
             ),
             Dropdown<String?>(
               title: string.typography,
               hint: string.selectOne,
               items: const [null, ...kFontFamilys],
               value: block['data']?['style']?['text']?['typography'],
-              maintainState: true,
-              itemBuilder: (p0) =>
-                  Text(p0?.replaceAll('_', ' ') ?? string.fromThemeSettings),
-              onSelected: (String? font) => update('text', MapEntry('typography', font)),
+              selectedItemBuilder: (item) =>
+                  Text(item ?? string.fromThemeSettings),
+              itemBuilder: (item) => Text(
+                item ?? string.fromThemeSettings,
+                style: item == null
+                    ? null
+                    : GoogleFonts.getFont(
+                        item,
+                        textStyle: Theme.of(context).textTheme.bodySmall,
+                      ),
+              ),
+              onSelected: (String? font) =>
+                  update('text', MapEntry('typography', font)),
             ),
             Seekbar(
               title: string.fontSize,
@@ -133,25 +151,33 @@ class ButtonSettings extends StatelessWidget {
             ),
             ColourPicker(
               title: string.textColor,
-              value: block['data']?['style']?['text']?['textColor']?.toString().hexColor ?? defaultTheme.iconColor,
+              value: block['data']?['style']?['text']?['textColor']
+                      ?.toString()
+                      .hexColor ??
+                  defaultTheme.iconColor,
               colors: kColors,
-              onPick: (color) => update('text', MapEntry('textColor', color.toHex)),
+              onPick: (color) =>
+                  update('text', MapEntry('textColor', color.toHex)),
             ),
             TabWidget(
               title: string.fontWeight,
               tabs: kFontWeights,
-              value: block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
-              onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
+              value:
+                  block['data']?['style']?['text']?['fontWeight'] ?? 'regular',
+              onSelect: (weight) =>
+                  update('text', MapEntry('fontWeight', weight)),
             ),
             CheckboxWidget.expand(
               value: block['settings']?['additional']?['openInNewTab'] ?? true,
               label: string.fullWidth,
-              onChanged: (checked) => update('additional', MapEntry('openInNewTab', checked)),
+              onChanged: (checked) =>
+                  update('additional', MapEntry('openInNewTab', checked)),
             ),
             CheckboxWidget.expand(
               value: block['settings']?['additional']?['disabled'] ?? false,
               label: string.disabled,
-              onChanged: (checked) => update('additional', MapEntry('disabled', checked)),
+              onChanged: (checked) =>
+                  update('additional', MapEntry('disabled', checked)),
             ),
           ],
         ),

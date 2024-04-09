@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../models/theme_model.dart';
 import '../../../shared/drawables.dart';
 import '../../../shared/strings.dart';

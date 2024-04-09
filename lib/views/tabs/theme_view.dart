@@ -58,7 +58,6 @@ class ThemeView extends StatelessWidget {
                       'textColor': theme.textColor.toHex,
                       'borderColor': theme.iconColor.toHex,
                       'dividerColor': theme.dividerColor.toHex,
-                      'typography': theme.fontFamily,
                     });
                     controller.theme = theme.inheritFrom(controller.theme);
                   },

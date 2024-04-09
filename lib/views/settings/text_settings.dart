@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../models/theme_model.dart';
 import '../../viewmodels/design_viewmodel.dart';
@@ -111,8 +112,16 @@ class TextSettings extends StatelessWidget {
           hint: string.selectOne,
           items: const [null, ...kFontFamilys],
           value: block['data']?['style']?['text']?['typography'],
-          maintainState: true,
-          itemBuilder: (item) => Text(item ?? string.fromThemeSettings),
+          selectedItemBuilder: (item) => Text(item ?? string.fromThemeSettings),
+          itemBuilder: (item) => Text(
+            item ?? string.fromThemeSettings,
+            style: item == null
+                ? null
+                : GoogleFonts.getFont(
+                    item,
+                    textStyle: Theme.of(context).textTheme.bodySmall,
+                  ),
+          ),
           onSelected: (String? font) =>
               update('text', MapEntry('typography', font)),
         ),
@@ -138,7 +147,9 @@ class TextSettings extends StatelessWidget {
           value: block['data']?['style']?['text']?['fontWeight'],
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
-        if ((block['data']?['style']?['text'] as Map?)?.containsKey('alignment') ?? false)
+        if ((block['data']?['style']?['text'] as Map?)
+                ?.containsKey('alignment') ??
+            false)
           TabWidget(
             title: string.alignment,
             tabs: kHorizontalAlignments,

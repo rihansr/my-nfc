@@ -418,4 +418,19 @@ extension IconExtensions on String {
         return FontAwesomeIcons.link;
     }
   }
+
+  IconData get contactIcon {
+    switch (this) {
+      case "phoneNumbers":
+        return Icons.phone_outlined;
+      case "emails":
+        return Icons.email_outlined;
+      case "addresses":
+        return Icons.location_on_outlined;
+      case "websites":
+        return Icons.public_outlined;
+      default:
+        return FontAwesomeIcons.info;
+    }
+  }
 }

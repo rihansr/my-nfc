@@ -22,7 +22,7 @@
                     "style": {
                         "background": {
                             "image": {
-                                "path": "https://images.unsplash.com/photo-1506765515384-028b60a970df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1Nzk3MzB8MHwxfHNlYXJjaHwxfHxiYW5uZXJ8ZW58MHwwfHx8MTcxMjUzNDc3NXww&ixlib=rb-4.0.3&q=80&w=1080",
+                                "path": null,
                                 "style": {
                                     "scale": 1.0
                                 }
@@ -30,7 +30,7 @@
                         },
                         "overlay": {
                             "color": "#FF000000",
-                            "opacity": 44
+                            "opacity": 40
                         },
                         "alignment": {
                             "horizontal": "center",
@@ -93,14 +93,14 @@
                                     }
                                 },
                                 "data": {
-                                    "content": "Space",
+                                    "content": null,
                                     "style": {
                                         "text": {
                                             "typography": null,
                                             "fontSize": 32,
                                             "textColor": null,
                                             "fontWeight": "regular",
-                                            "alignment": "left"
+                                            "alignment": null
                                         }
                                     }
                                 }
@@ -214,7 +214,7 @@
                                         },
                                         "margin": {
                                             "top": 0,
-                                            "bottom": 0,
+                                            "bottom": -20,
                                             "left": 0,
                                             "right": 0
                                         }
@@ -245,12 +245,13 @@
                     "label": "Space",
                     "settings": {
                         "primary": false,
-                        "visible": true,
+                        "visible": false,
                         "removable": false
                     },
                     "data": {
                         "style": {
-                            "height": 20
+                            "height": 0,
+                            "default": 0
                         }
                     }
                 },
@@ -291,7 +292,7 @@
                         }
                     },
                     "data": {
-                        "content": "Rkrkrk",
+                        "content": null,
                         "style": {
                             "text": {
                                 "typography": null,
@@ -313,7 +314,8 @@
                     },
                     "data": {
                         "style": {
-                            "height": 20
+                            "height": 8,
+                            "default": 8
                         }
                     }
                 },
@@ -377,7 +379,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -391,8 +393,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,
@@ -443,7 +445,8 @@
                     },
                     "data": {
                         "style": {
-                            "height": 20
+                            "height": 20,
+                            "default": 20
                         }
                     }
                 },
@@ -471,7 +474,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -485,8 +488,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,
@@ -552,24 +555,14 @@
                                 "data": {
                                     "phoneNumbers": [
                                         {
-                                            "home": ""
+                                            "type": "Main",
+                                            "text": "36",
+                                            "prefix": "+672"
                                         }
                                     ],
-                                    "emails": [
-                                        {
-                                            "home": ""
-                                        }
-                                    ],
-                                    "websites": [
-                                        {
-                                            "work": ""
-                                        }
-                                    ],
-                                    "addresses": [
-                                        {
-                                            "Home": ""
-                                        }
-                                    ]
+                                    "emails": [],
+                                    "websites": [],
+                                    "addresses": []
                                 }
                             }
                         ]
@@ -586,7 +579,7 @@
                     "style": {
                         "spacing": {
                             "default": {
-                                "margin": 25,
+                                "margin": 20,
                                 "padding": 0
                             },
                             "limit": {
@@ -600,8 +593,8 @@
                                 }
                             },
                             "margin": {
-                                "top": 25,
-                                "bottom": 25
+                                "top": 20,
+                                "bottom": 20
                             },
                             "padding": {
                                 "left": 0,
@@ -662,7 +655,8 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 10
+                                        "height": 10,
+                                        "default": 10
                                     }
                                 }
                             },
@@ -695,7 +689,8 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 10
+                                        "height": 10,
+                                        "default": 10
                                     }
                                 }
                             },

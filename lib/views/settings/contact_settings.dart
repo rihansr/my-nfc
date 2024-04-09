@@ -97,7 +97,7 @@ class _ContactSettingsState extends State<ContactSettings> {
       children: _data.entries.map(
         (e) {
           List<Map<String, dynamic>> items = List.from(e.value ?? []);
-          List<String> types = e.key.types;
+          List<String> types = e.key.labels;
           return ListTile(
             contentPadding: const EdgeInsets.all(0),
             title: Text(
@@ -113,7 +113,7 @@ class _ContactSettingsState extends State<ContactSettings> {
                   separatorBuilder: (context, i) => const SizedBox(height: 8),
                   itemBuilder: (context, i) {
                     Map<String, dynamic> item = items[i];
-                    String type = item['type'] ?? types.first;
+                    String label = item['label'] ?? types.first;
                     return Column(
                       children: [
                         Row(
@@ -123,25 +123,25 @@ class _ContactSettingsState extends State<ContactSettings> {
                               child: Dropdown<String>(
                                 hint: string.selectOne,
                                 items: types,
-                                value: types.contains(type) ? type : 'custom',
+                                value: types.contains(label) ? label : 'custom',
                                 margin: const EdgeInsets.only(top: 12),
                                 itemBuilder: (item) => Text(
                                   item.capitalizeFirstOfEach,
                                 ),
                                 selectedItemBuilder: (item) => Text(
-                                  (item == 'custom' ? type : item)
+                                  (item == 'custom' ? label : item)
                                       .capitalizeFirstOfEach,
                                 ),
-                                onSelected: (type) {
-                                  if (type == 'custom') {
+                                onSelected: (label) {
+                                  if (label == 'custom') {
                                     openCustomField((text) {
-                                      items[i]
-                                          .addEntries([MapEntry('type', text)]);
+                                      items[i].addEntries(
+                                          [MapEntry('label', text)]);
                                       setState(() => update(e.key, items));
                                     });
                                   } else {
                                     items[i]
-                                        .addEntries([MapEntry('type', type)]);
+                                        .addEntries([MapEntry('label', label)]);
                                     update(e.key, items);
                                   }
                                 },
@@ -162,7 +162,8 @@ class _ContactSettingsState extends State<ContactSettings> {
                           ],
                         ),
                         InputField(
-                          controller: TextEditingController(text: item['text']),
+                          controller:
+                              TextEditingController(text: item['content']),
                           margin: const EdgeInsets.only(top: 8, right: 18),
                           keyboardType: e.key.keyboardType,
                           padding: e.key == 'phoneNumbers'
@@ -175,6 +176,11 @@ class _ContactSettingsState extends State<ContactSettings> {
                                   padding:
                                       const EdgeInsets.fromLTRB(8, 9, 4, 9),
                                   margin: const EdgeInsets.all(0),
+                                  value: kCountryCodes.firstWhere(
+                                    (element) =>
+                                        element['code'] == item['prefix'],
+                                    orElse: () => kCountryCodes.first,
+                                  ),
                                   items: kCountryCodes,
                                   itemBuilder: (value) => Text(
                                     '${value['iso'] ?? ''} ${value['code'] ?? ''}'
@@ -183,12 +189,24 @@ class _ContactSettingsState extends State<ContactSettings> {
                                   ),
                                   selectedItemBuilder: (value) =>
                                       Text(value['code'] ?? ''),
-                                  onSelected: (value) => {},
+                                  onSelected: (value) {
+                                    items[i].addEntries(
+                                        [MapEntry('prefix', value?['code'])]);
+                                    update(e.key, items);
+                                  },
                                 )
                               : null,
                           onTyping: (text) {
                             items[i].addEntries(
-                                [MapEntry('text', text.isEmpty ? null : text)]);
+                              [
+                                if (e.key == 'phoneNumbers')
+                                  MapEntry(
+                                    'prefix',
+                                    kCountryCodes.first['code'],
+                                  ),
+                                MapEntry('content', text.isEmpty ? null : text),
+                              ],
+                            );
                             update(e.key, items);
                           },
                         ),
@@ -201,7 +219,7 @@ class _ContactSettingsState extends State<ContactSettings> {
                     padding: const EdgeInsets.fromLTRB(0, 24, 18, 12),
                   ),
                   onPressed: () {
-                    items.add({'type': types.first});
+                    items.add({'label': types.first});
                     setState(() => update(e.key, items));
                   },
                   icon: Icon(
@@ -224,7 +242,7 @@ class _ContactSettingsState extends State<ContactSettings> {
 }
 
 extension _StringExtension on String {
-  List<String> get types {
+  List<String> get labels {
     switch (this) {
       case 'phoneNumbers':
         return [
