@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
@@ -144,8 +145,17 @@ class ThemeView extends StatelessWidget {
               value: controller.theme.fontFamily,
               maintainState: false,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              itemBuilder: (item) =>
-                  Text(item?.replaceAll('_', ' ') ?? string.fromThemeSettings),
+              selectedItemBuilder: (item) =>
+                  Text(item ?? string.fromThemeSettings),
+              itemBuilder: (item) => Text(
+                item ?? string.fromThemeSettings,
+                style: item == null
+                    ? null
+                    : GoogleFonts.getFont(
+                        item,
+                        textStyle: Theme.of(context).textTheme.bodySmall,
+                      ),
+              ),
               onSelected: (String? font) {
                 controller.designData.modify({'typography': font});
                 controller.theme = controller.theme.copyWith(fontFamily: font);

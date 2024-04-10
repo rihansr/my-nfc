@@ -32,10 +32,8 @@ class ButtonSettings extends StatelessWidget {
       case 'data':
       case 'style':
         settings.addEntry(key, value);
-      case 'border':
-        settings['style'] ??= {};
-        (settings['style'] as Map<String, dynamic>).addEntry(key, value);
       case 'text':
+      case 'border':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
         (settings['data']['style'] as Map<String, dynamic>)
@@ -92,38 +90,47 @@ class ButtonSettings extends StatelessWidget {
           label: string.buttonDesign,
           children: [
             ColourPicker(
-              title: string.borderCcolor,
-              value: block['style']?['border']?['borderColor']
+              title: string.borderColor,
+              value: block['data']?['style']?['border']?['borderColor']
                       ?.toString()
                       .hexColor ??
                   defaultTheme.iconColor,
               colors: const [Colors.transparent, ...kColors],
               onPick: (color) =>
-                  update('border', MapEntry('color', color.toHex)),
+                  update('border', MapEntry('borderColor', color.toHex)),
             ),
             Seekbar(
               title: string.borderThickness,
               type: 'px',
-              value: block['style']?['border']?['thickness'] ?? 1,
+              value: block['data']?['style']?['border']?['borderWidth'] ?? 1,
               min: 0,
               max: 100,
               onChanged: (size) =>
-                  update('border', MapEntry('thickness', size)),
+                  update('border', MapEntry('borderWidth', size)),
             ),
             Seekbar(
               title: string.borderRadius,
               type: 'px',
-              value: block['style']?['border']?['radius'] ?? 4,
+              value: block['data']?['style']?['border']?['borderRadius'] ?? 4,
               min: 0,
               max: 50,
               onChanged: (radius) =>
-                  update('border', MapEntry('radius', radius)),
+                  update('border', MapEntry('borderRadius', radius)),
             ),
             CheckboxWidget.expand(
               value: block['style']?['fullWidth'] ?? false,
               label: string.fullWidth,
               onChanged: (checked) =>
                   update('style', MapEntry('fullWidth', checked)),
+            ),
+            ColourPicker(
+              title: string.buttonColor,
+              value: block['data']?['style']?['background']?['color']
+                      ?.toString()
+                      .hexColor ,
+              colors: const [Colors.transparent, ...kColors],
+              onPick: (color) =>
+                  update('background', MapEntry('color', color.toHex)),
             ),
             Dropdown<String?>(
               title: string.typography,

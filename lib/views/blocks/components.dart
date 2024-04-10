@@ -87,12 +87,13 @@ ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
       }
     }());
 
-Widget? photo(String? path, {String? placeholder, double? width, BoxFit? fit}) =>
+Widget? photo(String? path,
+        {String? placeholder, double? width, BoxFit? fit}) =>
     path?.isNotEmpty == true || placeholder?.isNotEmpty == true
         ? Uri.tryParse(path ?? placeholder!)?.isAbsolute ?? false
             ? FadeInImage.memoryNetwork(
                 image: path ?? placeholder!,
-                  width: width,
+                width: width,
                 fit: fit ?? BoxFit.cover,
                 placeholder: kTransparentImage,
               )
@@ -109,9 +110,11 @@ Widget? photo(String? path, {String? placeholder, double? width, BoxFit? fit}) =
                   )
         : null;
 
-TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
+TextStyle textStyle(BuildContext context, Map? style, {TextStyle? orElse}) =>
+    GoogleFonts.getFont(
       style?['typography'] ??
           Provider.of<DesignViewModel>(context).theme.fontFamily,
+      textStyle: orElse,
       fontSize: style?['fontSize']?.toDouble() ?? 16,
       color: style?['textColor']?.toString().hexColor ??
           Provider.of<DesignViewModel>(context).theme.textColor,

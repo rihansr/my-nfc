@@ -53,11 +53,12 @@
   "backgroungImage": "Background Image",
   "backgroundColor": "Background Color",
   "button": "Button",
+  "buttonColor": "Button Color",
   "buttonText": "Button Text",
   "learnMore": "Learn more",
   "linkTo": "Link To",
   "buttonDesign": "Button Design",
-  "borderCcolor": "Border Color",
+  "borderColor": "Border Color",
   "borderThickness": "Border Thickness",
   "ratio": "{a}:{b}",
   "@ratio": {

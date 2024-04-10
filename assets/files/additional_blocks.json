@@ -171,11 +171,6 @@
                     },
                     "style": {
                         "fullWidth": false,
-                        "border": {
-                            "borderColor": null,
-                            "thickness": 1,
-                            "radius": 4
-                        },
                         "spacing": {
                             "default": {
                                 "margin": 0,
@@ -209,11 +204,19 @@
                         },
                         "link": "",
                         "style": {
+                            "background": {
+                                "color": "#00000000"
+                            },
                             "text": {
                                 "typography": null,
                                 "textColor": null,
                                 "fontSize": 16,
                                 "fontWeight": "regular"
+                            },
+                            "border": {
+                                "borderColor": null,
+                                "borderWidth": 1,
+                                "borderRadius": 4
                             }
                         }
                     }
@@ -535,11 +538,6 @@
         },
         "style": {
             "fullWidth": false,
-            "border": {
-                "borderColor": null,
-                "thickness": 1,
-                "radius": 4
-            },
             "spacing": {
                 "default": {
                     "margin": 0,
@@ -573,11 +571,19 @@
             },
             "link": null,
             "style": {
+                "background": {
+                    "color": "#00000000"
+                },
                 "text": {
                     "typography": null,
                     "textColor": null,
                     "fontSize": 16,
                     "fontWeight": "regular"
+                },
+                "border": {
+                    "borderColor": null,
+                    "borderWidth": 1,
+                    "borderRadius": 4
                 }
             }
         }

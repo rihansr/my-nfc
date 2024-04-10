@@ -57,8 +57,8 @@ class ColourPicker extends StatelessWidget {
             value: _ColourViewModel(colors, reselectable, value),
             child: Consumer<_ColourViewModel>(
               builder: (context, controller, _) => Wrap(
-                spacing: 8,
-                runSpacing: 8,
+                spacing: 4,
+                runSpacing: 4,
                 children: [
                   ...colors.map(
                     (color) => _ColorItem(
@@ -181,6 +181,7 @@ class _ColorItem extends StatelessWidget {
               : BorderSide.strokeAlignInside,
         ),
         size: 36,
+        margin: const EdgeInsets.all(2),
         padding: const EdgeInsets.all(1.5),
         child: CircleAvatar(
           backgroundColor: color,
