@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
@@ -50,7 +51,13 @@ class VideoSettings extends StatelessWidget {
           minLines: 2,
           maxLines: 2,
           title: string.videoLink,
-          textCapitalization: TextCapitalization.sentences,
+          keyboardType: TextInputType.url,
+          inputFormatters: [
+            FilteringTextInputFormatter.deny(
+              RegExp(r'\s'),
+              replacementString: '/',
+            ),
+          ],
           onTyping: (text) => update(
             'data',
             MapEntry('link', text.isEmpty ? null : text),

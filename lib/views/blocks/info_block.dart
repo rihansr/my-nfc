@@ -27,7 +27,7 @@ class InfoBlock extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if ((configs['data'] as Map?)?.containsKey('title') ??

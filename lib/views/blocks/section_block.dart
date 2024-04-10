@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../utils/extensions.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
@@ -32,7 +33,7 @@ class SectionBlock extends StatelessWidget {
           double scale = configs['style']?['background']?['image']?['style']
                   ?['scale'] ??
               1.0;
-          
+
           if (path == null) {
             return SizedBox(height: configs['label'] == 'Banner' ? 100 : 0);
           }
@@ -45,7 +46,11 @@ class SectionBlock extends StatelessWidget {
             child: Transform.scale(
               alignment: Alignment.center,
               scale: scale,
-              child: photo(path),
+              child: photo(
+                path,
+                width: double.infinity,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           );
           return image;
@@ -114,8 +119,15 @@ class SectionBlock extends StatelessWidget {
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
-        onTap: configs['settings']?['additional']?['openInNewTab'] == true
-            ? () => {}
+        onTap: configs['settings']?['additional']?['linkTo'] != null
+            ? () async => await launchUrl(
+                  Uri.parse(configs['settings']['additional']['linkTo']),
+                  webOnlyWindowName: configs['settings']?['additional']
+                              ?['openInNewTab'] ==
+                          true
+                      ? '_blank'
+                      : '_self',
+                )
             : null,
         child: configs['label'] == 'Banner'
             ? NegativePadding(

@@ -9,7 +9,6 @@
             "dragable": true,
             "expandConfigs": true,
             "additional": {
-                "altText": null,
                 "linkTo": null,
                 "openInNewTab": true
             }
@@ -28,7 +27,7 @@
                 "horizontal": "left"
             },
             "overlay": {
-                "color": "#00000000",
+                "color": "#FF000000",
                 "opacity": 40
             },
             "spacing": {
@@ -47,8 +46,8 @@
                     }
                 },
                 "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
+                    "horizontal": 30,
+                    "vertical": 25
                 },
                 "margin": {
                     "top": 0,

@@ -87,17 +87,26 @@ ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
       }
     }());
 
-Widget? photo(String? path, {String? placeholder}) =>
+Widget? photo(String? path, {String? placeholder, double? width, BoxFit? fit}) =>
     path?.isNotEmpty == true || placeholder?.isNotEmpty == true
         ? Uri.tryParse(path ?? placeholder!)?.isAbsolute ?? false
             ? FadeInImage.memoryNetwork(
                 image: path ?? placeholder!,
-                fit: BoxFit.cover,
+                  width: width,
+                fit: fit ?? BoxFit.cover,
                 placeholder: kTransparentImage,
               )
             : kIsWeb
-                ? Image.network(path ?? placeholder!, fit: BoxFit.cover)
-                : Image.file(File(path ?? placeholder!), fit: BoxFit.cover)
+                ? Image.network(
+                    path ?? placeholder!,
+                    width: width,
+                    fit: fit ?? BoxFit.cover,
+                  )
+                : Image.file(
+                    File(path ?? placeholder!),
+                    width: width,
+                    fit: fit ?? BoxFit.cover,
+                  )
         : null;
 
 TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
@@ -111,25 +120,25 @@ TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
 
 FontWeight fontWeight(Object? fontWeight) {
   switch (fontWeight) {
-          case 'thin':
-            return FontWeight.w200;
-          case 'light':
-            return FontWeight.w300;
-          case 'regular':
-            return FontWeight.w400;
-          case 'medium':
-            return FontWeight.w500;
-          case 'semi-bold':
-            return FontWeight.w600;
-          case 'bold':
-            return FontWeight.w700;
-          case 'extra bold':
-            return FontWeight.w800;
-          case 'black':
-            return FontWeight.w900;
-          default:
-            return FontWeight.normal;
-        }
+    case 'thin':
+      return FontWeight.w200;
+    case 'light':
+      return FontWeight.w300;
+    case 'regular':
+      return FontWeight.w400;
+    case 'medium':
+      return FontWeight.w500;
+    case 'semi-bold':
+      return FontWeight.w600;
+    case 'bold':
+      return FontWeight.w700;
+    case 'extra bold':
+      return FontWeight.w800;
+    case 'black':
+      return FontWeight.w900;
+    default:
+      return FontWeight.normal;
+  }
 }
 
 EdgeInsets margin(Map? spacing) => EdgeInsets.only(

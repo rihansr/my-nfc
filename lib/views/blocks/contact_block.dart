@@ -40,9 +40,9 @@ class ContactBlock extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
+              child: Wrap(
+                crossAxisAlignment: WrapCrossAlignment.start,
+                runSpacing: 4,
                 children: (entry.value as List)
                     .where((element) => element?['content'] != null)
                     .map(
@@ -80,37 +80,33 @@ class ContactBlock extends StatelessWidget {
                                   )
                             }[entry.key] ??
                             () {},
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 3),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '${e?['label'] ?? 'other'}'
-                                    .capitalizeFirstOfEach,
-                                style: textStyle(
-                                  context,
-                                  {'fontWeight': 'regular', 'fontSize': 10},
-                                ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${e?['label'] ?? 'other'}'.capitalizeFirstOfEach,
+                              style: textStyle(
+                                context,
+                                {'fontWeight': 'regular', 'fontSize': 10},
                               ),
-                              const SizedBox(height: 2),
-                              Text.rich(
-                                TextSpan(
-                                  text: e?['prefix'] != null
-                                      ? '${e?['prefix']}-'
-                                      : '',
-                                  children: [
-                                    TextSpan(text: e?['content'] ?? ''),
-                                  ],
-                                ),
-                                style: textStyle(
-                                  context,
-                                  {'fontWeight': 'semi-bold', 'fontSize': 14},
-                                ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text.rich(
+                              TextSpan(
+                                text: e?['prefix'] != null
+                                    ? '${e?['prefix']}-'
+                                    : '',
+                                children: [
+                                  TextSpan(text: e?['content'] ?? ''),
+                                ],
                               ),
-                            ],
-                          ),
+                              style: textStyle(
+                                context,
+                                {'fontWeight': 'semi-bold', 'fontSize': 14},
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     )

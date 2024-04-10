@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:collection/collection.dart';
+import 'package:my_nfc/widgets/negative_padding.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';
 import '../../../widgets/input_field_widget.dart';
@@ -38,8 +38,8 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
     _debounce = Timer(
       const Duration(milliseconds: 500),
       () {
-        width = int.parse('$width');
-        height = int.parse('$height');
+        width = int.parse('$width').abs();
+        height = int.parse('$height').abs();
         if (width == 0 && height == 0) return;
         widget.onSelected.call("$width:$height");
       },
@@ -80,63 +80,76 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
             ),
           ),
           const SizedBox(height: 12),
-          Wrap(
-            spacing: 24,
-            runSpacing: 16,
-            children: _aspectRatios.mapIndexed(
-              (i, ratio) {
-                List<String> splitRatio = ratio.split(':');
-                int width = int.parse(splitRatio[0]);
-                int height = int.parse(splitRatio[1]);
-                bool isCustom = i == (_aspectRatios.length - 1);
-                Color selectedColor = _aspectRatio == ratio
-                    ? theme.colorScheme.primary
-                    : theme.iconTheme.color!;
+          NegativePadding(
+            padding: const EdgeInsets.only(left: 12, right: 20),
+            child: SizedBox(
+              width: double.infinity,
+              height: 64,
+              child: ListView.separated(
+                itemCount: _aspectRatios.length,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.only(left: 12, right: 20),
+                separatorBuilder: (context, index) => const SizedBox(width: 24),
+                itemBuilder: (context, i) {
+                  {
+                    String ratio = _aspectRatios[i];
+                    List<String> splitRatio = ratio.split(':');
+                    int width = int.parse(splitRatio[0]);
+                    int height = int.parse(splitRatio[1]);
+                    bool isCustom = i == (_aspectRatios.length - 1);
+                    Color selectedColor = _aspectRatio == ratio
+                        ? theme.colorScheme.primary
+                        : theme.iconTheme.color!;
 
-                return InkWell(
-                  focusColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () {
-                    selectedAspectRatio = ratio;
-                    isCustom ? generateRatio() : widget.onSelected.call(ratio);
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (!isCustom)
-                        SizedBox.square(
-                          dimension: 32,
-                          child: Center(
-                            child: AspectRatio(
-                              aspectRatio: width / height,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: Border.all(color: selectedColor),
+                    return InkWell(
+                      focusColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () {
+                        selectedAspectRatio = ratio;
+                        isCustom
+                            ? generateRatio()
+                            : widget.onSelected.call(ratio);
+                      },
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (!isCustom)
+                            SizedBox.square(
+                              dimension: 32,
+                              child: Center(
+                                child: AspectRatio(
+                                  aspectRatio: width / height,
+                                  child: DecoratedBox(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: selectedColor),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
+                          if (!isCustom) const SizedBox(height: 4),
+                          Center(
+                            widthFactor: 1,
+                            heightFactor: isCustom ? 2 : 1,
+                            child: Text(
+                              isCustom
+                                  ? string.custom
+                                  : string.ratio(width, height),
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.titleMedium
+                                  ?.copyWith(color: selectedColor),
+                            ),
                           ),
-                        ),
-                      if (!isCustom) const SizedBox(height: 4),
-                      Center(
-                        widthFactor: 1,
-                        heightFactor: isCustom ? 2 : 1,
-                        child: Text(
-                          isCustom
-                              ? string.custom
-                              : string.ratio(width, height),
-                          textAlign: TextAlign.center,
-                          style: theme.textTheme.titleMedium
-                              ?.copyWith(color: selectedColor),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              },
-            ).toList(),
+                    );
+                  }
+                },
+              ),
+            ),
           ),
           if (_aspectRatio == _aspectRatios.last) ...[
             const SizedBox(height: 16),

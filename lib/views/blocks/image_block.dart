@@ -14,11 +14,16 @@ class ImageBlock extends StatelessWidget {
       child: configs['block'] == 'avatar'
           ? CircleAvatar(
               backgroundColor: Colors.black12,
-              backgroundImage: providerPhoto(configs['data']?['path'], placeholder: drawable.avatar),
+              backgroundImage: providerPhoto(configs['data']?['path'],
+                  placeholder: drawable.avatar),
               radius:
                   (configs['data']?['style']?['size']?.toDouble() ?? 100.0) / 2,
             )
-          : photo(configs['data']?['path']),
+          : photo(
+              configs['data']?['path'],
+              fit: BoxFit.fitWidth,
+              width: double.infinity,
+            ),
     );
   }
 }

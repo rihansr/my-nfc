@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'block_expansion_tile.dart';
-import 'backdrop.dart';
 import '../../../utils/extensions.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';
@@ -10,6 +8,8 @@ import '../../../widgets/colour_picker_widget.dart';
 import '../../../widgets/input_field_widget.dart';
 import '../../../widgets/seekbar_widget.dart';
 import '../../../widgets/tab_widget.dart';
+import 'block_expansion_tile.dart';
+import 'backdrop.dart';
 import 'spcaing.dart';
 
 // ignore: must_be_immutable
@@ -79,8 +79,8 @@ class BlockStyle extends StatelessWidget {
         ...(style['alignment'] as Map?)
                 ?.entries
                 .map((entry) => TabWidget(
-                      title:
-                          '${entry.key} ${string.alignment}'.capitalizeFirstOfEach,
+                      title: '${entry.key} ${string.alignment}'
+                          .capitalizeFirstOfEach,
                       tabs: (() {
                         switch (entry.key) {
                           case 'horizontal':
@@ -139,22 +139,16 @@ class BlockStyle extends StatelessWidget {
           BlockExpansionTile(
             label: string.advancedSettings,
             children: [
-              if (settings!.containsKey('altText'))
-                InputField(
-                  controller: TextEditingController(text: settings?['altText']),
-                  title: string.altText,
-                  textCapitalization: TextCapitalization.words,
-                  onTyping: (text) => update(
-                    'settings',
-                    MapEntry('altText', text.isEmpty ? null : text),
-                  ),
-                ),
               if (settings!.containsKey('linkTo'))
                 InputField(
                   controller: TextEditingController(text: settings?['linkTo']),
                   title: string.linkTo,
+                  keyboardType: TextInputType.url,
                   inputFormatters: [
-                    FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    FilteringTextInputFormatter.deny(
+                      RegExp(r'\s'),
+                      replacementString: '/',
+                    ),
                   ],
                   onTyping: (text) => update(
                     'settings',
