@@ -23,12 +23,12 @@ class ButtonBlock extends StatelessWidget {
         onPressed: (() {
           String? url = configs['data']?['link'];
           bool disabled =
-              configs['settings']?['additional']?['disabled'] ?? false;
+              configs['settings']?['advanced']?['disabled'] ?? false;
           if (disabled || url == null) return null;
           return () async => await launchUrl(
                 Uri.parse(url),
                 webOnlyWindowName:
-                    configs['settings']?['additional']?['openInNewTab'] == true
+                    configs['settings']?['advanced']?['openInNewTab'] == true
                         ? '_blank'
                         : '_self',
               );

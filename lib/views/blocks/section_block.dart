@@ -168,16 +168,16 @@ class SectionBlock extends StatelessWidget {
     return Clipper(
       width: configs['style']?['fullWidth'] == false ? null : double.infinity,
       color: configs['style']?['background']?['color']?.toString().hexColor,
-      //transform: transform(configs['style']?['spacing']?['margin']),
+      transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       child: InkWell(
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
-        onTap: configs['settings']?['additional']?['linkTo'] != null
+        onTap: configs['settings']?['advanced']?['linkTo'] != null
             ? () async => await launchUrl(
-                  Uri.parse(configs['settings']['additional']['linkTo']),
-                  webOnlyWindowName: configs['settings']?['additional']
+                  Uri.parse(configs['settings']['advanced']['linkTo']),
+                  webOnlyWindowName: configs['settings']?['advanced']
                               ?['openInNewTab'] ==
                           true
                       ? '_blank'

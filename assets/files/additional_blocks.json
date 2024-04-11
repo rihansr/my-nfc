@@ -8,7 +8,7 @@
             "removable": true,
             "dragable": true,
             "expandConfigs": true,
-            "additional": {
+            "advanced": {
                 "linkTo": null,
                 "openInNewTab": true
             }
@@ -164,7 +164,7 @@
                         "primary": false,
                         "visible": true,
                         "removable": true,
-                        "additional": {
+                        "advanced": {
                             "openInNewTab": true,
                             "disabled": false
                         }
@@ -187,11 +187,11 @@
                                 }
                             },
                             "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
+                                "horizontal": 16,
+                                "vertical": 8
                             },
                             "margin": {
-                                "top": 0,
+                                "top": 8,
                                 "bottom": 0,
                                 "left": 0,
                                 "right": 0
@@ -518,7 +518,31 @@
         "settings": {
             "primary": false,
             "visible": true,
-            "removable": true
+            "removable": true,
+            "expandConfigs": true,
+            "advanced": {
+                "linkTo": null,
+                "openInNewTab": true
+            }
+        },
+        "style":{
+            "spacing": {
+                "default": {
+                    "margin": 0
+                },
+                "limit": {
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
+            }
         },
         "data": {
             "path": null
@@ -554,11 +578,11 @@
                     }
                 },
                 "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
+                    "horizontal": 16,
+                    "vertical": 8
                 },
                 "margin": {
-                    "top": 0,
+                    "top": 8,
                     "bottom": 0,
                     "left": 0,
                     "right": 0
@@ -671,7 +695,7 @@
                 },
                 "description": {
                     "typography": null,
-                    "fontSize": 14,
+                    "fontSize": 12,
                     "textColor": null,
                     "fontWeight": "reqular"
                 },

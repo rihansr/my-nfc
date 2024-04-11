@@ -168,17 +168,17 @@ class _SectionSettingsState extends State<SectionSettings> {
       onExpansionChanged: (expanded) {
         if (!expanded) setState(() => {});
       },
-      child: widget.block.containsKey('style')
+      child: widget.block.containsKey('style') || widget.block['settings']?['advanced'] != null
           ? BlockStyle(
               widget.block['style'],
-              settings: widget.block['settings']?['additional'],
+              settings: widget.block['settings']?['advanced'],
               onUpdate: (settings) {
                 widget.block['style'] = settings;
                 widget.onUpdate?.call(widget.block);
               },
               onSettingsUpdate: (settings) {
                 widget.block
-                    .addEntry('settings', MapEntry('additional', settings));
+                    .addEntry('settings', MapEntry('advanced', settings));
                 widget.onUpdate?.call(widget.block);
               },
             )

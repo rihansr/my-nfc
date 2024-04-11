@@ -23,7 +23,7 @@ class ActionsSettings extends StatefulWidget {
 }
 
 class _ActionsSettingsState extends State<ActionsSettings> {
-  late Map<String, dynamic> additionalSettings;
+  late Map<String, dynamic> advancedSettings;
   late Map<dynamic, dynamic>? primary;
   late Map<dynamic, dynamic>? additional;
 
@@ -72,8 +72,8 @@ class _ActionsSettingsState extends State<ActionsSettings> {
   void initState() {
     primary = widget.block['data']?['primary'];
     additional = widget.block['data']?['additional'];
-    additionalSettings =
-        Map.from(widget.block['settings']?['additional'] ?? {});
+    advancedSettings =
+        Map.from(widget.block['settings']?['advanced'] ?? {});
     super.initState();
   }
 
@@ -187,14 +187,14 @@ class _ActionsSettingsState extends State<ActionsSettings> {
         ),
         BlockExpansionTile(
           label: string.advancedSettings,
-          children: additionalSettings.entries
+          children: advancedSettings.entries
               .map(
                 (e) => CheckboxWidget.expand(
                   value: e.value ?? false,
                   label: e.key.camelToNormal,
                   onChanged: (checked) {
-                    additionalSettings[e.key] = checked;
-                    update('settings', additionalSettings);
+                    advancedSettings[e.key] = checked;
+                    update('settings', advancedSettings);
                   },
                 ),
               )

@@ -743,7 +743,7 @@
                         "primary": false,
                         "visible": true,
                         "removable": false,
-                        "additional": {
+                        "advanced": {
                             "showSaveToPhoneButton": true,
                             "showPrimaryContactButton": true,
                             "showAdditionalContactButton": true,
@@ -751,8 +751,8 @@
                         }
                     },
                     "data": {
-                        "primary": null,
-                        "additional": null
+                        "primary": {},
+                        "additional": {}
                     }
                 }
             ]

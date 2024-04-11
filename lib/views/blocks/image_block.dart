@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../shared/drawables.dart';
 import 'components.dart';
 
@@ -13,19 +14,34 @@ class ImageBlock extends StatelessWidget {
     return Container(
       margin: margin(configs['style']?['spacing']?['margin']),
       alignment: alignment(configs['style']?['alignment']),
-      child: configs['block'] == 'avatar'
-          ? CircleAvatar(
-              backgroundColor: Colors.black12,
-              backgroundImage: providerPhoto(configs['data']?['path'],
-                  placeholder: drawable.avatar),
-              radius:
-                  (configs['data']?['style']?['size']?.toDouble() ?? 100.0) / 2,
-            )
-          : photo(
-              configs['data']?['path'],
-              fit: BoxFit.fitWidth,
-              width: double.infinity,
-            ),
+      child: InkWell(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        onTap: configs['settings']?['advanced']?['linkTo'] != null
+            ? () async => await launchUrl(
+                  Uri.parse(configs['settings']['advanced']['linkTo']),
+                  webOnlyWindowName: configs['settings']?['advanced']
+                              ?['openInNewTab'] ==
+                          true
+                      ? '_blank'
+                      : '_self',
+                )
+            : null,
+        child: configs['block'] == 'avatar'
+            ? CircleAvatar(
+                backgroundColor: Colors.black12,
+                backgroundImage: providerPhoto(configs['data']?['path'],
+                    placeholder: drawable.avatar),
+                radius:
+                    (configs['data']?['style']?['size']?.toDouble() ?? 100.0) / 2,
+              )
+            : photo(
+                configs['data']?['path'],
+                fit: BoxFit.fitWidth,
+                width: double.infinity,
+              ),
+      ),
     );
   }
 }

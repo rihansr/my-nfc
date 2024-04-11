@@ -42,9 +42,10 @@ class ImageSettings extends StatelessWidget {
       },
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(10, 8, 22, 18),
-      child: block.containsKey('style')
+      child: block.containsKey('style') || block['settings']?['advanced'] != null
           ? BlockStyle(
               block['style'],
+              settings: block['settings']?['advanced'],
               onUpdate: (settings) {
                 block['style'] = settings;
                 onUpdate?.call(block);

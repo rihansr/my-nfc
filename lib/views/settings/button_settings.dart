@@ -38,7 +38,7 @@ class ButtonSettings extends StatelessWidget {
         settings['data']['style'] ??= {};
         (settings['data']['style'] as Map<String, dynamic>)
             .addEntry(key, value);
-      case 'additional':
+      case 'advanced':
         settings['settings'] ??= {};
         (settings['settings'] as Map<String, dynamic>).addEntry(key, value);
       default:
@@ -185,16 +185,16 @@ class ButtonSettings extends StatelessWidget {
                   update('style', MapEntry('fullWidth', checked)),
             ),
             CheckboxWidget.expand(
-              value: block['settings']?['additional']?['openInNewTab'] ?? true,
+              value: block['settings']?['advanced']?['openInNewTab'] ?? true,
               label: string.openInNewTab,
               onChanged: (checked) =>
-                  update('additional', MapEntry('openInNewTab', checked)),
+                  update('advanced', MapEntry('openInNewTab', checked)),
             ),
             CheckboxWidget.expand(
-              value: block['settings']?['additional']?['disabled'] ?? false,
+              value: block['settings']?['advanced']?['disabled'] ?? false,
               label: string.disabled,
               onChanged: (checked) =>
-                  update('additional', MapEntry('disabled', checked)),
+                  update('advanced', MapEntry('disabled', checked)),
             ),
           ],
         ),
