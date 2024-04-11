@@ -268,7 +268,7 @@
                     "textColor": null,
                     "fontSize": 16,
                     "fontWeight": "reqular",
-                    "alignment": "center"
+                    "alignment": null
                 }
             }
         }
@@ -660,13 +660,27 @@
         },
         "data": {
             "style": {
-                "alignment": "left",
+                "alignment": {
+                    "horizontal": "left"
+                },
+                "title": {
+                    "typography": null,
+                    "fontSize": 14,
+                    "textColor": null,
+                    "fontWeight": "bold"
+                },
+                "description": {
+                    "typography": null,
+                    "fontSize": 14,
+                    "textColor": null,
+                    "fontWeight": "reqular"
+                },
                 "hints": {
                     "title": "e.g. Awards",
                     "description": "e.g. Good employee"
                 }
             },
-            "items": []
+            "fields": []
         }
     },
     {

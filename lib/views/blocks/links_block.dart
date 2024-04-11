@@ -7,7 +7,6 @@ import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
 
 class LinksBlock extends StatelessWidget {
-  
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
   const LinksBlock(this.configs, {this.sectionStyle, super.key});
@@ -20,23 +19,25 @@ class LinksBlock extends StatelessWidget {
       runSpacing: 12,
       alignment: WrapAlignment.center,
       runAlignment: WrapAlignment.center,
-      children: (configs['data']?['links'] as List)
-          .where((element) => element['id'] != null)
-          .map((link) => GestureDetector(
-                onTap: () async => await launchUrl(
-                  Uri.parse('https://${link['link'] ?? ''}${link['id'] ?? ''}'),
-                ),
-                child: Clipper.circle(
-                  border: Border.all(color: theme.iconColor, width: 1),
-                  padding: const EdgeInsets.all(10),
-                  child: Icon(
-                    '${link['name']}'.socialIcon,
-                    size: 24,
-                    color: theme.iconColor,
-                  ),
-                ),
-              ))
-          .toList(),
+      children: (configs['data']?['links'] as List?)
+              ?.where((element) => element['id'] != null)
+              .map((link) => GestureDetector(
+                    onTap: () async => await launchUrl(
+                      Uri.parse(
+                          'https://${link['link'] ?? ''}${link['id'] ?? ''}'),
+                    ),
+                    child: Clipper.circle(
+                      border: Border.all(color: theme.iconColor, width: 1),
+                      padding: const EdgeInsets.all(10),
+                      child: Icon(
+                        '${link['name']}'.socialIcon,
+                        size: 24,
+                        color: theme.iconColor,
+                      ),
+                    ),
+                  ))
+              .toList() ??
+          [],
     );
   }
 }

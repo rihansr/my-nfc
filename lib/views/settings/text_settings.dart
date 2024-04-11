@@ -160,14 +160,17 @@ class TextSettings extends StatelessWidget {
           ),
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
-        TabWidget(
-          title: string.alignment,
-          tabs: kHorizontalAlignments,
-          reselectable: true,
-          value: block['data']?['style']?['text']?['alignment'],
-          onSelect: (alignment) =>
-              update('text', MapEntry('alignment', alignment)),
-        ),
+        if ((block['data']?['style']?['text'] as Map?)
+                ?.containsKey('alignment') ??
+            false)
+          TabWidget(
+            title: string.alignment,
+            tabs: kHorizontalAlignments,
+            reselectable: true,
+            value: block['data']?['style']?['text']?['alignment'],
+            onSelect: (alignment) =>
+                update('text', MapEntry('alignment', alignment)),
+          ),
         Spacing(
           title: string.paddingAndMarginSettings,
           spacing: block['style']?['spacing'],

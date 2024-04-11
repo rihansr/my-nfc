@@ -11,14 +11,11 @@ class AdditionalSettings extends StatelessWidget {
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  late String? _selectedAlignment;
-
   AdditionalSettings({
     super.key,
     required this.block,
     this.onUpdate,
-  })  : _selectedAlignment = block['data']?['style']?['alignment'] ?? 'left',
-        fields = ValueNotifier(block['data']?['fields'] ?? []);
+  }) : fields = ValueNotifier(block['data']?['fields'] ?? []);
 
   late ValueNotifier<List> fields;
 
@@ -27,6 +24,12 @@ class AdditionalSettings extends StatelessWidget {
     switch (key) {
       case 'data':
         settings.addEntry(key, value);
+      case 'alignment':
+        settings.addEntry(key, value);
+        settings['data'] ??= {};
+        settings['data']['style'] ??= {};
+        (settings['data']['style'] as Map<String, dynamic>)
+            .addEntry(key, value);
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -54,12 +57,11 @@ class AdditionalSettings extends StatelessWidget {
         TabWidget(
           title: string.alignment,
           tabs: kHorizontalAlignments,
-          value: _selectedAlignment,
+          value: block['data']?['style']?['alignment']?['horizontal'],
+          reselectable: true,
           margin: const EdgeInsets.all(12),
-          onSelect: (alignment) {
-            _selectedAlignment = alignment;
-            update('style', MapEntry('alignment', alignment));
-          },
+          onSelect: (alignment) =>
+              update('alignment', MapEntry('horizontal', alignment)),
         ),
         ValueListenableBuilder<List>(
           valueListenable: fields,
