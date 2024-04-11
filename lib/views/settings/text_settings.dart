@@ -154,23 +154,20 @@ class TextSettings extends StatelessWidget {
           itemBuilder: (item, isSelected) => Text(
             item,
             style: theme.textTheme.bodySmall?.copyWith(
-              color: isSelected ? theme.colorScheme.primary : theme.dividerColor,
-              fontWeight: fontWeight(item)
-            ),
+                color:
+                    isSelected ? theme.colorScheme.primary : theme.dividerColor,
+                fontWeight: fontWeight(item)),
           ),
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
-        if ((block['data']?['style']?['text'] as Map?)
-                ?.containsKey('alignment') ??
-            false)
-          TabWidget(
-            title: string.alignment,
-            tabs: kHorizontalAlignments,
-            reselectable: true,
-            value: block['data']?['style']?['text']?['alignment'],
-            onSelect: (alignment) =>
-                update('text', MapEntry('alignment', alignment)),
-          ),
+        TabWidget(
+          title: string.alignment,
+          tabs: kHorizontalAlignments,
+          reselectable: true,
+          value: block['data']?['style']?['text']?['alignment'],
+          onSelect: (alignment) =>
+              update('text', MapEntry('alignment', alignment)),
+        ),
         Spacing(
           title: string.paddingAndMarginSettings,
           spacing: block['style']?['spacing'],

@@ -6,15 +6,19 @@ import '../../utils/extensions.dart';
 import 'components.dart';
 
 class ButtonBlock extends StatelessWidget {
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const ButtonBlock(this.configs, {super.key});
+  const ButtonBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: configs['style']?['fullWidth'] == false ? null : double.infinity,
+      width: configs['style']?['fullWidth'] == true ? double.infinity : null,
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
+      alignment: configs['style']?['fullWidth'] == true
+          ? null
+          : alignment(sectionStyle?['alignment']),
       child: TextButton(
         onPressed: (() {
           String? url = configs['data']?['link'];
@@ -46,6 +50,9 @@ class ButtonBlock extends StatelessWidget {
               ),
             );
           }())),
+          minimumSize: const MaterialStatePropertyAll(Size.zero),
+          padding: MaterialStatePropertyAll(
+              padding(configs['style']?['spacing']?['padding'])),
           shape: MaterialStatePropertyAll((() {
             final style = Map.from(configs['data']?['style']?['border'] ?? {});
 

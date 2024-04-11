@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class SpaceBlock extends StatelessWidget {
+  
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const SpaceBlock(this.configs, {super.key});
+  const SpaceBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {

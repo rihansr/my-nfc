@@ -117,17 +117,11 @@ class ButtonSettings extends StatelessWidget {
               onChanged: (radius) =>
                   update('border', MapEntry('borderRadius', radius)),
             ),
-            CheckboxWidget.expand(
-              value: block['style']?['fullWidth'] ?? false,
-              label: string.fullWidth,
-              onChanged: (checked) =>
-                  update('style', MapEntry('fullWidth', checked)),
-            ),
             ColourPicker(
               title: string.buttonColor,
               value: block['data']?['style']?['background']?['color']
-                      ?.toString()
-                      .hexColor ,
+                  ?.toString()
+                  .hexColor,
               colors: const [Colors.transparent, ...kColors],
               onPick: (color) =>
                   update('background', MapEntry('color', color.toHex)),
@@ -185,8 +179,14 @@ class ButtonSettings extends StatelessWidget {
                   update('text', MapEntry('fontWeight', weight)),
             ),
             CheckboxWidget.expand(
-              value: block['settings']?['additional']?['openInNewTab'] ?? true,
+              value: block['style']?['fullWidth'] ?? false,
               label: string.fullWidth,
+              onChanged: (checked) =>
+                  update('style', MapEntry('fullWidth', checked)),
+            ),
+            CheckboxWidget.expand(
+              value: block['settings']?['additional']?['openInNewTab'] ?? true,
+              label: string.openInNewTab,
               onChanged: (checked) =>
                   update('additional', MapEntry('openInNewTab', checked)),
             ),

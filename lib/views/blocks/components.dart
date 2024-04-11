@@ -8,7 +8,7 @@ import '../../../utils/extensions.dart';
 import '../../../viewmodels/design_viewmodel.dart';
 import '../../shared/constants.dart';
 
-Alignment alignment(Map? alignment) {
+Alignment? alignment(Map? alignment) {
   switch (
       '${alignment?['vertical'] ?? 'top'}-${alignment?['horizontal'] ?? 'left'}') {
     case 'top-left':
@@ -30,7 +30,7 @@ Alignment alignment(Map? alignment) {
     case 'bottom-right':
       return Alignment.bottomRight;
     default:
-      return Alignment.topLeft;
+      return null;
   }
 }
 
@@ -49,11 +49,12 @@ CrossAxisAlignment horizontalAlignment(Object? alignment) {
 
 MainAxisAlignment verticalAlignment(Object? alignment) {
   switch (alignment) {
+    case "top":
+      return MainAxisAlignment.start;
     case "center":
       return MainAxisAlignment.center;
     case "bottom":
       return MainAxisAlignment.end;
-    case "top":
     default:
       return MainAxisAlignment.start;
   }

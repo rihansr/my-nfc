@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_nfc/widgets/negative_padding.dart';
 import '../shared/strings.dart';
 import '../widgets/button_widget.dart';
 
@@ -23,7 +24,7 @@ class Seekbar extends StatelessWidget {
     this.type,
     this.titleStyle,
     this.titleAlign = TextAlign.start,
-    this.titleSpacing = const EdgeInsets.only(bottom: 10),
+    this.titleSpacing = const EdgeInsets.only(bottom: 4),
     margin,
     padding,
     this.min = 0,
@@ -41,8 +42,8 @@ class Seekbar extends StatelessWidget {
             .toDouble()),
         margin = margin ??
             (defaultValue == null || !showCount
-                ? const EdgeInsets.symmetric(vertical: 12)
-                : const EdgeInsets.symmetric(vertical: 8)),
+                ? const EdgeInsets.fromLTRB(0, 12, 0, 0)
+                : const EdgeInsets.fromLTRB(0, 8, 0, 0)),
         defaultValue = defaultValue == null
             ? null
             : defaultValue < min
@@ -117,8 +118,8 @@ class Seekbar extends StatelessWidget {
                       style: titleStyle,
                     ),
                   ),
-                Transform.scale(
-                  scale: 1.075,
+                NegativePadding(
+                  padding: const EdgeInsets.symmetric(horizontal: 19),
                   child: Slider(
                     value: value,
                     min: min.toDouble(),

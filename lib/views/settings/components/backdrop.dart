@@ -102,46 +102,49 @@ class _BackdropState extends State<Backdrop> {
     ThemeData theme = Theme.of(context);
     return Column(
       children: [
-        _imagePath != null
-            ? ImageView(
-                path: _imagePath!,
-                fit: BoxFit.cover,
-                style: widget.settings['style'],
-                onStyleChange: (data) {
-                  widget.settings.addEntry('style', data);
-                  widget.onUpdate?.call(widget.settings);
-                },
-                onRemove: () => imagePath = null,
-              )
-            : Row(
-                children: [
-                  Expanded(
-                    child: InputField(
-                      controller: searchController,
-                      prefixIcon: const Icon(Icons.search, size: 20),
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      margin: const EdgeInsets.only(bottom: 12),
-                      textStyle: theme.textTheme.bodySmall,
-                      underlineOnly: true,
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: _imagePath != null
+              ? ImageView(
+                  path: _imagePath!,
+                  fit: BoxFit.cover,
+                  style: widget.settings['style'],
+                  onStyleChange: (data) {
+                    widget.settings.addEntry('style', data);
+                    widget.onUpdate?.call(widget.settings);
+                  },
+                  onRemove: () => imagePath = null,
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: InputField(
+                        controller: searchController,
+                        prefixIcon: const Icon(Icons.search, size: 20),
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        margin: const EdgeInsets.only(bottom: 12),
+                        textStyle: theme.textTheme.bodySmall,
+                        underlineOnly: true,
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 8),
-                  Button(
-                    shape: BoxShape.rectangle,
-                    label: string.uploadImage,
-                    fontSize: 13,
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-                    margin: const EdgeInsets.only(bottom: 12),
-                    radius: 6,
-                    onPressed: () {
-                      extension
-                          .pickPhoto(ImageSource.gallery)
-                          .then((path) => imagePath = path);
-                    },
-                  )
-                ],
-              ),
+                    const SizedBox(width: 8),
+                    Button(
+                      shape: BoxShape.rectangle,
+                      label: string.uploadImage,
+                      fontSize: 13,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
+                      margin: const EdgeInsets.only(bottom: 12),
+                      radius: 6,
+                      onPressed: () {
+                        extension
+                            .pickPhoto(ImageSource.gallery)
+                            .then((path) => imagePath = path);
+                      },
+                    )
+                  ],
+                ),
+        ),
         if (_imagePath == null && _photos.isNotEmpty) ...[
           const SizedBox(height: 24),
           GridView.builder(

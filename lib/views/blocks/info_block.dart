@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'components.dart';
 
 class InfoBlock extends StatelessWidget {
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const InfoBlock(this.configs, {super.key});
+  const InfoBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {

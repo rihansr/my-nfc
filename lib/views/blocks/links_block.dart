@@ -7,8 +7,10 @@ import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
 
 class LinksBlock extends StatelessWidget {
+  
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const LinksBlock(this.configs, {super.key});
+  const LinksBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {

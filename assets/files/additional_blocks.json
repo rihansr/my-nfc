@@ -103,7 +103,7 @@
                                 "fontSize": 32,
                                 "textColor": null,
                                 "fontWeight": "reqular",
-                                "alignment": "left"
+                                "alignment": null
                             }
                         }
                     }
@@ -152,7 +152,7 @@
                                 "textColor": null,
                                 "fontSize": 19,
                                 "fontWeight": "reqular",
-                                "alignment": "left"
+                                "alignment": null
                             }
                         }
                     }

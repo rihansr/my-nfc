@@ -20,13 +20,14 @@ import 'text_block.dart';
 import 'video_block.dart';
 
 class SectionBlock extends StatelessWidget {
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const SectionBlock(this.configs, {super.key});
+  const SectionBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {
     Widget child = Stack(
-      alignment: alignment(configs['style']?['alignment']),
+      alignment: alignment(configs['style']?['alignment']) ?? Alignment.topLeft,
       children: [
         (() {
           String? path = configs['style']?['background']?['image']?['path'];
@@ -67,39 +68,93 @@ class SectionBlock extends StatelessWidget {
                   (i, e) {
                     Key key =
                         this.key != null ? Key('${this.key}/$i') : Key('$i');
+
+                    Map<String, dynamic> sectionStyle =
+                        Map<String, dynamic>.from(this.configs['style'] ?? {});
+
                     Map<String, dynamic> configs = Map<String, dynamic>.from(e);
+
                     if (configs['settings']?['visible'] == false) {
                       return SizedBox.shrink(key: key);
                     }
+
                     switch (configs['block']) {
                       case "section":
                       case "section-secure":
-                        return SectionBlock(configs, key: key);
+                        return SectionBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "space":
-                        return SpaceBlock(configs, key: key);
+                        return SpaceBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "divider":
-                        return DividerBlock(configs, key: key);
+                        return DividerBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "text":
                       case "name":
-                        return TextBlock(configs, key: key);
+                        return TextBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "avatar":
                       case "image":
-                        return ImageBlock(configs, key: key);
+                        return ImageBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "contact":
-                        return ContactBlock(configs, key: key);
+                        return ContactBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "info":
-                        return InfoBlock(configs, key: key);
+                        return InfoBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "links-public":
                       case "links":
-                        return LinksBlock(configs, key: key);
+                        return LinksBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "button":
-                        return ButtonBlock(configs, key: key);
+                        return ButtonBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "video":
-                        return VideoBlock(configs, key: key);
+                        return VideoBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "additional":
-                        return AdditionalBlock(configs, key: key);
+                        return AdditionalBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       case "actions":
-                        return ActionsBlock(configs, key: key);
+                        return ActionsBlock(
+                          configs,
+                          sectionStyle: sectionStyle,
+                          key: key,
+                        );
                       default:
                         return SizedBox.shrink(key: key);
                     }
@@ -110,10 +165,10 @@ class SectionBlock extends StatelessWidget {
         ),
       ],
     );
-    return Container(
+    return Clipper(
       width: configs['style']?['fullWidth'] == false ? null : double.infinity,
       color: configs['style']?['background']?['color']?.toString().hexColor,
-      transform: transform(configs['style']?['spacing']?['margin']),
+      //transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       child: InkWell(
         focusColor: Colors.transparent,

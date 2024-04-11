@@ -5,8 +5,10 @@ import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
 
 class DividerBlock extends StatelessWidget {
+  
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const DividerBlock(this.configs, {super.key});
+  const DividerBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {

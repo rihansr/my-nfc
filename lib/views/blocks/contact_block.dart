@@ -8,8 +8,10 @@ import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
 
 class ContactBlock extends StatelessWidget {
+  
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const ContactBlock(this.configs, {super.key});
+  const ContactBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {

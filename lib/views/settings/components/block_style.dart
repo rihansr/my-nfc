@@ -12,31 +12,20 @@ import 'block_expansion_tile.dart';
 import 'backdrop.dart';
 import 'spcaing.dart';
 
-// ignore: must_be_immutable
 class BlockStyle extends StatelessWidget {
   final Map<String, dynamic> style;
-  final Map<String, dynamic>? settings;
   final Function(Map<String, dynamic>)? onUpdate;
+
+  final Map<String, dynamic>? settings;
   final Function(Map<String, dynamic>)? onSettingsUpdate;
 
-  late Color? _selectedBackgroudColor;
-  late Color? _selectedOverlayColor;
-  late int _selectedOverlayOpacity;
-  late bool _fullWidth;
-  late bool _openInNewTab;
-
-  BlockStyle(
+  const BlockStyle(
     this.style, {
     this.settings,
     super.key,
     this.onUpdate,
     this.onSettingsUpdate,
-  })  : _selectedBackgroudColor =
-            style['background']?['color']?.toString().hexColor,
-        _selectedOverlayColor = style['overlay']?['color']?.toString().hexColor,
-        _selectedOverlayOpacity = style['overlay']?['opacity'] ?? 0,
-        _fullWidth = style['fullWidth'] ?? true,
-        _openInNewTab = settings?['openInNewTab'] ?? true;
+  });
 
   update(String key, MapEntry<String, dynamic> entry) {
     Map<String, dynamic> style = Map<String, dynamic>.from(this.style);
@@ -47,7 +36,6 @@ class BlockStyle extends StatelessWidget {
       case 'style':
         style.addEntries([entry]);
         onUpdate?.call(style);
-
       default:
         style.addEntry(key, entry);
         onUpdate?.call(style);
@@ -69,12 +57,10 @@ class BlockStyle extends StatelessWidget {
         if ((style['background'] as Map?)?.containsKey('color') ?? false)
           ColourPicker(
             title: string.backgroundColor,
-            value: _selectedBackgroudColor,
+            value: style['background']?['color']?.toString().hexColor,
             colors: const [Colors.transparent],
-            onPick: (color) {
-              _selectedBackgroudColor = color;
-              update('background', MapEntry('color', color.toHex));
-            },
+            onPick: (color) =>
+                update('background', MapEntry('color', color.toHex)),
           ),
         ...(style['alignment'] as Map?)
                 ?.entries
@@ -91,6 +77,7 @@ class BlockStyle extends StatelessWidget {
                             return List<String>.from([]);
                         }
                       }()),
+                      reselectable: true,
                       value: entry.value,
                       onSelect: (alignment) {
                         update('alignment', MapEntry(entry.key, alignment));
@@ -101,33 +88,27 @@ class BlockStyle extends StatelessWidget {
         if (style.containsKey('overlay')) ...[
           ColourPicker(
             title: string.overlayColor,
-            value: _selectedOverlayColor,
+            value: style['overlay']?['color']?.toString().hexColor,
             colors: const [Colors.transparent, Colors.black, Colors.white],
-            onPick: (color) {
-              _selectedOverlayColor = color;
-              update('overlay', MapEntry('color', color.toHex));
-            },
+            onPick: (color) =>
+                update('overlay', MapEntry('color', color.toHex)),
           ),
           Seekbar(
             title: string.overlayOpacity,
-            value: _selectedOverlayOpacity,
+            value: style['overlay']?['opacity'] ?? 0,
             type: '%',
             min: 0,
             max: 100,
-            onChanged: (opacity) {
-              _selectedOverlayOpacity = opacity;
-              update('overlay', MapEntry('opacity', opacity));
-            },
+            onChanged: (opacity) =>
+                update('overlay', MapEntry('opacity', opacity)),
           ),
         ],
         if (style.containsKey('fullWidth'))
           CheckboxWidget.expand(
-            value: _fullWidth,
+            value: style['fullWidth'] ?? true,
             label: string.fullWidth,
-            onChanged: (checked) {
-              _fullWidth = checked;
-              update('style', MapEntry('fullWidth', checked));
-            },
+            onChanged: (checked) =>
+                update('style', MapEntry('fullWidth', checked)),
           ),
         if (style.containsKey('spacing'))
           Spacing(
@@ -157,12 +138,10 @@ class BlockStyle extends StatelessWidget {
                 ),
               if (settings!.containsKey('openInNewTab'))
                 CheckboxWidget.expand(
-                  value: _openInNewTab,
+                  value: settings?['openInNewTab'] ?? true,
                   label: string.openInNewTab,
-                  onChanged: (checked) {
-                    _openInNewTab = checked;
-                    update('settings', MapEntry('openInNewTab', checked));
-                  },
+                  onChanged: (checked) =>
+                      update('settings', MapEntry('openInNewTab', checked)),
                 ),
             ],
           ),

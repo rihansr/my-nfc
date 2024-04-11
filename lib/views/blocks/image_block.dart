@@ -3,8 +3,10 @@ import '../../shared/drawables.dart';
 import 'components.dart';
 
 class ImageBlock extends StatelessWidget {
+  
+  final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const ImageBlock(this.configs, {super.key});
+  const ImageBlock(this.configs, {this.sectionStyle, super.key});
 
   @override
   Widget build(BuildContext context) {
