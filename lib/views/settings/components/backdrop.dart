@@ -130,17 +130,15 @@ class _BackdropState extends State<Backdrop> {
                     const SizedBox(width: 8),
                     Button(
                       shape: BoxShape.rectangle,
-                      label: string.uploadImage,
+                      label: string.upload,
                       fontSize: 13,
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 10),
                       margin: const EdgeInsets.only(bottom: 12),
                       radius: 6,
-                      onPressed: () {
-                        extension
-                            .pickPhoto(ImageSource.gallery)
-                            .then((path) => imagePath = path);
-                      },
+                      onPressed: () => extension
+                          .pickPhoto(ImageSource.gallery)
+                          .then((path) => imagePath = path),
                     )
                   ],
                 ),

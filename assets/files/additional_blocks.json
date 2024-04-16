@@ -1,6 +1,7 @@
 [
     {
         "block": "section",
+        "subBlock": "link",
         "label": "Link with Image",
         "settings": {
             "primary": false,
@@ -366,6 +367,7 @@
     },
     {
         "block": "section",
+        "subBlock": "image",
         "label": "Section (Image Background)",
         "settings": {
             "primary": false,
@@ -468,7 +470,8 @@
         }
     },
     {
-        "block": "section-secure",
+        "block": "section",
+        "subBlock": "secure",
         "label": "Secure Section",
         "settings": {
             "primary": false,

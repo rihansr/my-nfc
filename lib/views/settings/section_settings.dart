@@ -61,7 +61,6 @@ class _SectionSettingsState extends State<SectionSettings> {
         Map<String, dynamic> block = Map.from(e);
         switch (e['block']) {
           case "section":
-          case "section-secure":
             return SectionSettings(
               key: key,
               block: block,
@@ -188,6 +187,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           ReorderableListView(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
+            buildDefaultDragHandles: true,
             onReorder: (i, j) {
               if (i < j) j--;
               final item = _fields.removeAt(i);

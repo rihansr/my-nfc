@@ -221,8 +221,6 @@ class _ColourViewModel extends ChangeNotifier {
     if (_reselectable) {
       _selectedColor = _selectedColor == color ? null : color;
     } else if (_selectedColor == color) {
-      notifyListeners();
-      return;
     } else {
       _selectedColor = color;
     }
@@ -232,5 +230,6 @@ class _ColourViewModel extends ChangeNotifier {
   set pick(Color color) => this
     .._chooseFromPicker = true
     .._pickerColor = color
-    .._selectedColor = color;
+    .._selectedColor = color
+    ..notifyListeners();
 }

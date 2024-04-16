@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../utils/extensions.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
@@ -80,7 +79,6 @@ class SectionBlock extends StatelessWidget {
 
                     switch (configs['block']) {
                       case "section":
-                      case "section-secure":
                         return SectionBlock(
                           configs,
                           sectionStyle: sectionStyle,
@@ -165,7 +163,7 @@ class SectionBlock extends StatelessWidget {
         ),
       ],
     );
-    return Clipper(
+    return Container(
       width: configs['style']?['fullWidth'] == false ? null : double.infinity,
       color: configs['style']?['background']?['color']?.toString().hexColor,
       transform: transform(configs['style']?['spacing']?['margin']),
@@ -174,16 +172,7 @@ class SectionBlock extends StatelessWidget {
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
-        onTap: configs['settings']?['advanced']?['linkTo'] != null
-            ? () async => await launchUrl(
-                  Uri.parse(configs['settings']['advanced']['linkTo']),
-                  webOnlyWindowName: configs['settings']?['advanced']
-                              ?['openInNewTab'] ==
-                          true
-                      ? '_blank'
-                      : '_self',
-                )
-            : null,
+        onTap: launchUrl(settings: configs['settings']?['advanced']),
         child: configs['label'] == 'Banner'
             ? NegativePadding(
                 padding: EdgeInsets.symmetric(

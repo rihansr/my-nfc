@@ -28,7 +28,8 @@ class ImageView extends StatefulWidget {
     this.onStyleChange,
     this.onPick,
     this.onRemove,
-  })  : _scale = style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
+  })  : _scale =
+            style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
         _overlayOpacity = style?['overlayOpacity'];
 
   @override
@@ -78,8 +79,7 @@ class _ImageViewState extends State<ImageView> {
                   widget.onPick?.call(path);
                 },
               ),
-              child: Clipper(
-                shape: BoxShape.rectangle,
+              child: Clipper.rectangle(
                 size: double.infinity,
                 alignment: Alignment.center,
                 radius: 6,
@@ -146,7 +146,7 @@ class _ImageViewState extends State<ImageView> {
                     max: 20,
                     onChanged: (value) {
                       setState(() => scale = value);
-                      widget.onStyleChange?.call(MapEntry('scale', value/10));
+                      widget.onStyleChange?.call(MapEntry('scale', value / 10));
                     },
                   ),
                 if (opacity != null)

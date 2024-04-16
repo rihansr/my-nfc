@@ -7,6 +7,7 @@ class Clipper<T> extends StatelessWidget {
   final double? width;
   final double? size;
   final Color? color;
+  final Clip? clipBehavior;
   final double? radius;
   final Matrix4? transform;
   final EdgeInsets? margin;
@@ -29,6 +30,7 @@ class Clipper<T> extends StatelessWidget {
     this.width,
     this.size,
     this.color,
+    this.clipBehavior,
     this.radius,
     this.transform,
     this.margin,
@@ -51,6 +53,7 @@ class Clipper<T> extends StatelessWidget {
     this.width,
     this.size,
     this.color,
+    this.clipBehavior,
     this.radius,
     this.transform,
     this.margin,
@@ -73,6 +76,7 @@ class Clipper<T> extends StatelessWidget {
     this.width,
     this.size,
     this.color,
+    this.clipBehavior,
     this.radius,
     this.transform,
     this.margin,
@@ -93,6 +97,7 @@ class Clipper<T> extends StatelessWidget {
     this.child,
     this.size,
     this.shape,
+    this.clipBehavior,
     this.color,
     this.radius,
     this.transform,
@@ -114,6 +119,7 @@ class Clipper<T> extends StatelessWidget {
     super.key,
     this.child,
     this.shape,
+    this.clipBehavior,
     this.color,
     this.radius,
     this.transform,
@@ -143,10 +149,11 @@ class Clipper<T> extends StatelessWidget {
       transform: transform,
       margin: margin,
       padding: padding,
-      clipBehavior: Clip.antiAlias,
+      clipBehavior: clipBehavior ?? Clip.antiAlias,
       alignment: alignment,
       constraints: constraints,
-      foregroundDecoration: overlayColor != null  && overlayColor != Colors.transparent
+      foregroundDecoration: overlayColor != null &&
+              overlayColor != Colors.transparent
           ? shape == null
               ? BoxDecoration(
                   shape: BoxShape.rectangle,

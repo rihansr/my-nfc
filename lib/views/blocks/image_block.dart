@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../shared/drawables.dart';
 import 'components.dart';
 
@@ -18,16 +17,7 @@ class ImageBlock extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
-        onTap: configs['settings']?['advanced']?['linkTo'] != null
-            ? () async => await launchUrl(
-                  Uri.parse(configs['settings']['advanced']['linkTo']),
-                  webOnlyWindowName: configs['settings']?['advanced']
-                              ?['openInNewTab'] ==
-                          true
-                      ? '_blank'
-                      : '_self',
-                )
-            : null,
+        onTap: launchUrl(settings: configs['settings']?['advanced']),
         child: configs['block'] == 'avatar'
             ? CircleAvatar(
                 backgroundColor: Colors.black12,

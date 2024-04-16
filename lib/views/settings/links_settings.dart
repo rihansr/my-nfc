@@ -53,10 +53,8 @@ class _LinksSettingsState extends State<LinksSettings> {
       },
       onRemove: () => widget.onUpdate?.call({}),
       children: [
-        ReorderableListView(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          children: _links.mapIndexed(
+        (() {
+          var children = _links.mapIndexed(
             (i, e) {
               Key key =
                   widget.key != null ? Key('${widget.key}/$i') : Key('$i');
@@ -132,16 +130,31 @@ class _LinksSettingsState extends State<LinksSettings> {
                 ),
               );
             },
-          ).toList(),
-          onReorder: (i, j) {
-            if (widget.block['settings']?['dragable'] != true) return;
-            if (i < j) j--;
-            final item = _links.removeAt(i);
-            _links.insert(j, item);
-            links = _links;
-            setState(() => {});
-          },
-        ),
+          ).toList();
+
+          return widget.block['settings']?['dragable'] == true
+              ? ReorderableListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(0),
+                  buildDefaultDragHandles: true,
+                  shrinkWrap: true,
+                  children: children,
+                  onReorder: (i, j) {
+                    if (widget.block['settings']?['dragable'] != true) return;
+                    if (i < j) j--;
+                    final item = _links.removeAt(i);
+                    _links.insert(j, item);
+                    links = _links;
+                    setState(() => {});
+                  },
+                )
+              : ListView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  children: children,
+                );
+        }()),
         PopupButton(
           items: json.decode(kSocialLinks),
           label: string.addANewLink,

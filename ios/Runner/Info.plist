@@ -59,12 +59,11 @@
 		<string>To select photo please grant gallery access</string>
 		<!-- Deep Linking -->
 		<key>FlutterDeepLinkingEnabled</key>
+		<true/>
 		<!-- URL Launcher -->
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
-			<string>sms</string>
 			<string>tel</string>
 		</array>
-		<true/>
 	</dict>
 </plist>

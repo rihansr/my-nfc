@@ -22,7 +22,7 @@ class ThemeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _isSelected ? null : () => onSelected?.call(groupValue),
-      child: Clipper(
+      child: Clipper.rectangle(
         width: 140,
         radius: 12,
         shadows: [

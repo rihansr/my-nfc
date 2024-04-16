@@ -25,6 +25,7 @@ class TextBlock extends StatelessWidget {
                 ? double.infinity
                 : null,
             padding: padding(configs['style']?['spacing']?['padding']),
+            transform: transform(configs['style']?['spacing']?['margin']),
             margin: margin(configs['style']?['spacing']?['margin']),
             child: Text(
               text,

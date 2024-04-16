@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/utils/extensions.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
 import '../../models/theme_model.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
 
 class ContactBlock extends StatelessWidget {
-  
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
   const ContactBlock(this.configs, {this.sectionStyle, super.key});
@@ -21,6 +19,7 @@ class ContactBlock extends StatelessWidget {
       return items.any((element) => element?['content'] != null);
     }).toList();
     return ListView.separated(
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: const EdgeInsets.all(0),
       itemCount: entries.length,
@@ -50,38 +49,31 @@ class ContactBlock extends StatelessWidget {
                     .map(
                       (e) => GestureDetector(
                         onTap: {
-                              'phoneNumbers': () async => await launchUrl(
-                                    Uri(
-                                      scheme: 'tel',
-                                      path:
-                                          '${e?['prefix'] ?? ''}-${e?['content'] ?? ''}',
-                                    ),
-                                  ),
-                              'emails': () async => await launchUrl(
-                                    Uri(
-                                      scheme: 'mailto',
-                                      path: e?['content'] ?? '',
-                                      queryParameters: {
-                                        'subject': '',
-                                        'body': ''
-                                      },
-                                    ),
-                                  ),
-                              'addresses': () async => await launchUrl(
-                                    Uri.https(
-                                      'www.google.com',
-                                      '/maps/search/',
-                                      {
-                                        'api': '1',
-                                        'query': e?['content'] ?? ''
-                                      },
-                                    ),
-                                  ),
-                              'websites': () async => await launchUrl(
-                                    Uri.parse('https://${e['content'] ?? ''}'),
-                                  )
-                            }[entry.key] ??
-                            () {},
+                          'phoneNumbers': launchUrl(
+                            url: Uri(
+                              scheme: 'tel',
+                              path:
+                                  '${e?['prefix'] ?? ''}-${e?['content'] ?? ''}',
+                            ),
+                          ),
+                          'emails': launchUrl(
+                            url: Uri(
+                              scheme: 'mailto',
+                              path: e?['content'] ?? '',
+                              queryParameters: {'subject': '', 'body': ''},
+                            ),
+                          ),
+                          'addresses': launchUrl(
+                            url: Uri.https(
+                              'www.google.com',
+                              '/maps/search/',
+                              {'api': '1', 'query': e?['content'] ?? ''},
+                            ),
+                          ),
+                          'websites': launchUrl(
+                            url: Uri.parse('https://${e['content'] ?? ''}'),
+                          )
+                        }[entry.key],
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,

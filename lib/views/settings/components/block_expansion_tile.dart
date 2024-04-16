@@ -65,7 +65,7 @@ class BlockExpansionTile extends StatelessWidget {
 
     return ListTileTheme(
       dense: true,
-      horizontalTitleGap: 5.0,
+      horizontalTitleGap: 6.0,
       minLeadingWidth: 0,
       child: ExpansionTile(
         key: Key('$key/expansion_tile'),

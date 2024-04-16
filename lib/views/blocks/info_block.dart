@@ -31,7 +31,7 @@ class InfoBlock extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if ((configs['data'] as Map?)?.containsKey('title') ??
+                    if ((configs['data'] as Map?)?.containsKey('content') ??
                         false) ...[
                       Text(
                         configs['data']?['content']?['text'] ?? '',

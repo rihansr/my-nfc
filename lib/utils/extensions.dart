@@ -112,6 +112,26 @@ extension DynamicMapExtension on Map {
       }
     });
   }
+
+  List<Map<String, dynamic>> findBy(MapEntry entry) {
+    List<Map<String, dynamic>> list = [];
+    forEach((key, value) {
+      if (value is Map) {
+        final map = Map<String, dynamic>.from(value);
+        map[entry.key] == entry.value
+            ? list.add(map)
+            : list.addAll(map.findBy(entry));
+      } else if (value is List) {
+        for (var i = 0; i < value.length; i++) {
+          final map = Map<String, dynamic>.from(value[i]);
+          map[entry.key] == entry.value
+              ? list.add(map)
+              : list.addAll(map.findBy(entry));
+        }
+      }
+    });
+    return list;
+  }
 }
 
 extension HexColor on Color {

@@ -27,7 +27,7 @@ class Spacing extends StatelessWidget {
         if (spacing?.containsKey('padding') ?? false)
           ...Map<String, dynamic>.from(spacing?['padding'] ?? {}).entries.map(
                 (entry) => Seekbar(
-                  title: '${entry.key.capitalizeFirstOfEach} ${string.padding}',
+                  title: '${string.padding.capitalizeFirstOfEach} ${entry.key}',
                   type: 'px',
                   value: entry.value,
                   defaultValue: spacing?['default']?['padding'] ?? 0,
@@ -41,19 +41,19 @@ class Spacing extends StatelessWidget {
               ),
         if (spacing?.containsKey('margin') ?? false)
           ...Map<String, dynamic>.from(spacing?['margin'] ?? {}).entries.map(
-              (entry) => Seekbar(
-                title: '${entry.key.capitalizeFirstOfEach} ${string.margin}',
-                type: 'px',
-                value: entry.value,
-                defaultValue: spacing?['default']?['margin'] ?? 0,
-                min: spacing?['limit']?['margin']?['min'] ?? 0,
-                max: spacing?['limit']?['margin']?['max'] ?? 100,
-                onChanged: (val) {
-                  spacing?.addEntry('margin', MapEntry(entry.key, val));
-                  onUpdate?.call(MapEntry("spacing", spacing!));
-                },
+                (entry) => Seekbar(
+                  title: '${string.margin.capitalizeFirstOfEach} ${entry.key}',
+                  type: 'px',
+                  value: entry.value,
+                  defaultValue: spacing?['default']?['margin'] ?? 0,
+                  min: spacing?['limit']?['margin']?['min'] ?? 0,
+                  max: spacing?['limit']?['margin']?['max'] ?? 100,
+                  onChanged: (val) {
+                    spacing?.addEntry('margin', MapEntry(entry.key, val));
+                    onUpdate?.call(MapEntry("spacing", spacing!));
+                  },
+                ),
               ),
-            ),
       ],
     );
   }

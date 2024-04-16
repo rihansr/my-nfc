@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_nfc/viewmodels/design_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../utils/extensions.dart';
 import 'components.dart';
 
@@ -20,35 +19,16 @@ class ButtonBlock extends StatelessWidget {
           ? null
           : alignment(sectionStyle?['alignment']),
       child: TextButton(
-        onPressed: (() {
-          String? url = configs['data']?['link'];
-          bool disabled =
-              configs['settings']?['advanced']?['disabled'] ?? false;
-          if (disabled || url == null) return null;
-          return () async => await launchUrl(
-                Uri.parse(url),
-                webOnlyWindowName:
-                    configs['settings']?['advanced']?['openInNewTab'] == true
-                        ? '_blank'
-                        : '_self',
-              );
-        }()),
+        onPressed: launchUrl(
+            settings: configs['settings']?['advanced'],
+            url: configs['data']?['link'] == null
+                ? null
+                : Uri.parse(configs['data']?['link'])),
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll((() {
             final style =
                 Map.from(configs['data']?['style']?['background'] ?? {});
             return style['color'].toString().hexColor;
-          }())),
-          textStyle: MaterialStatePropertyAll((() {
-            final style = Map.from(configs['data']?['style']?['text'] ?? {});
-            return textStyle(
-              context,
-              style,
-              orElse: TextStyle(
-                color: style['textColor']?.toString().hexColor ??
-                    Provider.of<DesignViewModel>(context).theme.iconColor,
-              ),
-            );
           }())),
           minimumSize: const MaterialStatePropertyAll(Size.zero),
           padding: MaterialStatePropertyAll(
@@ -68,7 +48,10 @@ class ButtonBlock extends StatelessWidget {
             );
           }())),
         ),
-        child: Text(configs['data']?['label']?['text'] ?? ''),
+        child: Text(
+          configs['data']?['label']?['text'] ?? '',
+          style: textStyle(context, Map.from(configs['data']?['style']?['text'] ?? {})),
+        ),
       ),
     );
   }

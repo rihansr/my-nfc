@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../models/theme_model.dart';
@@ -81,6 +82,13 @@ class ButtonSettings extends StatelessWidget {
         InputField(
           controller: TextEditingController(text: block['data']?['link']),
           title: string.linkTo,
+          keyboardType: TextInputType.url,
+          inputFormatters: [
+            FilteringTextInputFormatter.deny(
+              RegExp(r'\s'),
+              replacementString: '/',
+            ),
+          ],
           onTyping: (text) => update(
             'data',
             MapEntry('link', text.isEmpty ? null : text),

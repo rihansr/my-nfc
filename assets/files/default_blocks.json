@@ -1,6 +1,7 @@
 {
     "basicInformation": {
         "block": "section",
+        "subBlock": "basic",
         "label": "Basic Information",
         "settings": {
             "primary": true,
@@ -11,6 +12,7 @@
             "fields": [
                 {
                     "block": "section",
+                    "subBlock": "banner",
                     "label": "Banner",
                     "settings": {
                         "primary": true,
@@ -139,7 +141,7 @@
                                 "vertical": 0
                             },
                             "margin": {
-                                "top": -50,
+                                "top": 0,
                                 "bottom": 0,
                                 "left": 0,
                                 "right": 0
@@ -214,7 +216,7 @@
                                         },
                                         "margin": {
                                             "top": 0,
-                                            "bottom": -20,
+                                            "bottom": 0,
                                             "left": 0,
                                             "right": 0
                                         }
@@ -414,6 +416,7 @@
     },
     "profileInformation": {
         "block": "section",
+        "subBlock": "profile",
         "label": "Profile Information",
         "settings": {
             "primary": true,
@@ -440,7 +443,7 @@
                     "label": "Space",
                     "settings": {
                         "primary": false,
-                        "visible": true,
+                        "visible": false,
                         "removable": false
                     },
                     "data": {
@@ -715,6 +718,7 @@
     },
     "additionalInformation": {
         "block": "section",
+        "subBlock": "additional",
         "label": "Additional Information",
         "settings": {
             "primary": false,
@@ -728,6 +732,7 @@
     },
     "footer": {
         "block": "section",
+        "subBlock": "footer",
         "label": "Footer",
         "settings": {
             "primary": true,

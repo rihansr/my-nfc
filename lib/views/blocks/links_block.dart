@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
+import 'components.dart';
 
 class LinksBlock extends StatelessWidget {
   final Map<String, dynamic>? sectionStyle;
@@ -22,8 +22,8 @@ class LinksBlock extends StatelessWidget {
       children: (configs['data']?['links'] as List?)
               ?.where((element) => element['id'] != null)
               .map((link) => GestureDetector(
-                    onTap: () async => await launchUrl(
-                      Uri.parse(
+                    onTap: launchUrl(
+                      url: Uri.parse(
                           'https://${link['link'] ?? ''}${link['id'] ?? ''}'),
                     ),
                     child: Clipper.circle(
