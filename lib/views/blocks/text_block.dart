@@ -8,7 +8,7 @@ class TextBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String text = configs['block'] == 'name'
+    String text = configs['subBlock'] == 'text_name'
         ? '${configs['data']?['name']?['first'] ?? ''}'
                 ' '
                 '${configs['data']?['name']?['middle'] ?? ''}'

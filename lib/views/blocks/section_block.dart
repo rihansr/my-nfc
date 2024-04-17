@@ -35,7 +35,8 @@ class SectionBlock extends StatelessWidget {
               1.0;
 
           if (path == null) {
-            return SizedBox(height: configs['label'] == 'Banner' ? 100 : 0);
+            return SizedBox(
+                height: configs['subBlock'] == 'section_banner' ? 100 : 0);
           }
           Widget image = Clipper(
             overlayColor:
@@ -77,85 +78,91 @@ class SectionBlock extends StatelessWidget {
                       return SizedBox.shrink(key: key);
                     }
 
+                    late Widget field;
+
                     switch (configs['block']) {
                       case "section":
-                        return SectionBlock(
+                        field = SectionBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "space":
-                        return SpaceBlock(
+                        field = SpaceBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "divider":
-                        return DividerBlock(
+                        field = DividerBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "text":
-                      case "name":
-                        return TextBlock(
+                        field = TextBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
-                      case "avatar":
                       case "image":
-                        return ImageBlock(
+                        field = ImageBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "contact":
-                        return ContactBlock(
+                        field = ContactBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "info":
-                        return InfoBlock(
+                        field = InfoBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
-                      case "links-public":
                       case "links":
-                        return LinksBlock(
+                        field = LinksBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "button":
-                        return ButtonBlock(
+                        field = ButtonBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "video":
-                        return VideoBlock(
+                        field = VideoBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "additional":
-                        return AdditionalBlock(
+                        field = AdditionalBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "actions":
-                        return ActionsBlock(
+                        field = ActionsBlock(
                           configs,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       default:
-                        return SizedBox.shrink(key: key);
+                        field = SizedBox.shrink(key: key);
                     }
+
+                    return configs['style']?['spacing']?['outset'] != null
+                        ? NegativePadding(
+                            padding:
+                                margin(configs['style']?['spacing']?['outset']),
+                            child: field)
+                        : field;
                   },
                 ).toList() ??
                 [],
@@ -173,7 +180,7 @@ class SectionBlock extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
         onTap: launchUrl(settings: configs['settings']?['advanced']),
-        child: configs['label'] == 'Banner'
+        child: configs['subBlock'] == 'section_banner'
             ? NegativePadding(
                 padding: EdgeInsets.symmetric(
                   horizontal:

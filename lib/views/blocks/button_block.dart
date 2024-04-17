@@ -50,7 +50,16 @@ class ButtonBlock extends StatelessWidget {
         ),
         child: Text(
           configs['data']?['label']?['text'] ?? '',
-          style: textStyle(context, Map.from(configs['data']?['style']?['text'] ?? {})),
+          style: textStyle(
+            context,
+            Map.from(configs['data']?['style']?['text'] ?? {}),
+            orElse: TextStyle(
+              color: configs['data']?['style']?['text']?['labelColor']
+                      ?.toString()
+                      .hexColor ??
+                  Provider.of<DesignViewModel>(context).theme.iconColor,
+            ),
+          ),
         ),
       ),
     );

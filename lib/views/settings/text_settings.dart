@@ -62,7 +62,7 @@ class TextSettings extends StatelessWidget {
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(14, 0, 22, 8),
       children: [
-        ...(block['block'] == 'name'
+        ...(block['subBlock'] == 'text_name'
             ? [
                 InputField(
                   controller: TextEditingController(

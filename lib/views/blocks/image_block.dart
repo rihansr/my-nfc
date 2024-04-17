@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../shared/drawables.dart';
+import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
 
 class ImageBlock extends StatelessWidget {
-  
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
   const ImageBlock(this.configs, {this.sectionStyle, super.key});
@@ -18,19 +19,29 @@ class ImageBlock extends StatelessWidget {
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
         onTap: launchUrl(settings: configs['settings']?['advanced']),
-        child: configs['block'] == 'avatar'
+        child: configs['subBlock'] == 'image_avatar'
             ? CircleAvatar(
                 backgroundColor: Colors.black12,
                 backgroundImage: providerPhoto(configs['data']?['path'],
                     placeholder: drawable.avatar),
                 radius:
-                    (configs['data']?['style']?['size']?.toDouble() ?? 100.0) / 2,
+                    (configs['data']?['style']?['size']?.toDouble() ?? 100.0) /
+                        2,
               )
             : photo(
-                configs['data']?['path'],
-                fit: BoxFit.fitWidth,
-                width: double.infinity,
-              ),
+                  configs['data']?['path'],
+                  fit: BoxFit.fitWidth,
+                  width: double.infinity,
+                ) ??
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Placeholder(
+                    color: Provider.of<DesignViewModel>(context)
+                        .theme
+                        .dividerColor,
+                    fallbackWidth: double.infinity,
+                  ),
+                ),
       ),
     );
   }

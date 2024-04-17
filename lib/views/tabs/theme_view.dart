@@ -54,14 +54,16 @@ class ThemeView extends StatelessWidget {
                 itemBuilder: (_, i) => ThemeItem(
                   groupValue: kThemes[i],
                   value: controller.theme,
-                  onSelected: (theme) {
-                    controller.designData.modify({
-                      'textColor': theme.textColor.toHex,
-                      'borderColor': theme.iconColor.toHex,
-                      'dividerColor': theme.dividerColor.toHex,
-                    });
-                    controller.theme = theme.inheritFrom(controller.theme);
-                  },
+                  onSelected: (theme) => controller
+                    ..designData.modify(
+                      {
+                        'textColor': theme.textColor.toHex,
+                        'borderColor': theme.iconColor.toHex,
+                        'labelColor': theme.iconColor.toHex,
+                        'dividerColor': theme.dividerColor.toHex,
+                      },
+                    )
+                    ..theme = theme.inheritFrom(controller.theme),
                 ),
               ),
             ),
@@ -71,20 +73,23 @@ class ThemeView extends StatelessWidget {
               value: controller.theme.textColor,
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              onPick: (color) {
-                controller.designData.modify({'textColor': color.toHex});
-                controller.theme = controller.theme.copyWith(textColor: color);
-              },
+              onPick: (color) => controller
+                ..designData.modify({'textColor': color.toHex})
+                ..theme = controller.theme.copyWith(textColor: color),
             ),
             ColourPicker(
               title: string.iconColor,
               value: controller.theme.iconColor,
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              onPick: (color) {
-                controller.designData.modify({'borderColor': color.toHex});
-                controller.theme = controller.theme.copyWith(iconColor: color);
-              },
+              onPick: (color) => controller
+                ..designData.modify(
+                  {
+                    'borderColor': color.toHex,
+                    'labelColor': color.toHex,
+                  },
+                )
+                ..theme = controller.theme.copyWith(iconColor: color),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -156,21 +161,26 @@ class ThemeView extends StatelessWidget {
                         textStyle: Theme.of(context).textTheme.bodySmall,
                       ),
               ),
-              onSelected: (String? font) {
-                controller.designData.modify({'typography': font});
-                controller.theme = controller.theme.copyWith(fontFamily: font);
-              },
+              onSelected: (String? font) => controller
+                ..designData.modify(
+                  {
+                    'typography': font,
+                  },
+                )
+                ..theme = controller.theme.copyWith(fontFamily: font),
             ),
             ColourPicker(
               title: string.lineBreakColor,
               value: controller.theme.iconColor,
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              onPick: (color) {
-                controller.designData.modify({'dividerColor': color.toHex});
-                controller.theme =
-                    controller.theme.copyWith(dividerColor: color);
-              },
+              onPick: (color) => controller
+                ..designData.modify(
+                  {
+                    'dividerColor': color.toHex,
+                  },
+                )
+                ..theme = controller.theme.copyWith(dividerColor: color),
             ),
           ],
         ),

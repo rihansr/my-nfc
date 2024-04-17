@@ -31,7 +31,7 @@ class ImageSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
-      icon: block['block'] == 'avatar'
+      icon: block['subBlock'] == 'image_avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
       label: block['label'],

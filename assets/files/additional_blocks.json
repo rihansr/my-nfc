@@ -1,7 +1,7 @@
 [
     {
         "block": "section",
-        "subBlock": "link",
+        "subBlock": "section_image_link",
         "label": "Link with Image",
         "settings": {
             "primary": false,
@@ -210,7 +210,7 @@
                             },
                             "text": {
                                 "typography": null,
-                                "textColor": null,
+                                "labelColor": null,
                                 "fontSize": 16,
                                 "fontWeight": "regular"
                             },
@@ -367,7 +367,7 @@
     },
     {
         "block": "section",
-        "subBlock": "image",
+        "subBlock": "section_background",
         "label": "Section (Image Background)",
         "settings": {
             "primary": false,
@@ -471,7 +471,7 @@
     },
     {
         "block": "section",
-        "subBlock": "secure",
+        "subBlock": "section_secure",
         "label": "Secure Section",
         "settings": {
             "primary": false,
@@ -603,7 +603,7 @@
                 },
                 "text": {
                     "typography": null,
-                    "textColor": null,
+                    "labelColor": null,
                     "fontSize": 16,
                     "fontWeight": "regular"
                 },
@@ -629,7 +629,8 @@
         }
     },
     {
-        "block": "links-public",
+        "block": "links",
+        "subBlock": "links_public",
         "label": "Public Social Media",
         "settings": {
             "primary": false,
@@ -671,9 +672,53 @@
                 "buttonFixedAtBottom": true
             }
         },
+        "style":{
+            "spacing": {
+                "default": {
+                    "margin": 0,
+                    "padding": 0
+                },
+                "limit": {
+                    "padding": {
+                        "min": 0,
+                        "max": 200
+                    },
+                    "margin": {
+                        "min": -200,
+                        "max": 200
+                    }
+                },
+                "padding": {
+                    "horizontal": 16,
+                    "vertical": 8
+                },
+                "margin": {
+                    "top": 0,
+                    "bottom": 0,
+                    "left": 0,
+                    "right": 0
+                }
+            }
+        },
         "data": {
             "primary": {},
-            "additional": {}
+            "additional": {},
+            "style": {
+                "background": {
+                    "color": "#003F3F46"
+                },
+                "text": {
+                    "typography": null,
+                    "labelColor": "#00FFFFFF",
+                    "fontSize": 14,
+                    "fontWeight": "regular"
+                },
+                "border": {
+                    "borderColor": null,
+                    "borderWidth": 1,
+                    "borderRadius": 4
+                }
+            }
         }
     },
     {

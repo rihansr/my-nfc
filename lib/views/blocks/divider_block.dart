@@ -13,7 +13,8 @@ class DividerBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: margin(configs['style']?['spacing']?['margin']),
+      margin: margin(configs['style']?['spacing']?['margin']),
+      transform: transform(configs['style']?['spacing']?['margin']),
       child: Divider(
         thickness: configs['data']?['style']?['height']?.toDouble() ?? 1.0,
         indent: configs['style']?['spacing']?['padding']?['left']?.toDouble() ??

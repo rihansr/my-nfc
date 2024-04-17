@@ -1,7 +1,7 @@
 {
     "basicInformation": {
         "block": "section",
-        "subBlock": "basic",
+        "subBlock": "section_basic",
         "label": "Basic Information",
         "settings": {
             "primary": true,
@@ -12,7 +12,7 @@
             "fields": [
                 {
                     "block": "section",
-                    "subBlock": "banner",
+                    "subBlock": "section_banner",
                     "label": "Banner",
                     "settings": {
                         "primary": true,
@@ -112,6 +112,7 @@
                 },
                 {
                     "block": "section",
+                    "subBlock": "section_profile",
                     "label": "Profile",
                     "settings": {
                         "primary": true,
@@ -151,7 +152,8 @@
                     "data": {
                         "fields": [
                             {
-                                "block": "avatar",
+                                "block": "image",
+                                "subBlock": "image_avatar",
                                 "label": "Avatar",
                                 "settings": {
                                     "primary": true,
@@ -176,18 +178,25 @@
                                         "margin": {
                                             "left": 0,
                                             "right": 0
+                                        },
+                                        "outset": {
+                                            "top": 64,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
                                         }
                                     }
                                 },
                                 "data": {
                                     "path": null,
                                     "style": {
-                                        "size": 100
+                                        "size": 128
                                     }
                                 }
                             },
                             {
-                                "block": "name",
+                                "block": "text",
+                                "subBlock": "text_name",
                                 "label": "Name",
                                 "settings": {
                                     "primary": true,
@@ -219,6 +228,12 @@
                                             "bottom": 0,
                                             "left": 0,
                                             "right": 0
+                                        },
+                                        "outset": {
+                                            "top": 48,
+                                            "bottom": 0,
+                                            "left": 0,
+                                            "right": 0
                                         }
                                     }
                                 },
@@ -240,21 +255,6 @@
                                 }
                             }
                         ]
-                    }
-                },
-                {
-                    "block": "space",
-                    "label": "Space",
-                    "settings": {
-                        "primary": false,
-                        "visible": false,
-                        "removable": false
-                    },
-                    "data": {
-                        "style": {
-                            "height": 0,
-                            "default": 0
-                        }
                     }
                 },
                 {
@@ -290,6 +290,12 @@
                                 "bottom": 0,
                                 "left": 0,
                                 "right": 0
+                            },
+                            "outset": {
+                                "top": 36,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
                             }
                         }
                     },
@@ -303,21 +309,6 @@
                                 "fontWeight": "regular",
                                 "alignment": "center"
                             }
-                        }
-                    }
-                },
-                {
-                    "block": "space",
-                    "label": "Space",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": false
-                    },
-                    "data": {
-                        "style": {
-                            "height": 8,
-                            "default": 8
                         }
                     }
                 },
@@ -351,6 +342,12 @@
                             },
                             "margin": {
                                 "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            },
+                            "outset": {
+                                "top": 24,
                                 "bottom": 0,
                                 "left": 0,
                                 "right": 0
@@ -395,7 +392,7 @@
                                 }
                             },
                             "margin": {
-                                "top": 20,
+                                "top": 0,
                                 "bottom": 20
                             },
                             "padding": {
@@ -416,7 +413,7 @@
     },
     "profileInformation": {
         "block": "section",
-        "subBlock": "profile",
+        "subBlock": "section_profile",
         "label": "Profile Information",
         "settings": {
             "primary": true,
@@ -426,7 +423,8 @@
         "data": {
             "fields": [
                 {
-                    "block": "links-public",
+                    "block": "links",
+                    "subBlock": "links_public",
                     "label": "Public Social Media",
                     "settings": {
                         "primary": false,
@@ -555,7 +553,7 @@
                                     "removable": false,
                                     "dragable": true
                                 },
-                                "style":{
+                                "style": {
                                     "alignment": {
                                         "horizontal": "center"
                                     }
@@ -718,7 +716,7 @@
     },
     "additionalInformation": {
         "block": "section",
-        "subBlock": "additional",
+        "subBlock": "section_additional",
         "label": "Additional Information",
         "settings": {
             "primary": false,
@@ -732,7 +730,7 @@
     },
     "footer": {
         "block": "section",
-        "subBlock": "footer",
+        "subBlock": "section_footer",
         "label": "Footer",
         "settings": {
             "primary": true,
@@ -755,9 +753,55 @@
                             "buttonFixedAtBottom": true
                         }
                     },
+                    "spacing":{
+                        "style":{
+                            "spacing": {
+                                "default": {
+                                    "margin": 0,
+                                    "padding": 0
+                                },
+                                "limit": {
+                                    "padding": {
+                                        "min": 0,
+                                        "max": 200
+                                    },
+                                    "margin": {
+                                        "min": -200,
+                                        "max": 200
+                                    }
+                                },
+                                "padding": {
+                                    "horizontal": 16,
+                                    "vertical": 8
+                                },
+                                "margin": {
+                                    "top": 0,
+                                    "bottom": 0,
+                                    "left": 0,
+                                    "right": 0
+                                }
+                            }
+                        }
+                    },
                     "data": {
                         "primary": {},
-                        "additional": {}
+                        "additional": {},
+                        "style": {
+                            "background": {
+                                "color": "#003F3F46"
+                            },
+                            "text": {
+                                "typography": null,
+                                "labelColor": "#00FFFFFF",
+                                "fontSize": 14,
+                                "fontWeight": "regular"
+                            },
+                            "border": {
+                                "borderColor": null,
+                                "borderWidth": 1,
+                                "borderRadius": 4
+                            }
+                        }
                     }
                 }
             ]

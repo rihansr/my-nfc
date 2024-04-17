@@ -89,28 +89,28 @@ ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
       }
     }());
 
-Widget? photo(String? path,
-        {String? placeholder, double? width, BoxFit? fit}) =>
-    path?.isNotEmpty == true || placeholder?.isNotEmpty == true
-        ? Uri.tryParse(path ?? placeholder!)?.isAbsolute ?? false
-            ? FadeInImage.memoryNetwork(
-                image: path ?? placeholder!,
-                width: width,
-                fit: fit ?? BoxFit.cover,
-                placeholder: kTransparentImage,
-              )
-            : kIsWeb
-                ? Image.network(
-                    path ?? placeholder!,
-                    width: width,
-                    fit: fit ?? BoxFit.cover,
-                  )
-                : Image.file(
-                    File(path ?? placeholder!),
-                    width: width,
-                    fit: fit ?? BoxFit.cover,
-                  )
-        : null;
+Widget? photo(
+  String? path, {
+  String? placeholder,
+  double? width,
+  double? height,
+  BoxFit fit = BoxFit.cover,
+}) {
+  path ??= placeholder;
+  return path?.isNotEmpty ?? false
+      ? Uri.tryParse(path!)?.isAbsolute ?? false
+          ? FadeInImage.memoryNetwork(
+              image: path,
+              width: width,
+              height: height,
+              fit: fit,
+              placeholder: kTransparentImage,
+            )
+          : kIsWeb
+              ? Image.network(path, width: width, height: height, fit: fit)
+              : Image.file(File(path), width: width, height: height, fit: fit)
+      : null;
+}
 
 TextStyle textStyle(BuildContext context, Map? style, {TextStyle? orElse}) =>
     GoogleFonts.getFont(

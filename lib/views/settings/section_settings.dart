@@ -79,13 +79,11 @@ class _SectionSettingsState extends State<SectionSettings> {
               onUpdate: (settings) => update(i, settings),
             );
           case "text":
-          case "name":
             return TextSettings(
               key: key,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
-          case "avatar":
           case "image":
             return ImageSettings(
               key: key,
@@ -104,7 +102,6 @@ class _SectionSettingsState extends State<SectionSettings> {
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
-          case "links-public":
           case "links":
             return LinksSettings(
               key: key,
