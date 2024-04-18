@@ -34,6 +34,7 @@ class ButtonSettings extends StatelessWidget {
       case 'style':
         settings.addEntry(key, value);
       case 'text':
+      case 'background':
       case 'border':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};

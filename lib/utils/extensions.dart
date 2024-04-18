@@ -113,24 +113,61 @@ extension DynamicMapExtension on Map {
     });
   }
 
-  List<Map<String, dynamic>> findBy(MapEntry entry) {
+  List<Map<String, dynamic>> filterBy(MapEntry entry) {
     List<Map<String, dynamic>> list = [];
     forEach((key, value) {
       if (value is Map) {
         final map = Map<String, dynamic>.from(value);
         map[entry.key] == entry.value
             ? list.add(map)
-            : list.addAll(map.findBy(entry));
+            : list.addAll(map.filterBy(entry));
       } else if (value is List) {
         for (var i = 0; i < value.length; i++) {
           final map = Map<String, dynamic>.from(value[i]);
           map[entry.key] == entry.value
               ? list.add(map)
-              : list.addAll(map.findBy(entry));
+              : list.addAll(map.filterBy(entry));
         }
       }
     });
     return list;
+  }
+
+  Map<String, List<Map<String, dynamic>>> findBy(List<String> by) {
+    Map<String, List<Map<String, dynamic>>> mapList = {};
+    forEach((key, value) {
+      if (value is Map) {
+        final map = Map<String, dynamic>.from(value);
+
+        for (var i = 0; i < by.length; i++) {
+          mapList.update(
+            by[i],
+            (list) {
+              map.containsKey(by[i])
+                  ? list.add(map)
+                  : list.addAll(map.findBy(by)[by[i]] ?? []);
+              return list;
+            },
+            ifAbsent: () => [map],
+          );
+        }
+      } else if (value is List) {
+        for (var i = 0; i < value.length; i++) {
+          final map = Map<String, dynamic>.from(value[i]);
+          mapList.update(
+            by[i],
+            (list) {
+              map.containsKey(by[i])
+                  ? list.add(map)
+                  : list.addAll(map.findBy(by)[by[i]] ?? []);
+              return list;
+            },
+            ifAbsent: () => [map],
+          );
+        }
+      }
+    });
+    return mapList;
   }
 }
 

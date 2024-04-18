@@ -112,11 +112,10 @@ Widget? photo(
       : null;
 }
 
-TextStyle textStyle(BuildContext context, Map? style, {TextStyle? orElse}) =>
+TextStyle textStyle(BuildContext context, Map? style) =>
     GoogleFonts.getFont(
       style?['typography'] ??
           Provider.of<DesignViewModel>(context).theme.fontFamily,
-      textStyle: orElse,
       fontSize: style?['fontSize']?.toDouble() ?? 16,
       color: style?['textColor']?.toString().hexColor ??
           Provider.of<DesignViewModel>(context).theme.textColor,

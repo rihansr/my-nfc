@@ -16,6 +16,7 @@ class LandingView extends StatelessWidget {
           onInit: (controller) {
             WidgetsBinding.instance.addPostFrameCallback(
                 (_) => controller.showsModalBottomSheet(0));
+            
           },
           builder: (context, controller, child) => DecoratedBox(
             decoration: BoxDecoration(gradient: controller.theme.background),

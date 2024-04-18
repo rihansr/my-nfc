@@ -660,6 +660,7 @@
     },
     {
         "block": "actions",
+        "subBlock": "actions_footer",
         "label": "Save Contact/Contact",
         "settings": {
             "primary": false,
@@ -689,8 +690,8 @@
                     }
                 },
                 "padding": {
-                    "horizontal": 16,
-                    "vertical": 8
+                    "horizontal": 12,
+                    "vertical": 20
                 },
                 "margin": {
                     "top": 0,
@@ -701,22 +702,20 @@
             }
         },
         "data": {
+            "label": {
+                "text": "Save to phone"
+            },
             "primary": {},
             "additional": {},
             "style": {
                 "background": {
-                    "color": "#003F3F46"
+                    "color": "#FF3F3F46"
                 },
                 "text": {
                     "typography": null,
-                    "labelColor": "#00FFFFFF",
+                    "labelColor": "#FFFFFFFF",
                     "fontSize": 14,
-                    "fontWeight": "regular"
-                },
-                "border": {
-                    "borderColor": null,
-                    "borderWidth": 1,
-                    "borderRadius": 4
+                    "fontWeight": "semi-bold"
                 }
             }
         }

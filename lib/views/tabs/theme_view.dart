@@ -171,7 +171,7 @@ class ThemeView extends StatelessWidget {
             ),
             ColourPicker(
               title: string.lineBreakColor,
-              value: controller.theme.iconColor,
+              value: controller.theme.dividerColor,
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               onPick: (color) => controller

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import '../utils/extensions.dart';
 import '../models/theme_model.dart';
 import '../views/tabs/design_view.dart';
 import '../views/tabs/theme_view.dart';
@@ -10,6 +11,9 @@ class DesignViewModel extends BaseViewModel {
   final BuildContext _context;
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Map<String, dynamic> designData;
+
+  List<Map<String, dynamic>> get footers =>
+      designData.filterBy(const MapEntry('subBlock', 'actions_footer'));
 
   DesignViewModel(BuildContext context)
       : _context = context,

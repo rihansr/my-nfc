@@ -741,11 +741,12 @@
             "fields": [
                 {
                     "block": "actions",
-                    "label": "Save Contact/Connect",
+                    "subBlock": "actions_footer",
+                    "label": "Save Contact/Contact",
                     "settings": {
                         "primary": false,
                         "visible": true,
-                        "removable": false,
+                        "removable": true,
                         "advanced": {
                             "showSaveToPhoneButton": true,
                             "showPrimaryContactButton": true,
@@ -753,53 +754,49 @@
                             "buttonFixedAtBottom": true
                         }
                     },
-                    "spacing":{
-                        "style":{
-                            "spacing": {
-                                "default": {
-                                    "margin": 0,
-                                    "padding": 0
-                                },
-                                "limit": {
-                                    "padding": {
-                                        "min": 0,
-                                        "max": 200
-                                    },
-                                    "margin": {
-                                        "min": -200,
-                                        "max": 200
-                                    }
-                                },
+                    "style":{
+                        "spacing": {
+                            "default": {
+                                "margin": 0,
+                                "padding": 0
+                            },
+                            "limit": {
                                 "padding": {
-                                    "horizontal": 16,
-                                    "vertical": 8
+                                    "min": 0,
+                                    "max": 200
                                 },
                                 "margin": {
-                                    "top": 0,
-                                    "bottom": 0,
-                                    "left": 0,
-                                    "right": 0
+                                    "min": -200,
+                                    "max": 200
                                 }
+                            },
+                            "padding": {
+                                "horizontal": 12,
+                                "vertical": 20
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
                             }
                         }
                     },
                     "data": {
+                        "label": {
+                            "text": "Save to phone"
+                        },
                         "primary": {},
                         "additional": {},
                         "style": {
                             "background": {
-                                "color": "#003F3F46"
+                                "color": "#FF3F3F46"
                             },
                             "text": {
                                 "typography": null,
-                                "labelColor": "#00FFFFFF",
+                                "labelColor": "#FFFFFFFF",
                                 "fontSize": 14,
-                                "fontWeight": "regular"
-                            },
-                            "border": {
-                                "borderColor": null,
-                                "borderWidth": 1,
-                                "borderRadius": 4
+                                "fontWeight": "semi-bold"
                             }
                         }
                     }

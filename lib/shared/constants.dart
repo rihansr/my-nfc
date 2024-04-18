@@ -417,6 +417,60 @@ extension IconExtensions on String {
     }
   }
 
+  Color get socialIconColor {
+    switch (this) {
+      case "facebook":
+        return const Color(0xFF4267B2);
+      case "instagram":
+        return const Color(0xFFC13584);
+      case "linkedin":
+        return const Color(0xFF0077B5);
+      case "twitter":
+        return const Color(0xFF1DA1F2);
+      case "whatsapp":
+        return const Color(0xFF25D366);
+      case "youtube":
+        return const Color(0xFFFF0000);
+      case "snapchat":
+        return const Color(0xFFFFFC00);
+      case "tiktok":
+        return const Color(0xFF000000);
+      case "telegram":
+        return const Color(0xFF0088CC);
+      case "pinterest":
+        return const Color(0xFFBD081C);
+      case "reddit":
+        return const Color(0xFFFF4500);
+      case "github":
+        return const Color(0xFF333333);
+      case "dribbble":
+        return const Color(0xFFEA4C89);
+      case "behance":
+        return const Color(0xFF1769FF);
+      case "medium":
+        return const Color(0xFF00AB6C);
+      case "tumblr":
+        return const Color(0xFF36465D);
+      case "soundcloud":
+        return const Color(0xFFFF5500);
+      case "spotify":
+        return const Color(0xFF1DB954);
+      case "discord":
+        return const Color(0xFF7289DA);
+      case "skype":
+        return const Color(0xFF00AFF0);
+      case "viber":
+        return const Color(0xFF665CAC);
+      case "line":
+        return const Color(0xFF00C300);
+      case "threads":
+        return const Color(0xFF05A9D0);
+      default:
+        return const Color(
+            0xFF000000); // Default color if none of the cases match
+    }
+  }
+
   IconData get contactIcon {
     switch (this) {
       case "phoneNumbers":
