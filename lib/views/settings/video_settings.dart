@@ -4,7 +4,6 @@ import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import 'components/aspect_ratio_selector.dart';
-import 'components/spcaing.dart';
 import 'components/video_configs.dart';
 import 'components/block_expansion_tile.dart';
 
@@ -35,12 +34,13 @@ class VideoSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.video_library_outlined,
       label: block['label'],
       enableBorder: true,
       maintainState: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
@@ -73,11 +73,6 @@ class VideoSettings extends StatelessWidget {
         VideoConfigs(
           configs: block['data']?['configs'] ?? {},
           onUpdate: (entry) => update('configs', entry),
-        ),
-        Spacing(
-          title: string.paddingAndMarginSettings,
-          spacing: block['style']?['spacing'],
-          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

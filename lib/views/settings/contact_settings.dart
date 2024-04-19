@@ -85,11 +85,12 @@ class _ContactSettingsState extends State<ContactSettings> {
     return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
+      style: widget.block['style'],
       icon: Icons.group_outlined,
       label: widget.block['label'],
       enableBorder: true,
-      onUpdate: (entry) {
-        widget.block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        widget.block.addEntry(key, entry);
         widget.onUpdate?.call(widget.block);
       },
       onRemove: () => widget.onUpdate?.call({}),

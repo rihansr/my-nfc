@@ -26,11 +26,12 @@ class SpaceSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.zoom_out_map_outlined,
       label: block['label'],
       enableBorder: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),

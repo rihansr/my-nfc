@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import '../../../shared/strings.dart';
 import '../../../shared/constants.dart';
+import 'block_style.dart';
 
 class BlockExpansionTile extends StatelessWidget {
   final IconData? icon;
   final String? label;
-  final Widget? child;
-  final Map<String, dynamic>? controllers;
+  final Map<String, dynamic>? settings;
+  final Map<String, dynamic>? style;
   final EdgeInsetsGeometry titlePadding;
   final EdgeInsetsGeometry? padding;
   final bool enableBorder;
   final bool maintainState;
   final bool initiallyExpanded;
   final List<Widget> children;
-  final Function(MapEntry<String, dynamic>)? onUpdate;
+  final Function(String, MapEntry<String, dynamic>)? onUpdate;
   final Function()? onRemove;
   final Function(bool)? onExpansionChanged;
 
@@ -21,7 +22,6 @@ class BlockExpansionTile extends StatelessWidget {
     super.key,
     this.icon,
     this.label,
-    this.child,
     this.titlePadding = const EdgeInsets.all(0),
     this.padding = const EdgeInsets.all(0),
     this.enableBorder = false,
@@ -29,7 +29,8 @@ class BlockExpansionTile extends StatelessWidget {
     this.initiallyExpanded = false,
     this.children = const [],
     this.onExpansionChanged,
-  })  : controllers = null,
+  })  : settings = null,
+        style = null,
         onUpdate = null,
         onRemove = null,
         visible = ValueNotifier(false),
@@ -37,11 +38,11 @@ class BlockExpansionTile extends StatelessWidget {
         childrenExpanded = ValueNotifier(false);
 
   BlockExpansionTile.settings(
-    this.controllers, {
+    this.settings, {
     super.key,
+    this.style,
     this.icon,
     this.label,
-    this.child,
     this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
     this.padding,
     this.enableBorder = false,
@@ -51,8 +52,8 @@ class BlockExpansionTile extends StatelessWidget {
     this.onUpdate,
     this.onRemove,
     this.onExpansionChanged,
-  })  : visible = ValueNotifier(controllers?['visible'] == true),
-        childExpanded = ValueNotifier(controllers?['expandConfigs'] == true),
+  })  : visible = ValueNotifier(settings?['visible'] == true),
+        childExpanded = ValueNotifier(settings?['expandConfigs'] == true),
         childrenExpanded = ValueNotifier(false);
 
   final ValueNotifier<bool> visible;
@@ -97,12 +98,13 @@ class BlockExpansionTile extends StatelessWidget {
         iconColor: icon != null ? theme.colorScheme.primary : null,
         controlAffinity: ListTileControlAffinity.leading,
         leading: icon == null ? null : Icon(icon!, size: 16),
-        trailing: controllers == null || controllers?['hideControllers'] == true
+        trailing: settings == null || settings?['hideControllers'] == true
             ? null
             : Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (child != null)
+                  if (style != null ||
+                      settings?['settings']?['advanced'] != null)
                     ValueListenableBuilder(
                         valueListenable: childrenExpanded,
                         builder: (_, isExpanded, __) {
@@ -128,16 +130,17 @@ class BlockExpansionTile extends StatelessWidget {
                         }),
                   _IconButton(
                     onPressed: () {
-                      if (controllers?['primary'] == true) return;
+                      if (settings?['primary'] == true) return;
                       visible.value = !visible.value;
-                      onUpdate?.call(MapEntry('visible', visible.value));
+                      onUpdate?.call(
+                          'settings', MapEntry('visible', visible.value));
                     },
                     icon: ValueListenableBuilder(
                       valueListenable: visible,
                       builder: (_, isVisible, __) {
                         return Icon(
                           isVisible ? Icons.visibility : Icons.visibility_off,
-                          color: (controllers?['primary'] ?? false)
+                          color: (settings?['primary'] ?? false)
                               ? theme.disabledColor
                               : theme.iconTheme.color,
                         );
@@ -147,7 +150,7 @@ class BlockExpansionTile extends StatelessWidget {
                   _IconButton(
                     icon: Icon(
                       Icons.drag_indicator,
-                      color: (controllers?['dragable'] ?? false)
+                      color: (settings?['dragable'] ?? false)
                           ? theme.hintColor
                           : theme.disabledColor,
                     ),
@@ -155,26 +158,33 @@ class BlockExpansionTile extends StatelessWidget {
                 ],
               ),
         children: [
-          if (child != null)
+          if (style != null || settings?['settings']?['advanced'] != null)
             ValueListenableBuilder(
               valueListenable: childExpanded,
               builder: (_, isExpanded, __) => AnimatedSwitcher(
                 duration: const Duration(milliseconds: 250),
                 child: isExpanded
-                    ? DecoratedBox(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            right: BorderSide(color: theme.colorScheme.primary),
-                          ),
-                        ),
+                    ? Container(
+                        key: UniqueKey(),
+                        margin: icon == null
+                            ? const EdgeInsets.fromLTRB(12, 0, 22, 0)
+                            : const EdgeInsets.all(0),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        color: theme.colorScheme.primary.withOpacity(0.05),
                         child: Column(
-                          key: UniqueKey(),
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 0, 22, 0),
-                              child: child!,
+                            BlockStyle(
+                              style ?? {},
+                              settings: settings!['settings']?['advanced'],
+                              onUpdate: (style) {
+                                onUpdate?.call('style', style);
+                              },
+                              onSettingsUpdate: (settings) {
+                                onUpdate?.call(
+                                    'settings', MapEntry('advanced', settings));
+                              },
                             ),
                             const SizedBox(height: 16)
                           ],
@@ -184,7 +194,7 @@ class BlockExpansionTile extends StatelessWidget {
               ),
             ),
           ...children,
-          if (controllers?['removable'] == true) ...[
+          if (settings?['removable'] == true) ...[
             const SizedBox(height: 16),
             Divider(
               height: 1,

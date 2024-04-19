@@ -8,12 +8,11 @@ import '../../viewmodels/design_viewmodel.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/seekbar_widget.dart';
 import 'components/block_expansion_tile.dart';
-import 'components/spcaing.dart';
 
 // ignore: must_be_immutable
 class DividerSettings extends StatelessWidget {
   final Map<String, dynamic> block;
-  final Function(Map<String, dynamic>)? onUpdate;
+final Function(Map<String, dynamic>)? onUpdate;
 
   const DividerSettings({
     super.key,
@@ -39,11 +38,12 @@ class DividerSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.remove_outlined,
       label: block['label'],
       enableBorder: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
@@ -66,10 +66,6 @@ class DividerSettings extends StatelessWidget {
           colors: kColors,
           onPick: (color) =>
               update('data', MapEntry('dividerColor', color.toHex)),
-        ),
-        Spacing(
-          spacing: block['style']?['spacing'],
-          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

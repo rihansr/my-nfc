@@ -70,7 +70,7 @@ class ActionsBlock extends StatelessWidget {
                 padding: EdgeInsets.only(
                     left: settings['showSaveToPhoneButton'] == true ? 8 : 0),
                 child: TextButton.icon(
-                  onPressed: launchUrl(
+                  onPressed: openUrl(
                     url: Uri.parse(
                         'https://${primary['link'] ?? ''}${primary['id'] ?? ''}'),
                   ),
@@ -114,7 +114,7 @@ class ActionsBlock extends StatelessWidget {
                 style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(
                         '${additional['name']}'.socialIconColor)),
-                onPressed: launchUrl(
+                onPressed: openUrl(
                   url: Uri.parse(
                       'https://${additional['link'] ?? ''}${additional['id'] ?? ''}'),
                 ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
-import 'components/block_style.dart';
 import 'components/image_view.dart';
 
 class ImageSettings extends StatelessWidget {
@@ -31,29 +30,21 @@ class ImageSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: block['subBlock'] == 'image_avatar'
           ? Icons.person_outline
           : Icons.image_outlined,
       label: block['label'],
       enableBorder: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(10, 8, 22, 18),
-      child: block.containsKey('style') || block['settings']?['advanced'] != null
-          ? BlockStyle(
-              block['style'],
-              settings: block['settings']?['advanced'],
-              onUpdate: (settings) {
-                block['style'] = settings;
-                onUpdate?.call(block);
-              },
-            )
-          : null,
       children: [
         if (block['label'] != null) ...[
+          const SizedBox(height: 12),
           Text(
             block['label'] ?? '',
             style: theme.textTheme.bodySmall?.copyWith(

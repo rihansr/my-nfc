@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/extensions.dart';
 import '../../views/blocks/components.dart';
 
 class TextBlock extends StatelessWidget {
@@ -20,6 +21,8 @@ class TextBlock extends StatelessWidget {
     return text.isEmpty
         ? const SizedBox.shrink()
         : Container(
+            color:
+                configs['style']?['background']?['color']?.toString().hexColor,
             width: configs['data']?['style']?['text']?['alignment'] != null ||
                     sectionStyle?['alignment']?['horizontal'] != null
                 ? double.infinity

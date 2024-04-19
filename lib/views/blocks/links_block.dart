@@ -22,7 +22,7 @@ class LinksBlock extends StatelessWidget {
       children: (configs['data']?['links'] as List?)
               ?.where((element) => element['id'] != null)
               .map((link) => GestureDetector(
-                    onTap: launchUrl(
+                    onTap: openUrl(
                       url: Uri.parse(
                           'https://${link['link'] ?? ''}${link['id'] ?? ''}'),
                     ),

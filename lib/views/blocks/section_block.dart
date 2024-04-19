@@ -64,7 +64,15 @@ class SectionBlock extends StatelessWidget {
             mainAxisAlignment:
                 verticalAlignment(configs['style']?['alignment']?['vertical']),
             mainAxisSize: MainAxisSize.min,
-            children: (configs['data']?['fields'] as List?)?.mapIndexed(
+            children: (configs['data']?['fields'] as List?)?.where((element) {
+                  if (element['subBlock'] == 'actions_footer' &&
+                      (element['settings']?['advanced']
+                              ?['buttonFixedAtBottom'] ??
+                          true)) {
+                    return false;
+                  }
+                  return true;
+                }).mapIndexed(
                   (i, e) {
                     Key key =
                         this.key != null ? Key('${this.key}/$i') : Key('$i');
@@ -179,7 +187,7 @@ class SectionBlock extends StatelessWidget {
         focusColor: Colors.transparent,
         highlightColor: Colors.transparent,
         splashColor: Colors.transparent,
-        onTap: launchUrl(settings: configs['settings']?['advanced']),
+        onTap: openUrl(settings: configs['settings']?['advanced']),
         child: configs['subBlock'] == 'section_banner'
             ? NegativePadding(
                 padding: EdgeInsets.symmetric(

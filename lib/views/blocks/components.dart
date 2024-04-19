@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart' as urlLauncher;
+import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/extensions.dart';
 import '../../../viewmodels/design_viewmodel.dart';
 import '../../shared/constants.dart';
@@ -112,8 +112,7 @@ Widget? photo(
       : null;
 }
 
-TextStyle textStyle(BuildContext context, Map? style) =>
-    GoogleFonts.getFont(
+TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
       style?['typography'] ??
           Provider.of<DesignViewModel>(context).theme.fontFamily,
       fontSize: style?['fontSize']?.toDouble() ?? 16,
@@ -173,13 +172,13 @@ Matrix4 transform(Map? margin) {
 
 double _abs(num val) => val < 0 ? 0.0 : val.toDouble();
 
-Function()? launchUrl({Map? settings, Uri? url}) {
+Function()? openUrl({Map? settings, Uri? url}) {
   url ??= settings?['linkTo'] == null ? null : Uri.parse(settings?['linkTo']);
   bool disabled = settings?['disabled'] ?? false;
 
   return () async => disabled || url == null
       ? null
-      : await urlLauncher.launchUrl(
+      : await launchUrl(
           url,
           webOnlyWindowName:
               settings?['openInNewTab'] == true ? '_blank' : '_self',

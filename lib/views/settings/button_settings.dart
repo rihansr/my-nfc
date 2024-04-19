@@ -15,7 +15,6 @@ import '../../widgets/seekbar_widget.dart';
 import '../../widgets/tab_widget.dart';
 import '../blocks/components.dart';
 import 'components/block_expansion_tile.dart';
-import 'components/spcaing.dart';
 
 class ButtonSettings extends StatelessWidget {
   final Map<String, dynamic> block;
@@ -58,11 +57,12 @@ class ButtonSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.add_circle_outline,
       label: block['label'],
       enableBorder: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
@@ -206,11 +206,6 @@ class ButtonSettings extends StatelessWidget {
                   update('advanced', MapEntry('disabled', checked)),
             ),
           ],
-        ),
-        Spacing(
-          title: string.paddingAndMarginSettings,
-          spacing: block['style']?['spacing'],
-          onUpdate: (spacing) => update('style', spacing),
         ),
       ],
     );

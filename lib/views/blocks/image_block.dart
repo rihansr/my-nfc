@@ -18,7 +18,7 @@ class ImageBlock extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         focusColor: Colors.transparent,
-        onTap: launchUrl(settings: configs['settings']?['advanced']),
+        onTap: openUrl(settings: configs['settings']?['advanced']),
         child: configs['subBlock'] == 'image_avatar'
             ? CircleAvatar(
                 backgroundColor: Colors.black12,

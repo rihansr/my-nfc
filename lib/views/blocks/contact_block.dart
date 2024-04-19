@@ -49,28 +49,28 @@ class ContactBlock extends StatelessWidget {
                     .map(
                       (e) => GestureDetector(
                         onTap: {
-                          'phoneNumbers': launchUrl(
+                          'phoneNumbers': openUrl(
                             url: Uri(
                               scheme: 'tel',
                               path:
                                   '${e?['prefix'] ?? ''}-${e?['content'] ?? ''}',
                             ),
                           ),
-                          'emails': launchUrl(
+                          'emails': openUrl(
                             url: Uri(
                               scheme: 'mailto',
                               path: e?['content'] ?? '',
                               queryParameters: {'subject': '', 'body': ''},
                             ),
                           ),
-                          'addresses': launchUrl(
+                          'addresses': openUrl(
                             url: Uri.https(
                               'www.google.com',
                               '/maps/search/',
                               {'api': '1', 'query': e?['content'] ?? ''},
                             ),
                           ),
-                          'websites': launchUrl(
+                          'websites': openUrl(
                             url: Uri.parse('https://${e['content'] ?? ''}'),
                           )
                         }[entry.key],

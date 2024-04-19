@@ -4,7 +4,6 @@ import '../../../shared/strings.dart';
 import '../../../widgets/seekbar_widget.dart';
 import 'block_expansion_tile.dart';
 
-// ignore: must_be_immutable
 class Spacing extends StatelessWidget {
   final String? title;
   final Map<String, dynamic>? spacing;

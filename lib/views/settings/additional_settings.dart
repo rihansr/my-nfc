@@ -43,13 +43,14 @@ class AdditionalSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.playlist_add_outlined,
       label: block['label'],
       enableBorder: true,
       padding: const EdgeInsets.fromLTRB(12, 0, 2, 0),
       maintainState: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),

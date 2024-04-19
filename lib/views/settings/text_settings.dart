@@ -13,7 +13,6 @@ import '../../shared/strings.dart';
 import '../../widgets/input_field_widget.dart';
 import '../../widgets/dropdown_widget.dart';
 import 'components/block_expansion_tile.dart';
-import 'components/spcaing.dart';
 
 class TextSettings extends StatelessWidget {
   final Map<String, dynamic> block;
@@ -51,12 +50,13 @@ class TextSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      style: block['style'],
       icon: Icons.title,
       label: block['label'],
       enableBorder: true,
       maintainState: true,
-      onUpdate: (entry) {
-        block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        block.addEntry(key, entry);
         onUpdate?.call(block);
       },
       onRemove: () => onUpdate?.call({}),
@@ -171,11 +171,6 @@ class TextSettings extends StatelessWidget {
             onSelect: (alignment) =>
                 update('text', MapEntry('alignment', alignment)),
           ),
-        Spacing(
-          title: string.paddingAndMarginSettings,
-          spacing: block['style']?['spacing'],
-          onUpdate: (spacing) => update('style', spacing),
-        ),
       ],
     );
   }

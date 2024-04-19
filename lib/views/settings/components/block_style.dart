@@ -14,7 +14,7 @@ import 'spcaing.dart';
 
 class BlockStyle extends StatelessWidget {
   final Map<String, dynamic> style;
-  final Function(Map<String, dynamic>)? onUpdate;
+  final Function(MapEntry<String, dynamic>)? onUpdate;
 
   final Map<String, dynamic>? settings;
   final Function(Map<String, dynamic>)? onSettingsUpdate;
@@ -35,10 +35,10 @@ class BlockStyle extends StatelessWidget {
         onSettingsUpdate?.call(settings!);
       case 'style':
         style.addEntries([entry]);
-        onUpdate?.call(style);
+        onUpdate?.call(entry);
       default:
         style.addEntry(key, entry);
-        onUpdate?.call(style);
+        onUpdate?.call(MapEntry(key, Map<String, dynamic>.from(style[key])));
     }
   }
 
@@ -46,22 +46,31 @@ class BlockStyle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if ((style['background'] as Map?)?.containsKey('image') ?? false)
-          Backdrop(
-            style['background']?['image'] ?? {},
-            onUpdate: (map) {
-              style['background']?['image'] = map;
-              onUpdate?.call(style);
-            },
-          ),
-        if ((style['background'] as Map?)?.containsKey('color') ?? false)
-          ColourPicker(
-            title: string.backgroundColor,
-            value: style['background']?['color']?.toString().hexColor,
-            colors: const [Colors.transparent],
-            onPick: (color) =>
-                update('background', MapEntry('color', color.toHex)),
-          ),
+        if (style.containsKey('background'))
+          ...(() {
+            final background = Map<String, dynamic>.from(style['background']);
+            return [
+              if (background.containsKey('image'))
+                Backdrop(
+                  style['background']['image'] ?? {},
+                  onUpdate: (map) {
+                    background.addEntries([MapEntry('image', map)]);
+                    update('style', MapEntry('background', background));
+                  },
+                ),
+              if (background.containsKey('color'))
+                ColourPicker(
+                  title: string.backgroundColor,
+                  value: style['background']['color']?.toString().hexColor,
+                  colors: const [Colors.transparent],
+                  reselectable: true,
+                  onPick: (color) {
+                    background.addEntries([MapEntry('color', color.toHex)]);
+                    update('style', MapEntry('background', background));
+                  },
+                ),
+            ];
+          }()),
         ...(style['alignment'] as Map?)
                 ?.entries
                 .map((entry) => TabWidget(
@@ -85,24 +94,32 @@ class BlockStyle extends StatelessWidget {
                     ))
                 .toList() ??
             [],
-        if (style.containsKey('overlay')) ...[
-          ColourPicker(
-            title: string.overlayColor,
-            value: style['overlay']?['color']?.toString().hexColor,
-            colors: const [Colors.transparent, Colors.black, Colors.white],
-            onPick: (color) =>
-                update('overlay', MapEntry('color', color.toHex)),
-          ),
-          Seekbar(
-            title: string.overlayOpacity,
-            value: style['overlay']?['opacity'] ?? 0,
-            type: '%',
-            min: 0,
-            max: 100,
-            onChanged: (opacity) =>
-                update('overlay', MapEntry('opacity', opacity)),
-          ),
-        ],
+        if (style.containsKey('overlay'))
+          ...(() {
+            final overlay = Map<String, dynamic>.from(style['overlay']);
+            return [
+              ColourPicker(
+                title: string.overlayColor,
+                value: overlay['color']?.toString().hexColor,
+                colors: const [Colors.transparent, Colors.black, Colors.white],
+                onPick: (color) {
+                  overlay.addEntries([MapEntry('color', color.toHex)]);
+                  update('style', MapEntry('overlay', overlay));
+                },
+              ),
+              Seekbar(
+                title: string.overlayOpacity,
+                value: overlay['opacity'] ?? 0,
+                type: '%',
+                min: 0,
+                max: 100,
+                onChanged: (opacity) {
+                  overlay.addEntries([MapEntry('opacity', opacity)]);
+                  update('style', MapEntry('overlay', overlay));
+                },
+              ),
+            ];
+          }()),
         if (style.containsKey('fullWidth'))
           CheckboxWidget.expand(
             value: style['fullWidth'] ?? true,
@@ -110,13 +127,7 @@ class BlockStyle extends StatelessWidget {
             onChanged: (checked) =>
                 update('style', MapEntry('fullWidth', checked)),
           ),
-        if (style.containsKey('spacing'))
-          Spacing(
-            title: string.paddingAndMarginSettings,
-            spacing: style['spacing'],
-            onUpdate: (spacing) => update('style', spacing),
-          ),
-        if (settings != null) ...[
+        if (settings != null)
           BlockExpansionTile(
             label: string.advancedSettings,
             children: [
@@ -145,7 +156,12 @@ class BlockStyle extends StatelessWidget {
                 ),
             ],
           ),
-        ],
+        if (style.containsKey('spacing'))
+          Spacing(
+            title: string.paddingAndMarginSettings,
+            spacing: style['spacing'],
+            onUpdate: (spacing) => update('style', spacing),
+          ),
       ],
     );
   }

@@ -9,7 +9,6 @@ import 'components/block_expansion_tile.dart';
 import 'actions_settings.dart';
 import 'additional_settings.dart';
 import 'button_settings.dart';
-import 'components/block_style.dart';
 import 'contact_settings.dart';
 import 'divider_settings.dart';
 import 'image_settings.dart';
@@ -155,30 +154,16 @@ class _SectionSettingsState extends State<SectionSettings> {
     return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
+      style: widget.block['style'],
       label: widget.block['label'],
-      onUpdate: (entry) {
-        widget.block.addEntry('settings', entry);
+      onUpdate: (key, entry) {
+        widget.block.addEntry(key, entry);
         widget.onUpdate?.call(widget.block);
       },
       onRemove: () => widget.onUpdate?.call({}),
       onExpansionChanged: (expanded) {
         if (!expanded) setState(() => {});
       },
-      child: widget.block.containsKey('style') || widget.block['settings']?['advanced'] != null
-          ? BlockStyle(
-              widget.block['style'],
-              settings: widget.block['settings']?['advanced'],
-              onUpdate: (settings) {
-                widget.block['style'] = settings;
-                widget.onUpdate?.call(widget.block);
-              },
-              onSettingsUpdate: (settings) {
-                widget.block
-                    .addEntry('settings', MapEntry('advanced', settings));
-                widget.onUpdate?.call(widget.block);
-              },
-            )
-          : null,
       children: [
         if (widget.block['settings']?['dragable'] == true)
           ReorderableListView(

@@ -19,7 +19,7 @@ class ButtonBlock extends StatelessWidget {
           ? null
           : alignment(sectionStyle?['alignment']),
       child: TextButton(
-        onPressed: launchUrl(
+        onPressed: openUrl(
             settings: configs['settings']?['advanced'],
             url: configs['data']?['link'] == null
                 ? null
@@ -54,11 +54,10 @@ class ButtonBlock extends StatelessWidget {
             context,
             Map.from(configs['data']?['style']?['text'] ?? {}),
           ).copyWith(
-            color: configs['data']?['style']?['text']?['labelColor']
+              color: configs['data']?['style']?['text']?['labelColor']
                       ?.toString()
                       .hexColor ??
-                  Provider.of<DesignViewModel>(context).theme.iconColor
-          ),
+                  Provider.of<DesignViewModel>(context).theme.iconColor),
         ),
       ),
     );
