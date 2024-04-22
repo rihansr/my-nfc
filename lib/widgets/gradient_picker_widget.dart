@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:my_nfc/shared/styles.dart';
 import 'package:provider/provider.dart';
-import '../shared/drawables.dart';
+import '../shared/styles.dart';
 import 'clipper_widget.dart';
 
-class ColourPicker extends StatelessWidget {
+class GradientPicker extends StatelessWidget {
   final String? title;
   final TextStyle? titleStyle;
   final TextAlign titleAlign;
   final EdgeInsets titleSpacing;
   final EdgeInsets margin;
-  final List<Color> colors;
-  final Color? value;
+  final List<Gradient> gradientColors;
+  final Gradient? value;
   final bool reselectable;
-  final Function(Color)? onPick;
+  final Function(Gradient)? onPick;
 
-  const ColourPicker({
+  const GradientPicker({
     super.key,
     this.title,
     this.titleStyle,
     this.titleAlign = TextAlign.start,
     this.titleSpacing = const EdgeInsets.only(bottom: 10),
     this.margin = const EdgeInsets.symmetric(vertical: 12),
-    this.colors = const [],
+    this.gradientColors = const [],
     this.value,
     this.reselectable = false,
     this.onPick,
@@ -52,26 +51,26 @@ class ColourPicker extends StatelessWidget {
                     ),
               ),
             ),
-          ChangeNotifierProvider<_ColourViewModel>.value(
-            value: _ColourViewModel(colors, reselectable, value),
-            child: Consumer<_ColourViewModel>(
+          ChangeNotifierProvider<_GradientColourViewModel>.value(
+            value: _GradientColourViewModel(gradientColors, reselectable, value),
+            child: Consumer<_GradientColourViewModel>(
               builder: (context, controller, _) => Wrap(
                 spacing: 4,
                 runSpacing: 4,
                 children: [
-                  ...colors.map(
-                    (color) => _ColorItem(
-                      isSelected: controller.isColorSelected(color),
-                      color: color,
-                      onTap: (color) {
-                        controller.select = color;
-                        onPick?.call(color);
+                  ...gradientColors.map(
+                    (gradient) => _GradientItem(
+                      isSelected: controller.isGradientColorSelected(gradient),
+                      gradient: gradient,
+                      onTap: (gradientColor) {
+                        controller.select = gradientColor;
+                        onPick?.call(gradientColor);
                       },
                     ),
                   ),
-                  _ColorItem(
+                  _GradientItem(
                     isSelected: controller.isColorPicked,
-                    color: controller.pickerColor,
+                    gradient: LinearGradient(colors: [controller.pickerColor, controller.pickerColor]),
                     child: const Icon(
                       Iconsax.brush_4,
                       size: 16,
@@ -80,8 +79,8 @@ class ColourPicker extends StatelessWidget {
                     onTap: (_) => style.showColorPicker(
                       controller.pickerColor,
                       onColorChanged: (Color color) {
-                        controller.pick = color;
-                        onPick?.call(color);
+                        controller.pick = LinearGradient(colors: [color, color]);
+                        onPick?.call(LinearGradient(colors: [color, color]));
                       },
                     ),
                   ),
@@ -95,13 +94,13 @@ class ColourPicker extends StatelessWidget {
   }
 }
 
-class _ColorItem extends StatelessWidget {
-  final Color color;
+class _GradientItem extends StatelessWidget {
+  final Gradient gradient;
   final bool isSelected;
   final Widget? child;
-  final Function(Color)? onTap;
-  const _ColorItem({
-    required this.color,
+  final Function(Gradient)? onTap;
+  const _GradientItem({
+    required this.gradient,
     this.isSelected = false,
     this.child,
     this.onTap,
@@ -112,15 +111,8 @@ class _ColorItem extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return InkWell(
       radius: 36,
-      highlightColor: color.withOpacity(0.25),
-      onTap: () => onTap?.call(color),
+      onTap: () => onTap?.call(gradient),
       child: Clipper.circle(
-        backdrop: color == Colors.transparent
-            ? DecorationImage(
-                image: AssetImage(drawable.transparentBG),
-                fit: BoxFit.fill,
-              )
-            : null,
         border: Border.all(
           color: isSelected ? theme.primaryColor : theme.disabledColor,
           width: 2,
@@ -131,40 +123,40 @@ class _ColorItem extends StatelessWidget {
         size: 36,
         margin: const EdgeInsets.all(2),
         padding: const EdgeInsets.all(1.5),
-        child: CircleAvatar(
-          backgroundColor: color,
-          child: child,
-        ),
+        child: Clipper.circle(gradient: gradient, child: child,),
       ),
     );
   }
 }
 
-class _ColourViewModel extends ChangeNotifier {
+class _GradientColourViewModel extends ChangeNotifier {
   late final bool _reselectable;
   late bool _chooseFromPicker;
-  late Color? _selectedColor;
+  late Gradient? _selectedColor;
   late Color _pickerColor;
 
-  _ColourViewModel(List<Color> colors, this._reselectable, [Color? color])
-      : _chooseFromPicker = !(color == null || colors.contains(color)),
-        _selectedColor = color,
-        _pickerColor =
-            color == null || colors.contains(color) ? Colors.white : color;
+  _GradientColourViewModel(List<Gradient> gradientColors, this._reselectable,
+      [Gradient? gradient])
+      : _chooseFromPicker =
+            !(gradient == null || gradientColors.contains(gradient)),
+        _selectedColor = gradient,
+        _pickerColor = gradient == null || gradientColors.contains(gradient)
+            ? Colors.white
+            : gradient.colors.first;
 
   bool get chooseFromPicker => _chooseFromPicker;
 
-  Color? get selectedColor => _selectedColor;
+  Gradient? get selectedColor => _selectedColor;
 
   Color get pickerColor => _pickerColor;
 
-  bool isColorSelected(Color color) =>
+  bool isGradientColorSelected(Gradient color) =>
       !_chooseFromPicker && (_selectedColor == color);
 
   bool get isColorPicked =>
-      _chooseFromPicker && (_selectedColor == _pickerColor);
+      _chooseFromPicker && (_selectedColor == LinearGradient(colors: [_pickerColor, _pickerColor]));
 
-  set select(Color color) {
+  set select(Gradient color) {
     _chooseFromPicker = false;
     if (_reselectable) {
       _selectedColor = _selectedColor == color ? null : color;
@@ -175,9 +167,9 @@ class _ColourViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  set pick(Color color) => this
+  set pick(Gradient gradient) => this
     .._chooseFromPicker = true
-    .._pickerColor = color
-    .._selectedColor = color
+    .._pickerColor = gradient.colors.first
+    .._selectedColor = gradient
     ..notifyListeners();
 }

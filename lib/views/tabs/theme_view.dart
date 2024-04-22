@@ -5,7 +5,7 @@ import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../viewmodels/design_viewmodel.dart';
-import '../../widgets/clipper_widget.dart';
+import '../../widgets/gradient_picker_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/dropdown_widget.dart';
 import '../../widgets/seekbar_widget.dart';
@@ -91,48 +91,14 @@ class ThemeView extends StatelessWidget {
                 )
                 ..theme = controller.theme.copyWith(iconColor: color),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                string.theme,
-                style: theme.textTheme.bodySmall?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+            GradientPicker(
+              title: string.backgroundColor,
+              value: controller.theme.background,
+              gradientColors: kThemes.map((e) => e.background).toList(),
+              margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+              onPick: (gradient) => controller.theme =
+                  controller.theme.copyWith(background: gradient),
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: kThemes.map(
-                  (theme) {
-                    bool isSelected =
-                        controller.theme.background == theme.background;
-                    return InkWell(
-                      radius: 34,
-                      onTap: () => controller.theme = controller.theme
-                          .copyWith(background: theme.background),
-                      child: Clipper.circle(
-                        gradient: theme.background,
-                        border: Border.all(
-                          color: isSelected
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context).disabledColor,
-                          width: 2,
-                          strokeAlign: isSelected
-                              ? BorderSide.strokeAlignOutside
-                              : BorderSide.strokeAlignInside,
-                        ),
-                        size: 34,
-                      ),
-                    );
-                  },
-                ).toList(),
-              ),
-            ),
-            const SizedBox(height: 12),
             Seekbar(
               title: string.horizontalPadding,
               type: 'px',

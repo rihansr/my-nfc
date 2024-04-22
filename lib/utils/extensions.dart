@@ -87,6 +87,29 @@ extension MapExtension on Map<String, dynamic> {
       this[key] = {}..addEntries([entry]);
     }
   }
+
+  Map<String, List<dynamic>> findLinks(List by) {
+    Map<String, List<dynamic>> mapList = {};
+
+    forEach((key, val) {
+      if (val is Map) {
+        if (val.containsKey('data')) {
+          final data = Map<String, dynamic>.from(val['data']);
+          mapList.update('data', (value) => value..add(data),
+              ifAbsent: () => [data]);
+        } else {
+          mapList.addAll(Map<String, dynamic>.from(val).findLinks(by));
+        }
+      } else if (val is List) {
+        for (var i = 0; i < val.length; i++) {
+          final map = Map<String, dynamic>.from(val[i]);
+          mapList.addAll(map.findLinks(by));
+        }
+      }
+    });
+
+    return mapList;
+  }
 }
 
 extension DynamicMapExtension on Map {
@@ -133,41 +156,20 @@ extension DynamicMapExtension on Map {
     return list;
   }
 
-  Map<String, List<Map<String, dynamic>>> findBy(List<String> by) {
-    Map<String, List<Map<String, dynamic>>> mapList = {};
-    forEach((key, value) {
-      if (value is Map) {
-        final map = Map<String, dynamic>.from(value);
-
-        for (var i = 0; i < by.length; i++) {
-          mapList.update(
-            by[i],
-            (list) {
-              map.containsKey(by[i])
-                  ? list.add(map)
-                  : list.addAll(map.findBy(by)[by[i]] ?? []);
-              return list;
-            },
-            ifAbsent: () => [map],
-          );
-        }
-      } else if (value is List) {
-        for (var i = 0; i < value.length; i++) {
-          final map = Map<String, dynamic>.from(value[i]);
-          mapList.update(
-            by[i],
-            (list) {
-              map.containsKey(by[i])
-                  ? list.add(map)
-                  : list.addAll(map.findBy(by)[by[i]] ?? []);
-              return list;
-            },
-            ifAbsent: () => [map],
-          );
+  List<Map<String, dynamic>> findBy(String key) {
+    List<Map<String, dynamic>> list = [];
+    forEach((k, v) {
+      if (v is Map) {
+        final map = Map<String, dynamic>.from(v);
+        k == key ? list.add(map) : list.addAll(map.findBy(key));
+      } else if (v is List) {
+        for (var i = 0; i < v.length; i++) {
+          final map = Map<String, dynamic>.from(v[i]);
+          k == key ? list.add(map) : list.addAll(map.findBy(key));
         }
       }
     });
-    return mapList;
+    return list;
   }
 }
 

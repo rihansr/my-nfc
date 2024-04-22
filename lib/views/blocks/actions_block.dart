@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_nfc/shared/strings.dart';
 import 'package:provider/provider.dart';
 import '../../utils/extensions.dart';
+import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
@@ -40,7 +40,10 @@ class ActionsBlock extends StatelessWidget {
           if (settings['showSaveToPhoneButton'] == true)
             Expanded(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  DesignViewModel designViewModel =
+                      Provider.of<DesignViewModel>(context, listen: false);
+                },
                 style: buttonStyle.copyWith(
                   backgroundColor: MaterialStatePropertyAll((() {
                     final style = Map<String, dynamic>.from(
