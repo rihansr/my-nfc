@@ -65,5 +65,8 @@
 		<array>
 			<string>tel</string>
 		</array>
+		<!-- Contacts -->
+		<key>NSContactsUsageDescription</key>
+    	<string>We need access to the contact list</string>
 	</dict>
 </plist>

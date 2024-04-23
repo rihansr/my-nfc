@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:my_nfc/utils/debug.dart';
 import 'package:provider/provider.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
@@ -20,6 +24,137 @@ class ActionsBlock extends StatelessWidget {
         additional =
             Map<String, dynamic>.from(configs['data']?['additional'] ?? {});
 
+  Future<void> saveToPhone(BuildContext context) async {
+    Map<String, dynamic> designStructure =
+        Provider.of<DesignViewModel>(context, listen: false).designStructure;
+
+    final names = designStructure
+        .filterBy(const MapEntry('subBlock', 'image_avatar'))
+        .where((element) =>
+            element['first'] != null ||
+            element['middle'] != null ||
+            element['last'] != null)
+        .toList();
+
+    final avatars = designStructure
+        .filterBy(const MapEntry('subBlock', 'image_avatar'))
+        .where((element) => element['data']?['path'] != null)
+        .toList();
+
+    List? name;
+    if (names.isNotEmpty) {
+      name = names.first.values.where((element) => element != null).toList();
+    }
+
+    final works = designStructure
+        .filterBy(const MapEntry('label', 'Work'))
+        .where((element) =>
+            element['data']?['title']?['text'] != null &&
+            element['data']?['content']?['text'] != null)
+        .toList();
+
+    final phoneNumbers = designStructure
+        .findBy('phoneNumbers')
+        .where((element) =>
+            element['prefix'] != null && element['content'] != null)
+        .toList();
+
+    final emails = designStructure
+        .findBy('emails')
+        .where((element) => element['content'] != null)
+        .toList();
+
+    final addresses = designStructure
+        .findBy('addresses')
+        .where((element) => element['content'] != null)
+        .toList();
+
+    final websites = designStructure
+        .findBy('websites')
+        .where((element) => element['content'] != null)
+        .toList();
+
+    final socialLinks = designStructure
+        .findBy('links')
+        .where((element) => element['id'] != null)
+        .toList();
+
+    debug.print(
+      'Name:\n${name?.join(' ')}'
+      '\n\nOrganization:\n${works.join('\n')}'
+      '\n\nNumbers:\n${phoneNumbers.join('\n')}'
+      '\n\nEmails:\n${emails.join('\n')}'
+      '\n\nAddresses:\n${addresses.join('\n')}'
+      '\n\nWebsites:\n${websites.join('\n')}'
+      '\n\nSocial Links:\n${socialLinks.join('\n')}',
+    );
+
+    label(String key, String? label) =>
+        key.contactLabels.contains(label) ? label!.toUpperCase() : 'CUSTOM';
+
+    StringBuffer vCard = StringBuffer();
+
+    vCard.writeln('BEGIN:VCARD');
+    vCard.writeln('VERSION:3.0');
+    if (name?.isNotEmpty ?? false) {
+      vCard.writeln('FN:${name?.join(' ')}');
+      vCard.writeln('N:${name?.reversed.join(';')};;;');
+    }
+
+    for (var avatar in avatars) {
+      String? path = avatar['data']?['path'];
+      if (path?.isEmpty ?? true) continue;
+      if (Uri.tryParse(path!)?.isAbsolute ?? false) {
+        vCard.writeln('PHOTO;TYPE=JPEG;VALUE=URI:$path');
+      } else {
+        vCard.writeln(
+            'PHOTO;TYPE=JPEG;ENCODING=b:${base64Encode(File(path).readAsBytesSync())}');
+      }
+    }
+
+    for (var work in works) {
+      vCard.writeln('ORG:${work['data']?['title']?['text']}');
+    }
+
+    for (var number in phoneNumbers) {
+      vCard.writeln(
+          'TEL;TYPE=${label('phoneNUmbers', number['label'])}:${number['prefix']}${number['content']}');
+    }
+
+    for (var email in emails) {
+      vCard.writeln(
+          'EMAIL;TYPE=${label('emails', email['label'])}:${email['content']}');
+    }
+
+    for (var address in addresses) {
+      vCard.writeln(
+          'ADR;TYPE=${label('addresses', address['label'])}:;;${address['content']}');
+    }
+
+    for (var website in websites) {
+      vCard.writeln(
+          'URL;TYPE=${label('websites', website['label'])}:${website['content']}');
+    }
+
+    for (var link in socialLinks) {
+      vCard.writeln(
+          'X-SOCIALPROFILE:https://${link['link'] ?? ''}${link['id'] ?? ''}');
+    }
+
+    vCard.writeln('END:VCARD');
+
+    debug.print(vCard.toString());
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      if (await FlutterContacts.requestPermission()) {
+        Contact contact = Contact.fromVCard(vCard.toString());
+        debug.print(contact);
+      }
+    } else {
+      //webExtension.saveVCard(name?.join(' '), vCard.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final buttonStyle = ButtonStyle(
@@ -40,10 +175,7 @@ class ActionsBlock extends StatelessWidget {
           if (settings['showSaveToPhoneButton'] == true)
             Expanded(
               child: TextButton(
-                onPressed: () {
-                  DesignViewModel designViewModel =
-                      Provider.of<DesignViewModel>(context, listen: false);
-                },
+                onPressed: () async => await saveToPhone(context),
                 style: buttonStyle.copyWith(
                   backgroundColor: MaterialStatePropertyAll((() {
                     final style = Map<String, dynamic>.from(

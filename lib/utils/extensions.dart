@@ -39,21 +39,7 @@ class Extension {
         length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
   }
 
-  InputBorder inputBorder(
-    Color color, {
-    double width = 0.75,
-    bool underlineOnly = false,
-    double radius = 4,
-  }) {
-    BorderSide borderSide = BorderSide(color: color, width: width);
-
-    return underlineOnly
-        ? UnderlineInputBorder(borderSide: borderSide)
-        : OutlineInputBorder(
-            borderSide: borderSide,
-            borderRadius: BorderRadius.all(Radius.circular(radius)),
-          );
-  }
+  get unfocus => FocusManager.instance.primaryFocus?.unfocus();
 }
 
 extension StringExtension on String {

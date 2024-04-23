@@ -60,7 +60,7 @@ class ActionsSettings extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     List<Map<dynamic, dynamic>> links =
         Provider.of<DesignViewModel>(context, listen: true)
-            .designData
+            .designStructure
             .findBy('links')
           ..removeWhere((element) => element['id'] == null);
 

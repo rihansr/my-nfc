@@ -17,7 +17,7 @@ class DesignView extends StatelessWidget {
   Widget build(BuildContext context) => ModalBottomSheet(
         scrollController: scrollController,
         children: Provider.of<DesignViewModel>(context, listen: false)
-            .designData
+            .designStructure
             .entries
             .map(
               (e) => SectionSettings(
@@ -25,10 +25,11 @@ class DesignView extends StatelessWidget {
                 block: e.value,
                 onUpdate: (section) {
                   Provider.of<DesignViewModel>(context, listen: false)
-                      ..designData[e.key] = section..notify;
+                    ..designStructure[e.key] = section
+                    ..notify;
                   debug.print(json.encode(
                       Provider.of<DesignViewModel>(context, listen: false)
-                          .designData));
+                          .designStructure));
                 },
               ),
             )

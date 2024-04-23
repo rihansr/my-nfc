@@ -485,4 +485,45 @@ extension IconExtensions on String {
         return FontAwesomeIcons.info;
     }
   }
+
+  List<String> get contactLabels {
+    switch (this) {
+      case 'phoneNumbers':
+        return [
+          'main',
+          'home',
+          'work',
+          'cell',
+          'mobile',
+          'fax',
+          'other'
+        ];
+      case 'emails':
+      case 'websites':
+        return ['home', 'work', 'other'];
+      case 'addresses':
+        return ['home', 'mailing', 'work', 'other'];
+      default:
+        return ['other'];
+    }
+  }
+
+  TextInputType? get keyboardType {
+    switch (this) {
+      case 'phone':
+      case 'phoneNumbers':
+        return TextInputType.phone;
+      case 'email':
+      case 'emails':
+        return TextInputType.emailAddress;
+      case 'website':
+      case 'websites':
+        return TextInputType.url;
+      case 'address':
+      case 'addresses':
+        return TextInputType.streetAddress;
+      default:
+        return TextInputType.text;
+    }
+  }
 }

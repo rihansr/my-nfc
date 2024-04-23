@@ -10,15 +10,15 @@ import 'base_viewmodel.dart';
 class DesignViewModel extends BaseViewModel {
   final BuildContext _context;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  final Map<String, dynamic> designData;
+  final Map<String, dynamic> designStructure;
 
   List<Map<String, dynamic>> get footers =>
-      designData.filterBy(const MapEntry('subBlock', 'actions_footer'));
+      designStructure.filterBy(const MapEntry('subBlock', 'actions_footer'));
 
   DesignViewModel(BuildContext context)
       : _context = context,
         scaffoldKey = GlobalKey<ScaffoldState>(),
-        designData = jsonDecode(kDefaultBlocks);
+        designStructure = jsonDecode(kDefaultBlocks);
 
   ThemeModel _theme = kThemes.first;
   ThemeModel get theme => _theme;

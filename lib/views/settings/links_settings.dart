@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
+import '../../shared/styles.dart';
 import '../../utils/extensions.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
@@ -101,9 +101,9 @@ class _LinksSettingsState extends State<LinksSettings> {
                       prefixIconConstraints:
                           const BoxConstraints(minWidth: 8, minHeight: 0),
                       prefixStyle: theme.textTheme.bodySmall,
-                      enabledBorder: extension.inputBorder(theme.hintColor),
-                      border: extension.inputBorder(theme.hintColor),
-                      focusedBorder: extension.inputBorder(theme.primaryColor),
+                      enabledBorder: style.inputBorder(theme.hintColor),
+                      border: style.inputBorder(theme.hintColor),
+                      focusedBorder: style.inputBorder(theme.primaryColor),
                       contentPadding: const EdgeInsets.fromLTRB(0, 10, 6, 10),
                       isDense: true,
                     ),

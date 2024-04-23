@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../utils/extensions.dart';
+import '../shared/styles.dart';
 
 class InputField extends StatelessWidget {
   final TextEditingController? controller;
@@ -107,7 +106,7 @@ class InputField extends StatelessWidget {
     this.underlineOnly = false,
   });
 
-  InputBorder boder(Color color) => extension.inputBorder(
+  InputBorder boder(Color color) => style.inputBorder(
         borderFocusable ? borderTint ?? color : Colors.transparent,
         underlineOnly: underlineOnly,
         radius: borderRadius,

@@ -37,7 +37,7 @@ class LandingView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        ...controller.designData.entries
+                        ...controller.designStructure.entries
                             .map((e) => SectionBlock(e.value, key: Key(e.key))),
                         const SafeArea(child: SizedBox.shrink())
                       ],

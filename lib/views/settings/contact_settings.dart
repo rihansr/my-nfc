@@ -98,7 +98,7 @@ class _ContactSettingsState extends State<ContactSettings> {
       children: _data.entries.map(
         (e) {
           List<Map<String, dynamic>> items = List.from(e.value ?? []);
-          List<String> types = e.key.labels;
+          List<String> types = [...e.key.contactLabels, 'custom'];
           return ListTile(
             contentPadding: const EdgeInsets.all(0),
             title: Text(
@@ -237,45 +237,5 @@ class _ContactSettingsState extends State<ContactSettings> {
         },
       ).toList(),
     );
-  }
-}
-
-extension _StringExtension on String {
-  List<String> get labels {
-    switch (this) {
-      case 'phoneNumbers':
-        return [
-          'Main',
-          'home',
-          'work',
-          'cell',
-          'mobile',
-          'fax',
-          'other',
-          'custom'
-        ];
-      case 'emails':
-      case 'websites':
-        return ['home', 'work', 'other', 'custom'];
-      case 'addresses':
-        return ['home', 'mailing', 'work', 'other', 'custom'];
-      default:
-        return ['other', 'custom'];
-    }
-  }
-
-  TextInputType? get keyboardType {
-    switch (this) {
-      case 'phoneNumbers':
-        return TextInputType.phone;
-      case 'emails':
-        return TextInputType.emailAddress;
-      case 'websites':
-        return TextInputType.url;
-      case 'addresses':
-        return TextInputType.streetAddress;
-      default:
-        return TextInputType.text;
-    }
   }
 }

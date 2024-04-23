@@ -6,6 +6,9 @@
     <!--NFC Permission-->
     <uses-permission android:name="android.permission.NFC"/>
 
+    <!--Contacts-->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
     <queries>
         <!-- If your app checks for call support -->
         <intent>
