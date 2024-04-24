@@ -98,7 +98,7 @@ class _ContactSettingsState extends State<ContactSettings> {
       children: _data.entries.map(
         (e) {
           List<Map<String, dynamic>> items = List.from(e.value ?? []);
-          List<String> types = [...e.key.contactLabels, 'custom'];
+          List<String> types = e.key.contactLabels;
           return ListTile(
             contentPadding: const EdgeInsets.all(0),
             title: Text(

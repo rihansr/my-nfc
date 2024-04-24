@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:my_nfc/utils/debug.dart';
@@ -28,8 +29,131 @@ class ActionsBlock extends StatelessWidget {
     Map<String, dynamic> designStructure =
         Provider.of<DesignViewModel>(context, listen: false).designStructure;
 
-    final names = designStructure
+    Contact contact = Contact();
+
+    final name = designStructure.findBy('name').where((element) =>
+        element['first'] != null ||
+        element['middle'] != null ||
+        element['last'] != null);
+
+    if (name.isNotEmpty) {
+      contact.name = Name(
+        first: name.first['first'] ?? '',
+        middle: name.first['middle'] ?? '',
+        last: name.first['last'] ?? '',
+      );
+    }
+
+    final avatars = designStructure
         .filterBy(const MapEntry('subBlock', 'image_avatar'))
+        .where((element) => element['data']?['path'] != null)
+        .toList();
+
+    avatars.forEachIndexed((i, item) {
+      //contact.photo = ;
+    });
+
+    contact.notes = designStructure
+        .filterBy(const MapEntry('label', 'Bio'))
+        .where((element) => element['data']?['content'] != null)
+        .map((e) => Note(e['data']?['content'] ?? ''))
+        .toList();
+
+    contact.organizations = designStructure
+        .filterBy(const MapEntry('label', 'Work'))
+        .where((element) =>
+            element['data']?['title']?['text'] != null ||
+            element['data']?['content']?['text'] != null)
+        .map((e) => Organization(
+              company: e['data']?['title']?['text'] ?? '',
+              title: e['data']?['content']?['text'] ?? '',
+            ))
+        .toList();
+
+    contact.phones = designStructure
+        .findBy('phoneNumbers')
+        .where((element) =>
+            element['prefix'] != null && element['content'] != null)
+        .map(
+      (e) {
+        PhoneLabel? label = PhoneLabel.values
+            .firstWhereOrNull((label) => label.name == e['label']);
+        return Phone(
+          '${e['prefix']}${e['content']}',
+          label: label ?? PhoneLabel.mobile,
+          customLabel: label == null ? e['label'] ?? '' : '',
+        );
+      },
+    ).toList();
+
+    contact.emails = designStructure
+        .findBy('emails')
+        .where((element) => element['content'] != null)
+        .map(
+      (e) {
+        EmailLabel? label = EmailLabel.values
+            .firstWhereOrNull((label) => label.name == e['label']);
+        return Email(
+          '${e['prefix']}${e['content']}',
+          label: label ?? EmailLabel.home,
+          customLabel: label == null ? e['label'] ?? '' : '',
+        );
+      },
+    ).toList();
+
+    contact.addresses = designStructure
+        .findBy('addresses')
+        .where((element) => element['content'] != null)
+        .map(
+      (e) {
+        AddressLabel? label = AddressLabel.values
+            .firstWhereOrNull((label) => label.name == e['label']);
+        return Address(
+          '${e['prefix']}${e['content']}',
+          label: label ?? AddressLabel.home,
+          customLabel: label == null ? e['label'] ?? '' : '',
+        );
+      },
+    ).toList();
+
+    contact.websites = designStructure
+        .findBy('websites')
+        .where((element) => element['content'] != null)
+        .map(
+      (e) {
+        WebsiteLabel? label = WebsiteLabel.values
+            .firstWhereOrNull((label) => label.name == e['label']);
+        return Website(
+          '${e['prefix']}${e['content']}',
+          label: label ?? WebsiteLabel.home,
+          customLabel: label == null ? e['label'] ?? '' : '',
+        );
+      },
+    ).toList();
+
+    contact.socialMedias = designStructure
+        .findBy('links')
+        .where((element) => element['id'] != null)
+        .map((e) => SocialMedia('https://${e['link'] ?? ''}${e['id'] ?? ''}'))
+        .toList();
+
+    debug.print(contact.toVCard());
+
+    if (Platform.isAndroid || Platform.isIOS) {
+      if (await FlutterContacts.requestPermission()) {
+        await contact.insert();
+      }
+    } else {
+      //webExtension.saveVCard(name?.join(' '), vCard.toString());
+    }
+  }
+
+  Future<void> test(BuildContext context) async {
+    Map<String, dynamic> designStructure =
+        Provider.of<DesignViewModel>(context, listen: false).designStructure;
+
+    final names = designStructure
+        .findBy('name')
         .where((element) =>
             element['first'] != null ||
             element['middle'] != null ||
@@ -49,8 +173,13 @@ class ActionsBlock extends StatelessWidget {
     final works = designStructure
         .filterBy(const MapEntry('label', 'Work'))
         .where((element) =>
-            element['data']?['title']?['text'] != null &&
+            element['data']?['title']?['text'] != null ||
             element['data']?['content']?['text'] != null)
+        .toList();
+
+    final bio = designStructure
+        .filterBy(const MapEntry('label', 'Bio'))
+        .where((element) => element['data']?['content'] != null)
         .toList();
 
     final phoneNumbers = designStructure
@@ -89,16 +218,27 @@ class ActionsBlock extends StatelessWidget {
       '\n\nSocial Links:\n${socialLinks.join('\n')}',
     );
 
-    label(String key, String? label) =>
-        key.contactLabels.contains(label) ? label!.toUpperCase() : 'CUSTOM';
+    List<String> customLabels = [];
+
+    type(String key, String? label) => key.contactLabels.contains(label)
+        ? ';type=${label!.capitalizeFirstOfEach}'
+        : label?.isNotEmpty ?? false
+            ? (() {
+                customLabels.add(label!);
+              }())
+            : '';
 
     StringBuffer vCard = StringBuffer();
 
     vCard.writeln('BEGIN:VCARD');
     vCard.writeln('VERSION:3.0');
     if (name?.isNotEmpty ?? false) {
-      vCard.writeln('FN:${name?.join(' ')}');
       vCard.writeln('N:${name?.reversed.join(';')};;;');
+      vCard.writeln('FN:${name?.join(' ')}');
+    }
+
+    for (var item in bio) {
+      vCard.writeln('NOTE:${item['data']?['content']}');
     }
 
     for (var avatar in avatars) {
@@ -108,38 +248,46 @@ class ActionsBlock extends StatelessWidget {
         vCard.writeln('PHOTO;TYPE=JPEG;VALUE=URI:$path');
       } else {
         vCard.writeln(
-            'PHOTO;TYPE=JPEG;ENCODING=b:${base64Encode(File(path).readAsBytesSync())}');
+            'PHOTO;TYPE=JPEG;ENCODING=b:${base64Encode(await File(path).readAsBytes())}');
       }
     }
 
     for (var work in works) {
-      vCard.writeln('ORG:${work['data']?['title']?['text']}');
+      final title = work['data']?['title']?['text'];
+      if (title != null) vCard.writeln('ORG:$title');
+
+      final content = work['data']?['content']?['text'];
+      if (content != null) vCard.writeln('TITLE:$content');
     }
 
     for (var number in phoneNumbers) {
       vCard.writeln(
-          'TEL;TYPE=${label('phoneNUmbers', number['label'])}:${number['prefix']}${number['content']}');
+          'TEL${type('phoneNUmbers', number['label'])}:${number['prefix']}${number['content']}');
     }
 
     for (var email in emails) {
       vCard.writeln(
-          'EMAIL;TYPE=${label('emails', email['label'])}:${email['content']}');
+          'EMAIL${type('emails', email['label'])}:${email['content']}');
     }
 
     for (var address in addresses) {
       vCard.writeln(
-          'ADR;TYPE=${label('addresses', address['label'])}:;;${address['content']}');
+          'ADR${type('addresses', address['label'])}:;;${address['content']}');
     }
 
     for (var website in websites) {
       vCard.writeln(
-          'URL;TYPE=${label('websites', website['label'])}:${website['content']}');
+          'URL${type('websites', website['label'])}:${website['content']}');
     }
 
     for (var link in socialLinks) {
       vCard.writeln(
           'X-SOCIALPROFILE:https://${link['link'] ?? ''}${link['id'] ?? ''}');
     }
+
+    customLabels
+        .asMap()
+        .forEach((i, val) => vCard.writeln('item${i + 1}.X-ABLabel:$val'));
 
     vCard.writeln('END:VCARD');
 
@@ -149,6 +297,7 @@ class ActionsBlock extends StatelessWidget {
       if (await FlutterContacts.requestPermission()) {
         Contact contact = Contact.fromVCard(vCard.toString());
         debug.print(contact);
+        //await contact.insert();
       }
     } else {
       //webExtension.saveVCard(name?.join(' '), vCard.toString());

@@ -127,6 +127,7 @@
   "customLabelName": "Custom Label Name",
   "none": "None",
   "primaryConnectButton": "Primary connect button",
+  "additionalConnectButton": "Additional connect button",
   "additionalConnectButtons": "Additional connect buttons",
   "advancedSettings": "Advanced settings",
   "loading": "Loading...",

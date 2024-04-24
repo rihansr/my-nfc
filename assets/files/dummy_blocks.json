@@ -24,7 +24,7 @@
                     "style": {
                         "background": {
                             "image": {
-                                "path": null,
+                                "path": "https://images.unsplash.com/photo-1541167760496-1628856ab772?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1Nzk3MzB8MHwxfHNlYXJjaHwzfHxjb2ZmZWV8ZW58MHwwfHx8MTcxMzk0MTk5NHww&ixlib=rb-4.0.3&q=80&w=1080",
                                 "style": {
                                     "scale": 1.0
                                 }
@@ -103,7 +103,7 @@
                                         "text": {
                                             "typography": null,
                                             "fontSize": 32,
-                                            "textColor": null,
+                                            "textColor": "#ffffffff",
                                             "fontWeight": "regular",
                                             "alignment": null
                                         }
@@ -245,15 +245,15 @@
                                 },
                                 "data": {
                                     "name": {
-                                        "first": null,
-                                        "middle": null,
-                                        "last": null
+                                        "first": "Rihan",
+                                        "middle": "Subhan",
+                                        "last": "Rizve"
                                     },
                                     "style": {
                                         "text": {
                                             "typography": null,
                                             "fontSize": 32,
-                                            "textColor": null,
+                                            "textColor": "#ffffffff",
                                             "fontWeight": "regular",
                                             "alignment": "center"
                                         }
@@ -309,12 +309,12 @@
                         }
                     },
                     "data": {
-                        "content": null,
+                        "content": "4yrs+ mobile dev @StaffAsia. Expert in Android & iOS. Craft top-tier apps, exceed expectations",
                         "style": {
                             "text": {
                                 "typography": null,
                                 "fontSize": 16,
-                                "textColor": null,
+                                "textColor": "#ffffffff",
                                 "fontWeight": "regular",
                                 "alignment": "center"
                             }
@@ -367,12 +367,12 @@
                         }
                     },
                     "data": {
-                        "content": "",
+                        "content": "Mobile App Developer",
                         "style": {
                             "text": {
                                 "typography": null,
                                 "fontSize": 14,
-                                "textColor": null,
+                                "textColor": "#ffffffff",
                                 "fontWeight": "regular",
                                 "alignment": "center"
                             }
@@ -416,7 +416,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": null
+                            "dividerColor": "#ff606060"
                         }
                     }
                 }
@@ -445,7 +445,36 @@
                         "dragable": true
                     },
                     "data": {
-                        "links": []
+                        "links": [
+                            {
+                                "name": "facebook",
+                                "link": "facebook.com/",
+                                "hint": "username",
+                                "id": "rxrsr"
+                            },
+                            {
+                                "name": "instagram",
+                                "link": "instagram.com/",
+                                "hint": "username",
+                                "id": "_rihan_s_r"
+                            },
+                            {
+                                "name": "snapchat",
+                                "link": "snapchat.com/add/",
+                                "id": "rx23026"
+                            },
+                            {
+                                "name": "whatsapp",
+                                "link": "wa.me/",
+                                "hint": "+880 1812 345678",
+                                "id": "+8801834670802"
+                            },
+                            {
+                                "name": "telegram",
+                                "link": "t.me/",
+                                "id": "rihansr"
+                            }
+                        ]
                     }
                 },
                 {
@@ -453,7 +482,7 @@
                     "label": "Space",
                     "settings": {
                         "primary": false,
-                        "visible": false,
+                        "visible": true,
                         "removable": false
                     },
                     "data": {
@@ -473,7 +502,19 @@
                         "dragable": true
                     },
                     "data": {
-                        "links": []
+                        "links": [
+                            {
+                                "name": "linkedin",
+                                "link": "linkedin.com/in/",
+                                "hint": "username",
+                                "id": "rihansr"
+                            },
+                            {
+                                "name": "github",
+                                "link": "github.com/",
+                                "id": "rihansr"
+                            }
+                        ]
                     }
                 },
                 {
@@ -513,7 +554,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": null
+                            "dividerColor": "#ff606060"
                         }
                     }
                 },
@@ -571,10 +612,49 @@
                                     }
                                 },
                                 "data": {
-                                    "phoneNumbers": [],
-                                    "emails": [],
-                                    "websites": [],
-                                    "addresses": []
+                                    "phoneNumbers": [
+                                        {
+                                            "label": "main",
+                                            "prefix": "+880",
+                                            "content": "1834670802"
+                                        },
+                                        {
+                                            "label": "other",
+                                            "prefix": "+880",
+                                            "content": "1600930603"
+                                        }
+                                    ],
+                                    "emails": [
+                                        {
+                                            "label": "home",
+                                            "prefix": null,
+                                            "content": "rx23026@gmail.com"
+                                        },
+                                        {
+                                            "label": "work",
+                                            "prefix": null,
+                                            "content": "subhanrihan@staffasia.org"
+                                        }
+                                    ],
+                                    "websites": [
+                                        {
+                                            "label": "Github",
+                                            "prefix": null,
+                                            "content": "https://github.com/rihansr"
+                                        }
+                                    ],
+                                    "addresses": [
+                                        {
+                                            "label": "home",
+                                            "prefix": null,
+                                            "content": "House #71, Road #3, Block #G, Shahjalal Upashahar, Sylhet-3100, Bangladesh"
+                                        },
+                                        {
+                                            "label": "work",
+                                            "prefix": null,
+                                            "content": "l Oli Center, Road #2, Block #E, Shahjalal Upashahar, Sylhet-3100, Bangladesh"
+                                        }
+                                    ]
                                 }
                             }
                         ]
@@ -617,7 +697,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": null
+                            "dividerColor": "#ff606060"
                         }
                     }
                 },
@@ -648,11 +728,11 @@
                                 },
                                 "data": {
                                     "title": {
-                                        "text": null,
+                                        "text": "Staff Asia",
                                         "hint": "Company"
                                     },
                                     "content": {
-                                        "text": null,
+                                        "text": "Mobile App Deeloper",
                                         "hint": "Position"
                                     }
                                 }
@@ -682,11 +762,11 @@
                                 },
                                 "data": {
                                     "title": {
-                                        "text": null,
+                                        "text": "International Islamic University of Chittagong",
                                         "hint": "Place"
                                     },
                                     "content": {
-                                        "text": null,
+                                        "text": "BSC in CSE",
                                         "hint": "Degree"
                                     }
                                 }
@@ -716,7 +796,7 @@
                                 },
                                 "data": {
                                     "content": {
-                                        "text": null
+                                        "text": "Single"
                                     }
                                 }
                             }
@@ -766,7 +846,7 @@
                             "buttonFixedAtBottom": true
                         }
                     },
-                    "style":{
+                    "style": {
                         "spacing": {
                             "default": {
                                 "margin": 0,
@@ -798,15 +878,25 @@
                         "label": {
                             "text": "Save to phone"
                         },
-                        "primary": null,
-                        "additional": null,
+                        "primary": {
+                            "name": "facebook",
+                            "link": "facebook.com/",
+                            "hint": "username",
+                            "id": "rxrsr"
+                        },
+                        "additional": {
+                            "name": "instagram",
+                            "link": "instagram.com/",
+                            "hint": "username",
+                            "id": "_rihan_s_r"
+                        },
                         "style": {
                             "background": {
                                 "color": "#FF3F3F46"
                             },
                             "text": {
                                 "typography": null,
-                                "labelColor": "#FFFFFFFF",
+                                "labelColor": "#ffbdbdbd",
                                 "fontSize": 14,
                                 "fontWeight": "semi-bold"
                             }

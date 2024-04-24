@@ -163,13 +163,13 @@ class ButtonSettings extends StatelessWidget {
             ),
             ColourPicker(
               title: string.textColor,
-              value: block['data']?['style']?['text']?['textColor']
+              value: block['data']?['style']?['text']?['labelColor']
                       ?.toString()
                       .hexColor ??
                   defaultTheme.iconColor,
               colors: kColors,
               onPick: (color) =>
-                  update('text', MapEntry('textColor', color.toHex)),
+                  update('text', MapEntry('labelColor', color.toHex)),
             ),
             TabWidget(
               title: string.fontWeight,

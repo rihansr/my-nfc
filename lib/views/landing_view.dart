@@ -50,9 +50,10 @@ class LandingView extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: controller.footers
                     .where((element) =>
-                        element['settings']?['advanced']
-                            ?['buttonFixedAtBottom'] ??
-                        false)
+                        (element['settings']?['advanced']
+                                ?['buttonFixedAtBottom'] ??
+                            false) &&
+                        (element['settings']?['visible'] ?? true))
                     .map(
                       (e) => Padding(
                         padding: EdgeInsets.symmetric(
@@ -62,36 +63,6 @@ class LandingView extends StatelessWidget {
                     )
                     .toList(),
               ),
-              /* child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      physics: const ClampingScrollPhysics(),
-                      padding: EdgeInsets.symmetric(
-                          horizontal: controller.theme.horizontalPadding),
-                      primary: true,
-                      child: Column(
-                        children: controller.designData.entries
-                            .map((e) => SectionBlock(e.value, key: Key(e.key)))
-                            .toList(),
-                      ),
-                    ),
-                  ),
-                  ...controller.footers
-                      .where((element) =>
-                          element['settings']?['advanced']
-                              ?['buttonFixedAtBottom'] ??
-                          false)
-                      .map(
-                        (e) => Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: controller.theme.horizontalPadding),
-                          child: ActionsBlock(e),
-                        ),
-                      ),
-                ],
-              ), */
             ),
             bottomNavigationBar: Container(
               color: Theme.of(context).colorScheme.background,

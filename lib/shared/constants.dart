@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/theme_model.dart';
 
@@ -489,20 +490,13 @@ extension IconExtensions on String {
   List<String> get contactLabels {
     switch (this) {
       case 'phoneNumbers':
-        return [
-          'main',
-          'home',
-          'work',
-          'cell',
-          'mobile',
-          'fax',
-          'other'
-        ];
+        return PhoneLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'emails':
+      return EmailLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'websites':
-        return ['home', 'work', 'other'];
+        return WebsiteLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'addresses':
-        return ['home', 'mailing', 'work', 'other'];
+        return AddressLabel.values.map((e) => e.name.toLowerCase()).toList();
       default:
         return ['other'];
     }

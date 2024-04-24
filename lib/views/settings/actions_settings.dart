@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,8 +21,8 @@ class ActionsSettings extends StatelessWidget {
   final Function(Map<String, dynamic>)? onUpdate;
 
   final Map<String, dynamic> advancedSettings;
-  late Map<dynamic, dynamic>? primary;
-  late Map<dynamic, dynamic>? additional;
+  late Map<String, dynamic>? primary;
+  late Map<String, dynamic>? additional;
 
   ActionsSettings({
     super.key,
@@ -58,7 +59,7 @@ class ActionsSettings extends StatelessWidget {
     ThemeModel defaultTheme =
         Provider.of<DesignViewModel>(context, listen: false).theme;
     ThemeData theme = Theme.of(context);
-    List<Map<dynamic, dynamic>> links =
+    List<Map<String, dynamic>> links =
         Provider.of<DesignViewModel>(context, listen: true)
             .designStructure
             .findBy('links')
@@ -78,89 +79,96 @@ class ActionsSettings extends StatelessWidget {
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(12, 0, 22, 12),
       children: [
-        Dropdown<Map?>(
-          title: string.primaryConnectButton,
-          items: [
-            ...links.where((element) => '$element' != '$additional'),
-            null
-          ],
-          value: (() {
-            if (primary?.isEmpty ?? true) {
-              return null;
-            } else {
-              if (links.where((element) => '$element' == '$primary').isEmpty) {
-                primary = null;
-                update('data', const MapEntry('primary', null));
-                return null;
-              } else {
-                return primary;
-              }
-            }
-          }()),
-          maintainState: true,
-          itemBuilder: (item) => Text.rich(
-            TextSpan(
-              style: theme.textTheme.bodySmall,
-              children: [
-                WidgetSpan(
-                  child: Icon(
-                    item?.icon ?? Icons.remove_circle_outline,
-                    size: 16,
-                    color: theme.textTheme.bodySmall?.color,
+        ...(() {
+          final list = links.map((e) => jsonEncode(e));
+
+          final primary =
+              this.primary == null ? null : jsonEncode(this.primary);
+
+          final additional =
+              this.additional == null ? null : jsonEncode(this.additional);
+
+          final primaryList = list.where(
+              (element) => element != additional || !list.contains(element));
+
+          final additionalList = list.where(
+              (element) => element != primary || !list.contains(element));
+
+          Widget dropdownItem(String? val) {
+            final item =
+                val == null ? null : Map<String, dynamic>.from(jsonDecode(val));
+            return Text.rich(
+              TextSpan(
+                style: theme.textTheme.bodySmall,
+                children: [
+                  WidgetSpan(
+                    child: Icon(
+                      item?.icon ?? Icons.remove_circle_outline,
+                      size: 16,
+                      color: theme.textTheme.bodySmall?.color,
+                    ),
+                    alignment: PlaceholderAlignment.middle,
                   ),
-                  alignment: PlaceholderAlignment.middle,
-                ),
-                const TextSpan(text: "  "),
-                TextSpan(text: item?.label ?? string.none),
-              ],
+                  const TextSpan(text: "  "),
+                  TextSpan(text: item?.label ?? string.none),
+                ],
+              ),
+            );
+          }
+
+          return [
+            Dropdown<String?>(
+              title: string.primaryConnectButton,
+              items: [...primaryList, null],
+              value: (() {
+                if (primary?.isEmpty ?? true) {
+                  return null;
+                } else {
+                  if (primaryList.isEmpty) {
+                    this.primary = null;
+                    update('data', const MapEntry('primary', null));
+                    return null;
+                  } else {
+                    return primary;
+                  }
+                }
+              }()),
+              maintainState: true,
+              itemBuilder: dropdownItem,
+              onSelected: (data) {
+                this.primary = data == null
+                    ? null
+                    : Map<String, dynamic>.from(jsonDecode(data));
+                update('data', MapEntry('primary', this.primary));
+              },
             ),
-          ),
-          onSelected: (data) {
-            primary = data;
-            update('data', MapEntry('primary', data));
-          },
-        ),
-        Dropdown<Map?>(
-          title: string.additionalConnectButtons,
-          items: [...links.where((element) => '$element' != '$primary'), null],
-          value: (() {
-            if (additional?.isEmpty ?? true) {
-              return null;
-            } else {
-              if (links
-                  .where((element) => '$element' == '$additional')
-                  .isEmpty) {
-                additional = null;
-                update('data', const MapEntry('additional', null));
-                return null;
-              } else {
-                return additional;
-              }
-            }
-          }()),
-          maintainState: true,
-          itemBuilder: (item) => Text.rich(
-            TextSpan(
-              style: theme.textTheme.bodySmall,
-              children: [
-                WidgetSpan(
-                  child: Icon(
-                    item?.icon ?? Icons.remove_circle_outline,
-                    size: 16,
-                    color: theme.textTheme.bodySmall?.color,
-                  ),
-                  alignment: PlaceholderAlignment.middle,
-                ),
-                const TextSpan(text: "  "),
-                TextSpan(text: item?.label ?? string.none),
-              ],
+            Dropdown<String?>(
+              title: string.additionalConnectButton,
+              items: [...additionalList, null],
+              value: (() {
+                if (additional?.isEmpty ?? true) {
+                  return null;
+                } else {
+                  if (additionalList.isEmpty) {
+                    this.additional = null;
+                    update('data', const MapEntry('additional', null));
+                    return null;
+                  } else {
+                    return additional;
+                  }
+                }
+              }()),
+              maintainState: true,
+              itemBuilder: dropdownItem,
+              onSelected: (data) {
+                this.additional = data == null
+                    ? null
+                    : Map<String, dynamic>.from(jsonDecode(data));
+                update('data', MapEntry('additional', this.additional));
+              },
             ),
-          ),
-          onSelected: (data) {
-            additional = data;
-            update('data', MapEntry('additional', data));
-          },
-        ),
+          ];
+        }()),
         BlockExpansionTile(
           label: string.buttonDesign,
           children: [
@@ -206,11 +214,11 @@ class ActionsSettings extends StatelessWidget {
                 ),
                 ColourPicker(
                   title: string.textColor,
-                  value: textStyle['textColor']?.toString().hexColor ??
+                  value: textStyle['labelColor']?.toString().hexColor ??
                       defaultTheme.iconColor,
                   colors: kColors,
                   onPick: (color) =>
-                      update('text', MapEntry('textColor', color.toHex)),
+                      update('text', MapEntry('labelColor', color.toHex)),
                 ),
                 TabWidget(
                   title: string.fontWeight,
