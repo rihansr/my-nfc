@@ -8,6 +8,7 @@ class BlockExpansionTile extends StatelessWidget {
   final String? label;
   final Map<String, dynamic>? settings;
   final Map<String, dynamic>? style;
+  final Map<String, dynamic>? defaultStyle;
   final EdgeInsetsGeometry titlePadding;
   final EdgeInsetsGeometry? padding;
   final bool enableBorder;
@@ -31,6 +32,7 @@ class BlockExpansionTile extends StatelessWidget {
     this.onExpansionChanged,
   })  : settings = null,
         style = null,
+        defaultStyle = null,
         onUpdate = null,
         onRemove = null,
         visible = ValueNotifier(false),
@@ -41,6 +43,7 @@ class BlockExpansionTile extends StatelessWidget {
     this.settings, {
     super.key,
     this.style,
+    this.defaultStyle,
     this.icon,
     this.label,
     this.titlePadding = const EdgeInsets.symmetric(horizontal: 10),
@@ -177,6 +180,7 @@ class BlockExpansionTile extends StatelessWidget {
                           children: [
                             BlockStyle(
                               style ?? {},
+                              defaultStyle: defaultStyle,
                               settings: settings!['settings']?['advanced'],
                               onUpdate: (style) {
                                 onUpdate?.call('style', style);

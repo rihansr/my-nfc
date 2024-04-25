@@ -39,9 +39,6 @@
                             "vertical": "center"
                         },
                         "spacing": {
-                            "default": {
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -71,10 +68,6 @@
                                         "color": null
                                     },
                                     "spacing": {
-                                        "default": {
-                                            "margin": 0,
-                                            "padding": 0
-                                        },
                                         "limit": {
                                             "padding": {
                                                 "min": 0,
@@ -98,7 +91,7 @@
                                     }
                                 },
                                 "data": {
-                                    "content": null,
+                                    "content": "Software Engineer",
                                     "style": {
                                         "text": {
                                             "typography": null,
@@ -126,10 +119,6 @@
                     "style": {
                         "spacing": {
                             "initiallyExpanded": true,
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -169,9 +158,6 @@
                                     },
                                     "spacing": {
                                         "initiallyExpanded": true,
-                                        "default": {
-                                            "margin": 0
-                                        },
                                         "limit": {
                                             "margin": {
                                                 "min": 0,
@@ -211,10 +197,6 @@
                                         "color": null
                                     },
                                     "spacing": {
-                                        "default": {
-                                            "margin": 0,
-                                            "padding": 0
-                                        },
                                         "limit": {
                                             "padding": {
                                                 "min": 0,
@@ -276,10 +258,6 @@
                             "color": null
                         },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -334,10 +312,6 @@
                             "color": null
                         },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -389,10 +363,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -416,7 +386,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ff606060"
+                            "dividerColor": "#ffffffff"
                         }
                     }
                 }
@@ -487,8 +457,7 @@
                     },
                     "data": {
                         "style": {
-                            "height": 20,
-                            "default": 20
+                            "height": 20
                         }
                     }
                 },
@@ -527,10 +496,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -554,7 +519,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ff606060"
+                            "dividerColor": "#ffffffff"
                         }
                     }
                 },
@@ -568,11 +533,11 @@
                         "dragable": false
                     },
                     "style": {
+                        "fullWidth": true,
+                        "background": {
+                            "color": "#00000000"
+                        },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -605,11 +570,6 @@
                                     "visible": true,
                                     "removable": false,
                                     "dragable": true
-                                },
-                                "style": {
-                                    "alignment": {
-                                        "horizontal": "center"
-                                    }
                                 },
                                 "data": {
                                     "phoneNumbers": [
@@ -670,10 +630,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -697,7 +653,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ff606060"
+                            "dividerColor": "#ffffffff"
                         }
                     }
                 },
@@ -711,10 +667,32 @@
                         "dragable": false
                     },
                     "style": {
+                        "fullWidth": true,
                         "background": {
                             "color": "#00000000"
                         },
-                        "fullWidth": true
+                        "spacing": {
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
                     },
                     "data": {
                         "fields": [
@@ -747,8 +725,7 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 20,
-                                        "default": 20
+                                        "height": 20
                                     }
                                 }
                             },
@@ -781,8 +758,7 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 20,
-                                        "default": 20
+                                        "height": 20
                                     }
                                 }
                             },
@@ -848,10 +824,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -896,7 +868,7 @@
                             },
                             "text": {
                                 "typography": null,
-                                "labelColor": "#ffbdbdbd",
+                                "labelColor": "#ffffffff",
                                 "fontSize": 14,
                                 "fontWeight": "semi-bold"
                             }

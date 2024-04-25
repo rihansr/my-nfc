@@ -17,6 +17,7 @@ import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class ActionsSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
@@ -26,6 +27,7 @@ class ActionsSettings extends StatelessWidget {
 
   ActionsSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   })  : primary = block['data']?['primary'],
@@ -68,6 +70,7 @@ class ActionsSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.system_update_alt_outlined,
       label: block['label'],
@@ -207,6 +210,7 @@ class ActionsSettings extends StatelessWidget {
                 Seekbar(
                   title: string.fontSize,
                   value: textStyle['fontSize'] ?? 16,
+                  defaultValue: defaultBlock?['default']?['style']?['text']?['fontSize'],
                   min: 8,
                   max: 96,
                   onChanged: (size) =>

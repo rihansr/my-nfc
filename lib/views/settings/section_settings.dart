@@ -19,11 +19,13 @@ import 'text_settings.dart';
 import 'video_settings.dart';
 
 class SectionSettings extends StatefulWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const SectionSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   });
@@ -57,77 +59,95 @@ class _SectionSettingsState extends State<SectionSettings> {
     List<Widget> children = _fields.mapIndexed(
       (i, e) {
         Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
+
+        Map<String, dynamic>? defaultBlock = ((){
+          final fields = widget.defaultBlock?['data']?['fields'] ?? [];
+          return fields.contains(i) ? Map<String, dynamic>.from(fields[i]) : null;
+        }());
+        
         Map<String, dynamic> block = Map.from(e);
         switch (e['block']) {
           case "section":
             return SectionSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "space":
             return SpaceSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "divider":
             return DividerSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "text":
             return TextSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "image":
             return ImageSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "contact":
             return ContactSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "info":
             return InfoSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "links":
             return LinksSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "button":
             return ButtonSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "video":
             return VideoSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "additional":
             return AdditionalSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
           case "actions":
             return ActionsSettings(
               key: key,
+              defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
             );
@@ -154,6 +174,7 @@ class _SectionSettingsState extends State<SectionSettings> {
     return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.key}'),
+      defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       label: widget.block['label'],
       onUpdate: (key, entry) {

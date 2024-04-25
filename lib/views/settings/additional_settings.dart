@@ -8,11 +8,13 @@ import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class AdditionalSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   AdditionalSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   }) : fields = ValueNotifier(block['data']?['fields'] ?? []);
@@ -43,6 +45,7 @@ class AdditionalSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.playlist_add_outlined,
       label: block['label'],

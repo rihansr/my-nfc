@@ -13,8 +13,10 @@ import '../../../widgets/seekbar_widget.dart';
 class ImageView extends StatefulWidget {
   final String? path;
   final BoxFit? fit;
+  final int? _defaultScale;
   final int? _scale;
   final int? _overlayOpacity;
+  final Map<String, dynamic>? defaultStyle;
   final Map<String, dynamic>? style;
   final Function(MapEntry<String, dynamic>)? onStyleChange;
   final Function(String? path)? onPick;
@@ -24,12 +26,16 @@ class ImageView extends StatefulWidget {
     super.key,
     required this.path,
     this.fit,
+    this.defaultStyle,
     this.style,
     this.onStyleChange,
     this.onPick,
     this.onRemove,
   })  : _scale =
             style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
+        _defaultScale = defaultStyle?['scale'] == null
+            ? null
+            : (defaultStyle!['scale'] * 10).toInt(),
         _overlayOpacity = style?['overlayOpacity'];
 
   @override
@@ -141,7 +147,7 @@ class _ImageViewState extends State<ImageView> {
                     title: string.resize,
                     value: scale!,
                     showCount: false,
-                    defaultValue: 10,
+                    defaultValue: widget._defaultScale ?? 10,
                     min: 1,
                     max: 20,
                     onChanged: (value) {
@@ -152,6 +158,7 @@ class _ImageViewState extends State<ImageView> {
                 if (opacity != null)
                   Seekbar(
                     title: string.overlayOpacity,
+                    defaultValue: widget.defaultStyle?['overlayOpacity'],
                     value: opacity!,
                     type: '%',
                     min: 0,

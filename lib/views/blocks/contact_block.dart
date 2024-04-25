@@ -28,17 +28,19 @@ class ContactBlock extends StatelessWidget {
         MapEntry entry = entries[index];
         return Row(
           children: [
-            Expanded(
-              flex: 1,
-              child: Align(
+            (() {
+              final icon = Align(
                 alignment: Alignment.centerLeft,
                 child: Icon(
                   '${entry.key}'.contactIcon,
                   size: 32,
                   color: defaultTheme.iconColor,
                 ),
-              ),
-            ),
+              );
+              return sectionStyle?['fullWidth'] == false
+                  ? SizedBox(width: 104, child: icon)
+                  : Expanded(flex: 1, child: icon);
+            }()),
             Expanded(
               flex: 2,
               child: Wrap(
@@ -82,7 +84,7 @@ class ContactBlock extends StatelessWidget {
                               '${e?['label'] ?? 'other'}'.capitalizeFirstOfEach,
                               style: textStyle(
                                 context,
-                                {'fontWeight': 'regular', 'fontSize': 10},
+                                {'fontWeight': 'regular', 'fontSize': 11},
                               ),
                             ),
                             const SizedBox(height: 2),

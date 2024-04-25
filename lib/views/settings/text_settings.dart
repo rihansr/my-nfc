@@ -15,11 +15,13 @@ import '../../widgets/dropdown_widget.dart';
 import 'components/block_expansion_tile.dart';
 
 class TextSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const TextSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   });
@@ -50,6 +52,7 @@ class TextSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.title,
       label: block['label'],
@@ -133,6 +136,7 @@ class TextSettings extends StatelessWidget {
         ),
         Seekbar(
           title: string.fontSize,
+          defaultValue: defaultBlock?['data']?['style']?['text']?['fontSize'],
           value: block['data']?['style']?['text']?['fontSize'] ?? 12,
           min: 8,
           max: 96,

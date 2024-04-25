@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,21 @@ TextAlign? textAlign(Object? alignment) {
   }
 }
 
-ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
+Future<Uint8List?> photoBytes(String? path) async {
+  if (path?.isNotEmpty ?? false) {
+    if (Uri.tryParse(path!)?.isAbsolute ?? false || kIsWeb) {
+      return (await NetworkAssetBundle(Uri.parse(path)).load(path))
+          .buffer
+          .asUint8List();
+    } else {
+      return await File(path).readAsBytes();
+    }
+  } else {
+    return null;
+  }
+}
+
+ImageProvider<Object>? providerPhoto(dynamic img, {String? placeholder}) =>
     (() {
       if (img?.isNotEmpty == true) {
         if ((Uri.tryParse(img!)?.isAbsolute ?? false) || kIsWeb) {
@@ -90,7 +105,7 @@ ImageProvider<Object>? providerPhoto(String? img, {String? placeholder}) =>
     }());
 
 Widget? photo(
-  String? path, {
+  dynamic path, {
   String? placeholder,
   double? width,
   double? height,

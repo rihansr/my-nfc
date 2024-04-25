@@ -11,11 +11,13 @@ import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class DividerSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
 final Function(Map<String, dynamic>)? onUpdate;
 
   const DividerSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   });
@@ -38,6 +40,7 @@ final Function(Map<String, dynamic>)? onUpdate;
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.remove_outlined,
       label: block['label'],
@@ -51,11 +54,11 @@ final Function(Map<String, dynamic>)? onUpdate;
       children: [
         Seekbar(
           title: string.height,
+          defaultValue: defaultBlock?['data']?['style']?['height'] ?? 1,
           value: block['data']?['style']?['height'] ?? 1.0,
           type: 'px',
           min: 1,
           max: 10,
-          defaultValue: 1,
           onChanged: (size) => update('data', MapEntry('height', size)),
         ),
         ColourPicker(

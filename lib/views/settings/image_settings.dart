@@ -4,11 +4,13 @@ import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
 class ImageSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   ImageSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   }) : _imagePath = ValueNotifier(() {
@@ -30,6 +32,7 @@ class ImageSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: block['subBlock'] == 'image_avatar'
           ? Icons.person_outline

@@ -8,11 +8,13 @@ import 'components/video_configs.dart';
 import 'components/block_expansion_tile.dart';
 
 class VideoSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const VideoSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   });
@@ -34,6 +36,7 @@ class VideoSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.video_library_outlined,
       label: block['label'],

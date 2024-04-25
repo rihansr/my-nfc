@@ -32,10 +32,6 @@
                 "opacity": 40
             },
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -73,10 +69,6 @@
                             "color": "#00000000"
                         },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -122,10 +114,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -176,10 +164,6 @@
                     "style": {
                         "fullWidth": false,
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -238,10 +222,6 @@
         },
         "style": {
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -288,10 +268,6 @@
         "style": {
             "aspectRatio": "21:9",
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -337,10 +313,6 @@
         },
         "style": {
             "spacing": {
-                "default": {
-                    "margin": 25,
-                    "padding": 0
-                },
                 "limit": {
                     "margin": {
                         "min": 0,
@@ -397,10 +369,6 @@
                 "opacity": 40
             },
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -442,10 +410,6 @@
             },
             "fullWidth": true,
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -488,10 +452,6 @@
             },
             "fullWidth": true,
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -533,9 +493,6 @@
         },
         "style":{
             "spacing": {
-                "default": {
-                    "margin": 0
-                },
                 "limit": {
                     "margin": {
                         "min": -200,
@@ -569,10 +526,6 @@
         "style": {
             "fullWidth": false,
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -678,10 +631,6 @@
         },
         "style":{
             "spacing": {
-                "default": {
-                    "margin": 0,
-                    "padding": 0
-                },
                 "limit": {
                     "padding": {
                         "min": 0,
@@ -767,8 +716,7 @@
         },
         "data": {
             "style": {
-                "height": 20,
-                "default": 20
+                "height": 20
             }
         }
     }

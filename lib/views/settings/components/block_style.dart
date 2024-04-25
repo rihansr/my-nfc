@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../../../utils/debug.dart';
 import '../../../utils/extensions.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';
@@ -13,6 +14,7 @@ import 'backdrop.dart';
 import 'spcaing.dart';
 
 class BlockStyle extends StatelessWidget {
+  final Map<String, dynamic>? defaultStyle;
   final Map<String, dynamic> style;
   final Function(MapEntry<String, dynamic>)? onUpdate;
 
@@ -21,6 +23,7 @@ class BlockStyle extends StatelessWidget {
 
   const BlockStyle(
     this.style, {
+    this.defaultStyle,
     this.settings,
     super.key,
     this.onUpdate,
@@ -44,6 +47,7 @@ class BlockStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debug.print(defaultStyle);
     return Column(
       children: [
         if (style.containsKey('background'))
@@ -109,6 +113,7 @@ class BlockStyle extends StatelessWidget {
               ),
               Seekbar(
                 title: string.overlayOpacity,
+                defaultValue: defaultStyle?['overlay']?['opacity'] ?? 0,
                 value: overlay['opacity'] ?? 0,
                 type: '%',
                 min: 0,
@@ -159,6 +164,7 @@ class BlockStyle extends StatelessWidget {
         if (style.containsKey('spacing'))
           Spacing(
             title: string.paddingAndMarginSettings,
+            defaultSpacing: defaultStyle?['spacing'],
             spacing: style['spacing'],
             onUpdate: (spacing) => update('style', spacing),
           ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'components.dart';
 
 class InfoBlock extends StatelessWidget {
@@ -15,16 +14,18 @@ class InfoBlock extends StatelessWidget {
         : Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 1,
-                child: Text(
+              (() {
+                final text = Text(
                   configs['label'] ?? '',
                   style: textStyle(
                     context,
                     {'fontWeight': 'semi-bold', 'fontSize': 14},
                   ),
-                ),
-              ),
+                );
+                return sectionStyle?['fullWidth'] == false
+                    ? SizedBox(width: 104, child: text)
+                    : Expanded(flex: 1, child: text);
+              }()),
               Expanded(
                 flex: 2,
                 child: Column(
@@ -46,7 +47,7 @@ class InfoBlock extends StatelessWidget {
                       configs['data']?['title']?['text'] ?? '',
                       style: textStyle(
                         context,
-                        {'fontWeight': 'regular', 'fontSize': 10},
+                        {'fontWeight': 'regular', 'fontSize': 11},
                       ),
                     ),
                   ],

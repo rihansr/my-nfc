@@ -17,11 +17,13 @@ import '../blocks/components.dart';
 import 'components/block_expansion_tile.dart';
 
 class ButtonSettings extends StatelessWidget {
+  final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const ButtonSettings({
     super.key,
+    this.defaultBlock,
     required this.block,
     this.onUpdate,
   });
@@ -57,6 +59,7 @@ class ButtonSettings extends StatelessWidget {
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$key'),
+      defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.add_circle_outline,
       label: block['label'],
@@ -111,6 +114,7 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderThickness,
               type: 'px',
+              defaultValue: defaultBlock?['data']?['style']?['border']?['borderWidth'] ?? 1,
               value: block['data']?['style']?['border']?['borderWidth'] ?? 1,
               min: 0,
               max: 100,
@@ -120,6 +124,7 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderRadius,
               type: 'px',
+              defaultValue: defaultBlock?['data']?['style']?['border']?['borderRadius'] ?? 4,
               value: block['data']?['style']?['border']?['borderRadius'] ?? 4,
               min: 0,
               max: 50,
@@ -156,6 +161,7 @@ class ButtonSettings extends StatelessWidget {
             ),
             Seekbar(
               title: string.fontSize,
+              defaultValue: defaultBlock?['data']?['style']?['text']?['fontSize'],
               value: block['data']?['style']?['text']?['fontSize'] ?? 16,
               min: 8,
               max: 96,

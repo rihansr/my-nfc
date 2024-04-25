@@ -39,9 +39,6 @@
                             "vertical": "center"
                         },
                         "spacing": {
-                            "default": {
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -71,10 +68,6 @@
                                         "color": null
                                     },
                                     "spacing": {
-                                        "default": {
-                                            "margin": 0,
-                                            "padding": 0
-                                        },
                                         "limit": {
                                             "padding": {
                                                 "min": 0,
@@ -126,10 +119,6 @@
                     "style": {
                         "spacing": {
                             "initiallyExpanded": true,
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -169,9 +158,6 @@
                                     },
                                     "spacing": {
                                         "initiallyExpanded": true,
-                                        "default": {
-                                            "margin": 0
-                                        },
                                         "limit": {
                                             "margin": {
                                                 "min": 0,
@@ -211,10 +197,6 @@
                                         "color": null
                                     },
                                     "spacing": {
-                                        "default": {
-                                            "margin": 0,
-                                            "padding": 0
-                                        },
                                         "limit": {
                                             "padding": {
                                                 "min": 0,
@@ -276,10 +258,6 @@
                             "color": null
                         },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -334,10 +312,6 @@
                             "color": null
                         },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -389,10 +363,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -458,8 +428,7 @@
                     },
                     "data": {
                         "style": {
-                            "height": 20,
-                            "default": 20
+                            "height": 20
                         }
                     }
                 },
@@ -486,10 +455,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -527,11 +492,11 @@
                         "dragable": false
                     },
                     "style": {
+                        "fullWidth": true,
+                        "background": {
+                            "color": "#00000000"
+                        },
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,
@@ -565,11 +530,6 @@
                                     "removable": false,
                                     "dragable": true
                                 },
-                                "style": {
-                                    "alignment": {
-                                        "horizontal": "center"
-                                    }
-                                },
                                 "data": {
                                     "phoneNumbers": [],
                                     "emails": [],
@@ -590,10 +550,6 @@
                     },
                     "style": {
                         "spacing": {
-                            "default": {
-                                "margin": 20,
-                                "padding": 0
-                            },
                             "limit": {
                                 "margin": {
                                     "min": 0,
@@ -631,10 +587,32 @@
                         "dragable": false
                     },
                     "style": {
+                        "fullWidth": true,
                         "background": {
                             "color": "#00000000"
                         },
-                        "fullWidth": true
+                        "spacing": {
+                            "limit": {
+                                "padding": {
+                                    "min": 0,
+                                    "max": 200
+                                },
+                                "margin": {
+                                    "min": -200,
+                                    "max": 200
+                                }
+                            },
+                            "padding": {
+                                "horizontal": 0,
+                                "vertical": 0
+                            },
+                            "margin": {
+                                "top": 0,
+                                "bottom": 0,
+                                "left": 0,
+                                "right": 0
+                            }
+                        }
                     },
                     "data": {
                         "fields": [
@@ -667,8 +645,7 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 20,
-                                        "default": 20
+                                        "height": 20
                                     }
                                 }
                             },
@@ -701,8 +678,7 @@
                                 },
                                 "data": {
                                     "style": {
-                                        "height": 20,
-                                        "default": 20
+                                        "height": 20
                                     }
                                 }
                             },
@@ -768,10 +744,6 @@
                     },
                     "style":{
                         "spacing": {
-                            "default": {
-                                "margin": 0,
-                                "padding": 0
-                            },
                             "limit": {
                                 "padding": {
                                     "min": 0,

@@ -6,12 +6,14 @@ import 'block_expansion_tile.dart';
 
 class Spacing extends StatelessWidget {
   final String? title;
+  final Map<String, dynamic>? defaultSpacing;
   final Map<String, dynamic>? spacing;
   final Function(MapEntry<String, Map<String, dynamic>>)? onUpdate;
 
   const Spacing({
     super.key,
     this.title,
+    this.defaultSpacing,
     this.spacing,
     this.onUpdate,
   });
@@ -29,7 +31,7 @@ class Spacing extends StatelessWidget {
                   title: '${string.padding.capitalizeFirstOfEach} ${entry.key}',
                   type: 'px',
                   value: entry.value,
-                  defaultValue: spacing?['default']?['padding'] ?? 0,
+                  defaultValue: defaultSpacing?['padding']?[entry.key],
                   min: spacing?['limit']?['padding']?['min'] ?? 0,
                   max: spacing?['limit']?['padding']?['max'] ?? 100,
                   onChanged: (val) {
@@ -44,7 +46,7 @@ class Spacing extends StatelessWidget {
                   title: '${string.margin.capitalizeFirstOfEach} ${entry.key}',
                   type: 'px',
                   value: entry.value,
-                  defaultValue: spacing?['default']?['margin'] ?? 0,
+                  defaultValue: defaultSpacing?['margin']?[entry.key],
                   min: spacing?['limit']?['margin']?['min'] ?? 0,
                   max: spacing?['limit']?['margin']?['max'] ?? 100,
                   onChanged: (val) {

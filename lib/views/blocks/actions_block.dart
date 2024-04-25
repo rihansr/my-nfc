@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:my_nfc/utils/debug.dart';
 import 'package:provider/provider.dart';
-import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
+import '../../utils/debug.dart';
+import '../../utils/extensions.dart';
+//import '../../utils/web_extensions.dart';
 import '../../viewmodels/design_viewmodel.dart';
 import 'components.dart';
 
@@ -31,26 +32,28 @@ class ActionsBlock extends StatelessWidget {
 
     Contact contact = Contact();
 
-    final name = designStructure.findBy('name').where((element) =>
-        element['first'] != null ||
-        element['middle'] != null ||
-        element['last'] != null);
+    final name = designStructure
+        .findBy('name')
+        .where((element) =>
+            element['first'] != null ||
+            element['middle'] != null ||
+            element['last'] != null)
+        .firstOrNull;
 
-    if (name.isNotEmpty) {
+    if (name != null) {
       contact.name = Name(
-        first: name.first['first'] ?? '',
-        middle: name.first['middle'] ?? '',
-        last: name.first['last'] ?? '',
+        first: name['first'] ?? '',
+        middle: name['middle'] ?? '',
+        last: name['last'] ?? '',
       );
     }
 
-    final avatars = designStructure
-        .filterBy(const MapEntry('subBlock', 'image_avatar'))
-        .where((element) => element['data']?['path'] != null)
-        .toList();
-
-    avatars.forEachIndexed((i, item) {
-      //contact.photo = ;
+    await Future.forEach(
+        designStructure
+            .filterBy(const MapEntry('subBlock', 'image_avatar'))
+            .where((element) => element['data']?['path'] != null),
+        (element) async {
+      contact.photo = await photoBytes('https://picsum.photos/250?image=9');
     });
 
     contact.notes = designStructure
@@ -144,7 +147,7 @@ class ActionsBlock extends StatelessWidget {
         await contact.insert();
       }
     } else {
-      //webExtension.saveVCard(name?.join(' '), vCard.toString());
+      //webExtension.saveVCard(contact.displayName, contact.toVCard());
     }
   }
 

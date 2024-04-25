@@ -10,6 +10,7 @@ import 'base_viewmodel.dart';
 class DesignViewModel extends BaseViewModel {
   final BuildContext _context;
   final GlobalKey<ScaffoldState> scaffoldKey;
+  final Map<String, dynamic> defaultStructure;
   final Map<String, dynamic> designStructure;
 
   List<Map<String, dynamic>> get footers =>
@@ -18,6 +19,7 @@ class DesignViewModel extends BaseViewModel {
   DesignViewModel(BuildContext context)
       : _context = context,
         scaffoldKey = GlobalKey<ScaffoldState>(),
+        defaultStructure = jsonDecode(kDefaultBlocks),
         designStructure = jsonDecode(kDefaultBlocks);
 
   ThemeModel _theme = kThemes.first;
