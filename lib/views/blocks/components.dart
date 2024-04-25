@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/extensions.dart';
@@ -78,9 +79,19 @@ TextAlign? textAlign(Object? alignment) {
 Future<Uint8List?> photoBytes(String? path) async {
   if (path?.isNotEmpty ?? false) {
     if (Uri.tryParse(path!)?.isAbsolute ?? false || kIsWeb) {
-      return (await NetworkAssetBundle(Uri.parse(path)).load(path))
-          .buffer
-          .asUint8List();
+      Uint8List? bytes;
+      if (kIsWeb) {
+        final http.Response responseData = await http.get(Uri.parse(path));
+        bytes = responseData.bodyBytes;
+        var buffer = bytes.buffer;
+        ByteData byteData = ByteData.view(buffer);
+        bytes = buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+      } else {
+        bytes = (await NetworkAssetBundle(Uri.parse(path)).load(path))
+            .buffer
+            .asUint8List();
+      }
+      return bytes;
     } else {
       return await File(path).readAsBytes();
     }

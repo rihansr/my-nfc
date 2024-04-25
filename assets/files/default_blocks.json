@@ -742,7 +742,7 @@
                             "buttonFixedAtBottom": true
                         }
                     },
-                    "style":{
+                    "style": {
                         "spacing": {
                             "limit": {
                                 "padding": {
@@ -759,7 +759,7 @@
                                 "vertical": 20
                             },
                             "margin": {
-                                "top": 0,
+                                "top": 12,
                                 "bottom": 12,
                                 "left": 0,
                                 "right": 0

@@ -612,7 +612,7 @@
                                         {
                                             "label": "work",
                                             "prefix": null,
-                                            "content": "l Oli Center, Road #2, Block #E, Shahjalal Upashahar, Sylhet-3100, Bangladesh"
+                                            "content": "Al Oli Center, Road #2, Block #E, Shahjalal Upashahar, Sylhet-3100, Bangladesh"
                                         }
                                     ]
                                 }
@@ -839,7 +839,7 @@
                                 "vertical": 20
                             },
                             "margin": {
-                                "top": 0,
+                                "top": 12,
                                 "bottom": 12,
                                 "left": 0,
                                 "right": 0

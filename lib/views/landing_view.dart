@@ -39,7 +39,7 @@ class LandingView extends StatelessWidget {
                       children: [
                         ...controller.designStructure.entries
                             .map((e) => SectionBlock(e.value, key: Key(e.key))),
-                        const SafeArea(child: SizedBox.shrink())
+                        const SafeArea(top: false, child: SizedBox.shrink())
                       ],
                     ),
                   ),

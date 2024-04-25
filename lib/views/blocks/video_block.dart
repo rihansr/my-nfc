@@ -16,11 +16,14 @@ class _VideoBlockState extends State<VideoBlock> {
   @override
   void initState() {
     super.initState();
+    _initController();
+  }
+
+  Future<void> _initController() async {
     _controller = VideoPlayerController.networkUrl(Uri.parse(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'))
-      ..initialize().then((_) {
-        setState(() {});
-      });
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'));
+    await _controller.initialize().then((_) => setState(() {}));
+    _controller.play();
   }
 
   @override

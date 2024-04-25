@@ -1,6 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:provider/provider.dart';
@@ -53,9 +52,8 @@ class ActionsBlock extends StatelessWidget {
             .filterBy(const MapEntry('subBlock', 'image_avatar'))
             .where((element) => element['data']?['path'] != null),
         (element) async {
-      contact.photo = await photoBytes('https://picsum.photos/250?image=9');
+      contact.photo = await photoBytes(element['data']?['path']);
     });
-
     contact.notes = designStructure
         .filterBy(const MapEntry('label', 'Bio'))
         .where((element) => element['data']?['content'] != null)
@@ -97,7 +95,7 @@ class ActionsBlock extends StatelessWidget {
         EmailLabel? label = EmailLabel.values
             .firstWhereOrNull((label) => label.name == e['label']);
         return Email(
-          '${e['prefix']}${e['content']}',
+          e['content'],
           label: label ?? EmailLabel.home,
           customLabel: label == null ? e['label'] ?? '' : '',
         );
@@ -112,7 +110,7 @@ class ActionsBlock extends StatelessWidget {
         AddressLabel? label = AddressLabel.values
             .firstWhereOrNull((label) => label.name == e['label']);
         return Address(
-          '${e['prefix']}${e['content']}',
+          e['content'],
           label: label ?? AddressLabel.home,
           customLabel: label == null ? e['label'] ?? '' : '',
         );
@@ -127,7 +125,7 @@ class ActionsBlock extends StatelessWidget {
         WebsiteLabel? label = WebsiteLabel.values
             .firstWhereOrNull((label) => label.name == e['label']);
         return Website(
-          '${e['prefix']}${e['content']}',
+          e['content'],
           label: label ?? WebsiteLabel.home,
           customLabel: label == null ? e['label'] ?? '' : '',
         );
@@ -142,168 +140,12 @@ class ActionsBlock extends StatelessWidget {
 
     debug.print(contact.toVCard());
 
-    if (Platform.isAndroid || Platform.isIOS) {
+    if (kIsWeb) {
+      //webExtension.saveVCard(contact.displayName, contact.toVCard());
+    } else {
       if (await FlutterContacts.requestPermission()) {
         await contact.insert();
       }
-    } else {
-      //webExtension.saveVCard(contact.displayName, contact.toVCard());
-    }
-  }
-
-  Future<void> test(BuildContext context) async {
-    Map<String, dynamic> designStructure =
-        Provider.of<DesignViewModel>(context, listen: false).designStructure;
-
-    final names = designStructure
-        .findBy('name')
-        .where((element) =>
-            element['first'] != null ||
-            element['middle'] != null ||
-            element['last'] != null)
-        .toList();
-
-    final avatars = designStructure
-        .filterBy(const MapEntry('subBlock', 'image_avatar'))
-        .where((element) => element['data']?['path'] != null)
-        .toList();
-
-    List? name;
-    if (names.isNotEmpty) {
-      name = names.first.values.where((element) => element != null).toList();
-    }
-
-    final works = designStructure
-        .filterBy(const MapEntry('label', 'Work'))
-        .where((element) =>
-            element['data']?['title']?['text'] != null ||
-            element['data']?['content']?['text'] != null)
-        .toList();
-
-    final bio = designStructure
-        .filterBy(const MapEntry('label', 'Bio'))
-        .where((element) => element['data']?['content'] != null)
-        .toList();
-
-    final phoneNumbers = designStructure
-        .findBy('phoneNumbers')
-        .where((element) =>
-            element['prefix'] != null && element['content'] != null)
-        .toList();
-
-    final emails = designStructure
-        .findBy('emails')
-        .where((element) => element['content'] != null)
-        .toList();
-
-    final addresses = designStructure
-        .findBy('addresses')
-        .where((element) => element['content'] != null)
-        .toList();
-
-    final websites = designStructure
-        .findBy('websites')
-        .where((element) => element['content'] != null)
-        .toList();
-
-    final socialLinks = designStructure
-        .findBy('links')
-        .where((element) => element['id'] != null)
-        .toList();
-
-    debug.print(
-      'Name:\n${name?.join(' ')}'
-      '\n\nOrganization:\n${works.join('\n')}'
-      '\n\nNumbers:\n${phoneNumbers.join('\n')}'
-      '\n\nEmails:\n${emails.join('\n')}'
-      '\n\nAddresses:\n${addresses.join('\n')}'
-      '\n\nWebsites:\n${websites.join('\n')}'
-      '\n\nSocial Links:\n${socialLinks.join('\n')}',
-    );
-
-    List<String> customLabels = [];
-
-    type(String key, String? label) => key.contactLabels.contains(label)
-        ? ';type=${label!.capitalizeFirstOfEach}'
-        : label?.isNotEmpty ?? false
-            ? (() {
-                customLabels.add(label!);
-              }())
-            : '';
-
-    StringBuffer vCard = StringBuffer();
-
-    vCard.writeln('BEGIN:VCARD');
-    vCard.writeln('VERSION:3.0');
-    if (name?.isNotEmpty ?? false) {
-      vCard.writeln('N:${name?.reversed.join(';')};;;');
-      vCard.writeln('FN:${name?.join(' ')}');
-    }
-
-    for (var item in bio) {
-      vCard.writeln('NOTE:${item['data']?['content']}');
-    }
-
-    for (var avatar in avatars) {
-      String? path = avatar['data']?['path'];
-      if (path?.isEmpty ?? true) continue;
-      if (Uri.tryParse(path!)?.isAbsolute ?? false) {
-        vCard.writeln('PHOTO;TYPE=JPEG;VALUE=URI:$path');
-      } else {
-        vCard.writeln(
-            'PHOTO;TYPE=JPEG;ENCODING=b:${base64Encode(await File(path).readAsBytes())}');
-      }
-    }
-
-    for (var work in works) {
-      final title = work['data']?['title']?['text'];
-      if (title != null) vCard.writeln('ORG:$title');
-
-      final content = work['data']?['content']?['text'];
-      if (content != null) vCard.writeln('TITLE:$content');
-    }
-
-    for (var number in phoneNumbers) {
-      vCard.writeln(
-          'TEL${type('phoneNUmbers', number['label'])}:${number['prefix']}${number['content']}');
-    }
-
-    for (var email in emails) {
-      vCard.writeln(
-          'EMAIL${type('emails', email['label'])}:${email['content']}');
-    }
-
-    for (var address in addresses) {
-      vCard.writeln(
-          'ADR${type('addresses', address['label'])}:;;${address['content']}');
-    }
-
-    for (var website in websites) {
-      vCard.writeln(
-          'URL${type('websites', website['label'])}:${website['content']}');
-    }
-
-    for (var link in socialLinks) {
-      vCard.writeln(
-          'X-SOCIALPROFILE:https://${link['link'] ?? ''}${link['id'] ?? ''}');
-    }
-
-    customLabels
-        .asMap()
-        .forEach((i, val) => vCard.writeln('item${i + 1}.X-ABLabel:$val'));
-
-    vCard.writeln('END:VCARD');
-
-    debug.print(vCard.toString());
-
-    if (Platform.isAndroid || Platform.isIOS) {
-      if (await FlutterContacts.requestPermission()) {
-        Contact contact = Contact.fromVCard(vCard.toString());
-        debug.print(contact);
-        //await contact.insert();
-      }
-    } else {
-      //webExtension.saveVCard(name?.join(' '), vCard.toString());
     }
   }
 

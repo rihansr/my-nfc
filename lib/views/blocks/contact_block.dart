@@ -55,7 +55,7 @@ class ContactBlock extends StatelessWidget {
                             url: Uri(
                               scheme: 'tel',
                               path:
-                                  '${e?['prefix'] ?? ''}-${e?['content'] ?? ''}',
+                                  '${e?['prefix'] ?? ''}${e?['content'] ?? ''}',
                             ),
                           ),
                           'emails': openUrl(
@@ -73,7 +73,7 @@ class ContactBlock extends StatelessWidget {
                             ),
                           ),
                           'websites': openUrl(
-                            url: Uri.parse('https://${e['content'] ?? ''}'),
+                            url: Uri.parse(e['content']),
                           )
                         }[entry.key],
                         child: Column(
