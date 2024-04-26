@@ -14,12 +14,12 @@ import 'components/theme_item.dart';
 
 class ThemeView extends StatelessWidget {
   final DesignViewModel parentController;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
   const ThemeView(
     this.parentController, {
     super.key,
-    required this.scrollController,
+    this.scrollController,
   });
 
   @override
@@ -28,10 +28,8 @@ class ThemeView extends StatelessWidget {
     return ChangeNotifierProvider<DesignViewModel>.value(
       value: parentController,
       child: Consumer<DesignViewModel>(
-        builder: (context, controller, _) => ModalBottomSheet(
-          scrollController: scrollController,
-          padding: const EdgeInsets.fromLTRB(0, 40, 0, 16),
-          children: [
+        builder: (context, controller, _) => (() {
+          final children = [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -148,8 +146,22 @@ class ThemeView extends StatelessWidget {
                 )
                 ..theme = controller.theme.copyWith(dividerColor: color),
             ),
-          ],
-        ),
+          ];
+          return scrollController != null
+              ? ModalBottomSheet(
+                  scrollController: scrollController!,
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 16),
+                  children: children,
+                )
+              : SingleChildScrollView(
+                  padding: const EdgeInsets.fromLTRB(0, 32, 0, 16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: children,
+                  ),
+                );
+        }()),
       ),
     );
   }

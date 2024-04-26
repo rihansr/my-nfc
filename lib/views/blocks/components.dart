@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utils/extensions.dart';
 import '../../../viewmodels/design_viewmodel.dart';
-import '../../shared/constants.dart';
 
 Alignment? alignment(Map? alignment) {
   switch (
@@ -85,7 +84,8 @@ Future<Uint8List?> photoBytes(String? path) async {
         bytes = responseData.bodyBytes;
         var buffer = bytes.buffer;
         ByteData byteData = ByteData.view(buffer);
-        bytes = buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
+        bytes =
+            buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
       } else {
         bytes = (await NetworkAssetBundle(Uri.parse(path)).load(path))
             .buffer
@@ -100,42 +100,30 @@ Future<Uint8List?> photoBytes(String? path) async {
   }
 }
 
-ImageProvider<Object>? providerPhoto(dynamic img, {String? placeholder}) =>
-    (() {
-      if (img?.isNotEmpty == true) {
-        if ((Uri.tryParse(img!)?.isAbsolute ?? false) || kIsWeb) {
-          return NetworkImage(img) as ImageProvider<Object>;
-        } else {
-          return FileImage(File(img));
-        }
-      } else {
-        return placeholder?.isNotEmpty == true
-            ? AssetImage(placeholder!)
-            : null;
-      }
-    }());
-
 Widget? photo(
-  dynamic path, {
+  Uint8List? bytes, {
   String? placeholder,
   double? width,
   double? height,
   BoxFit fit = BoxFit.cover,
 }) {
-  path ??= placeholder;
-  return path?.isNotEmpty ?? false
-      ? Uri.tryParse(path!)?.isAbsolute ?? false
-          ? FadeInImage.memoryNetwork(
-              image: path,
+  return bytes == null
+      ? placeholder != null
+          ? Image.asset(
+              placeholder,
               width: width,
               height: height,
               fit: fit,
-              placeholder: kTransparentImage,
+              gaplessPlayback: true,
             )
-          : kIsWeb
-              ? Image.network(path, width: width, height: height, fit: fit)
-              : Image.file(File(path), width: width, height: height, fit: fit)
-      : null;
+          : null
+      : Image.memory(
+          bytes,
+          width: width,
+          height: height,
+          fit: fit,
+          gaplessPlayback: true,
+        );
 }
 
 TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(

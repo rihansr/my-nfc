@@ -492,7 +492,7 @@
                         "dragable": false
                     },
                     "style": {
-                        "fullWidth": true,
+                        "fullWidth": false,
                         "background": {
                             "color": "#00000000"
                         },
@@ -587,7 +587,7 @@
                         "dragable": false
                     },
                     "style": {
-                        "fullWidth": true,
+                        "fullWidth": false,
                         "background": {
                             "color": "#00000000"
                         },

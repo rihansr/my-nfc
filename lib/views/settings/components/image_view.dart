@@ -1,17 +1,15 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_nfc/views/blocks/components.dart';
 import '../../../shared/strings.dart';
-import '../../../shared/constants.dart';
 import '../../../utils/extensions.dart';
 import '../../../widgets/clipper_widget.dart';
 import '../../../widgets/seekbar_widget.dart';
 
 // ignore: must_be_immutable
 class ImageView extends StatefulWidget {
-  final String? path;
+  final Uint8List? bytes;
   final BoxFit? fit;
   final int? _defaultScale;
   final int? _scale;
@@ -19,12 +17,12 @@ class ImageView extends StatefulWidget {
   final Map<String, dynamic>? defaultStyle;
   final Map<String, dynamic>? style;
   final Function(MapEntry<String, dynamic>)? onStyleChange;
-  final Function(String? path)? onPick;
+  final Function(Uint8List? bytes)? onPick;
   final Function()? onRemove;
 
   ImageView({
     super.key,
-    required this.path,
+    required this.bytes,
     this.fit,
     this.defaultStyle,
     this.style,
@@ -45,19 +43,19 @@ class ImageView extends StatefulWidget {
 class _ImageViewState extends State<ImageView> {
   late int? scale;
   late int? opacity;
-  late String? path;
+  late Uint8List? bytes;
 
   @override
   void initState() {
     scale = widget._scale;
     opacity = widget._overlayOpacity;
-    path = widget.path;
+    bytes = widget.bytes;
     super.initState();
   }
 
-  Widget get image => Uri.tryParse(path!)?.isAbsolute ?? false
+  Widget get image => photo(bytes, fit: widget.fit ?? BoxFit.cover) ?? const Placeholder() /* Uri.tryParse(bytes!)?.isAbsolute ?? false
       ? FadeInImage.memoryNetwork(
-          image: path!,
+          image: bytes!,
           fit: widget.fit,
           placeholder: kTransparentImage,
           placeholderErrorBuilder: (_, __, ___) =>
@@ -65,14 +63,15 @@ class _ImageViewState extends State<ImageView> {
           imageErrorBuilder: (_, __, ___) => const Placeholder(),
         )
       : kIsWeb
-          ? Image.network(widget.path!, fit: widget.fit)
-          : Image.file(File(widget.path!), fit: widget.fit);
+          ? Image.network(widget.bytes!, fit: widget.fit)
+          : Image.file(File(widget.bytes!), fit: widget.fit) */
+      ;
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
 
-    return path == null
+    return bytes == null
         ? AspectRatio(
             aspectRatio: 21 / 9,
             child: InkWell(
@@ -80,9 +79,10 @@ class _ImageViewState extends State<ImageView> {
               highlightColor: Colors.transparent,
               focusColor: Colors.transparent,
               onTap: () => extension.pickPhoto(ImageSource.gallery).then(
-                (path) {
-                  setState(() => this.path = path);
-                  widget.onPick?.call(path);
+                (path) async {
+                  final bytes = await photoBytes(path);
+                  setState(() => this.bytes = bytes);
+                  widget.onPick?.call(bytes);
                 },
               ),
               child: Clipper.rectangle(
@@ -129,7 +129,7 @@ class _ImageViewState extends State<ImageView> {
                         dimension: 32,
                         child: IconButton(
                           onPressed: () {
-                            setState(() => path = null);
+                            setState(() => bytes = null);
                             widget.onRemove?.call();
                           },
                           padding: const EdgeInsets.all(0),

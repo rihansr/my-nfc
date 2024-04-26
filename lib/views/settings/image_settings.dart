@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'components/block_expansion_tile.dart';
 import '../../utils/extensions.dart';
@@ -13,16 +15,17 @@ class ImageSettings extends StatelessWidget {
     this.defaultBlock,
     required this.block,
     this.onUpdate,
-  }) : _imagePath = ValueNotifier(() {
-          String path = block['data']?['path']?.toString().trim() ?? '';
-          return path.isEmpty ? null : path;
+  }) : _imageBytes = ValueNotifier(() {
+          String? encodedBytes = block['data']?['bytes'];
+          return encodedBytes == null ? null : base64Decode(encodedBytes);
         }());
 
-  final ValueNotifier<String?> _imagePath;
+  final ValueNotifier<Uint8List?> _imageBytes;
 
-  set imagePath(String? image) {
-    _imagePath.value = image;
-    block.addEntry('data', MapEntry('path', image));
+  set imageBytes(Uint8List? bytes) {
+    _imageBytes.value = bytes;
+    block.addEntry(
+        'data', MapEntry('bytes', bytes == null ? null : base64Encode(bytes)));
     onUpdate?.call(block);
   }
 
@@ -57,18 +60,18 @@ class ImageSettings extends StatelessWidget {
           const SizedBox(height: 12),
         ],
         ValueListenableBuilder(
-          valueListenable: _imagePath,
-          builder: (context, path, _) {
+          valueListenable: _imageBytes,
+          builder: (context, bytes, _) {
             return ImageView(
-              path: path,
+              bytes: bytes,
               fit: BoxFit.contain,
               onStyleChange: (data) {
                 block['data'] ??= {};
                 (block['data'] as Map<String, dynamic>).addEntry('style', data);
                 onUpdate?.call(block);
               },
-              onPick: (path) => imagePath = path,
-              onRemove: () => imagePath = null,
+              onPick: (bytes) => imageBytes = bytes,
+              onRemove: () => imageBytes = null,
             );
           },
         )

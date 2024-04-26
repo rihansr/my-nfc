@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
 import 'package:provider/provider.dart';
@@ -29,12 +31,16 @@ class SectionBlock extends StatelessWidget {
       alignment: alignment(configs['style']?['alignment']) ?? Alignment.topLeft,
       children: [
         (() {
-          String? path = configs['style']?['background']?['image']?['path'];
+          Uint8List? bytes = (() {
+            String? encodedBytes =
+                configs['style']?['background']?['image']?['bytes'];
+            return encodedBytes == null ? null : base64Decode(encodedBytes);
+          }());
           double scale = configs['style']?['background']?['image']?['style']
                   ?['scale'] ??
               1.0;
 
-          if (path == null) {
+          if (bytes == null) {
             return SizedBox(
                 height: configs['subBlock'] == 'section_banner' ? 100 : 0);
           }
@@ -48,7 +54,7 @@ class SectionBlock extends StatelessWidget {
               alignment: Alignment.center,
               scale: scale,
               child: photo(
-                path,
+                bytes,
                 width: double.infinity,
                 fit: BoxFit.fitWidth,
               ),

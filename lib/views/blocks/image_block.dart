@@ -1,13 +1,21 @@
+import 'dart:convert';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../shared/drawables.dart';
 import '../../viewmodels/design_viewmodel.dart';
+import '../../widgets/clipper_widget.dart';
 import 'components.dart';
 
 class ImageBlock extends StatelessWidget {
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const ImageBlock(this.configs, {this.sectionStyle, super.key});
+  final Uint8List? imageBytes;
+  ImageBlock(this.configs, {this.sectionStyle, super.key})
+      : imageBytes = (() {
+          String? encodedBytes = configs['data']?['bytes'];
+          return encodedBytes == null ? null : base64Decode(encodedBytes);
+        }());
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +28,17 @@ class ImageBlock extends StatelessWidget {
         focusColor: Colors.transparent,
         onTap: openUrl(settings: configs['settings']?['advanced']),
         child: configs['subBlock'] == 'image_avatar'
-            ? CircleAvatar(
-                backgroundColor: Colors.black12,
-                backgroundImage: providerPhoto(configs['data']?['path'],
+            ? Clipper.circle(
+                color: Colors.black12,
+                size: configs['data']?['style']?['size'] ?? 100.0,
+                child: photo(imageBytes,
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                    width: double.infinity,
                     placeholder: drawable.avatar),
-                radius:
-                    (configs['data']?['style']?['size']?.toDouble() ?? 100.0) /
-                        2,
               )
             : photo(
-                  configs['data']?['path'],
+                  imageBytes,
                   fit: BoxFit.fitWidth,
                   width: double.infinity,
                 ) ??

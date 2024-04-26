@@ -24,6 +24,7 @@ dependencies:
   video_player: ^2.8.6
 
   # UI
+  responsive_framework: ^1.4.0
   flutter_native_splash : ^2.3.10
   lottie: ^3.0.0
   google_fonts: ^6.2.0

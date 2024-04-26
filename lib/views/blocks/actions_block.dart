@@ -50,9 +50,9 @@ class ActionsBlock extends StatelessWidget {
     await Future.forEach(
         designStructure
             .filterBy(const MapEntry('subBlock', 'image_avatar'))
-            .where((element) => element['data']?['path'] != null),
+            .where((element) => element['data']?['bytes'] != null),
         (element) async {
-      contact.photo = await photoBytes(element['data']?['path']);
+      contact.photo = element['data']?['bytes'];
     });
     contact.notes = designStructure
         .filterBy(const MapEntry('label', 'Bio'))
@@ -247,7 +247,8 @@ class ActionsBlock extends StatelessWidget {
                   url: Uri.parse(
                       'https://${additional['link'] ?? ''}${additional['id'] ?? ''}'),
                 ),
-                padding: const EdgeInsets.all(22),
+                padding:
+                    kIsWeb ? const EdgeInsets.all(0) : const EdgeInsets.all(22),
                 icon: Transform.scale(
                   scale: 1.75,
                   child: Icon(

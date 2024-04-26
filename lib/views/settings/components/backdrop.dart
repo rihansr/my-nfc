@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -12,6 +13,7 @@ import '../../../services/api.dart';
 import '../../../services/server_env.dart';
 import '../../../widgets/button_widget.dart';
 import '../../../widgets/input_field_widget.dart';
+import '../../blocks/components.dart';
 import 'image_view.dart';
 
 class Backdrop extends StatefulWidget {
@@ -33,13 +35,13 @@ class _BackdropState extends State<Backdrop> {
   Timer? _debounce;
   int _page = 1;
   bool _isSearching = false;
-  String? _imagePath;
+  Uint8List? _imageBytes;
   final List<Map<String, dynamic>> _photos = [];
 
   @override
   void initState() {
-    String path = widget.settings['path']?.toString().trim() ?? '';
-    _imagePath = path.isEmpty ? null : path;
+    String? encodedBytes = widget.settings['bytes'];
+    _imageBytes = encodedBytes == null ? null : base64Decode(encodedBytes);
 
     searchController = TextEditingController();
     searchController.addListener(() {
@@ -91,9 +93,9 @@ class _BackdropState extends State<Backdrop> {
     });
   }
 
-  set imagePath(String? image) {
-    setState(() => _imagePath = image);
-    widget.settings['path'] = image;
+  set imageBytes(Uint8List? bytes) {
+    setState(() => _imageBytes = bytes);
+    widget.settings['bytes'] = bytes == null ? null : base64Encode(bytes);
     widget.onUpdate?.call(widget.settings);
   }
 
@@ -104,16 +106,16 @@ class _BackdropState extends State<Backdrop> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: _imagePath != null
+          child: _imageBytes != null
               ? ImageView(
-                  path: _imagePath!,
+                  bytes: _imageBytes!,
                   fit: BoxFit.cover,
                   style: widget.settings['style'],
                   onStyleChange: (data) {
                     widget.settings.addEntry('style', data);
                     widget.onUpdate?.call(widget.settings);
                   },
-                  onRemove: () => imagePath = null,
+                  onRemove: () => imageBytes = null,
                 )
               : Row(
                   children: [
@@ -136,14 +138,18 @@ class _BackdropState extends State<Backdrop> {
                           vertical: 5, horizontal: 10),
                       margin: const EdgeInsets.only(bottom: 12),
                       radius: 6,
-                      onPressed: () => extension
-                          .pickPhoto(ImageSource.gallery)
-                          .then((path) => imagePath = path),
+                      onPressed: () =>
+                          extension.pickPhoto(ImageSource.gallery).then(
+                        (path) async {
+                          final bytes = await photoBytes(path);
+                          imageBytes = bytes;
+                        },
+                      ),
                     )
                   ],
                 ),
         ),
-        if (_imagePath == null && _photos.isNotEmpty) ...[
+        if (_imageBytes == null && _photos.isNotEmpty) ...[
           const SizedBox(height: 24),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -155,9 +161,13 @@ class _BackdropState extends State<Backdrop> {
               crossAxisSpacing: 8,
             ),
             itemBuilder: (context, i) => InkWell(
-              onTap: () => imagePath = _photos[i]['urls']?['regular'] ??
-                  _photos[i]['urls']?['full'] ??
-                  _photos[i]['urls']?['raw'],
+              onTap: () async {
+                String? url = _photos[i]['urls']?['regular'] ??
+                    _photos[i]['urls']?['full'] ??
+                    _photos[i]['urls']?['raw'];
+                Uint8List? bytes = url == null ? null : await photoBytes(url);
+                imageBytes = bytes;
+              },
               child: FadeInImage.memoryNetwork(
                 image:
                     _photos[i]['urls']?['thumb'] ?? ServerEnv.placeholderImage,

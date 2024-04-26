@@ -24,7 +24,7 @@
                     "style": {
                         "background": {
                             "image": {
-                                "path": "https://images.unsplash.com/photo-1541167760496-1628856ab772?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1Nzk3MzB8MHwxfHNlYXJjaHwzfHxjb2ZmZWV8ZW58MHwwfHx8MTcxMzk0MTk5NHww&ixlib=rb-4.0.3&q=80&w=1080",
+                                "path": null,
                                 "style": {
                                     "scale": 1.0
                                 }
@@ -533,7 +533,7 @@
                         "dragable": false
                     },
                     "style": {
-                        "fullWidth": true,
+                        "fullWidth": false,
                         "background": {
                             "color": "#00000000"
                         },
@@ -667,7 +667,7 @@
                         "dragable": false
                     },
                     "style": {
-                        "fullWidth": true,
+                        "fullWidth": false,
                         "background": {
                             "color": "#00000000"
                         },

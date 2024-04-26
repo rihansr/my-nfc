@@ -1,8 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import 'package:nfc_manager/nfc_manager.dart';
 import '../services/nfc_service.dart';
 import '../shared/dimens.dart';
 import '../shared/drawables.dart';
@@ -16,15 +15,11 @@ class ScanView extends StatefulWidget {
 }
 
 class _ScanViewState extends State<ScanView> {
-  bool isWritable = false;
-
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       NFC.instance.read(
-        callback: (ndef, data) {
-          setState(() => isWritable = ndef.isWritable);
-        },
+        callback: (ndef, data) {},
       );
     });
     super.initState();
@@ -75,46 +70,6 @@ class _ScanViewState extends State<ScanView> {
           const Spacer(flex: 3),
         ],
       ),
-      floatingActionButton: isWritable
-          ? FloatingActionButton.extended(
-              label: RichText(
-                text: TextSpan(
-                  children: [
-                    WidgetSpan(
-                      child: Icon(
-                        Icons.edit_outlined,
-                        color: theme.colorScheme.onTertiary,
-                        size: 16,
-                      ),
-                      alignment: PlaceholderAlignment.top,
-                    ),
-                    const TextSpan(text: " "),
-                    TextSpan(
-                      text: 'Write',
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onTertiary,
-                      ),
-                    ),
-                  ],
-                ),
-                maxLines: 1,
-              ),
-              onPressed: () {
-                isWritable = false;
-                HapticFeedback.lightImpact();
-                NFC.instance.write(
-                  records: [
-                    NdefRecord.createUri(Uri.parse('https://www.google.com/'))
-                  ],
-                  callback: (ndef) {
-                    setState(() => isWritable = ndef.isWritable);
-                  },
-                );
-              },
-              backgroundColor: theme.colorScheme.tertiary,
-              shape: const StadiumBorder(),
-            )
-          : null,
       bottomNavigationBar: Padding(
         padding: EdgeInsets.only(bottom: dimen.bottom(24, false)),
         child: Text.rich(
@@ -131,13 +86,11 @@ class _ScanViewState extends State<ScanView> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     HapticFeedback.lightImpact();
-                    isWritable = false;
+                    //context.go('/rxrsr');
                     NFC.instance
                       ..stop()
                       ..read(
-                        callback: (ndef, data) {
-                          setState(() => isWritable = ndef.isWritable);
-                        },
+                        callback: (ndef, data) {},
                       );
                   },
               ),

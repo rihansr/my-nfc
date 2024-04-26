@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import '../shared/dimens.dart';
 import '../shared/strings.dart';
 import '../viewmodels/design_viewmodel.dart';
 import '../widgets/base_widget.dart';
-import 'blocks/actions_block.dart';
-import 'blocks/section_block.dart';
+import 'preview.dart';
+import 'tabs/design_view.dart';
+import 'tabs/theme_view.dart';
 
 class LandingView extends StatelessWidget {
   final Map<String, String>? params;
@@ -15,70 +18,92 @@ class LandingView extends StatelessWidget {
         return BaseWidget<DesignViewModel>(
           model: Provider.of<DesignViewModel>(context),
           onInit: (controller) {
-            WidgetsBinding.instance.addPostFrameCallback(
-                (_) => controller.showsModalBottomSheet(0));
+            controller.init(params);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (ResponsiveBreakpoints.of(context).isMobile) {
+                controller.showsModalBottomSheet(0);
+              }
+            });
           },
-          builder: (context, controller, child) => Scaffold(
-            key: controller.scaffoldKey,
-            backgroundColor: Colors.transparent,
-            body: Scaffold(
-              extendBody: true,
-              body: LayoutBuilder(builder: (context, constraints) {
-                return SingleChildScrollView(
-                  physics: const ClampingScrollPhysics(),
-                  child: Container(
-                    constraints: BoxConstraints(
-                      minHeight: constraints.maxHeight,
+          builder: (context, controller, _) {
+            ThemeData theme = Theme.of(context);
+            bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
+            return Scaffold(
+              key: controller.scaffoldKey,
+              backgroundColor: Colors.transparent,
+              drawerScrimColor: Colors.transparent,
+              extendBodyBehindAppBar: true,
+              appBar: isMobile
+                  ? null
+                  : AppBar(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                      iconTheme: IconThemeData(color: theme.iconTheme.color),
                     ),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: controller.theme.horizontalPadding),
-                    decoration:
-                        BoxDecoration(gradient: controller.theme.background),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ...controller.designStructure.entries
-                            .map((e) => SectionBlock(e.value, key: Key(e.key))),
-                        const SafeArea(top: false, child: SizedBox.shrink())
-                      ],
+              drawer: isMobile
+                  ? null
+                  : Drawer(
+                      backgroundColor: theme.colorScheme.background,
+                      width: (() {
+                        final responsive = ResponsiveBreakpoints.of(context);
+                        if (responsive.isMobile) {
+                          return double.infinity;
+                        } else if (responsive.isTablet) {
+                          return responsive.screenWidth / 2;
+                        } else if (responsive.isDesktop) {
+                          return responsive.screenWidth / 4;
+                        } else {
+                          return responsive.screenWidth / 5;
+                        }
+                      }()),
+                      child: SafeArea(
+                        child: DefaultTabController(
+                          length: 2,
+                          initialIndex: 0,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Expanded(
+                                child: TabBarView(children: [
+                                  DesignView(),
+                                  ThemeView(controller)
+                                ]),
+                              ),
+                              TabBar(
+                                tabs: [
+                                  Tab(text: string.design),
+                                  Tab(text: string.theme)
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                );
-              }),
-              bottomNavigationBar: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: controller.footers
-                    .where((element) =>
-                        (element['settings']?['advanced']
-                                ?['buttonFixedAtBottom'] ??
-                            false) &&
-                        (element['settings']?['visible'] ?? true))
-                    .map(
-                      (e) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: controller.theme.horizontalPadding),
-                        child: ActionsBlock(e),
+              body: Preview(designController: controller),
+              bottomNavigationBar: isMobile
+                  ? Container(
+                      color: theme.colorScheme.background,
+                      constraints:
+                          BoxConstraints(maxWidth: dimen.maxMobileWidth),
+                      child: SafeArea(
+                        top: false,
+                        child: DefaultTabController(
+                          length: 2,
+                          initialIndex: 0,
+                          child: TabBar(
+                            tabs: [
+                              Tab(text: string.design),
+                              Tab(text: string.theme)
+                            ],
+                            onTap: controller.showsModalBottomSheet,
+                          ),
+                        ),
                       ),
                     )
-                    .toList(),
-              ),
-            ),
-            bottomNavigationBar: Container(
-              color: Theme.of(context).colorScheme.background,
-              child: SafeArea(
-                top: false,
-                child: DefaultTabController(
-                  length: 2,
-                  initialIndex: 0,
-                  child: TabBar(
-                    tabs: [Tab(text: string.design), Tab(text: string.theme)],
-                    onTap: controller.showsModalBottomSheet,
-                  ),
-                ),
-              ),
-            ),
-          ),
+                  : null,
+            );
+          },
         );
       });
 }

@@ -10,19 +10,18 @@ import 'components/popup_view.dart';
 // ignore: must_be_immutable
 class DesignView extends StatelessWidget {
   late DesignViewModel viewModel;
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
 
   DesignView({
     super.key,
-    required this.scrollController,
+    this.scrollController,
   }) : viewModel =
             Provider.of<DesignViewModel>(navigator.context, listen: false);
 
   @override
   Widget build(BuildContext context) {
-    return ModalBottomSheet(
-      scrollController: scrollController,
-      children: viewModel.designStructure.entries
+    return (() {
+      final children = viewModel.designStructure.entries
           .map(
             (e) => SectionSettings(
               key: Key(e.key),
@@ -36,7 +35,20 @@ class DesignView extends StatelessWidget {
               },
             ),
           )
-          .toList(),
-    );
+          .toList();
+      return scrollController != null
+          ? ModalBottomSheet(
+              scrollController: scrollController!,
+              children: children,
+            )
+          : SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(0, 32, 0, 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: children,
+              ),
+            );
+    }());
   }
 }
