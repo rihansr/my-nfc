@@ -266,7 +266,7 @@
             "removable": true
         },
         "style": {
-            "aspectRatio": "21:9",
+            "aspectRatio": null,
             "spacing": {
                 "limit": {
                     "padding": {

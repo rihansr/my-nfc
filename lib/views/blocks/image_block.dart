@@ -30,7 +30,7 @@ class ImageBlock extends StatelessWidget {
         child: configs['subBlock'] == 'image_avatar'
             ? Clipper.circle(
                 color: Colors.black12,
-                size: configs['data']?['style']?['size'] ?? 100.0,
+                size: double.parse('${configs['data']?['style']?['size'] ?? 100.0}'),
                 child: photo(imageBytes,
                     fit: BoxFit.cover,
                     height: double.infinity,

@@ -7,7 +7,7 @@ import '../../../widgets/input_field_widget.dart';
 
 class AspectRatioSelector extends StatefulWidget {
   final String? aspectRatio;
-  final Function(String) onSelected;
+  final Function(String?) onSelected;
   const AspectRatioSelector(
     this.aspectRatio, {
     super.key,
@@ -21,11 +21,12 @@ class AspectRatioSelector extends StatefulWidget {
 class _AspectRatioSelectorState extends State<AspectRatioSelector> {
   Timer? _debounce;
   late List<String> _aspectRatios;
-  late String _aspectRatio;
+  late String? _aspectRatio;
   late TextEditingController _widthController;
   late TextEditingController _heightController;
 
-  set selectedAspectRatio(String ratio) => setState(() => _aspectRatio = ratio);
+  set selectedAspectRatio(String? ratio) =>
+      setState(() => _aspectRatio = _aspectRatio == ratio ? null : ratio);
 
   generateRatio() {
     Object width = _widthController.text.trim();
@@ -54,7 +55,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
         widget.aspectRatio == null || ratioExist ? '0:0' : widget.aspectRatio!);
 
     _aspectRatio = widget.aspectRatio ?? '0:0';
-    List<String> splitRatio = _aspectRatio.split(':');
+    List<String> splitRatio = (_aspectRatio ?? ':').split(':');
     _widthController =
         TextEditingController(text: ratioExist ? splitRatio[0] : '');
     _heightController =
@@ -109,7 +110,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                         selectedAspectRatio = ratio;
                         isCustom
                             ? generateRatio()
-                            : widget.onSelected.call(ratio);
+                            : widget.onSelected.call(_aspectRatio);
                       },
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
