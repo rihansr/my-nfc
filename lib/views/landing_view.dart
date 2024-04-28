@@ -14,8 +14,7 @@ class LandingView extends StatelessWidget {
   const LandingView({this.params, super.key});
 
   @override
-  Widget build(BuildContext context) => Builder(builder: (context) {
-        return BaseWidget<DesignViewModel>(
+  Widget build(BuildContext context) => BaseWidget<DesignViewModel>(
           model: Provider.of<DesignViewModel>(context),
           onInit: (controller) {
             controller.init(params);
@@ -105,5 +104,4 @@ class LandingView extends StatelessWidget {
             );
           },
         );
-      });
 }

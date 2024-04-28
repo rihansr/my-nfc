@@ -291,15 +291,15 @@
             }
         },
         "data": {
-            "link": "",
+            "link": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             "configs": {
                 "autoPlay": false,
                 "loop": false,
-                "showControls": false,
+                "showControls": true,
                 "mute": false,
                 "allowFullScreen": false,
-                "startAt": null,
-                "endAt": null
+                "startAt": "00:01:10",
+                "endAt": "00:01:30"
             }
         }
     },

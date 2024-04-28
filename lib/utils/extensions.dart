@@ -55,6 +55,14 @@ extension StringExtension on String {
   Color get hexColor => HexColor.fromHex(this);
   String get camelToNormal =>
       split(RegExp(r"(?=(?!^)[A-Z])")).join(' ').capitalizeFirstOfEach;
+
+  Duration get duration => RegExp(r'^\d{2}:\d{2}:\d{2}$').hasMatch(this)
+      ? Duration(
+          hours: int.parse(split(':')[0]),
+          minutes: int.parse(split(':')[1]),
+          seconds: int.parse(split(':')[2]),
+        )
+      : Duration.zero;
 }
 
 extension ContextExtension on BuildContext {
