@@ -190,7 +190,7 @@
                         "label": {
                             "text": "Button"
                         },
-                        "link": "",
+                        "link": null,
                         "style": {
                             "background": {
                                 "color": "#00000000"
@@ -291,15 +291,15 @@
             }
         },
         "data": {
-            "link": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            "link": null,
             "configs": {
                 "autoPlay": false,
                 "loop": false,
                 "showControls": true,
                 "mute": false,
                 "allowFullScreen": false,
-                "startAt": "00:01:10",
-                "endAt": "00:01:30"
+                "startAt": null,
+                "endAt": null
             }
         }
     },

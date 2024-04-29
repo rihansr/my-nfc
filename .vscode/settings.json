@@ -1,3 +1,4 @@
 {
-    "cmake.sourceDirectory": "/Users/dreamteam/Documents/Flutter/my_nfc/linux/flutter"
+    "cmake.sourceDirectory": "/Users/dreamteam/Documents/Flutter/my_nfc/linux/flutter",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

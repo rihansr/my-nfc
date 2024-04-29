@@ -4,50 +4,90 @@ import 'package:chewie/chewie.dart';
 import '../../utils/extensions.dart';
 import '../../widgets/clipper_widget.dart';
 
-class VideoBlock extends StatefulWidget {
+class VideoBlock extends StatelessWidget {
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
+  final String? url;
   final Map<String, dynamic> videoConfigs;
+  final double? aspectRatio;
 
   VideoBlock(this.configs, {this.sectionStyle, super.key})
-      : videoConfigs =
-            Map<String, dynamic>.from(configs['data']?['configs'] ?? {});
+      : url = configs['data']?['link'],
+        videoConfigs =
+            Map<String, dynamic>.from(configs['data']?['configs'] ?? {}),
+        aspectRatio = (() {
+          final ratio = configs['style']?['aspectRatio'];
+          if (ratio != null) {
+            List<String> splitRatio = ratio.split(':');
+            return int.parse(splitRatio[0]) / int.parse(splitRatio[1]);
+          } else {
+            return null;
+          }
+        }());
 
   @override
-  State<VideoBlock> createState() => _VideoBlockState();
+  Widget build(BuildContext context) {
+    return _VideoPlayer(
+      url,
+      key: Key(url ?? ''),
+      configs: videoConfigs,
+      aspectRatio: aspectRatio,
+    );
+  }
 }
 
-class _VideoBlockState extends State<VideoBlock> {
+class _VideoPlayer extends StatefulWidget {
+  final String? url;
+  final Map<String, dynamic> configs;
+  final double? aspectRatio;
+
+  const _VideoPlayer(
+    this.url, {
+    required this.configs,
+    this.aspectRatio,
+    super.key,
+  });
+
+  @override
+  State<_VideoPlayer> createState() => _VideoPlayerState();
+}
+
+class _VideoPlayerState extends State<_VideoPlayer> {
   ChewieController? _chewieController;
   VideoPlayerController? _videoController;
+  String? _url;
 
   @override
   void initState() {
     super.initState();
+    _url = widget.url;
+    _initController();
   }
+  
 
   Future<void> _initController() async {
-    _videoController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.configs['data']?['link'] ?? ''));
+    if (_url == null) return;
+    _videoController = VideoPlayerController.networkUrl(Uri.parse(_url!));
 
     await _videoController?.initialize().then(
-      (_) {
-        setState(
-          () => _chewieController = ChewieController(
-            videoPlayerController: _videoController!,
-            allowedScreenSleep: false,
-            autoPlay: widget.videoConfigs['autoPlay'] ?? false,
-            looping: widget.videoConfigs['loop'] ?? false,
-            showControls: widget.videoConfigs['showControls'] ?? false,
-            allowMuting: widget.videoConfigs['mute'] ?? false,
-            allowFullScreen: widget.videoConfigs['allowFullScreen'] ?? false,
-            startAt: widget.videoConfigs['startAt']?.toString().duration,
-          ),
+          (_) => setState(() => _chewieController = ChewieController(
+                videoPlayerController: _videoController!,
+                allowedScreenSleep: false,
+                startAt: widget.configs['startAt']?.toString().duration,
+              )),
         );
-        _chewieController
-            ?.setVolume((widget.videoConfigs['mute'] ?? false) ? 0.0 : 1.0);
-      },
+  }
+
+  _setConfigs() {
+    _chewieController = _chewieController!.copyWith(
+      autoPlay: widget.configs['autoPlay'] ?? false,
+      looping: widget.configs['loop'] ?? false,
+      showControls: widget.configs['showControls'] ?? false,
+      allowMuting: widget.configs['mute'] ?? false,
+      allowFullScreen: widget.configs['allowFullScreen'] ?? false,
+      startAt: widget.configs['startAt']?.toString().duration,
     );
+    _chewieController?.setVolume(widget.configs['mute'] ?? false ? 0.0 : 1.0);
   }
 
   @override
@@ -58,33 +98,19 @@ class _VideoBlockState extends State<VideoBlock> {
   }
 
   @override
-  Widget build(BuildContext context) => (() {
-        final aspectRatio = (() {
-          final ratio = widget.configs['style']?['aspectRatio'];
-          if (ratio != null) {
-            List<String> splitRatio = ratio.split(':');
-            return int.parse(splitRatio[0]) / int.parse(splitRatio[1]);
-          } else {
-            return null;
-          }
-        }());
-
-        return FutureBuilder(
-            future: _initController(),
-            builder: (_, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done &&
-                  _chewieController != null) {
-                return AspectRatio(
-                  aspectRatio:
-                      aspectRatio ?? _videoController!.value.aspectRatio,
-                  child: Chewie(controller: _chewieController!),
-                );
-              } else {
-                return AspectRatio(
-                  aspectRatio: aspectRatio ?? (16 / 9),
-                  child: const Clipper.expand(color: Colors.black12),
-                );
-              }
-            });
-      }());
+  Widget build(BuildContext context) => _chewieController != null
+      ? AspectRatio(
+          aspectRatio:
+              widget.aspectRatio ?? _videoController!.value.aspectRatio,
+          child: Chewie(
+            controller: (() {
+              _setConfigs();
+              return _chewieController!;
+            }()),
+          ),
+        )
+      : AspectRatio(
+          aspectRatio: widget.aspectRatio ?? (16 / 9),
+          child: const Clipper.expand(color: Colors.black12),
+        );
 }
