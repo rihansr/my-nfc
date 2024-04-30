@@ -21,6 +21,7 @@ dependencies:
   nfc_manager: ^3.4.0
   cached_network_image: ^3.3.1
   image_picker: ^1.0.4
+  youtube_player_iframe: ^5.1.2
   video_player: ^2.8.6
   chewie: ^1.8.1
 
@@ -49,6 +50,7 @@ dependencies:
   fluttertoast: ^8.2.4
   url_launcher: ^6.2.5
   flutter_contacts: ^1.1.7+1
+  flutter_inappwebview: ^5.8.0
 
 dev_dependencies:
   flutter_test:
