@@ -20,6 +20,7 @@ class ImageBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: GlobalKey(debugLabel: '$key'),
       margin: margin(configs['style']?['spacing']?['margin']),
       alignment: alignment(configs['style']?['alignment']),
       child: InkWell(

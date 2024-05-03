@@ -80,8 +80,7 @@ class SectionBlock extends StatelessWidget {
                   return true;
                 }).mapIndexed(
                   (i, e) {
-                    Key key =
-                        this.key != null ? Key('${this.key}/$i') : Key('$i');
+                    GlobalKey key = this.key != null ? GlobalKey(debugLabel:  '${this.key}/$i') : GlobalKey(debugLabel: '$i');
 
                     Map<String, dynamic> sectionStyle =
                         Map<String, dynamic>.from(this.configs['style'] ?? {});

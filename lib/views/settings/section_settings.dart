@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:my_nfc/utils/debug.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
@@ -58,7 +59,9 @@ class _SectionSettingsState extends State<SectionSettings> {
   Widget build(BuildContext context) {
     List<Widget> children = _fields.mapIndexed(
       (i, e) {
-        Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
+        GlobalKey key = widget.key != null
+            ? GlobalKey(debugLabel: '${widget.key}/$i')
+            : GlobalKey(debugLabel: '$i');
 
         Map<String, dynamic>? defaultBlock = (() {
           final fields =
@@ -174,7 +177,7 @@ class _SectionSettingsState extends State<SectionSettings> {
 
     return BlockExpansionTile.settings(
       widget.block['settings'],
-      key: Key('${widget.key}'),
+      key: GlobalKey(debugLabel:  '${widget.key}'),
       defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       label: widget.block['label'],

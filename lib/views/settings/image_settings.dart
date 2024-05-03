@@ -34,7 +34,7 @@ class ImageSettings extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: block['subBlock'] == 'image_avatar'

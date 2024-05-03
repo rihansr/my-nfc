@@ -13,6 +13,7 @@ class DividerBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: GlobalKey(debugLabel: '$key'),
       margin: margin(configs['style']?['spacing']?['margin']),
       transform: transform(configs['style']?['spacing']?['margin']),
       child: Divider(

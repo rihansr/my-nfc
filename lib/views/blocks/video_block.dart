@@ -30,6 +30,7 @@ class VideoBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: GlobalKey(debugLabel: '$key'),
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       padding: padding(configs['style']?['spacing']?['padding']),

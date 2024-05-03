@@ -19,6 +19,7 @@ class ContactBlock extends StatelessWidget {
       return items.any((element) => element?['content'] != null);
     }).toList();
     return ListView.separated(
+      key: GlobalKey(debugLabel: '$key'),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       padding: const EdgeInsets.all(0),

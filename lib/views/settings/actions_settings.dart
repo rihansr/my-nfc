@@ -69,7 +69,7 @@ class ActionsSettings extends StatelessWidget {
 
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.system_update_alt_outlined,

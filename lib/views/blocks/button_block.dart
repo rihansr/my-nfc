@@ -12,6 +12,7 @@ class ButtonBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: GlobalKey(debugLabel: '$key'),
       width: configs['style']?['fullWidth'] == true ? double.infinity : null,
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),

@@ -22,6 +22,7 @@ class Preview extends StatelessWidget {
             body: Align(
               alignment: Alignment.topCenter,
               child: SingleChildScrollView(
+                controller: controller.scrollController,
                 physics: const ClampingScrollPhysics(),
                 child: Container(
                   constraints: BoxConstraints(
@@ -36,7 +37,7 @@ class Preview extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ...controller.designStructure.entries
-                          .map((e) => SectionBlock(e.value, key: Key(e.key))),
+                          .map((e) => SectionBlock(e.value, key: GlobalKey(debugLabel: e.key))),
                       const SafeArea(top: false, child: SizedBox.shrink())
                     ],
                   ),

@@ -45,7 +45,7 @@ class _LinksSettingsState extends State<LinksSettings> {
     ThemeData theme = Theme.of(context);
     return BlockExpansionTile.settings(
       widget.block['settings'],
-      key: Key('${widget.key}'),
+      key: GlobalKey(debugLabel: '${widget.key}'),
       defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       icon: Icons.group_outlined,
@@ -61,7 +61,7 @@ class _LinksSettingsState extends State<LinksSettings> {
           var children = _links.mapIndexed(
             (i, e) {
               Key key =
-                  widget.key != null ? Key('${widget.key}/$i') : Key('$i');
+                  widget.key != null ? GlobalKey(debugLabel:  '${widget.key}/$i') : GlobalKey(debugLabel:  '$i');
               return ListTile(
                 key: key,
                 contentPadding: const EdgeInsets.only(right: 12),

@@ -58,7 +58,7 @@ class ButtonSettings extends StatelessWidget {
         Provider.of<DesignViewModel>(context, listen: false).theme;
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.add_circle_outline,

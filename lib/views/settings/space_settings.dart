@@ -27,7 +27,7 @@ class SpaceSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.zoom_out_map_outlined,

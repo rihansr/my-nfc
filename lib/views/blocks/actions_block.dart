@@ -159,6 +159,7 @@ class ActionsBlock extends StatelessWidget {
     );
 
     return Container(
+      key: GlobalKey(debugLabel: '$key'),
       width: double.infinity,
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../viewmodels/base_viewmodel.dart';
+import '../../../viewmodels/design_viewmodel.dart';
 import '../../../shared/strings.dart';
 import '../../../shared/constants.dart';
 import 'block_style.dart';
@@ -72,7 +74,7 @@ class BlockExpansionTile extends StatelessWidget {
       horizontalTitleGap: 6.0,
       minLeadingWidth: 0,
       child: ExpansionTile(
-        key: Key('$key/expansion_tile'),
+        key: GlobalKey(debugLabel: '$key/expansion_tile'),
         shape: enableBorder
             ? Border(
                 left: BorderSide(color: theme.colorScheme.primary),
@@ -85,6 +87,7 @@ class BlockExpansionTile extends StatelessWidget {
         onExpansionChanged: (state) {
           childrenExpanded.value = state;
           onExpansionChanged?.call(state);
+          provider<DesignViewModel>().scroll(state ? key : null);
         },
         maintainState: maintainState,
         title: Text(

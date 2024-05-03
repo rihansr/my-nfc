@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_nfc/viewmodels/base_viewmodel.dart';
+import 'package:my_nfc/viewmodels/design_viewmodel.dart';
 import '../../utils/extensions.dart';
 import '../../views/blocks/components.dart';
 
@@ -17,12 +19,17 @@ class TextBlock extends StatelessWidget {
                 '${configs['data']?['name']?['last'] ?? ''}'
             .trim()
         : '${configs['data']?['content'] ?? ''}'.trim();
+    GlobalKey key = GlobalKey(debugLabel: '${this.key}');
 
     return text.isEmpty
-        ? const SizedBox.shrink()
+        ? SizedBox.shrink(key: key)
         : Container(
-            color:
-                configs['style']?['background']?['color']?.toString().hexColor,
+            key: key,
+            color: provider<DesignViewModel>(true).selectedKey == key
+                ? Colors.amber
+                : configs['style']?['background']?['color']
+                    ?.toString()
+                    .hexColor,
             width: configs['data']?['style']?['text']?['alignment'] != null ||
                     sectionStyle?['alignment']?['horizontal'] != null
                 ? double.infinity

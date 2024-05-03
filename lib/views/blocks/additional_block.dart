@@ -10,6 +10,7 @@ class AdditionalBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      key: GlobalKey(debugLabel: '$key'),
       shrinkWrap: true,
       padding: const EdgeInsets.all(0),
       physics: const NeverScrollableScrollPhysics(),

@@ -26,7 +26,7 @@ class InfoSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.info_outline,

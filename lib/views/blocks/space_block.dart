@@ -9,6 +9,7 @@ class SpaceBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      key: GlobalKey(debugLabel: '$key'),
       height: configs['data']?['style']?['height']?.toDouble() ?? 0.0,
     );
   }

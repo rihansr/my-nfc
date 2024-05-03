@@ -44,7 +44,7 @@ class AdditionalSettings extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return BlockExpansionTile.settings(
       block['settings'],
-      key: Key('$key'),
+      key: GlobalKey(debugLabel: '$key'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.playlist_add_outlined,
@@ -76,7 +76,7 @@ class AdditionalSettings extends StatelessWidget {
               itemCount: items.length,
               separatorBuilder: (context, i) => const SizedBox(height: 8),
               itemBuilder: (context, i) {
-                Key key = this.key != null ? Key('${this.key}/$i') : Key('$i');
+                GlobalKey key = this.key != null ? GlobalKey(debugLabel:  '${this.key}/$i') : GlobalKey(debugLabel: '$i');
                 Map<dynamic, dynamic> item = items[i];
 
                 return ListTile(

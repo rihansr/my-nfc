@@ -10,8 +10,11 @@ class InfoBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return configs['data']?['title']?['text'] == null &&
             configs['data']?['content']?['text'] == null
-        ? const SizedBox.shrink()
+        ? SizedBox.shrink(
+            key: GlobalKey(debugLabel: '$key'),
+          )
         : Row(
+            key: GlobalKey(debugLabel: '$key'),
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               (() {

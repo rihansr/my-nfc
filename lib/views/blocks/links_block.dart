@@ -15,6 +15,7 @@ class LinksBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeModel theme = Provider.of<DesignViewModel>(context).theme;
     return Wrap(
+      key: GlobalKey(debugLabel: '$key'),
       spacing: 24,
       runSpacing: 12,
       alignment: WrapAlignment.center,

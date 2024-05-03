@@ -24,7 +24,7 @@ class DesignView extends StatelessWidget {
       final children = viewModel.designStructure.entries
           .map(
             (e) => SectionSettings(
-              key: Key(e.key),
+              key: GlobalKey(debugLabel:  e.key),
               defaultBlock: viewModel.defaultStructure[e.key],
               block: e.value,
               onUpdate: (section) {
