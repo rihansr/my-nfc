@@ -60,11 +60,12 @@ class _SectionSettingsState extends State<SectionSettings> {
       (i, e) {
         Key key = widget.key != null ? Key('${widget.key}/$i') : Key('$i');
 
-        Map<String, dynamic>? defaultBlock = ((){
-          final fields = widget.defaultBlock?['data']?['fields'] ?? [];
-          return fields.contains(i) ? Map<String, dynamic>.from(fields[i]) : null;
+        Map<String, dynamic>? defaultBlock = (() {
+          final fields =
+              List.from(widget.defaultBlock?['data']?['fields'] ?? []);
+          return fields.elementAtOrNull(i);
         }());
-        
+
         Map<String, dynamic> block = Map.from(e);
         switch (e['block']) {
           case "section":

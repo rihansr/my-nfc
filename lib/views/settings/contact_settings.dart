@@ -1,8 +1,6 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../shared/constants.dart';
 import '../../services/navigation_service.dart';
-import '../../utils/debug.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../widgets/dropdown_widget.dart';
@@ -37,7 +35,6 @@ class _ContactSettingsState extends State<ContactSettings> {
   update(String key, List value) {
     _data[key] = value;
     widget.block.addEntries([MapEntry('data', _data)]);
-    debug.print(json.encode(widget.block));
     widget.onUpdate?.call(widget.block);
   }
 

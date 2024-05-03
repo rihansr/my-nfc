@@ -266,7 +266,9 @@
             "removable": true
         },
         "style": {
-            "aspectRatio": null,
+            "background": {
+                "color": "#00000000"
+            },
             "spacing": {
                 "limit": {
                     "padding": {
@@ -291,7 +293,10 @@
             }
         },
         "data": {
-            "link": "https://www.youtube.com/watch?v=_ifwJhUPLzA",
+            "link": null,
+            "style": {
+                "aspectRatio": null
+            },
             "configs": {
                 "autoPlay": false,
                 "loop": false,
@@ -406,7 +411,7 @@
         },
         "style": {
             "background": {
-                "color": "#00000000"
+                "color": "#000000"
             },
             "fullWidth": true,
             "spacing": {

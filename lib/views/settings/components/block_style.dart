@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../utils/debug.dart';
 import '../../../utils/extensions.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/strings.dart';
@@ -47,7 +46,6 @@ class BlockStyle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debug.print(defaultStyle);
     return Column(
       children: [
         if (style.containsKey('background'))
@@ -147,10 +145,14 @@ class BlockStyle extends StatelessWidget {
                       replacementString: '/',
                     ),
                   ],
-                  onTyping: (text) => update(
-                    'settings',
-                    MapEntry('linkTo', text.isEmpty ? null : text),
-                  ),
+                  onTyping: (text) {
+                    text = text.trim();
+                    if (text.isNotEmpty && !text.isValidUrl) return;
+                    update(
+                      'data',
+                      MapEntry('linkTo', text.isEmpty ? null : text),
+                    );
+                  },
                 ),
               if (settings!.containsKey('openInNewTab'))
                 CheckboxWidget.expand(

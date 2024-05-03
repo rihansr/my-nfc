@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart' as dio;
-import 'package:dio_http_cache/dio_http_cache.dart' as dio;
+import 'package:flutter_dio_http_cache/dio_http_cache.dart' as dio;
 import 'package:http/http.dart' as http;
 import '../shared/strings.dart';
 import '../shared/styles.dart';

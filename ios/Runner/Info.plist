@@ -67,6 +67,12 @@
 		</array>
 		<!-- Contacts -->
 		<key>NSContactsUsageDescription</key>
-    	<string>We need access to the contact list</string>
+		<string>We need access to the contact list</string>
+		<!-- Player -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
 	</dict>
 </plist>

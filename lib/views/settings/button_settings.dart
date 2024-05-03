@@ -93,10 +93,14 @@ class ButtonSettings extends StatelessWidget {
               replacementString: '/',
             ),
           ],
-          onTyping: (text) => update(
-            'data',
-            MapEntry('link', text.isEmpty ? null : text),
-          ),
+          onTyping: (text) {
+            text = text.trim();
+            if(text.isNotEmpty && !text.isValidUrl) return;
+            update(
+              'data',
+              MapEntry('link', text.isEmpty ? null : text),
+            );
+          },
         ),
         BlockExpansionTile(
           label: string.buttonDesign,

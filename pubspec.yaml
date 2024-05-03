@@ -37,7 +37,7 @@ dependencies:
 
   # network
   http: ^1.1.2
-  dio_http_cache: ^0.3.0
+  flutter_dio_http_cache: ^0.3.0
   webview_flutter: ^4.4.4
 
   # state management
@@ -50,7 +50,6 @@ dependencies:
   fluttertoast: ^8.2.4
   url_launcher: ^6.2.5
   flutter_contacts: ^1.1.7+1
-  flutter_inappwebview: ^5.8.0
 
 dev_dependencies:
   flutter_test:

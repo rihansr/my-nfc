@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+import '../../services/api.dart';
 import '../../utils/extensions.dart';
-import '../../widgets/clipper_widget.dart';
+import 'components.dart';
 
 class VideoBlock extends StatelessWidget {
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  final String? url;
-  final Map<String, dynamic> videoConfigs;
-  final double? aspectRatio;
+  final String? _url;
+  final Map<String, dynamic> _videoConfigs;
+  final double? _aspectRatio;
 
   VideoBlock(this.configs, {this.sectionStyle, super.key})
-      : url = configs['data']?['link'],
-        videoConfigs =
+      : _url = configs['data']?['link'],
+        _videoConfigs =
             Map<String, dynamic>.from(configs['data']?['configs'] ?? {}),
-        aspectRatio = (() {
-          final ratio = configs['style']?['aspectRatio'];
+        _aspectRatio = (() {
+          final ratio = configs['data']?['style']?['aspectRatio'];
           if (ratio != null) {
             List<String> splitRatio = ratio.split(':');
             return int.parse(splitRatio[0]) / int.parse(splitRatio[1]);
@@ -29,53 +29,68 @@ class VideoBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (() {
-      if (url == null) return const SizedBox();
-      if (url!.isYoutube) {
-        return _YTVideoPlayer(
-          url,
-          key: Key(url!),
-          configs: videoConfigs,
-          aspectRatio: aspectRatio,
-        );
-      } else if (url!.isVimeo) {
-        return _WebPlayer(
-          url,
-          key: Key(url!),
-          configs: videoConfigs,
-          aspectRatio: aspectRatio,
-        );
-      } else {
-        return _VideoPlayer(
-          url,
-          key: Key(url!),
-          configs: videoConfigs,
-          aspectRatio: aspectRatio,
-        );
-      }
-    }());
+    return Container(
+      transform: transform(configs['style']?['spacing']?['margin']),
+      margin: margin(configs['style']?['spacing']?['margin']),
+      padding: padding(configs['style']?['spacing']?['padding']),
+      color: configs['style']?['background']?['color']?.toString().hexColor,
+      child: (() {
+        if (_url == null) {
+          return AspectRatio(
+            aspectRatio: _aspectRatio ?? (16 / 9),
+            child: const SizedBox.expand(),
+          );
+        } else if (_url.isYoutube) {
+          return _YTVideoPlayer(
+            _url,
+            key: Key(_url),
+            configs: _videoConfigs,
+            aspectRatio: _aspectRatio,
+          );
+        } else {
+          return _VideoPlayer(
+            _url,
+            key: Key(_url),
+            configs: _videoConfigs,
+            aspectRatio: _aspectRatio,
+          );
+        }
+      }()),
+    );
   }
 }
 
 class _VideoPlayer extends StatefulWidget {
-  final String? url;
-  final Map<String, dynamic> configs;
+  final String url;
   final double? aspectRatio;
+  final bool autoPlay;
+  final bool loop;
+  final bool mute;
+  final bool showControls;
+  final bool fullScreen;
+  final Duration? startAt;
+  final Duration? endAt;
 
-  const _VideoPlayer(
+  _VideoPlayer(
     this.url, {
-    required this.configs,
+    required Map<String, dynamic> configs,
     this.aspectRatio,
     super.key,
-  });
+  })  : autoPlay = configs['autoPlay'] ?? false,
+        loop = configs['loop'] ?? false,
+        mute = configs['mute'] ?? false,
+        showControls = configs['showControls'] ?? false,
+        fullScreen = configs['allowFullScreen'] ?? false,
+        startAt = configs['startAt']?.toString().duration,
+        endAt = configs['endAt']?.toString().duration;
 
   @override
   State<_VideoPlayer> createState() => _VideoPlayerState();
 }
 
 class _VideoPlayerState extends State<_VideoPlayer> {
-  ChewieController? _chewieController;
   VideoPlayerController? _videoController;
+  ChewieController? _chewieController;
 
   @override
   void initState() {
@@ -83,29 +98,94 @@ class _VideoPlayerState extends State<_VideoPlayer> {
     _initController();
   }
 
-  Future<void> _initController() async {
-    if (widget.url == null) return;
-    _videoController = VideoPlayerController.networkUrl(Uri.parse(widget.url!));
-
-    await _videoController?.initialize().then(
-          (_) => setState(() => _chewieController = ChewieController(
-                videoPlayerController: _videoController!,
-                allowedScreenSleep: false,
-                startAt: widget.configs['startAt']?.toString().duration,
-              )),
-        );
+  @override
+  void didUpdateWidget(covariant _VideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.startAt != widget.startAt) {
+      _chewieController?.copyWith(startAt: widget.startAt);
+    }
+    if (oldWidget.endAt != widget.endAt) {
+      if (widget.endAt == null) {
+        _videoController?.removeListener(() {});
+      } else {
+        _videoController?.addListener(() {
+          if (_videoController!.value.position >= widget.endAt!) {
+            _videoController?.pause();
+          }
+        });
+      }
+    }
+    controller = _chewieController;
   }
 
-  _setConfigs() {
-    _chewieController = _chewieController!.copyWith(
-      autoPlay: widget.configs['autoPlay'] ?? false,
-      looping: widget.configs['loop'] ?? false,
-      showControls: widget.configs['showControls'] ?? false,
-      allowMuting: widget.configs['mute'] ?? false,
-      allowFullScreen: widget.configs['allowFullScreen'] ?? false,
-      startAt: widget.configs['startAt']?.toString().duration,
+  Future<String?> get _findUrl async {
+    String? videoId = widget.url.vimeoId;
+    return videoId != null ? await _fetchVimeoUrl(videoId) : widget.url;
+  }
+
+  Future<String?> _fetchVimeoUrl(String id) async {
+    Response response = await api.invoke(
+      baseUrl: 'https://player.vimeo.com',
+      endpoint: 'video/$id/config',
+      method: Method.get,
+      cacheDuration: const Duration(days: 1),
+      justifyResponse: true,
     );
-    _chewieController?.setVolume(widget.configs['mute'] ?? false ? 0.0 : 1.0);
+
+    if (response.data == null || response.data! is! Map) return null;
+
+    List resolutionJson =
+        response.data['request']?['files']?['progressive'] ?? [];
+    Map<String, String> resolutions = {
+      for (var item in resolutionJson) item['quality']: item['url']
+    };
+
+    Map<String, dynamic> cdnsJson =
+        response.data['request']?['files']?['hls']?['cdns'] ?? {};
+    List urls = cdnsJson.values
+        .map((e) => e['url'])
+        .where((element) => element != null)
+        .toList();
+
+    return resolutions.isNotEmpty
+        ? resolutions.values.last
+        : urls.isNotEmpty
+            ? urls.first
+            : null;
+  }
+
+  Future<void> _initController() async {
+    String? url = await _findUrl;
+    if (url == null) return;
+    _videoController = VideoPlayerController.networkUrl(Uri.parse(url));
+
+    await _videoController?.initialize().then((_) {
+      controller = ChewieController(
+        videoPlayerController: _videoController!,
+        allowedScreenSleep: false,
+        startAt: widget.startAt,
+      );
+      if (widget.endAt != null) {
+        _videoController?.addListener(() {
+          if (_videoController!.value.position >= widget.endAt!) {
+            _videoController?.pause();
+          }
+        });
+      }
+    });
+  }
+
+  set controller(ChewieController? controller) {
+    setState(() {
+      _chewieController = controller?.copyWith(
+        autoPlay: widget.autoPlay,
+        looping: widget.loop,
+        showControls: widget.showControls,
+        allowMuting: widget.mute,
+        allowFullScreen: widget.fullScreen,
+      );
+      _chewieController?.setVolume(widget.mute ? 0.0 : 1.0);
+    });
   }
 
   @override
@@ -120,98 +200,18 @@ class _VideoPlayerState extends State<_VideoPlayer> {
       ? AspectRatio(
           aspectRatio:
               widget.aspectRatio ?? _videoController!.value.aspectRatio,
-          child: Chewie(
-            controller: (() {
-              _setConfigs();
-              return _chewieController!;
-            }()),
-          ),
+          child: Chewie(controller: _chewieController!),
         )
       : AspectRatio(
           aspectRatio: widget.aspectRatio ?? (16 / 9),
-          child: const Clipper.expand(color: Colors.black12),
+          child: const SizedBox.expand(
+            child: Center(child: CircularProgressIndicator.adaptive()),
+          ),
         );
 }
 
-class _WebPlayer extends StatefulWidget {
-  final String? url;
-  final Map<String, dynamic> configs;
-  final double? aspectRatio;
-
-  const _WebPlayer(
-    this.url, {
-    required this.configs,
-    this.aspectRatio,
-    super.key,
-  });
-
-  @override
-  State<_WebPlayer> createState() => _WebPlayerState();
-}
-
-class _WebPlayerState extends State<_WebPlayer> {
-  InAppWebViewController? _controller;
-  Uri? url;
-  @override
-  void initState() {
-    super.initState();
-    _initController();
-  }
-
-  Future<void> _initController() async {
-    StringBuffer buffer = StringBuffer();
-    buffer.write('<html>');
-    buffer.write('<body>');
-    buffer.write('<iframe ');
-    buffer.write(
-        'style="position:absolute;left:0px;top:0px;width:100%;height:100vh;" ');
-    /* buffer.write('src="https://www.youtube.com/embed/_ifwJhUPLzA?'
-        'autoplay=${_BoolToInt(widget.configs['autoPlay'])}'
-        '&loop=${_BoolToInt(widget.configs['loop'])}'
-        '&controls=${_BoolToInt(widget.configs['showControls'])}'
-        '&mute=${_BoolToInt(widget.configs['mute'])}" '); */
-    buffer.write('src="https://player.vimeo.com/video/243692318?'
-        'autoplay=${_BoolToInt(widget.configs['autoPlay'])}'
-        '&loop=${_BoolToInt(widget.configs['loop'])}'
-        '&controls=${_BoolToInt(widget.configs['showControls'])}'
-        '&muted=${_BoolToInt(widget.configs['mute'])}" ');
-    buffer.write('controls="${_BoolToInt(widget.configs['showControls'])}" ');
-    buffer.write('frameborder="0" ');
-    buffer.write('allow="accelerometer; ');
-    if (widget.configs['autoPlay'] ?? false) {
-      buffer.write('autoplay; ');
-    }
-    buffer.write('modestbranding; encrypted-media; gyroscope;" ');
-    if (widget.configs['allowFullScreen'] ?? false) {
-      buffer.write('webkitallowfullscreen mozallowfullscreen allowfullscreen ');
-    }
-    buffer.write('>');
-    buffer.write('</iframe>');
-    buffer.write('</body>');
-    buffer.write('</html>');
-
-    url = Uri.dataFromString(buffer.toString(), mimeType: 'text/html');
-  }
-
-  int _BoolToInt(bool? value) => (value ?? false) ? 1 : 0;
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => AspectRatio(
-        aspectRatio: widget.aspectRatio ?? 16 / 9,
-        child: InAppWebView(
-          initialUrlRequest: URLRequest(url: url),
-          onWebViewCreated: (controller) => {_controller = controller},
-        ),
-      );
-}
-
 class _YTVideoPlayer extends StatefulWidget {
-  final String? url;
+  final String url;
   final double? aspectRatio;
   final bool autoPlay;
   final bool loop;
@@ -239,7 +239,7 @@ class _YTVideoPlayer extends StatefulWidget {
 }
 
 class _YTVideoPlayerState extends State<_YTVideoPlayer> {
-  YoutubePlayerController? _videoController;
+  late YoutubePlayerController _videoController;
 
   @override
   void initState() {
@@ -250,24 +250,24 @@ class _YTVideoPlayerState extends State<_YTVideoPlayer> {
   @override
   void didUpdateWidget(covariant _YTVideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.url != null && oldWidget.url != widget.url) {
-      _videoController?.loadVideo(widget.url!);
+    if (oldWidget.url != widget.url) {
+      _videoController.loadVideo(widget.url);
     }
 
-    if (widget.autoPlay) _videoController?.pauseVideo();
-    widget.mute ? _videoController?.mute() : _videoController?.unMute();
-    _videoController?.setLoop(loopPlaylists: widget.loop);
-    _videoController?.update(
+    if (widget.autoPlay) _videoController.pauseVideo();
+    widget.mute ? _videoController.mute() : _videoController.unMute();
+    _videoController.setLoop(loopPlaylists: widget.loop);
+    _videoController.update(
       fullScreenOption: FullScreenOption(enabled: widget.fullScreen),
     );
 
     if (widget.startAt != null && oldWidget.startAt != widget.startAt) {
-      _videoController?.duration.then((length) {
+      _videoController.duration.then((length) {
         if (length >= widget.startAt!) {
-          _videoController?.currentTime.then((now) {
+          _videoController.currentTime.then((now) {
             if (now < widget.startAt!) {
-              _videoController?.seekTo(seconds: widget.startAt!);
-              _videoController?.playVideo();
+              _videoController.seekTo(seconds: widget.startAt!);
+              _videoController.playVideo();
             }
           });
         }
@@ -276,12 +276,10 @@ class _YTVideoPlayerState extends State<_YTVideoPlayer> {
   }
 
   Future<void> _initController() async {
-    if (widget.url == null) return;
-    final videoId = YoutubePlayerController.convertUrlToId(widget.url!);
-    if (videoId == null) return;
+    final videoId = YoutubePlayerController.convertUrlToId(widget.url);
 
     _videoController = YoutubePlayerController.fromVideoId(
-      videoId: videoId,
+      videoId: videoId ?? '',
       params: YoutubePlayerParams(
         loop: widget.loop,
         showControls: widget.showControls,
@@ -292,34 +290,30 @@ class _YTVideoPlayerState extends State<_YTVideoPlayer> {
       startSeconds: widget.startAt,
       endSeconds: widget.endAt,
     );
-    _videoController?.update(
+    _videoController.update(
       fullScreenOption: FullScreenOption(enabled: widget.fullScreen),
     );
   }
 
   @override
   void dispose() {
-    _videoController?.close();
+    _videoController.close();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => _videoController != null
-      ? YoutubePlayer(
-          controller: _videoController!,
-          aspectRatio: widget.aspectRatio ?? 16 / 9,
-        )
-      : AspectRatio(
-          aspectRatio: widget.aspectRatio ?? (16 / 9),
-          child: const Clipper.expand(color: Colors.black12),
-        );
+  Widget build(BuildContext context) => YoutubePlayer(
+        controller: _videoController,
+        aspectRatio: widget.aspectRatio ?? 16 / 9,
+      );
 }
 
 extension _UrlExtensions on String {
   bool get isYoutube => RegExp(
-          r'((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?')
-      .hasMatch(this);
+        r'((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?',
+      ).hasMatch(this);
 
-  bool get isVimeo => RegExp(
-          r'((?:https?:)?\/\/)?((?:www|m)\.)?((?:vimeo\.com))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?').hasMatch(this);
+  String? get vimeoId => RegExp(
+        r'(?:http:|https:|)\/\/(?:player.|www.)?vimeo\.com\/(?:video\/|embed\/|watch\?\S*v=|v\/)?(\d*)',
+      ).firstMatch(this)?.group(1);
 }

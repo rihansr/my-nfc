@@ -63,6 +63,10 @@ extension StringExtension on String {
           seconds: int.parse(split(':')[2]),
         )
       : Duration.zero;
+
+  bool get isValidUrl => RegExp(
+          r'^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?')
+      .hasMatch(this);
 }
 
 extension ContextExtension on BuildContext {
