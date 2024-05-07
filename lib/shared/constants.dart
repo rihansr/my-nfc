@@ -90,23 +90,6 @@ const List<ThemeModel> kThemes = [
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        Color(0xFFFFFFFF),
-        Color(0xFF5998d6),
-        Color(0xFF18477c),
-        Color(0xFF0d0d14),
-      ],
-      stops: [0, 28, 53, 100],
-    ),
-    textColor: Color(0xFFFFFFFF),
-    iconColor: Color(0xFFFFFFFF),
-    dividerColor: Color(0xFFFFFFFF),
-  ),
-  ThemeModel(
-    id: 2,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
         Color(0xFFefefee),
         Color(0xFFffffff),
         Color(0xFFf4f3f3),
@@ -118,7 +101,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
-    id: 3,
+    id: 2,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -133,7 +116,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
-    id: 4,
+    id: 3,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -148,7 +131,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
-    id: 5,
+    id: 4,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -164,7 +147,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
-    id: 6,
+    id: 5,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -180,7 +163,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFF796DFD),
   ),
   ThemeModel(
-    id: 7,
+    id: 6,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -196,7 +179,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
-    id: 8,
+    id: 7,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -212,7 +195,7 @@ const List<ThemeModel> kThemes = [
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
-    id: 9,
+    id: 8,
     background: LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
@@ -227,6 +210,23 @@ const List<ThemeModel> kThemes = [
     textColor: Color(0xFFFBD8BE),
     iconColor: Color(0xFFFBD8BE),
     dividerColor: Color(0xFFFBD8BE),
+  ),
+   ThemeModel(
+    id: 9,
+    background: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [
+        Color(0xFF000000),
+        Color(0xFF990000),
+        Color(0xFFCC0000),
+        Color(0xFFFF0000),
+      ],
+      stops: [0, 28, 53, 100],
+    ),
+    textColor: Color(0xFFFFFFFF),
+    iconColor: Color(0xFFFFFFFF),
+    dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 10,

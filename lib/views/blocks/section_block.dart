@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:provider/provider.dart';
 import '../../utils/extensions.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/clipper_widget.dart';
 import '../../widgets/negative_padding.dart';
 import 'actions_block.dart';
@@ -21,9 +20,18 @@ import 'text_block.dart';
 import 'video_block.dart';
 
 class SectionBlock extends StatelessWidget {
+  final String path;
+  final DashboardViewModel parent;
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  const SectionBlock(this.configs, {this.sectionStyle, super.key});
+
+  const SectionBlock(
+    this.configs, {
+    required this.path,
+    required this.parent,
+    this.sectionStyle,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +88,8 @@ class SectionBlock extends StatelessWidget {
                   return true;
                 }).mapIndexed(
                   (i, e) {
-                    GlobalKey key = this.key != null ? GlobalKey(debugLabel:  '${this.key}/$i') : GlobalKey(debugLabel: '$i');
+                    String path = '${this.path}/$i';
+                    Key key = Key(path);
 
                     Map<String, dynamic> sectionStyle =
                         Map<String, dynamic>.from(this.configs['style'] ?? {});
@@ -97,72 +106,96 @@ class SectionBlock extends StatelessWidget {
                       case "section":
                         field = SectionBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "space":
                         field = SpaceBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "divider":
                         field = DividerBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "text":
                         field = TextBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "image":
                         field = ImageBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "contact":
                         field = ContactBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "info":
                         field = InfoBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "links":
                         field = LinksBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "button":
                         field = ButtonBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "video":
                         field = VideoBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "additional":
                         field = AdditionalBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
                       case "actions":
                         field = ActionsBlock(
                           configs,
+                          path: path,
+                          parent: parent,
                           sectionStyle: sectionStyle,
                           key: key,
                         );
@@ -183,9 +216,16 @@ class SectionBlock extends StatelessWidget {
         ),
       ],
     );
+
+    final key = parent.key('$path/');
+
     return Container(
+      key: key,
       width: configs['style']?['fullWidth'] == false ? null : double.infinity,
-      color: configs['style']?['background']?['color']?.toString().hexColor,
+      decoration: BoxDecoration(
+        color: configs['style']?['background']?['color']?.toString().hexColor,
+        border: parent.isSelected(key) ? selectedBorder : null,
+      ),
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       child: InkWell(
@@ -196,10 +236,7 @@ class SectionBlock extends StatelessWidget {
         child: configs['subBlock'] == 'section_banner'
             ? NegativePadding(
                 padding: EdgeInsets.symmetric(
-                  horizontal:
-                      Provider.of<DesignViewModel>(context, listen: false)
-                          .theme
-                          .horizontalPadding,
+                  horizontal: parent.theme.horizontalPadding,
                 ),
                 child: child,
               )

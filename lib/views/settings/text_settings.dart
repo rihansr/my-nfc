@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../views/blocks/components.dart';
 import '../../models/theme_model.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/tab_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/seekbar_widget.dart';
@@ -15,12 +15,14 @@ import '../../widgets/dropdown_widget.dart';
 import 'components/block_expansion_tile.dart';
 
 class TextSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const TextSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -48,10 +50,11 @@ class TextSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     ThemeModel defaultTheme =
-        Provider.of<DesignViewModel>(context, listen: false).theme;
+        Provider.of<DashboardViewModel>(context, listen: false).theme;
+
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.title,

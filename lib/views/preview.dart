@@ -1,28 +1,28 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../shared/dimens.dart';
-import '../viewmodels/design_viewmodel.dart';
+import '../viewmodels/dashboard_viewmodel.dart';
 import 'blocks/actions_block.dart';
 import 'blocks/section_block.dart';
 
 class Preview extends StatelessWidget {
   final Map<String, String>? params;
-  final DesignViewModel? designController;
+  final DashboardViewModel? designController;
   const Preview({super.key, this.params, this.designController});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) =>
-          ChangeNotifierProvider<DesignViewModel>.value(
-        value: designController ?? DesignViewModel(context, params),
-        child: Consumer<DesignViewModel>(
+          ChangeNotifierProvider<DashboardViewModel>.value(
+        value: designController ?? DashboardViewModel(params, isPeview: true),
+        child: Consumer<DashboardViewModel>(
           builder: (context, controller, _) => Scaffold(
             extendBody: true,
             body: Align(
               alignment: Alignment.topCenter,
               child: SingleChildScrollView(
-                controller: controller.scrollController,
                 physics: const ClampingScrollPhysics(),
                 child: Container(
                   constraints: BoxConstraints(
@@ -37,7 +37,12 @@ class Preview extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       ...controller.designStructure.entries
-                          .map((e) => SectionBlock(e.value, key: GlobalKey(debugLabel: e.key))),
+                          .map((e) => SectionBlock(
+                                e.value,
+                                key: Key(e.key),
+                                parent: controller,
+                                path: e.key,
+                              )),
                       const SafeArea(top: false, child: SizedBox.shrink())
                     ],
                   ),
@@ -57,11 +62,15 @@ class Preview extends StatelessWidget {
                                   ?['buttonFixedAtBottom'] ??
                               false) &&
                           (element['settings']?['visible'] ?? true))
-                      .map(
-                        (e) => Padding(
+                      .mapIndexed(
+                        (i, e) => Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: controller.theme.horizontalPadding),
-                          child: SafeArea(top: false, child: ActionsBlock(e)),
+                          child: SafeArea(
+                            top: false,
+                            child:
+                                ActionsBlock(e, path: '$i', parent: controller),
+                          ),
                         ),
                       )
                       .toList(),

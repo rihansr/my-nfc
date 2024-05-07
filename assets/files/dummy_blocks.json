@@ -96,7 +96,7 @@
                                         "text": {
                                             "typography": null,
                                             "fontSize": 32,
-                                            "textColor": "#ffffffff",
+                                            "textColor": null,
                                             "fontWeight": "regular",
                                             "alignment": null
                                         }
@@ -235,7 +235,7 @@
                                         "text": {
                                             "typography": null,
                                             "fontSize": 32,
-                                            "textColor": "#ffffffff",
+                                            "textColor": null,
                                             "fontWeight": "regular",
                                             "alignment": "center"
                                         }
@@ -292,7 +292,7 @@
                             "text": {
                                 "typography": null,
                                 "fontSize": 16,
-                                "textColor": "#ffffffff",
+                                "textColor": null,
                                 "fontWeight": "regular",
                                 "alignment": "center"
                             }
@@ -346,7 +346,7 @@
                             "text": {
                                 "typography": null,
                                 "fontSize": 14,
-                                "textColor": "#ffffffff",
+                                "textColor": null,
                                 "fontWeight": "regular",
                                 "alignment": "center"
                             }
@@ -386,7 +386,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ffffffff"
+                            "dividerColor": null
                         }
                     }
                 }
@@ -519,7 +519,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ffffffff"
+                            "dividerColor": null
                         }
                     }
                 },
@@ -653,7 +653,7 @@
                     "data": {
                         "style": {
                             "height": 1,
-                            "dividerColor": "#ffffffff"
+                            "dividerColor": null
                         }
                     }
                 },

@@ -6,7 +6,7 @@ import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/checkbox_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/dropdown_widget.dart';
@@ -17,6 +17,7 @@ import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class ActionsSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
@@ -27,6 +28,7 @@ class ActionsSettings extends StatelessWidget {
 
   ActionsSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -59,17 +61,17 @@ class ActionsSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeModel defaultTheme =
-        Provider.of<DesignViewModel>(context, listen: false).theme;
+        Provider.of<DashboardViewModel>(context, listen: false).theme;
     ThemeData theme = Theme.of(context);
     List<Map<String, dynamic>> links =
-        Provider.of<DesignViewModel>(context, listen: true)
+        Provider.of<DashboardViewModel>(context, listen: true)
             .designStructure
             .findBy('links')
           ..removeWhere((element) => element['id'] == null);
 
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.system_update_alt_outlined,
@@ -210,7 +212,8 @@ class ActionsSettings extends StatelessWidget {
                 Seekbar(
                   title: string.fontSize,
                   value: textStyle['fontSize'] ?? 16,
-                  defaultValue: defaultBlock?['default']?['style']?['text']?['fontSize'],
+                  defaultValue: defaultBlock?['default']?['style']?['text']
+                      ?['fontSize'],
                   min: 8,
                   max: 96,
                   onChanged: (size) =>

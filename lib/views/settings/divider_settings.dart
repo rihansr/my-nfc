@@ -4,19 +4,21 @@ import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../shared/strings.dart';
 import '../../utils/extensions.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/seekbar_widget.dart';
 import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class DividerSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
-final Function(Map<String, dynamic>)? onUpdate;
+  final Function(Map<String, dynamic>)? onUpdate;
 
   const DividerSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -36,10 +38,11 @@ final Function(Map<String, dynamic>)? onUpdate;
   @override
   Widget build(BuildContext context) {
     ThemeModel defaultTheme =
-        Provider.of<DesignViewModel>(context, listen: false).theme;
+        Provider.of<DashboardViewModel>(context, listen: false).theme;
+
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.remove_outlined,

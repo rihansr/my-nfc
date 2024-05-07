@@ -8,12 +8,14 @@ import 'components/video_configs.dart';
 import 'components/block_expansion_tile.dart';
 
 class VideoSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const VideoSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -32,9 +34,10 @@ class VideoSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.video_library_outlined,
@@ -62,7 +65,7 @@ class VideoSettings extends StatelessWidget {
           ],
           onTyping: (text) {
             text = text.trim();
-            if(text.isNotEmpty && !text.isValidUrl) return;
+            if (text.isNotEmpty && !text.isValidUrl) return;
             update(
               'data',
               MapEntry('link', text.isEmpty ? null : text),

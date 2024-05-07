@@ -2,13 +2,13 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../services/navigation_service.dart';
 import '../../../utils/extensions.dart';
-import '../../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 
 Alignment? alignment(Map? alignment) {
   switch (
@@ -35,6 +35,10 @@ Alignment? alignment(Map? alignment) {
       return null;
   }
 }
+
+BoxBorder get selectedBorder => Border.all(
+    color: Theme.of(navigator.context).colorScheme.primary,
+    strokeAlign: BorderSide.strokeAlignOutside);
 
 CrossAxisAlignment horizontalAlignment(Object? alignment) {
   switch (alignment) {
@@ -128,10 +132,10 @@ Widget? photo(
 
 TextStyle textStyle(BuildContext context, Map? style) => GoogleFonts.getFont(
       style?['typography'] ??
-          Provider.of<DesignViewModel>(context).theme.fontFamily,
+          Provider.of<DashboardViewModel>(context).theme.fontFamily,
       fontSize: style?['fontSize']?.toDouble() ?? 16,
       color: style?['textColor']?.toString().hexColor ??
-          Provider.of<DesignViewModel>(context).theme.textColor,
+          Provider.of<DashboardViewModel>(context).theme.textColor,
       fontWeight: fontWeight(style?['fontWeight']),
     );
 

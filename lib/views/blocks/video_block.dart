@@ -4,17 +4,25 @@ import 'package:chewie/chewie.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../../services/api.dart';
 import '../../utils/extensions.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import 'components.dart';
 
 class VideoBlock extends StatelessWidget {
+  final String path;
+  final DashboardViewModel parent;
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
   final String? _url;
   final Map<String, dynamic> _videoConfigs;
   final double? _aspectRatio;
 
-  VideoBlock(this.configs, {this.sectionStyle, super.key})
-      : _url = configs['data']?['link'],
+  VideoBlock(
+    this.configs, {
+    required this.parent,
+    required this.path,
+    this.sectionStyle,
+    super.key,
+  })  : _url = configs['data']?['link'],
         _videoConfigs =
             Map<String, dynamic>.from(configs['data']?['configs'] ?? {}),
         _aspectRatio = (() {
@@ -29,12 +37,17 @@ class VideoBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final key = parent.key('$path/');
+
     return Container(
-      key: GlobalKey(debugLabel: '$key'),
+      key: key,
+      decoration: BoxDecoration(
+        color: configs['style']?['background']?['color']?.toString().hexColor,
+        border: parent.isSelected(key) ? selectedBorder : null,
+      ),
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       padding: padding(configs['style']?['spacing']?['padding']),
-      color: configs['style']?['background']?['color']?.toString().hexColor,
       child: (() {
         if (_url == null) {
           return AspectRatio(

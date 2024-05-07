@@ -10,12 +10,14 @@ import '../../widgets/popup_button.dart';
 import 'components/block_expansion_tile.dart';
 
 class LinksSettings extends StatefulWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const LinksSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -43,9 +45,10 @@ class _LinksSettingsState extends State<LinksSettings> {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    
     return BlockExpansionTile.settings(
       widget.block['settings'],
-      key: GlobalKey(debugLabel: '${widget.key}'),
+      key: Key('${widget.path}/'),
       defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       icon: Icons.group_outlined,

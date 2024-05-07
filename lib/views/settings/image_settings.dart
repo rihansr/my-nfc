@@ -6,12 +6,14 @@ import '../../utils/extensions.dart';
 import 'components/image_view.dart';
 
 class ImageSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   ImageSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -32,9 +34,10 @@ class ImageSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: block['subBlock'] == 'image_avatar'

@@ -8,12 +8,14 @@ import 'components/block_expansion_tile.dart';
 
 // ignore: must_be_immutable
 class AdditionalSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   AdditionalSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -42,9 +44,10 @@ class AdditionalSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+    
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.playlist_add_outlined,
@@ -76,7 +79,9 @@ class AdditionalSettings extends StatelessWidget {
               itemCount: items.length,
               separatorBuilder: (context, i) => const SizedBox(height: 8),
               itemBuilder: (context, i) {
-                GlobalKey key = this.key != null ? GlobalKey(debugLabel:  '${this.key}/$i') : GlobalKey(debugLabel: '$i');
+                GlobalKey key = this.key != null
+                    ? GlobalKey(debugLabel: '${this.key}/$i')
+                    : GlobalKey(debugLabel: '$i');
                 Map<dynamic, dynamic> item = items[i];
 
                 return ListTile(

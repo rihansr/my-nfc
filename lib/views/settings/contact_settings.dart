@@ -8,12 +8,14 @@ import '../../widgets/input_field_widget.dart';
 import 'components/block_expansion_tile.dart';
 
 class ContactSettings extends StatefulWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const ContactSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -80,10 +82,12 @@ class _ContactSettingsState extends State<ContactSettings> {
 
   @override
   Widget build(BuildContext context) {
+    
+    
     ThemeData theme = Theme.of(context);
     return BlockExpansionTile.settings(
       widget.block['settings'],
-      key: GlobalKey(debugLabel: '${widget.key}'),
+      key: Key('${widget.path}/'),
       defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       icon: Icons.group_outlined,

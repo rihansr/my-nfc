@@ -5,12 +5,14 @@ import '../../widgets/seekbar_widget.dart';
 import 'components/block_expansion_tile.dart';
 
 class SpaceSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const SpaceSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -27,7 +29,7 @@ class SpaceSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.zoom_out_map_outlined,

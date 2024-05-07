@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/gradient_picker_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/dropdown_widget.dart';
@@ -13,7 +13,7 @@ import 'components/popup_view.dart';
 import 'components/theme_item.dart';
 
 class ThemeView extends StatelessWidget {
-  final DesignViewModel parentController;
+  final DashboardViewModel parentController;
   final ScrollController? scrollController;
 
   const ThemeView(
@@ -25,9 +25,9 @@ class ThemeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ChangeNotifierProvider<DesignViewModel>.value(
+    return ChangeNotifierProvider<DashboardViewModel>.value(
       value: parentController,
-      child: Consumer<DesignViewModel>(
+      child: Consumer<DashboardViewModel>(
         builder: (context, controller, _) => (() {
           final children = [
             Padding(

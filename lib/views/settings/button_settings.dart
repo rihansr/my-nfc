@@ -6,7 +6,7 @@ import '../../models/theme_model.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
 import '../../shared/strings.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import '../../widgets/checkbox_widget.dart';
 import '../../widgets/colour_picker_widget.dart';
 import '../../widgets/dropdown_widget.dart';
@@ -17,12 +17,14 @@ import '../blocks/components.dart';
 import 'components/block_expansion_tile.dart';
 
 class ButtonSettings extends StatelessWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const ButtonSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -55,10 +57,11 @@ class ButtonSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     ThemeModel defaultTheme =
-        Provider.of<DesignViewModel>(context, listen: false).theme;
+        Provider.of<DashboardViewModel>(context, listen: false).theme;
+
     return BlockExpansionTile.settings(
       block['settings'],
-      key: GlobalKey(debugLabel: '$key'),
+      key: Key('$path/'),
       defaultStyle: defaultBlock?['style'],
       style: block['style'],
       icon: Icons.add_circle_outline,
@@ -95,7 +98,7 @@ class ButtonSettings extends StatelessWidget {
           ],
           onTyping: (text) {
             text = text.trim();
-            if(text.isNotEmpty && !text.isValidUrl) return;
+            if (text.isNotEmpty && !text.isValidUrl) return;
             update(
               'data',
               MapEntry('link', text.isEmpty ? null : text),
@@ -118,7 +121,9 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderThickness,
               type: 'px',
-              defaultValue: defaultBlock?['data']?['style']?['border']?['borderWidth'] ?? 1,
+              defaultValue: defaultBlock?['data']?['style']?['border']
+                      ?['borderWidth'] ??
+                  1,
               value: block['data']?['style']?['border']?['borderWidth'] ?? 1,
               min: 0,
               max: 100,
@@ -128,7 +133,9 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderRadius,
               type: 'px',
-              defaultValue: defaultBlock?['data']?['style']?['border']?['borderRadius'] ?? 4,
+              defaultValue: defaultBlock?['data']?['style']?['border']
+                      ?['borderRadius'] ??
+                  4,
               value: block['data']?['style']?['border']?['borderRadius'] ?? 4,
               min: 0,
               max: 50,
@@ -165,7 +172,8 @@ class ButtonSettings extends StatelessWidget {
             ),
             Seekbar(
               title: string.fontSize,
-              defaultValue: defaultBlock?['data']?['style']?['text']?['fontSize'],
+              defaultValue: defaultBlock?['data']?['style']?['text']
+                  ?['fontSize'],
               value: block['data']?['style']?['text']?['fontSize'] ?? 16,
               min: 8,
               max: 96,

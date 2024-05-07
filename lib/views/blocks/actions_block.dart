@@ -8,26 +8,33 @@ import '../../shared/constants.dart';
 import '../../utils/debug.dart';
 import '../../utils/extensions.dart';
 //import '../../utils/web_extensions.dart';
-import '../../viewmodels/design_viewmodel.dart';
+import '../../viewmodels/dashboard_viewmodel.dart';
 import 'components.dart';
 
 class ActionsBlock extends StatelessWidget {
+  final String path;
+  final DashboardViewModel parent;
   final Map<String, dynamic>? sectionStyle;
   final Map<String, dynamic> configs;
-  final Map<String, dynamic> settings;
-  final Map<String, dynamic> primary;
-  final Map<String, dynamic> additional;
+  final Map<String, dynamic> _settings;
+  final Map<String, dynamic> _primary;
+  final Map<String, dynamic> _additional;
 
-  ActionsBlock(this.configs, {this.sectionStyle, super.key})
-      : settings =
+  ActionsBlock(
+    this.configs, {
+    required this.path,
+    required this.parent,
+    this.sectionStyle,
+    super.key,
+  })  : _settings =
             Map<String, dynamic>.from(configs['settings']?['advanced'] ?? {}),
-        primary = Map<String, dynamic>.from(configs['data']?['primary'] ?? {}),
-        additional =
+        _primary = Map<String, dynamic>.from(configs['data']?['primary'] ?? {}),
+        _additional =
             Map<String, dynamic>.from(configs['data']?['additional'] ?? {});
 
   Future<void> saveToPhone(BuildContext context) async {
     Map<String, dynamic> designStructure =
-        Provider.of<DesignViewModel>(context, listen: false).designStructure;
+        Provider.of<DashboardViewModel>(context, listen: false).designStructure;
 
     Contact contact = Contact();
 
@@ -151,23 +158,28 @@ class ActionsBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final key = parent.key('$path/');
     final buttonStyle = ButtonStyle(
       minimumSize: const MaterialStatePropertyAll(Size.zero),
       padding: MaterialStatePropertyAll(
           padding(configs['style']?['spacing']?['padding'])),
       shape: const MaterialStatePropertyAll((StadiumBorder())),
     );
+    debug.print('ActionsBlock: $key');
 
     return Container(
-      key: GlobalKey(debugLabel: '$key'),
+      key: key,
       width: double.infinity,
+      decoration: BoxDecoration(
+        border: parent.isSelected(key) ? selectedBorder : null,
+      ),
       transform: transform(configs['style']?['spacing']?['margin']),
       margin: margin(configs['style']?['spacing']?['margin']),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (settings['showSaveToPhoneButton'] == true)
+          if (_settings['showSaveToPhoneButton'] == true)
             Expanded(
               child: TextButton(
                 onPressed: () async => await saveToPhone(context),
@@ -188,30 +200,32 @@ class ActionsBlock extends StatelessWidget {
                       color: configs['data']?['style']?['text']?['labelColor']
                               ?.toString()
                               .hexColor ??
-                          Provider.of<DesignViewModel>(context).theme.iconColor,
+                          Provider.of<DashboardViewModel>(context)
+                              .theme
+                              .iconColor,
                       overflow: TextOverflow.ellipsis),
                 ),
               ),
             ),
-          if (settings['showPrimaryContactButton'] == true &&
-              primary.isNotEmpty)
+          if (_settings['showPrimaryContactButton'] == true &&
+              _primary.isNotEmpty)
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: settings['showSaveToPhoneButton'] == true ? 8 : 0),
+                    left: _settings['showSaveToPhoneButton'] == true ? 8 : 0),
                 child: TextButton.icon(
                   onPressed: openUrl(
                     url: Uri.parse(
-                        'https://${primary['link'] ?? ''}${primary['id'] ?? ''}'),
+                        'https://${_primary['link'] ?? ''}${_primary['id'] ?? ''}'),
                   ),
                   style: buttonStyle.copyWith(
                     backgroundColor: MaterialStatePropertyAll(
-                        '${primary['name']}'.socialIconColor),
+                        '${_primary['name']}'.socialIconColor),
                   ),
                   icon: Transform.scale(
                     scale: 1.5,
                     child: Icon(
-                      '${primary['name']}'.socialIcon,
+                      '${_primary['name']}'.socialIcon,
                       size: (configs['data']?['style']?['text']?['fontSize'] ??
                               14)
                           .toDouble(),
@@ -231,29 +245,29 @@ class ActionsBlock extends StatelessWidget {
                 ),
               ),
             ),
-          if (settings['showAdditionalContactButton'] == true &&
-              additional.isNotEmpty)
+          if (_settings['showAdditionalContactButton'] == true &&
+              _additional.isNotEmpty)
             Padding(
               padding: EdgeInsets.only(
-                  left: settings['showSaveToPhoneButton'] == true ||
-                          (settings['showPrimaryContactButton'] == true &&
-                              primary.isNotEmpty)
+                  left: _settings['showSaveToPhoneButton'] == true ||
+                          (_settings['showPrimaryContactButton'] == true &&
+                              _primary.isNotEmpty)
                       ? 8
                       : 0),
               child: IconButton.filled(
                 style: ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll(
-                        '${additional['name']}'.socialIconColor)),
+                        '${_additional['name']}'.socialIconColor)),
                 onPressed: openUrl(
                   url: Uri.parse(
-                      'https://${additional['link'] ?? ''}${additional['id'] ?? ''}'),
+                      'https://${_additional['link'] ?? ''}${_additional['id'] ?? ''}'),
                 ),
                 padding:
                     kIsWeb ? const EdgeInsets.all(0) : const EdgeInsets.all(22),
                 icon: Transform.scale(
                   scale: 1.75,
                   child: Icon(
-                    '${additional['name']}'.socialIcon,
+                    '${_additional['name']}'.socialIcon,
                     size:
                         (configs['data']?['style']?['text']?['fontSize'] ?? 14)
                             .toDouble(),

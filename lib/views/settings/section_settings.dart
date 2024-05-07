@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
-import 'package:my_nfc/utils/debug.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
 import '../../utils/extensions.dart';
@@ -20,12 +19,14 @@ import 'text_settings.dart';
 import 'video_settings.dart';
 
 class SectionSettings extends StatefulWidget {
+  final String path;
   final Map<String, dynamic>? defaultBlock;
   final Map<String, dynamic> block;
   final Function(Map<String, dynamic>)? onUpdate;
 
   const SectionSettings({
     super.key,
+    required this.path,
     this.defaultBlock,
     required this.block,
     this.onUpdate,
@@ -59,9 +60,8 @@ class _SectionSettingsState extends State<SectionSettings> {
   Widget build(BuildContext context) {
     List<Widget> children = _fields.mapIndexed(
       (i, e) {
-        GlobalKey key = widget.key != null
-            ? GlobalKey(debugLabel: '${widget.key}/$i')
-            : GlobalKey(debugLabel: '$i');
+        String path = '${widget.path}/$i';
+        Key key = Key(path);
 
         Map<String, dynamic>? defaultBlock = (() {
           final fields =
@@ -74,6 +74,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "section":
             return SectionSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -81,6 +82,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "space":
             return SpaceSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -88,6 +90,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "divider":
             return DividerSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -95,6 +98,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "text":
             return TextSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -102,6 +106,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "image":
             return ImageSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -109,6 +114,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "contact":
             return ContactSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -116,6 +122,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "info":
             return InfoSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -123,6 +130,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "links":
             return LinksSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -130,6 +138,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "button":
             return ButtonSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -137,6 +146,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "video":
             return VideoSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -144,6 +154,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "additional":
             return AdditionalSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -151,6 +162,7 @@ class _SectionSettingsState extends State<SectionSettings> {
           case "actions":
             return ActionsSettings(
               key: key,
+              path: path,
               defaultBlock: defaultBlock,
               block: block,
               onUpdate: (settings) => update(i, settings),
@@ -174,10 +186,10 @@ class _SectionSettingsState extends State<SectionSettings> {
                 setState(() => fields = [..._fields, Map.from(item)]),
           )
         : null;
-
+    
     return BlockExpansionTile.settings(
       widget.block['settings'],
-      key: GlobalKey(debugLabel:  '${widget.key}'),
+      key: Key('${widget.path}/'),
       defaultStyle: widget.defaultBlock?['style'],
       style: widget.block['style'],
       label: widget.block['label'],
