@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../../services/api.dart';
 import '../../utils/extensions.dart';
@@ -214,7 +215,18 @@ class _VideoPlayerState extends State<_VideoPlayer> {
       ? AspectRatio(
           aspectRatio:
               widget.aspectRatio ?? _videoController!.value.aspectRatio,
-          child: Chewie(controller: _chewieController!),
+          child: VisibilityDetector(
+            key: widget.key!,
+            onVisibilityChanged: (visibilityInfo) {
+              final fraction = visibilityInfo.visibleFraction;
+              if (fraction <= .50 && _chewieController!.isPlaying) {
+                _chewieController?.pause();
+              } else if (fraction == 1.0 && widget.autoPlay) {
+                _chewieController?.play();
+              }
+            },
+            child: Chewie(controller: _chewieController!),
+          ),
         )
       : AspectRatio(
           aspectRatio: widget.aspectRatio ?? (16 / 9),
@@ -316,9 +328,20 @@ class _YTVideoPlayerState extends State<_YTVideoPlayer> {
   }
 
   @override
-  Widget build(BuildContext context) => YoutubePlayer(
-        controller: _videoController,
-        aspectRatio: widget.aspectRatio ?? 16 / 9,
+  Widget build(BuildContext context) => VisibilityDetector(
+        key: widget.key!,
+        onVisibilityChanged: (visibilityInfo) {
+          final fraction = visibilityInfo.visibleFraction;
+          if (fraction <= .50) {
+            _videoController.pauseVideo();
+          } else if (fraction == 1.0 && widget.autoPlay) {
+            _videoController.playVideo();
+          }
+        },
+        child: YoutubePlayer(
+          controller: _videoController,
+          aspectRatio: widget.aspectRatio ?? 16 / 9,
+        ),
       );
 }
 

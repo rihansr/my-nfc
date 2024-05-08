@@ -34,7 +34,6 @@ class VideoSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$path/'),
@@ -56,6 +55,7 @@ class VideoSettings extends StatelessWidget {
           minLines: 2,
           maxLines: 2,
           title: string.videoLink,
+          titleHint: string.videoLinkOptions,
           keyboardType: TextInputType.url,
           inputFormatters: [
             FilteringTextInputFormatter.deny(

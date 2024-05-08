@@ -95,6 +95,7 @@
   "disabled": "Disabled",
   "removeBlock": "Remove block",
   "videoLink": "Video Link",
+  "videoLinkOptions": "(YouTube and Vimeo supported)",
   "aspectRatio": "Aspect Ratio",
   "custom": "Custom",
   "videoSetting": "Video Setting",

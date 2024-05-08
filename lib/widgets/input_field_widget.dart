@@ -19,6 +19,8 @@ class InputField extends StatelessWidget {
   final TextStyle? titleStyle;
   final TextAlign titleAlign;
   final EdgeInsets titleSpacing;
+  final String? titleHint;
+  final TextStyle? titleHintStyle;
   final bool obscureText;
   final TextAlign textAlign;
   final int? maxCharacters;
@@ -67,6 +69,8 @@ class InputField extends StatelessWidget {
     this.titleAlign = TextAlign.start,
     this.titleStyle,
     this.titleSpacing = const EdgeInsets.only(bottom: 10),
+    this.titleHint,
+    this.titleHintStyle,
     this.obscureText = false,
     this.textAlign = TextAlign.start,
     this.maxLines = 1,
@@ -126,13 +130,27 @@ class InputField extends StatelessWidget {
           if (title?.trim().isNotEmpty ?? false)
             Padding(
               padding: titleSpacing,
-              child: Text(
-                title ?? '',
+              child: Text.rich(
+                TextSpan(
+                  text: title,
+                  style: titleStyle ??
+                      theme.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w500,
+                      ),
+                  children: [
+                    if (titleHint?.trim().isNotEmpty ?? false)
+                      TextSpan(
+                        text: '  $titleHint',
+                        style: titleHintStyle ??
+                            theme.textTheme.titleMedium?.copyWith(
+                              color: hintColor ?? theme.hintColor,
+                              fontSize: hintSize ?? fontSize,
+                              fontWeight: hintWeight ?? fontWeight,
+                            ),
+                      ),
+                  ],
+                ),
                 textAlign: titleAlign,
-                style: titleStyle ??
-                    theme.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
               ),
             ),
           TextFormField(

@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 
 class ThemeModel {
   final int id;
-  final Gradient background;
+  final List<Color> colors;
+  final List<double> stops;
   final Color textColor;
   final Color iconColor;
   final Color dividerColor;
   final double horizontalPadding;
   final String fontFamily;
 
-
   const ThemeModel({
     required this.id,
-    required this.background,
+    required this.colors,
+    required this.stops,
     required this.textColor,
     required this.iconColor,
     required this.dividerColor,
@@ -22,7 +23,8 @@ class ThemeModel {
 
   ThemeModel copyWith({
     int? id,
-    Gradient? background,
+    List<Color>? colors,
+    List<double>? stops,
     Color? textColor,
     Color? iconColor,
     Color? dividerColor,
@@ -31,7 +33,8 @@ class ThemeModel {
   }) =>
       ThemeModel(
         id: id ?? this.id,
-        background: background ?? this.background,
+        colors: colors ?? this.colors,
+        stops: stops ?? this.stops,
         textColor: textColor ?? this.textColor,
         iconColor: iconColor ?? this.iconColor,
         dividerColor: dividerColor ?? this.dividerColor,
@@ -39,10 +42,10 @@ class ThemeModel {
         fontFamily: fontFamily ?? this.fontFamily,
       );
 
-  ThemeModel inheritFrom(ThemeModel theme) =>
-      ThemeModel(
+  ThemeModel inheritFrom(ThemeModel theme) => ThemeModel(
         id: id,
-        background: background,
+        colors: colors,
+        stops: stops,
         textColor: textColor,
         iconColor: iconColor,
         dividerColor: dividerColor,
@@ -50,8 +53,15 @@ class ThemeModel {
         fontFamily: theme.fontFamily,
       );
 
-   @override
-  bool operator == (Object other) {
+  Gradient get background => LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: colors,
+        stops: stops,
+      );
+
+  @override
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
     return other is ThemeModel && other.id == id;
   }

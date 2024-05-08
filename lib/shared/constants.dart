@@ -86,119 +86,97 @@ const List<String> kAspectRatios = ['21:9', '16:9', '1:1', '4:5', '9:16'];
 const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 1,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFFefefee),
         Color(0xFFffffff),
         Color(0xFFf4f3f3),
       ],
       stops: [0, 54, 99],
-    ),
+    
     textColor: Color(0xFF606060),
     iconColor: Color(0xFF606060),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 2,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFFfdfcfb),
         Color(0xFFE3D3C5),
       ],
       stops: [0, 100],
-    ),
+    
     textColor: Color(0xFF606060),
     iconColor: Color(0xFF606060),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 3,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFF414141),
         Color(0xFF161616),
       ],
       stops: [0, 74],
-    ),
+    
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 4,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFF000000),
         Color(0xFF615f5f),
         Color(0xFF331e10),
       ],
       stops: [0, 37, 100],
-    ),
+
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFBDBDBD),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 5,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFFf7f7f3),
         Color(0xFFfdf1e3),
         Color(0xFFb9ceef),
       ],
       stops: [28, 53, 100],
-    ),
+
     textColor: Color(0xFF3C32A7),
     iconColor: Color(0xFF796DFD),
     dividerColor: Color(0xFF796DFD),
   ),
   ThemeModel(
     id: 6,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
       colors: [
         Color(0xFFf0d5d5),
         Color(0xFFe2b4a7),
         Color(0xFFe4d9dc),
       ],
       stops: [4, 45, 92],
-    ),
+  
     textColor: Color(0xFF520000),
     iconColor: Color(0xFF520000),
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 7,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+
       colors: [
         Color(0xFF385138),
         Color(0xFF0d210d),
         Color(0xFF222b22),
       ],
       stops: [8, 54, 89],
-    ),
+    
     textColor: Color(0xFFF6F8D5),
     iconColor: Color(0xFFF6F8D5),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 8,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+
       colors: [
         Color(0xFF78421b),
         Color(0xFF451f12),
@@ -206,16 +184,14 @@ const List<ThemeModel> kThemes = [
         Color(0xFFae6b1e),
       ],
       stops: [0, 29, 62, 100],
-    ),
+
     textColor: Color(0xFFFBD8BE),
     iconColor: Color(0xFFFBD8BE),
     dividerColor: Color(0xFFFBD8BE),
   ),
    ThemeModel(
     id: 9,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+
       colors: [
         Color(0xFF000000),
         Color(0xFF990000),
@@ -223,16 +199,14 @@ const List<ThemeModel> kThemes = [
         Color(0xFFFF0000),
       ],
       stops: [0, 28, 53, 100],
-    ),
+    
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 10,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+   
       colors: [
         Color(0xFFf9f8f8),
         Color(0xFFd6d6d6),
@@ -240,23 +214,21 @@ const List<ThemeModel> kThemes = [
         Color(0xFFfefefd),
       ],
       stops: [13, 29, 46, 100],
-    ),
+    
     textColor: Color(0xFF053493),
     iconColor: Color(0xFF053493),
     dividerColor: Color(0xFF053493),
   ),
   ThemeModel(
     id: 11,
-    background: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
+   
       colors: [
         Color(0xFF131e34),
         Color(0xFF020817),
         Color(0xFF83705d),
       ],
       stops: [0, 54, 100],
-    ),
+ 
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFF606060),

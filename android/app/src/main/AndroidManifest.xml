@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--OTHER Permission-->
-    <uses-permission android:name="android.permission.INTERlNET"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <!--NFC Permission-->
     <uses-permission android:name="android.permission.NFC"/>

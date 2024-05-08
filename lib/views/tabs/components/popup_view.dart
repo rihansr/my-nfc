@@ -20,8 +20,9 @@ class ModalBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            theme.scaffoldBackgroundColor.withOpacity(.7),
-            theme.scaffoldBackgroundColor.withOpacity(.8),
+            theme.scaffoldBackgroundColor.withOpacity(.75),
+            theme.scaffoldBackgroundColor.withOpacity(.85),
+            theme.scaffoldBackgroundColor.withOpacity(1),
           ],
           begin: AlignmentDirectional.topCenter,
           end: AlignmentDirectional.bottomCenter,

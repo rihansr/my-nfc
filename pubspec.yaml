@@ -38,7 +38,6 @@ dependencies:
   # network
   http: ^1.1.2
   flutter_dio_http_cache: ^0.3.0
-  webview_flutter: ^4.4.4
 
   # state management
   provider: ^6.1.1
@@ -50,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.4
   url_launcher: ^6.2.5
   flutter_contacts: ^1.1.7+1
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
