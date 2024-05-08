@@ -48,6 +48,7 @@ class LandingView extends StatelessWidget {
                         margin: EdgeInsets.only(
                           right: controller.theme.horizontalPadding,
                         ),
+                        onPressed: controller.save,
                       ),
                     ],
             ),

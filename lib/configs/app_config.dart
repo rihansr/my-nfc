@@ -1,10 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import '../shared/constants.dart';
 import '../shared/shared_prefs.dart';
 
@@ -54,6 +55,13 @@ class AppConfig {
     );
 
     if (!kIsWeb) FlutterNativeSplash.remove();
+
+    /// Hive Init
+    final appDocumentDir = kIsWeb
+        ? await getTemporaryDirectory()
+        : await getApplicationDocumentsDirectory();
+    Hive.init(appDocumentDir.path);
+    localDb = await Hive.openBox('testBox');
   }
 
   Map<String, dynamic> get configs => config[appMode.name]!;

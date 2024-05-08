@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:my_nfc/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import '../../utils/debug.dart';
+import '../../services/navigation_service.dart';
 import '../../viewmodels/dashboard_viewmodel.dart';
 import '../settings/section_settings.dart';
 import 'components/popup_view.dart';

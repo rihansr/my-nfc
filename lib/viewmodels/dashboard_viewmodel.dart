@@ -12,9 +12,10 @@ import 'base_viewmodel.dart';
 class DashboardViewModel extends BaseViewModel {
   final bool isPreview;
   final Map<String, String>? _params;
+
   final GlobalKey<ScaffoldState> scaffoldKey;
   final Map<String, dynamic> defaultStructure;
-  final Map<String, dynamic> designStructure;
+  late Map<String, dynamic> designStructure;
   late Debouncer _scrollingDebounce;
 
   // Keys
@@ -54,18 +55,36 @@ class DashboardViewModel extends BaseViewModel {
       : isPreview = isPeview,
         scaffoldKey = GlobalKey<ScaffoldState>(),
         defaultStructure = jsonDecode(kDefaultBlocks),
-        designStructure = jsonDecode(kDefaultBlocks);
+        _theme = (() {
+          String? theme = localDb.get('${_params?['uid'] ?? ''}_theme');
+          return theme != null
+              ? ThemeModel.fromMap(jsonDecode(theme))
+              : kThemes.first;
+        }()),
+        designStructure = jsonDecode(localDb.get(
+            '${_params?['uid'] ?? ''}_design',
+            defaultValue: kDefaultBlocks)!);
 
   init(Map<String, String>? params) {
     if (params != null) _params?.addAll(params);
-    _scrollingDebounce = Debouncer(duraction: const Duration(milliseconds: 100));
+    _scrollingDebounce =
+        Debouncer(duraction: const Duration(milliseconds: 100));
+    localDb.put('theme', jsonEncode(theme.toMap()));
   }
 
-  ThemeModel _theme = kThemes.first;
+  ThemeModel _theme;
   ThemeModel get theme => _theme;
-  set theme(ThemeModel theme) => this
-    .._theme = theme
-    ..notifyListeners();
+  set theme(ThemeModel theme) {
+    this
+      .._theme = theme
+      ..notifyListeners();
+    localDb.put('${_params?['uid'] ?? ''}_theme', jsonEncode(theme.toMap()));
+  }
+
+  save() {
+    localDb.put(
+        '${_params?['uid'] ?? ''}_design', jsonEncode(defaultStructure));
+  }
 
   showsModalBottomSheet(int tab) => scaffoldKey.currentState?.showBottomSheet(
         constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),

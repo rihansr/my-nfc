@@ -2,12 +2,14 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:hive/hive.dart';
 import '../models/theme_model.dart';
 
 // Data
 late String kDefaultBlocks;
 late String kSocialLinks;
 late String kAdditionalBlocks;
+late Box<String> localDb;
 final List<Map<String, dynamic>> kCountryCodes = [];
 
 // Fonts

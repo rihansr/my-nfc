@@ -42,6 +42,30 @@ class ThemeModel {
         fontFamily: fontFamily ?? this.fontFamily,
       );
 
+  // to json
+  Map<String, dynamic> toMap() => {
+        'id': id,
+        'colors': colors.map((e) => e.value).toList(),
+        'stops': stops,
+        'textColor': textColor.value,
+        'iconColor': iconColor.value,
+        'dividerColor': dividerColor.value,
+        'horizontalPadding': horizontalPadding,
+        'fontFamily': fontFamily,
+      };
+
+  // from json
+  factory ThemeModel.fromMap(Map<String, dynamic> map) => ThemeModel(
+        id: map['id'],
+        colors: (map['colors'] as List).map((e) => Color(e)).toList(),
+        stops: List<double>.from(map['stops']),
+        textColor: Color(map['textColor']),
+        iconColor: Color(map['iconColor']),
+        dividerColor: Color(map['dividerColor']),
+        horizontalPadding: map['horizontalPadding'],
+        fontFamily: map['fontFamily'],
+      );
+
   ThemeModel inheritFrom(ThemeModel theme) => ThemeModel(
         id: id,
         colors: colors,
