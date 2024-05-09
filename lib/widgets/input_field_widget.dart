@@ -28,7 +28,9 @@ class InputField extends StatelessWidget {
   final int? minLines;
   final Widget? prefix;
   final Widget? prefixIcon;
+  final BoxConstraints? prefixIconConstraints;
   final Widget? suffixIcon;
+  final BoxConstraints? suffixIconConstraints;
   final bool typeable;
   final bool selectable;
   final EdgeInsets padding;
@@ -47,6 +49,7 @@ class InputField extends StatelessWidget {
   final bool underlineOnly;
   final FocusNode? focusNode;
   final bool autoFocus;
+  final bool expanded;
 
   /// Action
   final String? Function(String?)? validator;
@@ -76,6 +79,7 @@ class InputField extends StatelessWidget {
     this.maxLines = 1,
     this.minLines,
     this.suffixIcon,
+    this.suffixIconConstraints,
     this.typeable = true,
     this.selectable = true,
     this.borderTint,
@@ -95,6 +99,7 @@ class InputField extends StatelessWidget {
     this.onTap,
     this.prefix,
     this.prefixIcon,
+    this.prefixIconConstraints,
     this.onAction,
     this.onTyping,
     this.lengthFilter = 1,
@@ -108,6 +113,7 @@ class InputField extends StatelessWidget {
     this.autoFocus = false,
     this.inputAction,
     this.underlineOnly = false,
+    this.expanded = true,
   });
 
   InputBorder boder(Color color) => style.inputBorder(
@@ -124,7 +130,8 @@ class InputField extends StatelessWidget {
       width: width,
       margin: margin,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment:
+            expanded ? CrossAxisAlignment.start : CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
           if (title?.trim().isNotEmpty ?? false)
@@ -199,19 +206,24 @@ class InputField extends StatelessWidget {
                     fontSize: hintSize ?? fontSize,
                     fontWeight: hintWeight ?? fontWeight,
                   ),
-              prefixIconConstraints: BoxConstraints(
-                minWidth: theme.iconTheme.size! + padding.right,
-                maxHeight: (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
-                    padding.vertical,
-              ),
+              prefixIconConstraints: prefixIconConstraints ??
+                  BoxConstraints(
+                    minWidth: theme.iconTheme.size! + padding.right,
+                    maxHeight:
+                        (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
+                            padding.vertical,
+                  ),
               prefixIconColor: hintColor ?? theme.hintColor,
               prefix: prefix,
               prefixIcon: prefixIcon,
-              suffixIconConstraints: BoxConstraints(
-                minWidth: theme.iconTheme.size! + padding.left,
-                maxHeight: (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
-                    padding.vertical,
-              ),
+              prefixStyle: theme.textTheme.bodySmall,
+              suffixIconConstraints: suffixIconConstraints ??
+                  BoxConstraints(
+                    minWidth: theme.iconTheme.size! + padding.left,
+                    maxHeight:
+                        (textStyle ?? theme.textTheme.bodySmall)!.fontSize! +
+                            padding.vertical,
+                  ),
               suffixIconColor: hintColor ?? theme.hintColor,
               suffixIcon: suffixIcon,
               isDense: isDense,

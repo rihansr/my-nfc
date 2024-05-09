@@ -94,8 +94,12 @@ class ThemeView extends StatelessWidget {
               value: controller.theme.background,
               gradientColors: kThemes.map((e) => e.background).toList(),
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              onPick: (gradient) => controller.theme =
-                  controller.theme.copyWith(colors: gradient.colors, stops: gradient.stops),
+              onPick: (gradient) => controller.theme = controller.theme
+                  .copyWith(
+                      colors: gradient.colors,
+                      stops: gradient.stops?.isEmpty ?? true
+                          ? null
+                          : gradient.stops),
             ),
             Seekbar(
               title: string.horizontalPadding,

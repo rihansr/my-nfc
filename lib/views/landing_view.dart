@@ -11,14 +11,14 @@ import 'tabs/design_view.dart';
 import 'tabs/theme_view.dart';
 
 class LandingView extends StatelessWidget {
-  final Map<String, String>? params;
-  const LandingView({this.params, super.key});
+  final String? uid;
+  const LandingView({this.uid, super.key});
 
   @override
   Widget build(BuildContext context) => BaseWidget<DashboardViewModel>(
         model: Provider.of<DashboardViewModel>(context),
         onInit: (controller) {
-          controller.init(params);
+          controller.init(uid);
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (ResponsiveBreakpoints.of(context).isMobile) {
               controller.showsModalBottomSheet(0);

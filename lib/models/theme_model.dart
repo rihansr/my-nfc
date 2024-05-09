@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ThemeModel {
   final int id;
   final List<Color> colors;
-  final List<double> stops;
+  final List<double>? stops;
   final Color textColor;
   final Color iconColor;
   final Color dividerColor;
@@ -58,7 +58,7 @@ class ThemeModel {
   factory ThemeModel.fromMap(Map<String, dynamic> map) => ThemeModel(
         id: map['id'],
         colors: (map['colors'] as List).map((e) => Color(e)).toList(),
-        stops: List<double>.from(map['stops']),
+        stops: map['stops'] == null ? null : List<double>.from(map['stops']),
         textColor: Color(map['textColor']),
         iconColor: Color(map['iconColor']),
         dividerColor: Color(map['dividerColor']),

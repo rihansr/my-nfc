@@ -7,16 +7,16 @@ import 'blocks/actions_block.dart';
 import 'blocks/section_block.dart';
 
 class Preview extends StatelessWidget {
-  final Map<String, String>? params;
+  final String? uid;
   final DashboardViewModel? designController;
-  const Preview({super.key, this.params, this.designController});
+  const Preview({super.key, this.uid, this.designController});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) =>
           ChangeNotifierProvider<DashboardViewModel>.value(
-        value: designController ?? DashboardViewModel(params, isPeview: true),
+        value: designController ?? DashboardViewModel(uid, isPeview: true),
         child: Consumer<DashboardViewModel>(
           builder: (context, controller, _) => Scaffold(
             extendBody: true,

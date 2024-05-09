@@ -11,9 +11,9 @@ import 'base_viewmodel.dart';
 
 class DashboardViewModel extends BaseViewModel {
   final bool isPreview;
-  final Map<String, String>? _params;
-
+  late String? _uid;
   final GlobalKey<ScaffoldState> scaffoldKey;
+  late ThemeModel _theme;
   final Map<String, dynamic> defaultStructure;
   late Map<String, dynamic> designStructure;
   late Debouncer _scrollingDebounce;
@@ -51,39 +51,36 @@ class DashboardViewModel extends BaseViewModel {
   List<Map<String, dynamic>> get footers =>
       designStructure.filterBy(const MapEntry('subBlock', 'actions_footer'));
 
-  DashboardViewModel(this._params, {bool isPeview = false})
+  DashboardViewModel(this._uid, {bool isPeview = false})
       : isPreview = isPeview,
         scaffoldKey = GlobalKey<ScaffoldState>(),
-        defaultStructure = jsonDecode(kDefaultBlocks),
-        _theme = (() {
-          String? theme = localDb.get('${_params?['uid'] ?? ''}_theme');
-          return theme != null
-              ? ThemeModel.fromMap(jsonDecode(theme))
-              : kThemes.first;
-        }()),
-        designStructure = jsonDecode(localDb.get(
-            '${_params?['uid'] ?? ''}_design',
-            defaultValue: kDefaultBlocks)!);
+        defaultStructure = jsonDecode(kDefaultBlocks);
 
-  init(Map<String, String>? params) {
-    if (params != null) _params?.addAll(params);
+  init(String? uid) {
+    _uid = uid;
+    _theme = (() {
+      String? theme = localDb.get('${_uid ?? ''}_theme');
+      return theme != null
+          ? ThemeModel.fromMap(jsonDecode(theme))
+          : kThemes.first;
+    }());
+    designStructure = jsonDecode(
+        localDb.get('${_uid ?? ''}_design', defaultValue: kDefaultBlocks)!);
     _scrollingDebounce =
         Debouncer(duraction: const Duration(milliseconds: 100));
     localDb.put('theme', jsonEncode(theme.toMap()));
   }
 
-  ThemeModel _theme;
   ThemeModel get theme => _theme;
   set theme(ThemeModel theme) {
     this
       .._theme = theme
       ..notifyListeners();
-    localDb.put('${_params?['uid'] ?? ''}_theme', jsonEncode(theme.toMap()));
+    localDb.put('${_uid ?? ''}_theme', jsonEncode(theme.toMap()));
   }
 
   save() {
-    localDb.put(
-        '${_params?['uid'] ?? ''}_design', jsonEncode(defaultStructure));
+    localDb.put('${_uid ?? ''}_design', jsonEncode(defaultStructure));
   }
 
   showsModalBottomSheet(int tab) => scaffoldKey.currentState?.showBottomSheet(

@@ -61,7 +61,7 @@ class AppConfig {
         ? await getTemporaryDirectory()
         : await getApplicationDocumentsDirectory();
     Hive.init(appDocumentDir.path);
-    localDb = await Hive.openBox('testBox');
+    localDb = await Hive.openBox('my_nfc');
   }
 
   Map<String, dynamic> get configs => config[appMode.name]!;
@@ -71,7 +71,6 @@ class AppConfig {
       "base": {},
       'unsplash': {
         'base_url': 'https://api.unsplash.com',
-        'application_id': 579730,
         'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",
         'secret_key': "MfJhFteceOnxbt1EPBzRw7B5i-m0qb2gIZ2iF6hhKrg"
       }
@@ -80,7 +79,6 @@ class AppConfig {
       "base": {},
       'unsplash': {
         'base_url': 'https://api.unsplash.com',
-        'application_id': 579730,
         'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",
         'secret_key': "MfJhFteceOnxbt1EPBzRw7B5i-m0qb2gIZ2iF6hhKrg"
       }

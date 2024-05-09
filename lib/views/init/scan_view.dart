@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:lottie/lottie.dart';
-import '../services/nfc_service.dart';
-import '../shared/dimens.dart';
-import '../shared/drawables.dart';
-import '../shared/strings.dart';
+import '../../services/nfc_service.dart';
+import '../../shared/dimens.dart';
+import '../../shared/drawables.dart';
+import '../../shared/strings.dart';
 
 class ScanView extends StatefulWidget {
   const ScanView({super.key});

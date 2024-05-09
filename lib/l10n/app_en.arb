@@ -3,12 +3,30 @@
   "@_TITLES": "<-----------------TITLES----------------->",
   "appName": "My NFC",
   "scanCard": "Scan Card",
+  "claimPageTitle": "The best way to say hi and stay in touch.",
+  "createAnAccount": "Create an account for free",
   "@_SUBTITLES": "<-----------------SUBTITLES----------------->",
   "holdYourCard": "Hold your NFC card against the upper back of your phone",
+  "claimPageSubtitle": "A beautiful digital profile in just a few taps. Share anything.",
+  "signInSubtitle": "Make an impression. Create your digital profile today.",
+  "freeForever": "Free forever. No payment needed.",
+  "signUpAgreement": "By creating an account you are agreeing to our ",
+  "notHaveAnAccount": "Not yet have an account? ",
   "@_LABELS": "<-----------------LABELS----------------->",
   "havingTrouble": "Having trouble?",
   "tryAgain": "Try again",
   "okay": "Okay",
+  "claimYourPage": "Claim your page",
+  "signIn": "Sign in",
+  "signInNow": "Sign In now",
+  "login": "Login",
+  "createOne": "Create one",
+  "or": "or",
+  "signUpForFree": "Sign up for free",
+  "signUpWithEmail": "Sign up with email",
+  "termsAndConditionas": "Terms and Conditions",
+  "alreadyHaveAnAccount": "I already have an account?",
+  "forgotPassword": "Forgot Password?",
   "connect": "Connect",
   "write": "Write",
   "design": "Design",
@@ -141,6 +159,10 @@
   "linkToHints": "https://google.com",
   "videoLinkHints": "(Youtube/Vimeo)",
   "durationHint": "00:00:00",
+  "usernameHint": "Username",
+  "emailHint": "Email",
+  "passwordHint": "Password",
+  "confirmPasswordHint": "Confirm Password",
   "@_MESSAGES": "<-----------------MESSAGES----------------->",
   "networkNotAvailable": "We could not establish an internet connection to our service at the moment. Please make sure that you are connected to your network and try again.",
   "passwordFailed": "Sorry, password protection failed",
@@ -149,7 +171,80 @@
   "noPasswordNfc": "Sorry, this card does not support password protection",
   "notLockableNfc": "Sorry, you can't lock this card",
   "nfcSizeExceeded": "Sorry, the data is too large for this card",
+  "agreeUnsplashTerms": "By using images from Unsplash, you agree to their license and Terms of Service",
+  "emptyField": "{field, select, null{Field} other {{field}}} is required",
+  "@emptyField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "inputLengthError": "{field, select, null{Field must be {min}-{max} characters long} other {{field} must be {min}-{max} characters long}}",
+  "@inputLengthError": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "min": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "inputMinLengthError": "{field, select, null{Field must have at least {min} characters} other {{field} must have at least {min} characters}}",
+  "@inputMinLengthError": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "min": {
+        "type": "int"
+      }
+    }
+  },
+  "inputMaxLengthError": "{field, select, null{Field can contain upto {max} characters} other {{field} can contain upto {max} characters}}",
+  "@inputMaxLengthError": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "inputMaxValueError": "{field, select, null{Field max limit {value} characters} other {{field} max limit {value}}}",
+  "@inputMaxValueError": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      },
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "oldPassword": "You entered an old password",
+  "fieldNotMatch": "{field, select, null{Field} other {{field}}} doesn't match",
+  "@fieldNotMatch": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "notValidField": "Enter a valid {field, select, null{Field} other {{field}}}",
+  "@notValidField": {
+    "placeholders": {
+      "field": {
+        "type": "String"
+      }
+    }
+  },
+  "invalidUrl": "Enter a valid URL",
   "someErrorOccured": "Some Error Occured!",
-  "requestTimeout": "Request timed out!",
-  "agreeUnsplashTerms": "By using images from Unsplash, you agree to their license and Terms of Service"
+  "requestTimeout": "Request timed out!"
 }

@@ -3,19 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../services/navigation_service.dart';
 import '../routes/routes.dart';
+import '../views/auth/sign_in_view.dart';
+import '../views/auth/sign_up_view.dart';
+import '../views/init/claim_page_view.dart';
 import '../views/landing_view.dart';
 import '../views/preview.dart';
-import '../views/scan_view.dart';
+import '../views/init/scan_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigator.navigatorKey,
-  initialLocation: kIsWeb? '/${Routes.design}/rxrsr': '/${Routes.design}/rxrsr',
+  initialLocation: kIsWeb ? '/${Routes.design}/rxrsr' : '/',
   routes: <RouteBase>[
     GoRoute(
-      name: Routes.scan,
-      path: '/${Routes.scan}',
+      path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const ScanView();
+        //return kIsWeb ? const ClaimPageView() : const ScanView();
+        return const ClaimPageView();
+      },
+    ),
+    GoRoute(
+      name: Routes.signIn,
+      path: '/${Routes.signIn}',
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignInView();
+      },
+    ),
+    GoRoute(
+      name: Routes.signUp,
+      path: '/${Routes.signUp}',
+      builder: (BuildContext context, GoRouterState state) {
+        return SignUpView(uid: state.uri.queryParameters['uid']);
       },
     ),
     GoRoute(
@@ -28,20 +45,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/:uid',
       builder: (BuildContext context, GoRouterState state) {
-        return Preview(params: state.pathParameters);
+        return Preview(uid: state.pathParameters['uid']);
       },
     ),
     GoRoute(
       name: Routes.design,
-      path: '/${Routes.design}',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LandingView();
-      },
-    ),
-    GoRoute(
       path: '/${Routes.design}/:uid',
       builder: (BuildContext context, GoRouterState state) {
-        return LandingView(params: state.pathParameters);
+        return LandingView(uid: state.pathParameters['uid']);
       },
     ),
   ],
