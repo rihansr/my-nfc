@@ -58,7 +58,7 @@ class ColorPalette {
         primary: const Color(0xFF5CFFF4),
         onPrimary: const Color(0xFF9207FF),
         primaryDark: const Color(0xFF074DFF),
-        primaryLight: const Color(0xFF573CFE),
+        primaryLight: const Color(0xFFFFFFFF),
         secondary: const Color(0xFFE64DB8),
         onSecondary: const Color(0xFFCD07FF),
         tertiary: const Color(0xFFFFFFFF),
@@ -84,7 +84,7 @@ class ColorPalette {
   factory ColorPalette.light() => ColorPalette(
         primary: const Color(0xFFF45CFF),
         onPrimary: const Color(0xFF9207FF),
-        primaryLight: const Color(0xFF573CFE),
+        primaryLight: const Color(0xFF09091a),
         primaryDark: const Color(0xFF074DFF),
         secondary: const Color(0xFFE64DB8),
         onSecondary: const Color(0xFFCD07FF),

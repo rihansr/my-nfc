@@ -10,6 +10,7 @@ class AuthViewModel extends BaseViewModel {
   TextEditingController? emailController;
   TextEditingController? passwordController;
   TextEditingController? confirmPassController;
+  TextEditingController? resetCodeController;
 
   AuthViewModel.claim(this._context)
       : usernameController = TextEditingController();
@@ -24,25 +25,46 @@ class AuthViewModel extends BaseViewModel {
         passwordController = TextEditingController(),
         confirmPassController = TextEditingController();
 
+  AuthViewModel.forgetPass(this._context)
+      : emailController = TextEditingController();
+
+  AuthViewModel.resetPass(this._context, [Map<String, dynamic>? params])
+      : emailController = TextEditingController(text: params?['email']),
+        resetCodeController =
+            TextEditingController(text: params?['reset_code']),
+        passwordController = TextEditingController(),
+        confirmPassController = TextEditingController();
+
   Future<void> claimNow() async {
-    if (formKey.currentState?.validate() ?? false) {
-      _context.goNamed(Routes.signUp,
-          queryParameters: {'url': usernameController?.text ?? ''});
-    }
+    if (!validate(formKey)) return;
+    _context.pushNamed(Routes.signUp,
+        queryParameters: {'username': usernameController?.text ?? ''});
   }
 
   Future<void> login() async {
-    if (formKey.currentState?.validate() ?? false) {
-      _context.goNamed(Routes.design,
-          pathParameters: {'uid': usernameController?.text ?? ''});
-    }
+    if (!validate(formKey)) return;
+    _context.pushNamed(Routes.design,
+        pathParameters: {'username': usernameController?.text ?? ''});
   }
 
   Future<void> register() async {
-    if (formKey.currentState?.validate() ?? false) {
-      _context.goNamed(Routes.design,
-          pathParameters: {'uid': usernameController?.text ?? ''});
-    }
+    if (!validate(formKey)) return;
+    _context.pushNamed(Routes.design,
+        pathParameters: {'username': usernameController?.text ?? ''});
+  }
+
+  Future<void> resetEmail() async {
+    if (!validate(formKey)) return;
+    _context.canPop()
+        ? _context.pop()
+        : _context.pushReplacementNamed(Routes.signIn);
+  }
+
+  Future<void> passwordReset() async {
+    if (!validate(formKey)) return;
+    _context.canPop()
+        ? _context.pop()
+        : _context.pushReplacementNamed(Routes.signIn);
   }
 
   @override
@@ -51,6 +73,7 @@ class AuthViewModel extends BaseViewModel {
     emailController?.dispose();
     passwordController?.dispose();
     confirmPassController?.dispose();
+    resetCodeController?.dispose();
     super.dispose();
   }
 }

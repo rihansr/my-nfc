@@ -24,9 +24,9 @@ class ClaimPageView extends StatelessWidget {
         builder: (context, controller, _) => Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            title: const Text(
-              'My NFC',
-              style: TextStyle(height: 1),
+            title: Text(
+              string.appName,
+              style: const TextStyle(height: 1),
             ),
             titleSpacing: 16,
             actions: [
@@ -36,7 +36,7 @@ class ClaimPageView extends StatelessWidget {
                 margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.all(16),
                 borderTint: Colors.transparent,
-                onPressed: () => context.goNamed(Routes.signIn),
+                onPressed: () => context.pushNamed(Routes.signIn),
               ),
               Button(
                 label: string.signUpForFree,
@@ -45,7 +45,7 @@ class ClaimPageView extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 16),
                 padding: const EdgeInsets.all(16),
                 borderTint: Colors.white,
-                onPressed: () => context.goNamed(Routes.signUp),
+                onPressed: () => context.pushNamed(Routes.signUp),
               ),
             ],
           ),
@@ -107,11 +107,11 @@ class ClaimPageView extends StatelessWidget {
                   );
                   final button = Button(
                     label: string.claimYourPage,
-                    fillColor: theme.colorScheme.primary,
                     margin: const EdgeInsets.all(0),
                     padding: const EdgeInsets.all(16),
-                    borderTint: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fillColor: theme.primaryColorLight,
+                    fontColor: theme.colorScheme.onTertiary,
+                    fontWeight: FontWeight.w500,
                     onPressed: () => controller.claimNow(),
                   );
                   return isMobile

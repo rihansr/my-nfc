@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
+import '../../routes/routes.dart';
 import '../../services/nfc_service.dart';
 import '../../shared/dimens.dart';
 import '../../shared/drawables.dart';
 import '../../shared/strings.dart';
+import '../../widgets/button_widget.dart';
 
 class ScanView extends StatefulWidget {
   const ScanView({super.key});
@@ -36,8 +39,17 @@ class _ScanViewState extends State<ScanView> {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: theme.scaffoldBackgroundColor,
+        automaticallyImplyLeading: true,
+        actions: [
+          Button(
+            label: string.login,
+            fontWeight: FontWeight.bold,
+            margin: const EdgeInsets.all(0),
+            padding: const EdgeInsets.all(16),
+            borderTint: Colors.transparent,
+            onPressed: () => context.pushNamed(Routes.signIn),
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

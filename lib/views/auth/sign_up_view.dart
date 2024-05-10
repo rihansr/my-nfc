@@ -141,9 +141,8 @@ class SignUpView extends StatelessWidget {
                       radius: 12,
                       label: string.signUpWithEmail,
                       fillColor: theme.primaryColorLight,
-                      fontColor: Colors.white,
+                      fontColor: theme.colorScheme.onTertiary,
                       fontWeight: FontWeight.w500,
-                      borderTint: theme.colorScheme.primary.withOpacity(0.25),
                       padding: const EdgeInsets.all(18),
                       onPressed: () => controller.register(),
                     ),
@@ -157,13 +156,15 @@ class SignUpView extends StatelessWidget {
                             text: string.signIn,
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: theme.primaryColorLight,
+                              fontWeight: FontWeight.w600,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () => uid != null
                                   ? context.pushReplacementNamed(Routes.signIn)
                                   : context.canPop()
                                       ? context.pop()
-                                      : context.pushNamed(Routes.signIn),
+                                      : context
+                                          .pushReplacementNamed(Routes.signIn),
                           ),
                         ],
                       ),

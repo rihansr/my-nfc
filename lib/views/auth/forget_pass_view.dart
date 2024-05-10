@@ -12,8 +12,8 @@ import '../../viewmodels/auth_viewmodel.dart';
 import '../../widgets/button_widget.dart';
 import '../../widgets/input_field_widget.dart';
 
-class SignInView extends StatelessWidget {
-  const SignInView({super.key});
+class ForgetPassView extends StatelessWidget {
+  const ForgetPassView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SignInView extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) =>
           ChangeNotifierProvider<AuthViewModel>.value(
-        value: AuthViewModel.signIn(context),
+        value: AuthViewModel.forgetPass(context),
         child: Consumer<AuthViewModel>(
           builder: (context, controller, _) => Scaffold(
             appBar: kIsWeb ? null : AppBar(automaticallyImplyLeading: true),
@@ -41,16 +41,16 @@ class SignInView extends StatelessWidget {
                     ListTile(
                       contentPadding: const EdgeInsets.all(0),
                       title: Text(
-                        string.signInNow,
+                        string.resetPassword,
                         style: theme.textTheme.headlineMedium?.copyWith(
                           fontSize: 36,
                         ),
                         textAlign: TextAlign.center,
                       ),
                       subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 24),
+                        padding: const EdgeInsets.only(top: 12),
                         child: Text(
-                          string.signInSubtitle,
+                          string.passwordResetSubtitle,
                           style: theme.textTheme.bodySmall,
                           textAlign: TextAlign.center,
                         ),
@@ -59,48 +59,27 @@ class SignInView extends StatelessWidget {
                     const SizedBox(height: 24),
                     Form(
                       key: controller.formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          InputField(
-                            controller: controller.emailController,
-                            hint: string.emailHint,
-                            borderRadius: 12,
-                            autoValidate: controller.enabledAutoValidate,
-                            keyboardType: TextInputType.emailAddress,
-                            margin: const EdgeInsets.symmetric(vertical: 6),
-                            padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
-                            validator: (value) =>
-                                validator.validateEmail(value),
-                          ),
-                          InputField(
-                            controller: controller.passwordController,
-                            hint: string.passwordHint,
-                            borderRadius: 12,
-                            autoValidate: controller.enabledAutoValidate,
-                            keyboardType: TextInputType.visiblePassword,
-                            obscureText: true,
-                            margin: const EdgeInsets.symmetric(vertical: 6),
-                            padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
-                            validator: (value) => validator.validatePassword(
-                              value,
-                              field: string.passwordHint,
-                            ),
-                          ),
-                        ],
+                      child: InputField(
+                        controller: controller.emailController,
+                        hint: string.emailHint,
+                        borderRadius: 12,
+                        autoValidate: controller.enabledAutoValidate,
+                        keyboardType: TextInputType.emailAddress,
+                        margin: const EdgeInsets.symmetric(vertical: 6),
+                        padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
+                        validator: (value) => validator.validateEmail(value),
                       ),
                     ),
                     const SizedBox(height: 8),
                     Button(
                       shape: BoxShape.rectangle,
                       radius: 12,
-                      label: string.signIn,
+                      label: string.resetPassword,
                       fillColor: theme.primaryColorLight,
-                      fontColor: theme.colorScheme.onTertiary,
                       fontWeight: FontWeight.w500,
+                      fontColor: theme.colorScheme.onTertiary,
                       padding: const EdgeInsets.all(18),
-                      onPressed: () => controller.login(),
+                      onPressed: () => controller.resetEmail(),
                     ),
                     const SizedBox(height: 16),
                     RichText(
@@ -115,18 +94,12 @@ class SignInView extends StatelessWidget {
                               fontWeight: FontWeight.w600,
                             ),
                             recognizer: TapGestureRecognizer()
-                              ..onTap = () => context.pushNamed(Routes.signUp),
+                              ..onTap = () =>
+                                  context.pushReplacementNamed(Routes.signUp),
                           ),
                         ],
                       ),
                       textAlign: TextAlign.center,
-                    ),
-                    TextButton(
-                      onPressed: () => context.pushNamed(Routes.signUp),
-                      child: Text(
-                        string.forgotPassword,
-                        style: theme.textTheme.bodySmall,
-                      ),
                     ),
                   ],
                 ),
