@@ -36,7 +36,6 @@ class _ScanViewState extends State<ScanView> {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: theme.scaffoldBackgroundColor,
       ),

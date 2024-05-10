@@ -68,7 +68,9 @@ class AppConfig {
 
   static const config = {
     "debug": {
-      "base": {},
+      "base": {
+        'domain': 'mynfc.com',
+      },
       'unsplash': {
         'base_url': 'https://api.unsplash.com',
         'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",
@@ -76,7 +78,9 @@ class AppConfig {
       }
     },
     "production": {
-      "base": {},
+      "base": {
+        'domain': 'mynfc.com',
+      },
       'unsplash': {
         'base_url': 'https://api.unsplash.com',
         'access_key': "yJ0MiuIpIE_aunuyDS60eqqmxsdw4ImlczJrRNXSJao",

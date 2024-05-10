@@ -29,6 +29,10 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
               )
             : null,
     appBarTheme: const AppBarTheme().copyWith(
+      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+      foregroundColor: colorPalette.icon,
+      elevation: 0,
       titleTextStyle: TextStyle(
         fontSize: 21,
         fontWeight: FontWeight.w700,

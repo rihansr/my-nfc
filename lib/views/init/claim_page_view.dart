@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:my_nfc/routes/routes.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import '../../configs/app_config.dart';
 import '../../shared/strings.dart';
 import '../../utils/validator.dart';
 import '../../viewmodels/auth_viewmodel.dart';
@@ -82,12 +83,12 @@ class ClaimPageView extends StatelessWidget {
                       expanded: isMobile,
                       hint: string.usernameHint.toLowerCase(),
                       margin: const EdgeInsets.all(0),
-                      padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
+                      padding: const EdgeInsets.all(16),
                       borderRadius: 12,
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.only(left: 6),
+                        padding: const EdgeInsets.only(left: 16),
                         child: Text(
-                          'mynfc.com/',
+                          '${appConfig.configs['base']?['domain'] ?? ''}/',
                           maxLines: 1,
                           style: theme.textTheme.bodySmall?.copyWith(
                             overflow: TextOverflow.visible,

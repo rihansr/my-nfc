@@ -138,7 +138,13 @@ class CustomValidator implements Validator {
   }
 
   @override
-  String? validatePassword(var value, {String? field, String? matchValue}) {
+  String? validatePassword(
+    var value, {
+    String? field,
+    String? matchValue,
+    int? minLength = 6,
+    int? maxLength = 40,
+  }) {
     String? message = validateField(value,
         field: field ?? string.passwordHint, minLength: 6, maxLength: 40);
     if (message != null) {

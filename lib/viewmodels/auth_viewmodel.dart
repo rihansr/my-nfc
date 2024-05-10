@@ -26,7 +26,22 @@ class AuthViewModel extends BaseViewModel {
 
   Future<void> claimNow() async {
     if (formKey.currentState?.validate() ?? false) {
-      _context.goNamed(Routes.signUp, queryParameters: {'url': usernameController?.text ?? ''});
+      _context.goNamed(Routes.signUp,
+          queryParameters: {'url': usernameController?.text ?? ''});
+    }
+  }
+
+  Future<void> login() async {
+    if (formKey.currentState?.validate() ?? false) {
+      _context.goNamed(Routes.design,
+          pathParameters: {'uid': usernameController?.text ?? ''});
+    }
+  }
+
+  Future<void> register() async {
+    if (formKey.currentState?.validate() ?? false) {
+      _context.goNamed(Routes.design,
+          pathParameters: {'uid': usernameController?.text ?? ''});
     }
   }
 

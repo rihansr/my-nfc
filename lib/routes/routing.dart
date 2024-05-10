@@ -12,13 +12,12 @@ import '../views/init/scan_view.dart';
 
 final GoRouter router = GoRouter(
   navigatorKey: navigator.navigatorKey,
-  initialLocation: kIsWeb ? '/${Routes.design}/rxrsr' : '/',
+  initialLocation: kIsWeb ? '/${Routes.design}/rxrsr' : '/sign-up',
   routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        //return kIsWeb ? const ClaimPageView() : const ScanView();
-        return const ClaimPageView();
+        return kIsWeb ? const ClaimPageView() : const ScanView();
       },
     ),
     GoRoute(

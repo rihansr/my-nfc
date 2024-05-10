@@ -1,7 +1,7 @@
 {
   "@@locale": "en",
   "@_TITLES": "<-----------------TITLES----------------->",
-  "appName": "My NFC",
+  "appName": "TouchTie",
   "scanCard": "Scan Card",
   "claimPageTitle": "The best way to say hi and stay in touch.",
   "createAnAccount": "Create an account for free",

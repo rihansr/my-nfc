@@ -34,8 +34,6 @@ class LandingView extends StatelessWidget {
             drawerScrimColor: Colors.transparent,
             extendBodyBehindAppBar: true,
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
               elevation: 0,
               automaticallyImplyLeading: false,
               iconTheme: IconThemeData(color: theme.iconTheme.color),
