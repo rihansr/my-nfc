@@ -16,7 +16,7 @@ class Preview extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) =>
           ChangeNotifierProvider<DashboardViewModel>.value(
-        value: designController ?? DashboardViewModel(uid, isPeview: true),
+        value: designController ?? DashboardViewModel(context, isPeview: true),
         child: Consumer<DashboardViewModel>(
           builder: (context, controller, _) => Scaffold(
             extendBody: true,

@@ -40,8 +40,8 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="www.google.com" />
-                <data android:scheme="https" />
+                <data android:scheme="http" android:host="www.touchtie.com" />
+                <data android:scheme="https" android:host="www.touchtie.com"/>
             </intent-filter>
 
         </activity>

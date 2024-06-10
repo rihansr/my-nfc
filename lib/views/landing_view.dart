@@ -19,11 +19,6 @@ class LandingView extends StatelessWidget {
         model: Provider.of<DashboardViewModel>(context),
         onInit: (controller) {
           controller.init(uid);
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            if (ResponsiveBreakpoints.of(context).isMobile) {
-              controller.showsModalBottomSheet(0);
-            }
-          });
         },
         builder: (context, controller, _) {
           ThemeData theme = Theme.of(context);

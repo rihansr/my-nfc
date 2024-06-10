@@ -98,7 +98,7 @@ class ThemeView extends StatelessWidget {
                   .copyWith(
                       colors: gradient.colors,
                       stops: gradient.stops?.isEmpty ?? true
-                          ? null
+                          ? [0, 0]
                           : gradient.stops),
             ),
             Seekbar(

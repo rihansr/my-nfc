@@ -36,8 +36,11 @@ class AppConfig {
             DeviceOrientation.portraitUp,
             DeviceOrientation.portraitDown,
           ]),
-        rootBundle
+          rootBundle
             .loadString("assets/files/dummy_blocks.json")
+            .then((data) => kDummyBlocks = data),
+        rootBundle
+            .loadString("assets/files/default_blocks.json")
             .then((data) => kDefaultBlocks = data),
         rootBundle
             .loadString("assets/files/additional_blocks.json")

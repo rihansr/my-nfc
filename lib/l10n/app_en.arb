@@ -177,6 +177,7 @@
   "noPasswordNfc": "Sorry, this card does not support password protection",
   "notLockableNfc": "Sorry, you can't lock this card",
   "nfcSizeExceeded": "Sorry, the data is too large for this card",
+  "wrongNfcCard": "Sorry, this card is not supported. Please use a different card",
   "agreeUnsplashTerms": "By using images from Unsplash, you agree to their license and Terms of Service",
   "emptyField": "{field, select, null{Field} other {{field}}} is required",
   "@emptyField": {

@@ -18,16 +18,27 @@ class NFC {
       NfcManager.instance.startSession(
         onDiscovered: (NfcTag tag) async {
           Ndef? ndef = Ndef.from(tag);
-          if (ndef != null) callback?.call(ndef, tag.data);
-          _log(jsonEncode(tag.data), tag: "Read Data", logOnly: true);
-          _log(utf8.decode(tag.data['nfca']['atqa']),
-              tag: "ATQA", logOnly: true);
-          for (var record
-              in tag.data['ndef']?['cachedMessage']?['records'] ?? []) {
-            _log(String.fromCharCodes(record['payload']),
-                tag: "Record", logOnly: true);
-          }
-          stop();
+          if (ndef == null) return;
+          final data = {
+            'serialNo': String.fromCharCodes(tag.data['ndef']?['identifier'] ??
+                ndef.additionalData['identifier']),
+            'atqa': utf8.decode(tag.data['nfca']?['atqa'] ?? []),
+            'type': tag.data['ndef']?['type'] ?? ndef.additionalData['type'],
+            'canMakeReadOnly': tag.data['ndef']?['canMakeReadOnly'] ??
+                ndef.additionalData['canMakeReadOnly'] ??
+                false,
+            'records': (() {
+              List records =
+                  tag.data['ndef']?['cachedMessage']?['records'] ?? [];
+              return records.isEmpty
+                  ? null
+                  : records
+                      .map((record) => String.fromCharCodes(record['payload']))
+                      .toList();
+            }()),
+          };
+          _log(jsonEncode(data['records']), tag: 'Read Data', logOnly: true);
+          callback?.call(ndef, data);
         },
       );
     } else {

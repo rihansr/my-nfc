@@ -14,5 +14,5 @@ List<SingleChildWidget> independentService = [
 
 List<SingleChildWidget> universalService = [
   ChangeNotifierProvider<DashboardViewModel>(
-      create: (context) => DashboardViewModel(null)),
+      create: (context) => DashboardViewModel(context)),
 ];

@@ -8,6 +8,8 @@ import '../../services/nfc_service.dart';
 import '../../shared/dimens.dart';
 import '../../shared/drawables.dart';
 import '../../shared/strings.dart';
+import '../../shared/styles.dart';
+import '../../utils/validator.dart';
 import '../../widgets/button_widget.dart';
 
 class ScanView extends StatefulWidget {
@@ -20,12 +22,32 @@ class ScanView extends StatefulWidget {
 class _ScanViewState extends State<ScanView> {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      NFC.instance.read(
-        callback: (ndef, data) {},
-      );
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initialize());
     super.initState();
+  }
+
+  _initialize() {
+    NFC.instance.read(
+      callback: (ndef, data) {
+        String? url = data['records']?[0];
+        if (url != null &&
+            validator.validateUrl(url) == null &&
+            url.contains('touchtie.com')) {
+          String username = url.split('/').last.trim();
+          username.isEmpty
+              ? style.showToast(string.wrongNfcCard)
+              : {
+                  NFC.instance.stop(),
+                  context.goNamed(
+                    Routes.design,
+                    pathParameters: {'username': username},
+                  )
+                };
+        } else {
+          style.showToast(string.wrongNfcCard);
+        }
+      },
+    );
   }
 
   @override
@@ -40,6 +62,7 @@ class _ScanViewState extends State<ScanView> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
+        backgroundColor: theme.scaffoldBackgroundColor,
         actions: [
           Button(
             label: string.login,
@@ -97,12 +120,8 @@ class _ScanViewState extends State<ScanView> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     HapticFeedback.lightImpact();
-                    //context.go('/rxrsr');
-                    NFC.instance
-                      ..stop()
-                      ..read(
-                        callback: (ndef, data) {},
-                      );
+                    NFC.instance.stop();
+                    _initialize();
                   },
               ),
             ],

@@ -6,6 +6,7 @@ import 'package:hive/hive.dart';
 import '../models/theme_model.dart';
 
 // Data
+late String kDummyBlocks;
 late String kDefaultBlocks;
 late String kSocialLinks;
 late String kAdditionalBlocks;
