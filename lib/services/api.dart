@@ -9,15 +9,15 @@ import '../shared/styles.dart';
 import '../utils/debug.dart';
 import '../utils/encryptor.dart';
 
-final api = Api.function;
+final api = _Api.function;
 
 enum Method { get, post, put, delete }
 
 enum InvokeType { http, dio, multipart, download }
 
-class Api {
-  static Api get function => Api._();
-  Api._();
+class _Api {
+  static _Api get function => _Api._();
+  _Api._();
 
   Future<Response> invoke({
     InvokeType? via,

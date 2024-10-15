@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../shared/colors.dart';
 import '../shared/constants.dart';
 
-ThemeData theming(BuildContext context, ThemeMode mode) {
+ThemeData theming(ThemeMode mode) {
   ColorPalette colorPalette;
   switch (mode) {
     case ThemeMode.light:
@@ -48,8 +48,6 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       onSecondary: colorPalette.onSecondary,
       tertiary: colorPalette.tertiary,
       onTertiary: colorPalette.onTertiary,
-      background: colorPalette.scaffold,
-      onBackground: colorPalette.scaffold,
       surface: colorPalette.surface,
       onSurface: colorPalette.onSurface,
       error: colorPalette.error,
@@ -200,14 +198,14 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
     checkboxTheme: CheckboxThemeData(
       visualDensity: const VisualDensity(horizontal: -4, vertical: -4),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      checkColor: MaterialStateProperty.all(colorPalette.onTertiary),
-      fillColor: MaterialStateProperty.resolveWith<Color?>(
-        (Set<MaterialState> states) => states.contains(MaterialState.selected)
+      checkColor: WidgetStateProperty.all(colorPalette.onTertiary),
+      fillColor: WidgetStateProperty.resolveWith<Color?>(
+        (Set<WidgetState> states) => states.contains(WidgetState.selected)
             ? colorPalette.primary
             : Colors.transparent,
       ),
-      side: MaterialStateBorderSide.resolveWith(
-        (states) => states.contains(MaterialState.selected)
+      side: WidgetStateBorderSide.resolveWith(
+        (states) => states.contains(WidgetState.selected)
             ? BorderSide(
                 color: colorPalette.primary,
                 strokeAlign: 0,
@@ -221,22 +219,22 @@ ThemeData theming(BuildContext context, ThemeMode mode) {
       ),
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      thumbColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return null;
         }
-        if (states.contains(MaterialState.selected)) {
+        if (states.contains(WidgetState.selected)) {
           return colorPalette.surface;
         }
         return null;
       }),
-      trackColor: MaterialStateProperty.resolveWith<Color?>(
-          (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled)) {
+      trackColor: WidgetStateProperty.resolveWith<Color?>(
+          (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled)) {
           return null;
         }
-        if (states.contains(MaterialState.selected)) {
+        if (states.contains(WidgetState.selected)) {
           return colorPalette.surface;
         }
         return null;

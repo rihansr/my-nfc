@@ -6,11 +6,11 @@ import 'package:my_nfc/services/navigation_service.dart';
 
 import 'strings.dart';
 
-final style = Style.value;
+final style = _Style.value;
 
-class Style {
-  static Style get value => Style._();
-  Style._();
+class _Style {
+  static _Style get value => _Style._();
+  _Style._();
 
   showToast(String message) => Fluttertoast.showToast(
         msg: message,

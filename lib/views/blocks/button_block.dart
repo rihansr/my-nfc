@@ -39,15 +39,15 @@ class ButtonBlock extends StatelessWidget {
                 ? null
                 : Uri.parse(configs['data']?['link'])),
         style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll((() {
+          backgroundColor: WidgetStatePropertyAll((() {
             final style =
                 Map.from(configs['data']?['style']?['background'] ?? {});
             return style['color'].toString().hexColor;
           }())),
-          minimumSize: const MaterialStatePropertyAll(Size.zero),
-          padding: MaterialStatePropertyAll(
+          minimumSize: const WidgetStatePropertyAll(Size.zero),
+          padding: WidgetStatePropertyAll(
               padding(configs['style']?['spacing']?['padding'])),
-          shape: MaterialStatePropertyAll((() {
+          shape: WidgetStatePropertyAll((() {
             final style = Map.from(configs['data']?['style']?['border'] ?? {});
 
             return RoundedRectangleBorder(

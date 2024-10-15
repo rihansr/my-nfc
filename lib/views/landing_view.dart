@@ -12,14 +12,13 @@ import 'tabs/theme_view.dart';
 
 class LandingView extends StatelessWidget {
   final String? uid;
-  const LandingView({this.uid, super.key});
+  final bool isPreview;
+  const LandingView({this.uid, this.isPreview = true, super.key});
 
   @override
   Widget build(BuildContext context) => BaseWidget<DashboardViewModel>(
         model: Provider.of<DashboardViewModel>(context),
-        onInit: (controller) {
-          controller.init(uid);
-        },
+        onInit: (controller) => controller.init(context, uid, isPreview),
         builder: (context, controller, _) {
           ThemeData theme = Theme.of(context);
           bool isMobile = ResponsiveBreakpoints.of(context).isMobile;
@@ -37,7 +36,7 @@ class LandingView extends StatelessWidget {
                   : [
                       Button(
                         label: string.save,
-                        fillColor: theme.colorScheme.background,
+                        fillColor: theme.colorScheme.surface,
                         margin: EdgeInsets.only(
                           right: controller.theme.horizontalPadding,
                         ),
@@ -45,10 +44,10 @@ class LandingView extends StatelessWidget {
                       ),
                     ],
             ),
-            drawer: isMobile
+            drawer: isMobile || controller.isPreview
                 ? null
                 : Drawer(
-                    backgroundColor: theme.colorScheme.background,
+                    backgroundColor: theme.colorScheme.surface,
                     width: (() {
                       final responsive = ResponsiveBreakpoints.of(context);
                       if (responsive.isMobile) {
@@ -85,10 +84,10 @@ class LandingView extends StatelessWidget {
                       ),
                     ),
                   ),
-            body: Preview(designController: controller),
-            bottomNavigationBar: isMobile
+            body: Preview(controller: controller),
+            bottomNavigationBar: !controller.isPreview && isMobile
                 ? Container(
-                    color: theme.colorScheme.background,
+                    color: theme.colorScheme.surface,
                     constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),
                     child: SafeArea(
                       top: false,

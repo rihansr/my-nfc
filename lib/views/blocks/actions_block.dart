@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
+import 'package:my_nfc/shared/styles.dart';
 import 'package:provider/provider.dart';
 import '../../shared/strings.dart';
 import '../../shared/constants.dart';
@@ -151,7 +152,7 @@ class ActionsBlock extends StatelessWidget {
       //webExtension.saveVCard(contact.displayName, contact.toVCard());
     } else {
       if (await FlutterContacts.requestPermission()) {
-        await contact.insert();
+        await contact.insert().then((_) => style.showToast('Saved to contact!'));
       }
     }
   }
@@ -160,12 +161,11 @@ class ActionsBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     final key = parent.key('$path/');
     final buttonStyle = ButtonStyle(
-      minimumSize: const MaterialStatePropertyAll(Size.zero),
-      padding: MaterialStatePropertyAll(
+      minimumSize: const WidgetStatePropertyAll(Size.zero),
+      padding: WidgetStatePropertyAll(
           padding(configs['style']?['spacing']?['padding'])),
-      shape: const MaterialStatePropertyAll((StadiumBorder())),
+      shape: const WidgetStatePropertyAll((StadiumBorder())),
     );
-    debug.print('ActionsBlock: $key');
 
     return Container(
       key: key,
@@ -184,7 +184,7 @@ class ActionsBlock extends StatelessWidget {
               child: TextButton(
                 onPressed: () async => await saveToPhone(context),
                 style: buttonStyle.copyWith(
-                  backgroundColor: MaterialStatePropertyAll((() {
+                  backgroundColor: WidgetStatePropertyAll((() {
                     final style = Map<String, dynamic>.from(
                         configs['data']?['style']?['background'] ?? {});
                     return style['color'].toString().hexColor;
@@ -219,7 +219,7 @@ class ActionsBlock extends StatelessWidget {
                         'https://${_primary['link'] ?? ''}${_primary['id'] ?? ''}'),
                   ),
                   style: buttonStyle.copyWith(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                         '${_primary['name']}'.socialIconColor),
                   ),
                   icon: Transform.scale(
@@ -256,7 +256,7 @@ class ActionsBlock extends StatelessWidget {
                       : 0),
               child: IconButton.filled(
                 style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                         '${_additional['name']}'.socialIconColor)),
                 onPressed: openUrl(
                   url: Uri.parse(

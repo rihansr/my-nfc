@@ -27,7 +27,7 @@ class _ScanViewState extends State<ScanView> {
   }
 
   _initialize() {
-    NFC.instance.read(
+    nfc.read(
       callback: (ndef, data) {
         String? url = data['records']?[0];
         if (url != null &&
@@ -37,7 +37,7 @@ class _ScanViewState extends State<ScanView> {
           username.isEmpty
               ? style.showToast(string.wrongNfcCard)
               : {
-                  NFC.instance.stop(),
+                  nfc.stop(),
                   context.goNamed(
                     Routes.design,
                     pathParameters: {'username': username},
@@ -52,7 +52,7 @@ class _ScanViewState extends State<ScanView> {
 
   @override
   void dispose() {
-    NFC.instance.stop();
+    nfc.stop();
     super.dispose();
   }
 
@@ -120,7 +120,7 @@ class _ScanViewState extends State<ScanView> {
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     HapticFeedback.lightImpact();
-                    NFC.instance.stop();
+                    nfc.stop();
                     _initialize();
                   },
               ),

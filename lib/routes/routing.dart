@@ -9,7 +9,6 @@ import '../views/auth/sign_in_view.dart';
 import '../views/auth/sign_up_view.dart';
 import '../views/init/claim_page_view.dart';
 import '../views/landing_view.dart';
-import '../views/preview.dart';
 import '../views/init/scan_view.dart';
 
 final GoRouter router = GoRouter(
@@ -54,20 +53,23 @@ final GoRouter router = GoRouter(
       name: Routes.preview,
       path: '/${Routes.preview}',
       builder: (BuildContext context, GoRouterState state) {
-        return const Preview();
+        return LandingView(uid: state.pathParameters['username']);
       },
     ),
     GoRoute(
       path: '/:username',
       builder: (BuildContext context, GoRouterState state) {
-        return Preview(uid: state.pathParameters['username']);
+        return LandingView(uid: state.pathParameters['username']);
       },
     ),
     GoRoute(
       name: Routes.design,
       path: '/${Routes.design}/:username',
       builder: (BuildContext context, GoRouterState state) {
-        return LandingView(uid: state.pathParameters['username']);
+        return LandingView(
+          uid: state.pathParameters['username'],
+          isPreview: false,
+        );
       },
     ),
   ],

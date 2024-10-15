@@ -13,7 +13,7 @@ import 'base_viewmodel.dart';
 
 class DashboardViewModel extends BaseViewModel {
   final BuildContext context;
-  final bool isPreview;
+  late bool isPreview;
   late String? _uid;
   final GlobalKey<ScaffoldState> scaffoldKey;
   late ThemeModel _theme;
@@ -21,9 +21,8 @@ class DashboardViewModel extends BaseViewModel {
   late Map<String, dynamic> designStructure;
   late Debouncer _scrollingDebounce;
 
-  DashboardViewModel(this.context, {bool isPeview = false})
-      : isPreview = isPeview,
-        scaffoldKey = GlobalKey<ScaffoldState>(),
+  DashboardViewModel(this.context)
+      : scaffoldKey = GlobalKey<ScaffoldState>(),
         defaultStructure = jsonDecode(kDefaultBlocks);
 
   // Keys
@@ -59,8 +58,9 @@ class DashboardViewModel extends BaseViewModel {
   List<Map<String, dynamic>> get footers =>
       designStructure.filterBy(const MapEntry('subBlock', 'actions_footer'));
 
-  init(String? uid) {
+  init(BuildContext context, String? uid, bool isPreview) {
     _uid = uid;
+    this.isPreview = isPreview;
 
     _theme = (() {
       String? theme = localDb.get('${_uid ?? ''}_theme');
@@ -70,7 +70,9 @@ class DashboardViewModel extends BaseViewModel {
     }());
 
     final designData = localDb.get('${_uid ?? ''}_design');
-    designStructure = jsonDecode(designData ?? (_uid == 'rxrsr' ? kDummyBlocks : kDefaultBlocks));
+    designStructure = jsonDecode(
+      designData ?? (_uid == 'rxrsr' ? kDummyBlocks : kDefaultBlocks),
+    );
 
     _scrollingDebounce =
         Debouncer(duraction: const Duration(milliseconds: 100));
@@ -78,7 +80,7 @@ class DashboardViewModel extends BaseViewModel {
     if (designData != null) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (ResponsiveBreakpoints.of(context).isMobile) {
-        showsModalBottomSheet(0);
+        showsModalBottomSheet();
       }
     });
   }
@@ -96,7 +98,8 @@ class DashboardViewModel extends BaseViewModel {
     localDb.put('${_uid ?? ''}_design', jsonEncode(designStructure));
   }
 
-  showsModalBottomSheet(int tab) => scaffoldKey.currentState?.showBottomSheet(
+  showsModalBottomSheet([int tab = 0]) =>
+      scaffoldKey.currentState?.showBottomSheet(
         constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),
         (context) => DraggableScrollableSheet(
           initialChildSize: .46,

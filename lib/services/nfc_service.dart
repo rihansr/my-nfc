@@ -7,9 +7,11 @@ import '../shared/strings.dart';
 import '../shared/styles.dart';
 import '../utils/debug.dart';
 
-class NFC {
-  static NFC get instance => NFC._();
-  NFC._();
+final nfc = _NFC.instance;
+
+class _NFC {
+  static _NFC get instance => _NFC._();
+  _NFC._();
 
   Future<bool> isAvailable() async => await NfcManager.instance.isAvailable();
 

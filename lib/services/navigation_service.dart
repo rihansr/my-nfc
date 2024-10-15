@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-final navigator = NavigationService.value;
+final navigator = _NavigationService.value;
 
-class NavigationService {
-  static NavigationService get value => NavigationService._();
-  NavigationService._();
+class _NavigationService {
+  static _NavigationService get value => _NavigationService._();
+  _NavigationService._();
 
   final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();

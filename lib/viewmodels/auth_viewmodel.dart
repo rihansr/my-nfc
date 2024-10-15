@@ -16,7 +16,7 @@ class AuthViewModel extends BaseViewModel {
       : usernameController = TextEditingController();
 
   AuthViewModel.signIn(this._context)
-      : emailController = TextEditingController(),
+      : usernameController = TextEditingController(),
         passwordController = TextEditingController();
 
   AuthViewModel.signUp(this._context, [String? uid])
@@ -37,20 +37,26 @@ class AuthViewModel extends BaseViewModel {
 
   Future<void> claimNow() async {
     if (!validate(formKey)) return;
-    _context.pushNamed(Routes.signUp,
-        queryParameters: {'username': usernameController?.text ?? ''});
+    _context.pushNamed(
+      Routes.signUp,
+      queryParameters: {'username': usernameController?.text ?? ''},
+    );
   }
 
   Future<void> login() async {
     if (!validate(formKey)) return;
-    _context.pushNamed(Routes.design,
-        pathParameters: {'username': usernameController?.text ?? ''});
+    _context.goNamed(
+      Routes.design,
+      pathParameters: {'username': usernameController?.text ?? ''},
+    );
   }
 
   Future<void> register() async {
     if (!validate(formKey)) return;
-    _context.pushNamed(Routes.design,
-        pathParameters: {'username': usernameController?.text ?? ''});
+    _context.goNamed(
+      Routes.design,
+      pathParameters: {'username': usernameController?.text ?? ''},
+    );
   }
 
   Future<void> resetEmail() async {

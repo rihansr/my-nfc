@@ -1,9 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import '../../configs/app_config.dart';
 import '../../routes/routes.dart';
 import '../../shared/dimens.dart';
 import '../../shared/strings.dart';
@@ -30,7 +32,6 @@ class SignInView extends StatelessWidget {
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: dimen.maxMobileWidth,
-                  minHeight: constraints.maxHeight,
                 ),
                 padding: EdgeInsets.fromLTRB(16, 0, 16, dimen.bottom(16)),
                 alignment: isMobile ? null : Alignment.center,
@@ -64,6 +65,33 @@ class SignInView extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           InputField(
+                            controller: controller.usernameController,
+                            hint: string.usernameHint.toLowerCase(),
+                            borderRadius: 12,
+                            autoValidate: controller.enabledAutoValidate,
+                            margin: const EdgeInsets.symmetric(vertical: 6),
+                            padding: const EdgeInsets.fromLTRB(16, 20, 16, 20),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(left: 16),
+                              child: Text(
+                                '${appConfig.configs['base']?['domain'] ?? ''}/',
+                                maxLines: 1,
+                                style: theme.textTheme.bodySmall?.copyWith(
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                            ),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                            ],
+                            validator: (value) => validator.validateField(
+                              value,
+                              field: string.passwordHint,
+                              minLength: 3,
+                            ),
+                          ),
+                          /*
+                          InputField(
                             controller: controller.emailController,
                             hint: string.emailHint,
                             borderRadius: 12,
@@ -74,6 +102,7 @@ class SignInView extends StatelessWidget {
                             validator: (value) =>
                                 validator.validateEmail(value),
                           ),
+                          */
                           InputField(
                             controller: controller.passwordController,
                             hint: string.passwordHint,
@@ -122,7 +151,7 @@ class SignInView extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     TextButton(
-                      onPressed: () => context.pushNamed(Routes.signUp),
+                      onPressed: () => context.pushNamed(Routes.forgetPass),
                       child: Text(
                         string.forgotPassword,
                         style: theme.textTheme.bodySmall,

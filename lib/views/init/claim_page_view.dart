@@ -36,7 +36,7 @@ class ClaimPageView extends StatelessWidget {
                 margin: const EdgeInsets.all(0),
                 padding: const EdgeInsets.all(16),
                 borderTint: Colors.transparent,
-                onPressed: () => context.pushNamed(Routes.signIn),
+                onPressed: () => context.goNamed(Routes.signIn),
               ),
               Button(
                 label: string.signUpForFree,
@@ -45,7 +45,7 @@ class ClaimPageView extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 16),
                 padding: const EdgeInsets.all(16),
                 borderTint: Colors.white,
-                onPressed: () => context.pushNamed(Routes.signUp),
+                onPressed: () => context.goNamed(Routes.signUp),
               ),
             ],
           ),

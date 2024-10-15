@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../shared/dimens.dart';
 import '../viewmodels/dashboard_viewmodel.dart';
 import 'blocks/actions_block.dart';
@@ -8,17 +7,14 @@ import 'blocks/section_block.dart';
 
 class Preview extends StatelessWidget {
   final String? uid;
-  final DashboardViewModel? designController;
-  const Preview({super.key, this.uid, this.designController});
+  final DashboardViewModel controller;
+  const Preview({super.key, this.uid, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) =>
-          ChangeNotifierProvider<DashboardViewModel>.value(
-        value: designController ?? DashboardViewModel(context, isPeview: true),
-        child: Consumer<DashboardViewModel>(
-          builder: (context, controller, _) => Scaffold(
+          Scaffold(
             extendBody: true,
             body: Align(
               alignment: Alignment.topCenter,
@@ -78,8 +74,6 @@ class Preview extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
     );
   }
 }

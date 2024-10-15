@@ -33,7 +33,6 @@ class SignUpView extends StatelessWidget {
               child: Container(
                 constraints: BoxConstraints(
                   maxWidth: dimen.maxMobileWidth,
-                  minHeight: constraints.maxHeight,
                 ),
                 padding: EdgeInsets.fromLTRB(16, 0, 16, dimen.bottom(16)),
                 alignment: isMobile ? null : Alignment.center,

@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '/models/settings_model.dart';
 
-final sharedPrefs = SharedPrefs.value;
+final sharedPrefs = _SharedPrefs.value;
 
-class SharedPrefs {
-  static SharedPrefs get value => SharedPrefs._();
-  SharedPrefs._();
+class _SharedPrefs {
+  static _SharedPrefs get value => _SharedPrefs._();
+  _SharedPrefs._();
 
   late SharedPreferences _sharedPrefs;
 
