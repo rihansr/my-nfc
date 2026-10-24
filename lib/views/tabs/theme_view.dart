@@ -16,11 +16,7 @@ class ThemeView extends StatelessWidget {
   final DashboardViewModel parentController;
   final ScrollController? scrollController;
 
-  const ThemeView(
-    this.parentController, {
-    super.key,
-    this.scrollController,
-  });
+  const ThemeView(this.parentController, {super.key, this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +49,12 @@ class ThemeView extends StatelessWidget {
                   groupValue: kThemes[i],
                   value: controller.theme,
                   onSelected: (theme) => controller
-                    ..designStructure.modify(
-                      {
-                        'textColor': theme.textColor.toHex,
-                        'borderColor': theme.iconColor.toHex,
-                        'labelColor': theme.iconColor.toHex,
-                        'dividerColor': theme.dividerColor.toHex,
-                      },
-                    )
+                    ..designStructure.modify({
+                      'textColor': theme.textColor.toHex,
+                      'borderColor': theme.iconColor.toHex,
+                      'labelColor': theme.iconColor.toHex,
+                      'dividerColor': theme.dividerColor.toHex,
+                    })
                     ..theme = theme.inheritFrom(controller.theme),
                 ),
               ),
@@ -81,12 +75,10 @@ class ThemeView extends StatelessWidget {
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               onPick: (color) => controller
-                ..designStructure.modify(
-                  {
-                    'borderColor': color.toHex,
-                    'labelColor': color.toHex,
-                  },
-                )
+                ..designStructure.modify({
+                  'borderColor': color.toHex,
+                  'labelColor': color.toHex,
+                })
                 ..theme = controller.theme.copyWith(iconColor: color),
             ),
             GradientPicker(
@@ -94,12 +86,13 @@ class ThemeView extends StatelessWidget {
               value: controller.theme.background,
               gradientColors: kThemes.map((e) => e.background).toList(),
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              onPick: (gradient) => controller.theme = controller.theme
-                  .copyWith(
-                      colors: gradient.colors,
-                      stops: gradient.stops?.isEmpty ?? true
-                          ? [0, 0]
-                          : gradient.stops),
+              onPick: (gradient) =>
+                  controller.theme = controller.theme.copyWith(
+                    colors: gradient.colors,
+                    stops: gradient.stops?.isEmpty ?? true
+                        ? [0, 0]
+                        : gradient.stops,
+                  ),
             ),
             Seekbar(
               title: string.horizontalPadding,
@@ -108,8 +101,9 @@ class ThemeView extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(16, 8, 16, 8),
               value: controller.theme.horizontalPadding,
               maintainState: false,
-              onChanged: (val) => controller.theme =
-                  controller.theme.copyWith(horizontalPadding: val.toDouble()),
+              onChanged: (val) => controller.theme = controller.theme.copyWith(
+                horizontalPadding: val.toDouble(),
+              ),
             ),
             Dropdown<String?>(
               title: string.typography,
@@ -118,8 +112,10 @@ class ThemeView extends StatelessWidget {
               value: controller.theme.fontFamily,
               maintainState: false,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
-              selectedItemBuilder: (item) =>
-                  Text(item ?? string.fromThemeSettings),
+              selectedItemBuilder: (item) => Text(
+                item ?? string.fromThemeSettings,
+                style: item == null ? null : GoogleFonts.getFont(item),
+              ),
               itemBuilder: (item) => Text(
                 item ?? string.fromThemeSettings,
                 style: item == null
@@ -130,11 +126,7 @@ class ThemeView extends StatelessWidget {
                       ),
               ),
               onSelected: (String? font) => controller
-                ..designStructure.modify(
-                  {
-                    'typography': font,
-                  },
-                )
+                ..designStructure.modify({'typography': font})
                 ..theme = controller.theme.copyWith(fontFamily: font),
             ),
             ColourPicker(
@@ -143,11 +135,7 @@ class ThemeView extends StatelessWidget {
               colors: kColors,
               margin: const EdgeInsets.fromLTRB(16, 12, 16, 12),
               onPick: (color) => controller
-                ..designStructure.modify(
-                  {
-                    'dividerColor': color.toHex,
-                  },
-                )
+                ..designStructure.modify({'dividerColor': color.toHex})
                 ..theme = controller.theme.copyWith(dividerColor: color),
             ),
           ];

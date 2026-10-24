@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart' show GoogleFonts;
 import 'package:hive/hive.dart';
 import '../models/theme_model.dart';
 
@@ -16,35 +17,9 @@ final List<Map<String, dynamic>> kCountryCodes = [];
 // Fonts
 const String kFontFamily = "Inter";
 
-const List<String?> kFontFamilys = [
-  'Roboto',
-  'Open Sans',
-  'Work Sans',
-  'DM Sans',
-  'Bebas Neue',
-  'Roboto Condensed',
-  'Roboto Slab',
-  'Lato',
-  'Poppins',
-  'Playfair Display',
-  'Oswald',
-  'Source Sans 3',
-  'Lora',
-  'Raleway',
-  'Merriweather',
-  'Rubik',
-  'Fira Sans',
-  'Nunito',
-  'Montserrat',
-  'Quicksand',
-  'Ubuntu',
-  'Inter',
-  'PT Serif',
-  'League Spartan',
-  'Titillium Web',
-  'Alegreya',
-  'Inconsolata',
-];
+final List<String> kFontFamilys = List.unmodifiable(
+  GoogleFonts.asMap().keys.toList()..sort(),
+);
 
 const List<String> kFontWeights = [
   'thin',

@@ -1,728 +1,728 @@
 [
-    {
-        "block": "section",
-        "subBlock": "section_image_link",
-        "label": "Link with Image",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "removable": true,
-            "dragable": true,
-            "expandConfigs": true,
-            "advanced": {
-                "linkTo": null,
-                "openInNewTab": true
-            }
-        },
-        "style": {
-            "background": {
-                "image": {
-                    "path": null,
-                    "style": {
-                        "scale": 1.0
-                    }
-                }
-            },
-            "alignment": {
-                "vertical": "top",
-                "horizontal": "left"
-            },
-            "overlay": {
-                "color": "#FF000000",
-                "opacity": 40
-            },
-            "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "padding": {
-                    "horizontal": 30,
-                    "vertical": 25
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "fields": [
-                {
-                    "block": "text",
-                    "label": "Text",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true
-                    },
-                    "style": {
-                        "background": {
-                            "color": "#00000000"
-                        },
-                        "spacing": {
-                            "limit": {
-                                "padding": {
-                                    "min": 0,
-                                    "max": 200
-                                },
-                                "margin": {
-                                    "min": -200,
-                                    "max": 200
-                                }
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        }
-                    },
-                    "data": {
-                        "content": null,
-                        "style": {
-                            "text": {
-                                "typography": null,
-                                "fontSize": 32,
-                                "textColor": null,
-                                "fontWeight": "reqular",
-                                "alignment": null
-                            }
-                        }
-                    }
-                },
-                {
-                    "block": "text",
-                    "label": "Text",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true
-                    },
-                    "style": {
-                        "spacing": {
-                            "limit": {
-                                "padding": {
-                                    "min": 0,
-                                    "max": 200
-                                },
-                                "margin": {
-                                    "min": -200,
-                                    "max": 200
-                                }
-                            },
-                            "padding": {
-                                "horizontal": 0,
-                                "vertical": 0
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        }
-                    },
-                    "data": {
-                        "content": null,
-                        "style": {
-                            "text": {
-                                "typography": null,
-                                "textColor": null,
-                                "fontSize": 19,
-                                "fontWeight": "reqular",
-                                "alignment": null
-                            }
-                        }
-                    }
-                },
-                {
-                    "block": "button",
-                    "label": "Button",
-                    "settings": {
-                        "primary": false,
-                        "visible": true,
-                        "removable": true,
-                        "advanced": {
-                            "openInNewTab": true,
-                            "disabled": false
-                        }
-                    },
-                    "style": {
-                        "fullWidth": false,
-                        "spacing": {
-                            "limit": {
-                                "padding": {
-                                    "min": 0,
-                                    "max": 200
-                                },
-                                "margin": {
-                                    "min": -200,
-                                    "max": 200
-                                }
-                            },
-                            "padding": {
-                                "horizontal": 16,
-                                "vertical": 8
-                            },
-                            "margin": {
-                                "top": 0,
-                                "bottom": 0,
-                                "left": 0,
-                                "right": 0
-                            }
-                        }
-                    },
-                    "data": {
-                        "label": {
-                            "text": "Button"
-                        },
-                        "link": null,
-                        "style": {
-                            "background": {
-                                "color": "#00000000"
-                            },
-                            "text": {
-                                "typography": null,
-                                "labelColor": null,
-                                "fontSize": 16,
-                                "fontWeight": "regular"
-                            },
-                            "border": {
-                                "borderColor": null,
-                                "borderWidth": 1,
-                                "borderRadius": 4
-                            }
-                        }
-                    }
-                }
-            ]
-        }
+  {
+    "block": "section",
+    "subBlock": "section_image_link",
+    "label": "Link with Image",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true,
+      "dragable": true,
+      "expandConfigs": true,
+      "advanced": {
+        "linkTo": null,
+        "openInNewTab": true
+      }
     },
-    {
-        "block": "text",
-        "label": "Text",
-        "settings": {
+    "style": {
+      "background": {
+        "image": {
+          "path": null,
+          "style": {
+            "scale": 1
+          }
+        }
+      },
+      "alignment": {
+        "vertical": "top",
+        "horizontal": "left"
+      },
+      "overlay": {
+        "color": "#FF000000",
+        "opacity": 40
+      },
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 30,
+          "vertical": 25
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "fields": [
+        {
+          "block": "text",
+          "label": "Text",
+          "settings": {
             "primary": false,
             "visible": true,
             "removable": true
-        },
-        "style": {
+          },
+          "style": {
+            "background": {
+              "color": "#00000000"
+            },
             "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
+              "limit": {
                 "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
+                  "min": 0,
+                  "max": 200
                 },
                 "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
+                  "min": -200,
+                  "max": 200
                 }
+              },
+              "padding": {
+                "horizontal": 0,
+                "vertical": 0
+              },
+              "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+              }
             }
-        },
-        "data": {
+          },
+          "data": {
             "content": null,
             "style": {
-                "text": {
-                    "typography": null,
-                    "textColor": null,
-                    "fontSize": 16,
-                    "fontWeight": "reqular",
-                    "alignment": null
-                }
+              "text": {
+                "typography": null,
+                "fontSize": 32,
+                "textColor": null,
+                "fontWeight": "reqular",
+                "alignment": null
+              }
             }
-        }
-    },
-    {
-        "block": "video",
-        "label": "Online Video",
-        "settings": {
+          }
+        },
+        {
+          "block": "text",
+          "label": "Text",
+          "settings": {
             "primary": false,
             "visible": true,
             "removable": true
-        },
-        "style": {
-            "background": {
-                "color": "#000000"
-            },
+          },
+          "style": {
             "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
+              "limit": {
                 "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
+                  "min": 0,
+                  "max": 200
                 },
                 "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
+                  "min": -200,
+                  "max": 200
                 }
+              },
+              "padding": {
+                "horizontal": 0,
+                "vertical": 0
+              },
+              "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+              }
             }
-        },
-        "data": {
-            "link": null,
+          },
+          "data": {
+            "content": null,
             "style": {
-                "aspectRatio": null
-            },
-            "configs": {
-                "autoPlay": false,
-                "loop": false,
-                "showControls": true,
-                "mute": false,
-                "allowFullScreen": false,
-                "startAt": null,
-                "endAt": null
+              "text": {
+                "typography": null,
+                "textColor": null,
+                "fontSize": 19,
+                "fontWeight": "reqular",
+                "alignment": null
+              }
             }
-        }
-    },
-    {
-        "block": "divider",
-        "label": "Line Break",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "removable": true
+          }
         },
-        "style": {
-            "spacing": {
-                "limit": {
-                    "margin": {
-                        "min": 0,
-                        "max": 120
-                    },
-                    "padding": {
-                        "min": 0,
-                        "max": 120
-                    }
-                },
-                "margin": {
-                    "top": 25,
-                    "bottom": 25
-                },
-                "padding": {
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "style": {
-                "height": 1,
-                "dividerColor": null
-            }
-        }
-    },
-    {
-        "block": "section",
-        "subBlock": "section_background",
-        "label": "Section (Image Background)",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true,
-            "expandConfigs": true
-        },
-        "style": {
-            "background": {
-                "image": {
-                    "path": null,
-                    "style": {
-                        "scale": 1.0
-                    }
-                }
-            },
-            "alignment": {
-                "vertical": "top",
-                "horizontal": "left"
-            },
-            "overlay": {
-                "color": "#00000000",
-                "opacity": 40
-            },
-            "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "fields": []
-        }
-    },
-    {
-        "block": "section",
-        "label": "Section",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true
-        },
-        "style": {
-            "background": {
-                "color": "#000000"
-            },
-            "fullWidth": true,
-            "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "fields": []
-        }
-    },
-    {
-        "block": "section",
-        "subBlock": "section_secure",
-        "label": "Secure Section",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true
-        },
-        "style": {
-            "background": {
-                "color": "#00000000"
-            },
-            "fullWidth": true,
-            "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "padding": {
-                    "horizontal": 0,
-                    "vertical": 0
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "fields": []
-        }
-    },
-    {
-        "block": "image",
-        "label": "Image",
-        "settings": {
+        {
+          "block": "button",
+          "label": "Button",
+          "settings": {
             "primary": false,
             "visible": true,
             "removable": true,
-            "expandConfigs": true,
             "advanced": {
-                "linkTo": null,
-                "openInNewTab": true
+              "openInNewTab": true,
+              "disabled": false
             }
-        },
-        "style":{
-            "spacing": {
-                "limit": {
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "path": null
-        }
-    },
-    {
-        "block": "button",
-        "label": "Button",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "removable": true,
-            "additional": {
-                "openInNewTab": true,
-                "disabled": false
-            }
-        },
-        "style": {
+          },
+          "style": {
             "fullWidth": false,
             "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
+              "limit": {
                 "padding": {
-                    "horizontal": 16,
-                    "vertical": 8
+                  "min": 0,
+                  "max": 200
                 },
                 "margin": {
-                    "top": 8,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
+                  "min": -200,
+                  "max": 200
                 }
+              },
+              "padding": {
+                "horizontal": 16,
+                "vertical": 8
+              },
+              "margin": {
+                "top": 0,
+                "bottom": 0,
+                "left": 0,
+                "right": 0
+              }
             }
-        },
-        "data": {
+          },
+          "data": {
             "label": {
-                "text": "Button"
+              "text": "Button"
             },
             "link": null,
             "style": {
-                "background": {
-                    "color": "#00000000"
-                },
-                "text": {
-                    "typography": null,
-                    "labelColor": null,
-                    "fontSize": 16,
-                    "fontWeight": "regular"
-                },
-                "border": {
-                    "borderColor": null,
-                    "borderWidth": 1,
-                    "borderRadius": 4
-                }
+              "background": {
+                "color": "#00000000"
+              },
+              "text": {
+                "typography": null,
+                "labelColor": null,
+                "fontSize": 16,
+                "fontWeight": "regular"
+              },
+              "border": {
+                "borderColor": null,
+                "borderWidth": 1,
+                "borderRadius": 4
+              }
             }
+          }
         }
-    },
-    {
-        "block": "links",
-        "label": "Social Media",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true
-        },
-        "data": {
-            "links": []
-        }
-    },
-    {
-        "block": "links",
-        "subBlock": "links_public",
-        "label": "Public Social Media",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true
-        },
-        "data": {
-            "links": []
-        }
-    },
-    {
-        "block": "contact",
-        "label": "Contact",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": true,
-            "removable": true
-        },
-        "data": {
-            "phoneNumbers": [],
-            "emails": [],
-            "websites": [],
-            "addresses": []
-        }
-    },
-    {
-        "block": "actions",
-        "subBlock": "actions_footer",
-        "label": "Save Contact/Contact",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "removable": true,
-            "advanced": {
-                "showSaveToPhoneButton": true,
-                "showPrimaryContactButton": true,
-                "showAdditionalContactButton": true,
-                "buttonFixedAtBottom": true
-            }
-        },
-        "style":{
-            "spacing": {
-                "limit": {
-                    "padding": {
-                        "min": 0,
-                        "max": 200
-                    },
-                    "margin": {
-                        "min": -200,
-                        "max": 200
-                    }
-                },
-                "padding": {
-                    "horizontal": 12,
-                    "vertical": 20
-                },
-                "margin": {
-                    "top": 0,
-                    "bottom": 0,
-                    "left": 0,
-                    "right": 0
-                }
-            }
-        },
-        "data": {
-            "label": {
-                "text": "Save to phone"
-            },
-            "primary": {},
-            "additional": {},
-            "style": {
-                "background": {
-                    "color": "#FF3F3F46"
-                },
-                "text": {
-                    "typography": null,
-                    "labelColor": "#FFFFFFFF",
-                    "fontSize": 14,
-                    "fontWeight": "semi-bold"
-                }
-            }
-        }
-    },
-    {
-        "block": "additional",
-        "label": "Additional Items",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "dragable": false,
-            "removable": true
-        },
-        "data": {
-            "style": {
-                "alignment": {
-                    "horizontal": "left"
-                },
-                "title": {
-                    "typography": null,
-                    "fontSize": 14,
-                    "textColor": null,
-                    "fontWeight": "bold"
-                },
-                "description": {
-                    "typography": null,
-                    "fontSize": 12,
-                    "textColor": null,
-                    "fontWeight": "reqular"
-                },
-                "hints": {
-                    "title": "e.g. Awards",
-                    "description": "e.g. Good employee"
-                }
-            },
-            "fields": []
-        }
-    },
-    {
-        "block": "space",
-        "label": "Space",
-        "settings": {
-            "primary": false,
-            "visible": true,
-            "removable": true
-        },
-        "data": {
-            "style": {
-                "height": 20
-            }
-        }
+      ]
     }
+  },
+  {
+    "block": "text",
+    "label": "Text",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true
+    },
+    "style": {
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 0,
+          "vertical": 0
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "content": null,
+      "style": {
+        "text": {
+          "typography": null,
+          "textColor": null,
+          "fontSize": 16,
+          "fontWeight": "reqular",
+          "alignment": null
+        }
+      }
+    }
+  },
+  {
+    "block": "video",
+    "label": "Online Video",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true
+    },
+    "style": {
+      "background": {
+        "color": "#000000"
+      },
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 0,
+          "vertical": 0
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "link": null,
+      "style": {
+        "aspectRatio": null
+      },
+      "configs": {
+        "autoPlay": false,
+        "loop": false,
+        "showControls": true,
+        "mute": false,
+        "allowFullScreen": false,
+        "startAt": null,
+        "endAt": null
+      }
+    }
+  },
+  {
+    "block": "divider",
+    "label": "Line Break",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true
+    },
+    "style": {
+      "spacing": {
+        "limit": {
+          "margin": {
+            "min": 0,
+            "max": 120
+          },
+          "padding": {
+            "min": 0,
+            "max": 120
+          }
+        },
+        "margin": {
+          "top": 25,
+          "bottom": 25
+        },
+        "padding": {
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "style": {
+        "height": 1,
+        "dividerColor": null
+      }
+    }
+  },
+  {
+    "block": "section",
+    "subBlock": "section_background",
+    "label": "Section (Image Background)",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true,
+      "expandConfigs": true
+    },
+    "style": {
+      "background": {
+        "image": {
+          "path": null,
+          "style": {
+            "scale": 1
+          }
+        }
+      },
+      "alignment": {
+        "vertical": "top",
+        "horizontal": "left"
+      },
+      "overlay": {
+        "color": "#00000000",
+        "opacity": 40
+      },
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 0,
+          "vertical": 0
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "fields": []
+    }
+  },
+  {
+    "block": "section",
+    "label": "Section",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true
+    },
+    "style": {
+      "background": {
+        "color": "#000000"
+      },
+      "fullWidth": true,
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 0,
+          "vertical": 0
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "fields": []
+    }
+  },
+  {
+    "block": "section",
+    "subBlock": "section_secure",
+    "label": "Secure Section",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true
+    },
+    "style": {
+      "background": {
+        "color": "#00000000"
+      },
+      "fullWidth": true,
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 0,
+          "vertical": 0
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "fields": []
+    }
+  },
+  {
+    "block": "image",
+    "label": "Image",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true,
+      "expandConfigs": true,
+      "advanced": {
+        "linkTo": null,
+        "openInNewTab": true
+      }
+    },
+    "style": {
+      "spacing": {
+        "limit": {
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "path": null
+    }
+  },
+  {
+    "block": "button",
+    "label": "Button",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true,
+      "additional": {
+        "openInNewTab": true,
+        "disabled": false
+      }
+    },
+    "style": {
+      "fullWidth": false,
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 16,
+          "vertical": 8
+        },
+        "margin": {
+          "top": 8,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "label": {
+        "text": "Button"
+      },
+      "link": null,
+      "style": {
+        "background": {
+          "color": "#00000000"
+        },
+        "text": {
+          "typography": null,
+          "labelColor": null,
+          "fontSize": 16,
+          "fontWeight": "regular"
+        },
+        "border": {
+          "borderColor": null,
+          "borderWidth": 1,
+          "borderRadius": 4
+        }
+      }
+    }
+  },
+  {
+    "block": "links",
+    "label": "Social Media",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true
+    },
+    "data": {
+      "links": []
+    }
+  },
+  {
+    "block": "links",
+    "subBlock": "links_public",
+    "label": "Public Social Media",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true
+    },
+    "data": {
+      "links": []
+    }
+  },
+  {
+    "block": "contact",
+    "label": "Contact",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": true,
+      "removable": true
+    },
+    "data": {
+      "phoneNumbers": [],
+      "emails": [],
+      "websites": [],
+      "addresses": []
+    }
+  },
+  {
+    "block": "actions",
+    "subBlock": "actions_footer",
+    "label": "Save Contact/Contact",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true,
+      "advanced": {
+        "showSaveToPhoneButton": true,
+        "showPrimaryContactButton": true,
+        "showAdditionalContactButton": true,
+        "buttonFixedAtBottom": true
+      }
+    },
+    "style": {
+      "spacing": {
+        "limit": {
+          "padding": {
+            "min": 0,
+            "max": 200
+          },
+          "margin": {
+            "min": -200,
+            "max": 200
+          }
+        },
+        "padding": {
+          "horizontal": 12,
+          "vertical": 20
+        },
+        "margin": {
+          "top": 0,
+          "bottom": 0,
+          "left": 0,
+          "right": 0
+        }
+      }
+    },
+    "data": {
+      "label": {
+        "text": "Save to phone"
+      },
+      "primary": {},
+      "additional": {},
+      "style": {
+        "background": {
+          "color": "#FF3F3F46"
+        },
+        "text": {
+          "typography": null,
+          "labelColor": "#FFFFFFFF",
+          "fontSize": 14,
+          "fontWeight": "semi-bold"
+        }
+      }
+    }
+  },
+  {
+    "block": "additional",
+    "label": "Additional Items",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "dragable": false,
+      "removable": true
+    },
+    "data": {
+      "style": {
+        "alignment": {
+          "horizontal": "left"
+        },
+        "title": {
+          "typography": null,
+          "fontSize": 14,
+          "textColor": null,
+          "fontWeight": "bold"
+        },
+        "description": {
+          "typography": null,
+          "fontSize": 12,
+          "textColor": null,
+          "fontWeight": "reqular"
+        },
+        "hints": {
+          "title": "e.g. Awards",
+          "description": "e.g. Good employee"
+        }
+      },
+      "fields": []
+    }
+  },
+  {
+    "block": "space",
+    "label": "Space",
+    "settings": {
+      "primary": false,
+      "visible": true,
+      "removable": true
+    },
+    "data": {
+      "style": {
+        "height": 20
+      }
+    }
+  }
 ]

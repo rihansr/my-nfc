@@ -204,10 +204,12 @@ class ActionsSettings extends StatelessWidget {
                 Dropdown<String?>(
                   title: string.typography,
                   hint: string.selectOne,
-                  items: const [null, ...kFontFamilys],
+                  items: [null, ...kFontFamilys],
                   value: textStyle['typography'],
-                  selectedItemBuilder: (item) =>
-                      Text(item ?? string.fromThemeSettings),
+                  selectedItemBuilder: (item) => Text(
+                    item ?? string.fromThemeSettings,
+                    style: item == null ? null : GoogleFonts.getFont(item),
+                  ),
                   itemBuilder: (item) => Text(
                     item ?? string.fromThemeSettings,
                     style: item == null

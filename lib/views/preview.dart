@@ -13,67 +13,69 @@ class Preview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints) =>
-          Scaffold(
-            extendBody: true,
-            body: Align(
-              alignment: Alignment.topCenter,
-              child: SingleChildScrollView(
-                physics: const ClampingScrollPhysics(),
-                child: Container(
-                  constraints: BoxConstraints(
-                    maxWidth: dimen.maxMobileWidth,
-                    minHeight: constraints.maxHeight,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                      horizontal: controller.theme.horizontalPadding),
-                  decoration:
-                      BoxDecoration(gradient: controller.theme.background),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ...controller.designStructure.entries
-                          .map((e) => SectionBlock(
-                                e.value,
-                                key: Key(e.key),
-                                parent: controller,
-                                path: e.key,
-                              )),
-                      const SafeArea(top: false, child: SizedBox.shrink())
-                    ],
-                  ),
-                ),
+      builder: (context, constraints) => Scaffold(
+        extendBody: true,
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: Container(
+              constraints: BoxConstraints(
+                maxWidth: dimen.maxMobileWidth,
+                minHeight: constraints.maxHeight,
               ),
-            ),
-            bottomNavigationBar: Center(
-              heightFactor: 1,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),
+              padding: EdgeInsets.symmetric(
+                horizontal: controller.theme.horizontalPadding,
+              ),
+              decoration: BoxDecoration(gradient: controller.theme.background),
+              child: SafeArea(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: controller.footers
-                      .where((element) =>
-                          (element['settings']?['advanced']
-                                  ?['buttonFixedAtBottom'] ??
-                              false) &&
-                          (element['settings']?['visible'] ?? true))
-                      .mapIndexed(
-                        (i, e) => Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: controller.theme.horizontalPadding),
-                          child: SafeArea(
-                            top: false,
-                            child:
-                                ActionsBlock(e, path: '$i', parent: controller),
-                          ),
-                        ),
-                      )
-                      .toList(),
+                  children: [
+                    ...controller.designStructure.entries.map(
+                      (e) => SectionBlock(
+                        e.value,
+                        key: Key(e.key),
+                        parent: controller,
+                        path: e.key,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
+        ),
+        bottomNavigationBar: Center(
+          heightFactor: 1,
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: controller.footers
+                  .where(
+                    (element) =>
+                        (element['settings']?['advanced']?['buttonFixedAtBottom'] ??
+                            false) &&
+                        (element['settings']?['visible'] ?? true),
+                  )
+                  .mapIndexed(
+                    (i, e) => Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: controller.theme.horizontalPadding,
+                      ),
+                      child: SafeArea(
+                        top: false,
+                        child: ActionsBlock(e, path: '$i', parent: controller),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

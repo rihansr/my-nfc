@@ -1,122 +1,140 @@
 [
-    {
-      "name": "facebook",
-      "link": "facebook.com/",
-      "hint": "username",
-      "id": null
-    },
-    {
-      "name": "instagram",
-      "link": "instagram.com/",
-      "hint": "username",
-      "id": null
-    },
-    {
-      "name": "linkedin",
-      "link": "linkedin.com/in/",
-      "hint": "username",
-      "id": null
-    },
-    {
-      "name": "twitter",
-      "link": "twitter.com/",
-      "hint": "username",
-      "id": null
-    },
-    {
-      "name": "whatsapp",
-      "link": "wa.me/",
-      "hint": "+880 1812 345678",
-      "id": null
-    },
-    {
-      "name": "youtube",
-      "link": "youtube.com/",
-      "id": null
-    },
-    {
-      "name": "snapchat",
-      "link": "snapchat.com/add/",
-      "id": null
-    },
-    {
-      "name": "tiktok",
-      "link": "tiktok.com/@",
-      "id": null
-    },
-    {
-      "name": "telegram",
-      "link": "t.me/",
-      "id": null
-    },
-    {
-      "name": "pinterest",
-      "link": "pinterest.com/",
-      "id": null
-    },
-    {
-      "name": "reddit",
-      "link": "reddit.com/user/",
-      "id": null
-    },
-    {
-      "name": "github",
-      "link": "github.com/",
-      "id": null
-    },
-    {
-      "name": "dribbble",
-      "link": "dribbble.com/",
-      "id": null
-    },
-    {
-      "name": "behance",
-      "link": "behance.net/",
-      "id": null
-    },
-    {
-      "name": "medium",
-      "link": "medium.com/@",
-      "id": null
-    },
-    {
-      "name": "tumblr",
-      "link": "tumblr.com/blog/",
-      "id": null
-    },
-    {
-      "name": "soundcloud",
-      "link": "soundcloud.com/",
-      "id": null
-    },
-    {
-      "name": "spotify",
-      "link": "open.spotify.com/user/",
-      "id": null
-    },
-    {
-      "name": "discord",
-      "link": "discord.com/users/",
-      "id": null
-    },
-    {
-      "name": "skype",
-      "link": "join.skype.com/invite/",
-      "id": null
-    },
-    {
-      "name": "viber",
-      "link": "viber.com/add/",
-      "id": null
-    },
-    {
-      "name": "line",
-      "link": "line.me/ti/p/",
-      "id": null
-    },
-    {
-      "name": "threads",
-      "link": "threads.net/",
-      "id": null
-    }
-  ]
+  {
+    "name": "facebook",
+    "link": "facebook.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "instagram",
+    "link": "instagram.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "linkedin",
+    "link": "linkedin.com/in/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "twitter",
+    "link": "x.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "whatsapp",
+    "link": "wa.me/",
+    "hint": "8801812345678",
+    "id": null
+  },
+  {
+    "name": "youtube",
+    "link": "youtube.com/@",
+    "hint": "channel",
+    "id": null
+  },
+  {
+    "name": "snapchat",
+    "link": "snapchat.com/add/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "tiktok",
+    "link": "tiktok.com/@",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "telegram",
+    "link": "t.me/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "pinterest",
+    "link": "pinterest.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "reddit",
+    "link": "reddit.com/user/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "github",
+    "link": "github.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "dribbble",
+    "link": "dribbble.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "behance",
+    "link": "behance.net/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "medium",
+    "link": "medium.com/@",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "tumblr",
+    "link": "tumblr.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "soundcloud",
+    "link": "soundcloud.com/",
+    "hint": "username",
+    "id": null
+  },
+  {
+    "name": "spotify",
+    "link": "open.spotify.com/user/",
+    "hint": "user ID",
+    "id": null
+  },
+  {
+    "name": "discord",
+    "link": "discord.com/users/",
+    "hint": "user ID",
+    "id": null
+  },
+  {
+    "name": "skype",
+    "link": "join.skype.com/invite/",
+    "hint": "invitation code",
+    "id": null
+  },
+  {
+    "name": "viber",
+    "link": "viber.com/",
+    "hint": "profile or public account link",
+    "id": null
+  },
+  {
+    "name": "line",
+    "link": "line.me/ti/p/",
+    "hint": "profile link code",
+    "id": null
+  },
+  {
+    "name": "threads",
+    "link": "threads.net/@",
+    "hint": "username",
+    "id": null
+  }
+]

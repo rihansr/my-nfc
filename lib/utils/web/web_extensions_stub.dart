@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 final webExtension = WebExtension.function;
 
 class WebExtension {
@@ -6,8 +8,12 @@ class WebExtension {
   WebExtension._();
 
   Future<void> saveVCard(String? label, String vCard) async {
-    throw UnsupportedError(
-      'Saving a vCard through the browser is only supported on web.',
-    );
+    if (kIsWeb) {
+      webExtension.saveVCard(label, vCard);
+    } else {
+      throw UnsupportedError(
+        'Saving a vCard through the browser is only supported on web.',
+      );
+    }
   }
 }
