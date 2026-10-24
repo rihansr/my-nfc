@@ -1,6 +1,6 @@
 {
-    "name": "my_nfc",
-    "short_name": "my_nfc",
+    "name": "touch_tie",
+    "short_name": "touch_tie",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
