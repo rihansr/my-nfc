@@ -30,59 +30,58 @@ class ThemeModel {
     Color? dividerColor,
     double? horizontalPadding,
     String? fontFamily,
-  }) =>
-      ThemeModel(
-        id: id ?? this.id,
-        colors: colors ?? this.colors,
-        stops: stops ?? this.stops,
-        textColor: textColor ?? this.textColor,
-        iconColor: iconColor ?? this.iconColor,
-        dividerColor: dividerColor ?? this.dividerColor,
-        horizontalPadding: horizontalPadding ?? this.horizontalPadding,
-        fontFamily: fontFamily ?? this.fontFamily,
-      );
+  }) => ThemeModel(
+    id: id ?? this.id,
+    colors: colors ?? this.colors,
+    stops: stops ?? this.stops,
+    textColor: textColor ?? this.textColor,
+    iconColor: iconColor ?? this.iconColor,
+    dividerColor: dividerColor ?? this.dividerColor,
+    horizontalPadding: horizontalPadding ?? this.horizontalPadding,
+    fontFamily: fontFamily ?? this.fontFamily,
+  );
 
   // to json
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'colors': colors.map((e) => e.value).toList(),
-        'stops': stops,
-        'textColor': textColor.value,
-        'iconColor': iconColor.value,
-        'dividerColor': dividerColor.value,
-        'horizontalPadding': horizontalPadding,
-        'fontFamily': fontFamily,
-      };
+    'id': id,
+    'colors': colors.map((e) => e.toARGB32()).toList(),
+    'stops': stops,
+    'textColor': textColor.toARGB32(),
+    'iconColor': iconColor.toARGB32(),
+    'dividerColor': dividerColor.toARGB32(),
+    'horizontalPadding': horizontalPadding,
+    'fontFamily': fontFamily,
+  };
 
   // from json
   factory ThemeModel.fromMap(Map<String, dynamic> map) => ThemeModel(
-        id: map['id'],
-        colors: (map['colors'] as List).map((e) => Color(e)).toList(),
-        stops: map['stops'] == null ? null : List<double>.from(map['stops']),
-        textColor: Color(map['textColor']),
-        iconColor: Color(map['iconColor']),
-        dividerColor: Color(map['dividerColor']),
-        horizontalPadding: map['horizontalPadding'],
-        fontFamily: map['fontFamily'],
-      );
+    id: map['id'],
+    colors: (map['colors'] as List).map((e) => Color(e)).toList(),
+    stops: map['stops'] == null ? null : List<double>.from(map['stops']),
+    textColor: Color(map['textColor']),
+    iconColor: Color(map['iconColor']),
+    dividerColor: Color(map['dividerColor']),
+    horizontalPadding: map['horizontalPadding'],
+    fontFamily: map['fontFamily'],
+  );
 
   ThemeModel inheritFrom(ThemeModel theme) => ThemeModel(
-        id: id,
-        colors: colors,
-        stops: stops,
-        textColor: textColor,
-        iconColor: iconColor,
-        dividerColor: dividerColor,
-        horizontalPadding: theme.horizontalPadding,
-        fontFamily: theme.fontFamily,
-      );
+    id: id,
+    colors: colors,
+    stops: stops,
+    textColor: textColor,
+    iconColor: iconColor,
+    dividerColor: dividerColor,
+    horizontalPadding: theme.horizontalPadding,
+    fontFamily: theme.fontFamily,
+  );
 
   Gradient get background => LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: colors,
-        stops: stops,
-      );
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: colors,
+    stops: stops,
+  );
 
   @override
   bool operator ==(Object other) {

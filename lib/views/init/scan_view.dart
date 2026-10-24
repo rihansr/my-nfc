@@ -26,7 +26,7 @@ class _ScanViewState extends State<ScanView> {
     super.initState();
   }
 
-  _initialize() {
+  void _initialize() {
     nfc.read(
       callback: (ndef, data) {
         String? url = data['records']?[0];
@@ -41,7 +41,7 @@ class _ScanViewState extends State<ScanView> {
                   context.goNamed(
                     Routes.design,
                     pathParameters: {'username': username},
-                  )
+                  ),
                 };
         } else {
           style.showToast(string.wrongNfcCard);

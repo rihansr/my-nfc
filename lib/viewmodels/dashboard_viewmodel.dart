@@ -22,8 +22,8 @@ class DashboardViewModel extends BaseViewModel {
   late Debouncer _scrollingDebounce;
 
   DashboardViewModel(this.context)
-      : scaffoldKey = GlobalKey<ScaffoldState>(),
-        defaultStructure = jsonDecode(kDefaultBlocks);
+    : scaffoldKey = GlobalKey<ScaffoldState>(),
+      defaultStructure = jsonDecode(kDefaultBlocks);
 
   // Keys
   Map<String, GlobalKey> keys = {};
@@ -36,7 +36,7 @@ class DashboardViewModel extends BaseViewModel {
     keys[path] = GlobalKey(debugLabel: path);
   }
 
-  scroll(Key? key) {
+  void scroll(Key? key) {
     String? path = key != null
         ? RegExp(r"\[<\'(.*)\'\>\]").firstMatch(key.toString())?.group(1)
         : null;
@@ -58,7 +58,7 @@ class DashboardViewModel extends BaseViewModel {
   List<Map<String, dynamic>> get footers =>
       designStructure.filterBy(const MapEntry('subBlock', 'actions_footer'));
 
-  init(BuildContext context, String? uid, bool isPreview) {
+  void init(BuildContext context, String? uid, bool isPreview) {
     _uid = uid;
     this.isPreview = isPreview;
 
@@ -74,8 +74,9 @@ class DashboardViewModel extends BaseViewModel {
       designData ?? (_uid == 'rxrsr' ? kDummyBlocks : kDefaultBlocks),
     );
 
-    _scrollingDebounce =
-        Debouncer(duraction: const Duration(milliseconds: 100));
+    _scrollingDebounce = Debouncer(
+      duraction: const Duration(milliseconds: 100),
+    );
 
     if (designData != null) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -93,12 +94,12 @@ class DashboardViewModel extends BaseViewModel {
     localDb.put('${_uid ?? ''}_theme', jsonEncode(theme.toMap()));
   }
 
-  save() {
+  void save() {
     HapticFeedback.mediumImpact();
     localDb.put('${_uid ?? ''}_design', jsonEncode(designStructure));
   }
 
-  showsModalBottomSheet([int tab = 0]) =>
+  PersistentBottomSheetController? showsModalBottomSheet([int tab = 0]) =>
       scaffoldKey.currentState?.showBottomSheet(
         constraints: BoxConstraints(maxWidth: dimen.maxMobileWidth),
         (context) => DraggableScrollableSheet(

@@ -28,7 +28,7 @@ class TextSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
@@ -37,8 +37,10 @@ class TextSettings extends StatelessWidget {
       case 'text':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
-        (settings['data']['style'] as Map<String, dynamic>)
-            .addEntry(key, value);
+        (settings['data']['style'] as Map<String, dynamic>).addEntry(
+          key,
+          value,
+        );
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -49,8 +51,10 @@ class TextSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    ThemeModel defaultTheme =
-        Provider.of<DashboardViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme = Provider.of<DashboardViewModel>(
+      context,
+      listen: false,
+    ).theme;
 
     return BlockExpansionTile.settings(
       block['settings'],
@@ -72,7 +76,8 @@ class TextSettings extends StatelessWidget {
             ? [
                 InputField(
                   controller: TextEditingController(
-                      text: block['data']?['name']?['first']),
+                    text: block['data']?['name']?['first'],
+                  ),
                   title: string.firstName,
                   keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
@@ -83,7 +88,8 @@ class TextSettings extends StatelessWidget {
                 ),
                 InputField(
                   controller: TextEditingController(
-                      text: block['data']?['name']?['middle']),
+                    text: block['data']?['name']?['middle'],
+                  ),
                   title: string.middleName,
                   keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
@@ -94,7 +100,8 @@ class TextSettings extends StatelessWidget {
                 ),
                 InputField(
                   controller: TextEditingController(
-                      text: block['data']?['name']?['last']),
+                    text: block['data']?['name']?['last'],
+                  ),
                   title: string.lastName,
                   keyboardType: TextInputType.name,
                   textCapitalization: TextCapitalization.words,
@@ -106,8 +113,9 @@ class TextSettings extends StatelessWidget {
               ]
             : [
                 InputField(
-                  controller:
-                      TextEditingController(text: block['data']?['content']),
+                  controller: TextEditingController(
+                    text: block['data']?['content'],
+                  ),
                   minLines: 2,
                   maxLines: 8,
                   title: string.content,
@@ -147,7 +155,8 @@ class TextSettings extends StatelessWidget {
         ),
         ColourPicker(
           title: string.textColor,
-          value: block['data']?['style']?['text']?['textColor']
+          value:
+              block['data']?['style']?['text']?['textColor']
                   ?.toString()
                   .hexColor ??
               defaultTheme.textColor,
@@ -161,14 +170,17 @@ class TextSettings extends StatelessWidget {
           itemBuilder: (item, isSelected) => Text(
             item,
             style: theme.textTheme.bodySmall?.copyWith(
-                color:
-                    isSelected ? theme.colorScheme.primary : theme.dividerColor,
-                fontWeight: fontWeight(item)),
+              color: isSelected
+                  ? theme.colorScheme.primary
+                  : theme.dividerColor,
+              fontWeight: fontWeight(item),
+            ),
           ),
           onSelect: (weight) => update('text', MapEntry('fontWeight', weight)),
         ),
-        if ((block['data']?['style']?['text'] as Map?)
-                ?.containsKey('alignment') ??
+        if ((block['data']?['style']?['text'] as Map?)?.containsKey(
+              'alignment',
+            ) ??
             false)
           TabWidget(
             title: string.alignment,

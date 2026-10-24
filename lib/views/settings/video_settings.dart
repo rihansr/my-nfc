@@ -21,7 +21,7 @@ class VideoSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
       case 'data':
         block.addEntry(key, value);
@@ -66,18 +66,13 @@ class VideoSettings extends StatelessWidget {
           onTyping: (text) {
             text = text.trim();
             if (text.isNotEmpty && !text.isValidUrl) return;
-            update(
-              'data',
-              MapEntry('link', text.isEmpty ? null : text),
-            );
+            update('data', MapEntry('link', text.isEmpty ? null : text));
           },
         ),
         AspectRatioSelector(
           block['data']?['style']?['aspectRatio'],
-          onSelected: (ratio) => update(
-            'style',
-            MapEntry('aspectRatio', ratio),
-          ),
+          onSelected: (ratio) =>
+              update('style', MapEntry('aspectRatio', ratio)),
         ),
         VideoConfigs(
           configs: block['data']?['configs'] ?? {},

@@ -50,7 +50,8 @@ class TabWidget extends StatelessWidget {
               child: Text(
                 title ?? '',
                 textAlign: titleAlign,
-                style: titleStyle ??
+                style:
+                    titleStyle ??
                     theme.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -59,7 +60,7 @@ class TabWidget extends StatelessWidget {
           maintainState
               ? ValueListenableBuilder(
                   valueListenable: _selectedTab,
-                  builder: (_, selectedTab, __) {
+                  builder: (_, selectedTab, _) {
                     return Wrap(
                       spacing: 8,
                       runSpacing: 8,
@@ -71,8 +72,9 @@ class TabWidget extends StatelessWidget {
                             itemBuilder: itemBuilder,
                             onTap: (tab) {
                               if (reselectable) {
-                                _selectedTab.value =
-                                    selectedTab == tab ? null : tab;
+                                _selectedTab.value = selectedTab == tab
+                                    ? null
+                                    : tab;
                               } else if (selectedTab == tab) {
                                 return;
                               } else {
@@ -97,8 +99,9 @@ class TabWidget extends StatelessWidget {
                         itemBuilder: itemBuilder,
                         onTap: (tab) {
                           if (reselectable) {
-                            onSelect
-                                ?.call(_selectedTab.value == tab ? null : tab);
+                            onSelect?.call(
+                              _selectedTab.value == tab ? null : tab,
+                            );
                           } else if (_selectedTab.value == tab) {
                             return;
                           } else {
@@ -120,7 +123,7 @@ class _TabItem extends StatelessWidget {
   final bool isSelected;
   final Widget Function(String, bool)? itemBuilder;
   final Function(String)? onTap;
-  
+
   const _TabItem({
     required this.tab,
     this.isSelected = false,
@@ -132,21 +135,21 @@ class _TabItem extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     Color tint = isSelected ? theme.colorScheme.primary : theme.dividerColor;
-    Color inverseTint =
-        isSelected ? theme.dividerColor : theme.colorScheme.primary;
+    Color inverseTint = isSelected
+        ? theme.dividerColor
+        : theme.colorScheme.primary;
 
     return InkWell(
       radius: 6,
-      highlightColor: inverseTint.withOpacity(0.25),
+      highlightColor: inverseTint.withValues(alpha: 0.25),
       onTap: () => onTap?.call(tab),
       child: Clipper(
         padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 12),
         border: Border.all(color: tint, width: 1),
         radius: 6,
-        child: itemBuilder?.call(tab, isSelected) ?? Text(
-          tab,
-          style: theme.textTheme.bodySmall?.copyWith(color: tint),
-        ),
+        child:
+            itemBuilder?.call(tab, isSelected) ??
+            Text(tab, style: theme.textTheme.bodySmall?.copyWith(color: tint)),
       ),
     );
   }

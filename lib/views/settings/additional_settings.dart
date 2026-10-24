@@ -23,7 +23,7 @@ class AdditionalSettings extends StatelessWidget {
 
   late ValueNotifier<List> fields;
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
@@ -32,8 +32,10 @@ class AdditionalSettings extends StatelessWidget {
         settings.addEntry(key, value);
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
-        (settings['data']['style'] as Map<String, dynamic>)
-            .addEntry(key, value);
+        (settings['data']['style'] as Map<String, dynamic>).addEntry(
+          key,
+          value,
+        );
       default:
         settings['data'] ??= {};
         (settings['data'] as Map<String, dynamic>).addEntry(key, value);
@@ -44,7 +46,7 @@ class AdditionalSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    
+
     return BlockExpansionTile.settings(
       block['settings'],
       key: Key('$path/'),
@@ -94,8 +96,9 @@ class AdditionalSettings extends StatelessWidget {
                     children: [
                       Expanded(
                         child: InputField(
-                          controller:
-                              TextEditingController(text: item['title']),
+                          controller: TextEditingController(
+                            text: item['title'],
+                          ),
                           title: string.title(i + 1),
                           hint: block['data']?['style']?['hints']?['title'],
                           margin: const EdgeInsets.all(0),
@@ -103,11 +106,9 @@ class AdditionalSettings extends StatelessWidget {
                           maxLines: 2,
                           textCapitalization: TextCapitalization.sentences,
                           onTyping: (value) {
-                            items[i].addEntries(
-                              [
-                                MapEntry('title', value.isEmpty ? null : value),
-                              ],
-                            );
+                            items[i].addEntries([
+                              MapEntry('title', value.isEmpty ? null : value),
+                            ]);
                             fields.value = items;
                             update('data', MapEntry('fields', items));
                           },
@@ -129,8 +130,9 @@ class AdditionalSettings extends StatelessWidget {
                     ],
                   ),
                   subtitle: InputField(
-                    controller:
-                        TextEditingController(text: item['description']),
+                    controller: TextEditingController(
+                      text: item['description'],
+                    ),
                     title: string.description(i + 1),
                     hint: block['data']?['style']?['hints']?['description'],
                     margin: const EdgeInsets.only(top: 14, right: 12),
@@ -138,9 +140,9 @@ class AdditionalSettings extends StatelessWidget {
                     minLines: 2,
                     maxLines: 8,
                     onTyping: (value) {
-                      items[i].addEntries(
-                        [MapEntry('description', value.isEmpty ? null : value)],
-                      );
+                      items[i].addEntries([
+                        MapEntry('description', value.isEmpty ? null : value),
+                      ]);
                       fields.value = items;
                       update('data', MapEntry('fields', items));
                     },
@@ -160,17 +162,10 @@ class AdditionalSettings extends StatelessWidget {
             style: TextButton.styleFrom(
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
             ),
-            icon: Icon(
-              Icons.add,
-              size: 16,
-              color: theme.iconTheme.color,
-            ),
-            label: Text(
-              string.addANewRow,
-              style: theme.textTheme.bodySmall,
-            ),
+            icon: Icon(Icons.add, size: 16, color: theme.iconTheme.color),
+            label: Text(string.addANewRow, style: theme.textTheme.bodySmall),
           ),
-        )
+        ),
       ],
     );
   }

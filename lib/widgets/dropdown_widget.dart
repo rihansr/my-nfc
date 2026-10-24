@@ -82,8 +82,9 @@ class Dropdown<T> extends StatelessWidget {
       width: width,
       margin: margin,
       child: Column(
-        crossAxisAlignment:
-            isExpanded ? CrossAxisAlignment.stretch : CrossAxisAlignment.start,
+        crossAxisAlignment: isExpanded
+            ? CrossAxisAlignment.stretch
+            : CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
           if (title?.trim().isNotEmpty ?? false)
@@ -92,7 +93,8 @@ class Dropdown<T> extends StatelessWidget {
               child: Text(
                 title ?? '',
                 textAlign: titleAlign,
-                style: titleStyle ??
+                style:
+                    titleStyle ??
                     theme.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),
@@ -119,59 +121,62 @@ class Dropdown<T> extends StatelessWidget {
                   )
                 : null,
             child: ValueListenableBuilder(
-                valueListenable: _selectedItem,
-                builder: (_, selectedItem, __) {
-                  return DropdownButton<T?>(
-                    menuMaxHeight: height,
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(borderRadius)),
-                    isDense: dense,
-                    isExpanded: isExpanded,
-                    dropdownColor: fillColor,
-                    hint: hintWidget ??
-                        Text(
-                          hint ?? '',
-                          maxLines: maxLines,
-                          style: hintStyle ??
-                              theme.textTheme.bodySmall?.copyWith(
-                                color: hintColor ?? theme.hintColor,
-                                fontSize: fontSize,
-                                fontWeight: fontWeight,
-                              ),
-                        ),
-                    value: selectedItem,
-                    style: (textStyle ?? theme.textTheme.bodySmall)?.copyWith(
-                      color: fontColor,
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    underline: const SizedBox.shrink(),
-                    items: itemBuilder == null
-                        ? null
-                        : items.map((item) {
-                            return DropdownMenuItem(
-                              value: item,
-                              child: itemBuilder!(item),
-                            );
-                          }).toList(),
-                    selectedItemBuilder: selectedItemBuilder == null
-                        ? null
-                        : (_) => items.map<Widget>((item) {
-                              return Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: selectedItemBuilder!(item));
-                            }).toList(),
-                    onChanged: (T? item) {
-                      if (_selectedItem.value == item) {
-                        return;
-                      } else if (maintainState) {
-                        _selectedItem.value = item;
-                      }
-                      onSelected?.call(item);
-                    },
-                  );
-                }),
+              valueListenable: _selectedItem,
+              builder: (_, selectedItem, _) {
+                return DropdownButton<T?>(
+                  menuMaxHeight: height,
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                  isDense: dense,
+                  isExpanded: isExpanded,
+                  dropdownColor: fillColor,
+                  hint:
+                      hintWidget ??
+                      Text(
+                        hint ?? '',
+                        maxLines: maxLines,
+                        style:
+                            hintStyle ??
+                            theme.textTheme.bodySmall?.copyWith(
+                              color: hintColor ?? theme.hintColor,
+                              fontSize: fontSize,
+                              fontWeight: fontWeight,
+                            ),
+                      ),
+                  value: selectedItem,
+                  style: (textStyle ?? theme.textTheme.bodySmall)?.copyWith(
+                    color: fontColor,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  underline: const SizedBox.shrink(),
+                  items: itemBuilder == null
+                      ? null
+                      : items.map((item) {
+                          return DropdownMenuItem(
+                            value: item,
+                            child: itemBuilder!(item),
+                          );
+                        }).toList(),
+                  selectedItemBuilder: selectedItemBuilder == null
+                      ? null
+                      : (_) => items.map<Widget>((item) {
+                          return Align(
+                            alignment: Alignment.centerLeft,
+                            child: selectedItemBuilder!(item),
+                          );
+                        }).toList(),
+                  onChanged: (T? item) {
+                    if (_selectedItem.value == item) {
+                      return;
+                    } else if (maintainState) {
+                      _selectedItem.value = item;
+                    }
+                    onSelected?.call(item);
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),

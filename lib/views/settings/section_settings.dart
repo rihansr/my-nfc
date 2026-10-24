@@ -51,130 +51,127 @@ class _SectionSettingsState extends State<SectionSettings> {
     widget.onUpdate?.call(widget.block);
   }
 
-  update(int i, Map<String, dynamic> data) {
+  void update(int i, Map<String, dynamic> data) {
     fields = data.isEmpty ? (_fields..removeAt(i)) : (_fields..[i] = data);
     if (data.isEmpty) setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> children = _fields.mapIndexed(
-      (i, e) {
-        String path = '${widget.path}/$i';
-        Key key = Key(path);
+    List<Widget> children = _fields.mapIndexed((i, e) {
+      String path = '${widget.path}/$i';
+      Key key = Key(path);
 
-        Map<String, dynamic>? defaultBlock = (() {
-          final fields =
-              List.from(widget.defaultBlock?['data']?['fields'] ?? []);
-          return fields.elementAtOrNull(i);
-        }());
+      Map<String, dynamic>? defaultBlock = (() {
+        final fields = List.from(widget.defaultBlock?['data']?['fields'] ?? []);
+        return fields.elementAtOrNull(i);
+      }());
 
-        Map<String, dynamic> block = Map.from(e);
-        switch (e['block']) {
-          case "section":
-            return SectionSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "space":
-            return SpaceSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "divider":
-            return DividerSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "text":
-            return TextSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "image":
-            return ImageSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "contact":
-            return ContactSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "info":
-            return InfoSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "links":
-            return LinksSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "button":
-            return ButtonSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "video":
-            return VideoSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "additional":
-            return AdditionalSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          case "actions":
-            return ActionsSettings(
-              key: key,
-              path: path,
-              defaultBlock: defaultBlock,
-              block: block,
-              onUpdate: (settings) => update(i, settings),
-            );
-          default:
-            return SizedBox.shrink(key: key);
-        }
-      },
-    ).toList();
+      Map<String, dynamic> block = Map.from(e);
+      switch (e['block']) {
+        case "section":
+          return SectionSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "space":
+          return SpaceSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "divider":
+          return DividerSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "text":
+          return TextSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "image":
+          return ImageSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "contact":
+          return ContactSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "info":
+          return InfoSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "links":
+          return LinksSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "button":
+          return ButtonSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "video":
+          return VideoSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "additional":
+          return AdditionalSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        case "actions":
+          return ActionsSettings(
+            key: key,
+            path: path,
+            defaultBlock: defaultBlock,
+            block: block,
+            onUpdate: (settings) => update(i, settings),
+          );
+        default:
+          return SizedBox.shrink(key: key);
+      }
+    }).toList();
 
-    Widget? footer = _fields.isEmpty ||
-            widget.block['settings']?['primary'] == false
+    Widget? footer =
+        _fields.isEmpty || widget.block['settings']?['primary'] == false
         ? PopupButton(
             items: json.decode(kAdditionalBlocks),
             label: string.addANewBlock,
@@ -186,7 +183,7 @@ class _SectionSettingsState extends State<SectionSettings> {
                 setState(() => fields = [..._fields, Map.from(item)]),
           )
         : null;
-    
+
     return BlockExpansionTile.settings(
       widget.block['settings'],
       key: Key('${widget.path}/'),

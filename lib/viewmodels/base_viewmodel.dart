@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/navigation_service.dart';
 
-T provider<T>([listen = false, BuildContext? context]) =>
+T provider<T>([bool listen = false, BuildContext? context]) =>
     Provider.of<T>(context ?? navigator.context, listen: listen);
 
 class BaseViewModel extends ChangeNotifier {
@@ -15,8 +15,9 @@ class BaseViewModel extends ChangeNotifier {
     _busy = status;
     if (key != null) _loading[key] = status;
     afterBinding
-        ? WidgetsBinding.instance
-            .addPostFrameCallback((timeStamp) => notifyListeners())
+        ? WidgetsBinding.instance.addPostFrameCallback(
+            (timeStamp) => notifyListeners(),
+          )
         : notifyListeners();
     if (status == false && key != null && _loading.containsKey(key)) {
       _loading.remove(key);
@@ -29,15 +30,18 @@ class BaseViewModel extends ChangeNotifier {
 
   Map<String, String> _errorLog = {};
   Map<String, String> get errorLog => _errorLog;
-  get clearErrorLog => errorLog = {};
+  Map<String, String> get clearErrorLog => errorLog = {};
   set errorLog(Map<String, String> log) => this
     .._errorLog = log
     ..enabledAutoValidate = true
     ..notifyListeners();
 
   bool enabledAutoValidate = false;
-  bool validate(GlobalKey<FormState> formKey,
-      {autoValidate = true, orElse = true}) {
+  bool validate(
+    GlobalKey<FormState> formKey, {
+    autoValidate = true,
+    orElse = true,
+  }) {
     bool validated =
         _errorLog.isNotEmpty || (formKey.currentState?.validate() ?? orElse);
     if (autoValidate) {
@@ -48,7 +52,7 @@ class BaseViewModel extends ChangeNotifier {
     return validated;
   }
 
-  get notify => notifyListeners();
+  void get notify => notifyListeners();
 
   @override
   void dispose() {

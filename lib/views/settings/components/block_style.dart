@@ -29,7 +29,7 @@ class BlockStyle extends StatelessWidget {
     this.onSettingsUpdate,
   });
 
-  update(String key, MapEntry<String, dynamic> entry) {
+  void update(String key, MapEntry<String, dynamic> entry) {
     Map<String, dynamic> style = Map<String, dynamic>.from(this.style);
     switch (key) {
       case 'settings':
@@ -73,27 +73,28 @@ class BlockStyle extends StatelessWidget {
                 ),
             ];
           }()),
-        ...(style['alignment'] as Map?)
-                ?.entries
-                .map((entry) => TabWidget(
-                      title: '${entry.key} ${string.alignment}'
-                          .capitalizeFirstOfEach,
-                      tabs: (() {
-                        switch (entry.key) {
-                          case 'horizontal':
-                            return kHorizontalAlignments;
-                          case 'vertical':
-                            return kVerticalAlignments;
-                          default:
-                            return List<String>.from([]);
-                        }
-                      }()),
-                      reselectable: true,
-                      value: entry.value,
-                      onSelect: (alignment) {
-                        update('alignment', MapEntry(entry.key, alignment));
-                      },
-                    ))
+        ...(style['alignment'] as Map?)?.entries
+                .map(
+                  (entry) => TabWidget(
+                    title: '${entry.key} ${string.alignment}'
+                        .capitalizeFirstOfEach,
+                    tabs: (() {
+                      switch (entry.key) {
+                        case 'horizontal':
+                          return kHorizontalAlignments;
+                        case 'vertical':
+                          return kVerticalAlignments;
+                        default:
+                          return List<String>.from([]);
+                      }
+                    }()),
+                    reselectable: true,
+                    value: entry.value,
+                    onSelect: (alignment) {
+                      update('alignment', MapEntry(entry.key, alignment));
+                    },
+                  ),
+                )
                 .toList() ??
             [],
         if (style.containsKey('overlay'))

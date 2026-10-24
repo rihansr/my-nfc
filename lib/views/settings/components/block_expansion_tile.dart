@@ -32,14 +32,14 @@ class BlockExpansionTile extends StatelessWidget {
     this.initiallyExpanded = false,
     this.children = const [],
     this.onExpansionChanged,
-  })  : settings = null,
-        style = null,
-        defaultStyle = null,
-        onUpdate = null,
-        onRemove = null,
-        visible = ValueNotifier(false),
-        childExpanded = ValueNotifier(false),
-        childrenExpanded = ValueNotifier(false);
+  }) : settings = null,
+       style = null,
+       defaultStyle = null,
+       onUpdate = null,
+       onRemove = null,
+       visible = ValueNotifier(false),
+       childExpanded = ValueNotifier(false),
+       childrenExpanded = ValueNotifier(false);
 
   BlockExpansionTile.settings(
     this.settings, {
@@ -57,9 +57,9 @@ class BlockExpansionTile extends StatelessWidget {
     this.onUpdate,
     this.onRemove,
     this.onExpansionChanged,
-  })  : visible = ValueNotifier(settings?['visible'] == true),
-        childExpanded = ValueNotifier(settings?['expandConfigs'] == true),
-        childrenExpanded = ValueNotifier(false);
+  }) : visible = ValueNotifier(settings?['visible'] == true),
+       childExpanded = ValueNotifier(settings?['expandConfigs'] == true),
+       childrenExpanded = ValueNotifier(false);
 
   final ValueNotifier<bool> visible;
   final ValueNotifier<bool> childExpanded;
@@ -76,9 +76,7 @@ class BlockExpansionTile extends StatelessWidget {
       child: ExpansionTile(
         key: Key('$key/expansion_tile'),
         shape: enableBorder
-            ? Border(
-                left: BorderSide(color: theme.colorScheme.primary),
-              )
+            ? Border(left: BorderSide(color: theme.colorScheme.primary))
             : const Border(),
         tilePadding: titlePadding,
         childrenPadding: padding,
@@ -112,38 +110,41 @@ class BlockExpansionTile extends StatelessWidget {
                   if (style != null ||
                       settings?['settings']?['advanced'] != null)
                     ValueListenableBuilder(
-                        valueListenable: childrenExpanded,
-                        builder: (_, isExpanded, __) {
-                          return IgnorePointer(
-                            ignoring: !isExpanded,
-                            child: _IconButton(
-                              onPressed: () {
-                                childExpanded.value = !childExpanded.value;
+                      valueListenable: childrenExpanded,
+                      builder: (_, isExpanded, _) {
+                        return IgnorePointer(
+                          ignoring: !isExpanded,
+                          child: _IconButton(
+                            onPressed: () {
+                              childExpanded.value = !childExpanded.value;
+                            },
+                            icon: ValueListenableBuilder(
+                              valueListenable: childExpanded,
+                              builder: (_, isChildExpanded, _) {
+                                return Icon(
+                                  Icons.settings,
+                                  color: isChildExpanded && isExpanded
+                                      ? theme.colorScheme.primary
+                                      : theme.iconTheme.color,
+                                );
                               },
-                              icon: ValueListenableBuilder(
-                                valueListenable: childExpanded,
-                                builder: (_, isChildExpanded, __) {
-                                  return Icon(
-                                    Icons.settings,
-                                    color: isChildExpanded && isExpanded
-                                        ? theme.colorScheme.primary
-                                        : theme.iconTheme.color,
-                                  );
-                                },
-                              ),
                             ),
-                          );
-                        }),
+                          ),
+                        );
+                      },
+                    ),
                   _IconButton(
                     onPressed: () {
                       if (settings?['primary'] == true) return;
                       visible.value = !visible.value;
                       onUpdate?.call(
-                          'settings', MapEntry('visible', visible.value));
+                        'settings',
+                        MapEntry('visible', visible.value),
+                      );
                     },
                     icon: ValueListenableBuilder(
                       valueListenable: visible,
-                      builder: (_, isVisible, __) {
+                      builder: (_, isVisible, _) {
                         return Icon(
                           isVisible ? Icons.visibility : Icons.visibility_off,
                           color: (settings?['primary'] ?? false)
@@ -167,7 +168,7 @@ class BlockExpansionTile extends StatelessWidget {
           if (style != null || settings?['settings']?['advanced'] != null)
             ValueListenableBuilder(
               valueListenable: childExpanded,
-              builder: (_, isExpanded, __) => AnimatedSwitcher(
+              builder: (_, isExpanded, _) => AnimatedSwitcher(
                 duration: const Duration(milliseconds: 250),
                 child: isExpanded
                     ? Container(
@@ -176,7 +177,9 @@ class BlockExpansionTile extends StatelessWidget {
                             ? const EdgeInsets.fromLTRB(12, 0, 22, 0)
                             : const EdgeInsets.all(0),
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        color: theme.colorScheme.primary.withOpacity(0.05),
+                        color: theme.colorScheme.primary.withValues(
+                          alpha: 0.05,
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           mainAxisSize: MainAxisSize.min,
@@ -190,10 +193,12 @@ class BlockExpansionTile extends StatelessWidget {
                               },
                               onSettingsUpdate: (settings) {
                                 onUpdate?.call(
-                                    'settings', MapEntry('advanced', settings));
+                                  'settings',
+                                  MapEntry('advanced', settings),
+                                );
                               },
                             ),
-                            const SizedBox(height: 16)
+                            const SizedBox(height: 16),
                           ],
                         ),
                       )
@@ -203,11 +208,7 @@ class BlockExpansionTile extends StatelessWidget {
           ...children,
           if (settings?['removable'] == true) ...[
             const SizedBox(height: 16),
-            Divider(
-              height: 1,
-              thickness: 1,
-              color: theme.colorScheme.error,
-            ),
+            Divider(height: 1, thickness: 1, color: theme.colorScheme.error),
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton.icon(
@@ -228,7 +229,7 @@ class BlockExpansionTile extends StatelessWidget {
                 ),
               ),
             ),
-          ]
+          ],
         ],
       ),
     );

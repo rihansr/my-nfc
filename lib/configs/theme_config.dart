@@ -22,12 +22,12 @@ ThemeData theming(ThemeMode mode) {
     pageTransitionsTheme: kIsWeb
         ? null
         : Platform.isAndroid
-            ? const PageTransitionsTheme(
-                builders: <TargetPlatform, PageTransitionsBuilder>{
-                  TargetPlatform.android: ZoomPageTransitionsBuilder(),
-                },
-              )
-            : null,
+        ? const PageTransitionsTheme(
+            builders: <TargetPlatform, PageTransitionsBuilder>{
+              TargetPlatform.android: ZoomPageTransitionsBuilder(),
+            },
+          )
+        : null,
     appBarTheme: const AppBarTheme().copyWith(
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
@@ -62,10 +62,7 @@ ThemeData theming(ThemeMode mode) {
     primaryColorLight: colorPalette.primaryLight,
     disabledColor: colorPalette.disable,
     hintColor: colorPalette.hint,
-    iconTheme: IconThemeData(
-      color: colorPalette.icon,
-      size: 24,
-    ),
+    iconTheme: IconThemeData(color: colorPalette.icon, size: 24),
     primarySwatch: Colors.amber,
     snackBarTheme: const SnackBarThemeData().copyWith(
       backgroundColor: colorPalette.primary,
@@ -177,11 +174,8 @@ ThemeData theming(ThemeMode mode) {
         height: 1.22,
       ),
     ),
-    tabBarTheme: TabBarTheme(
-      labelStyle: const TextStyle(
-        fontSize: 13,
-        fontWeight: FontWeight.bold,
-      ),
+    tabBarTheme: TabBarThemeData(
+      labelStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
       unselectedLabelStyle: const TextStyle(
         fontSize: 13,
         fontWeight: FontWeight.w300,
@@ -206,21 +200,14 @@ ThemeData theming(ThemeMode mode) {
       ),
       side: WidgetStateBorderSide.resolveWith(
         (states) => states.contains(WidgetState.selected)
-            ? BorderSide(
-                color: colorPalette.primary,
-                strokeAlign: 0,
-                width: 5,
-              )
-            : BorderSide(
-                color: colorPalette.title,
-                strokeAlign: 4,
-                width: 0.5,
-              ),
+            ? BorderSide(color: colorPalette.primary, strokeAlign: 0, width: 5)
+            : BorderSide(color: colorPalette.title, strokeAlign: 4, width: 0.5),
       ),
     ),
     switchTheme: SwitchThemeData(
-      thumbColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      thumbColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -229,8 +216,9 @@ ThemeData theming(ThemeMode mode) {
         }
         return null;
       }),
-      trackColor: WidgetStateProperty.resolveWith<Color?>(
-          (Set<WidgetState> states) {
+      trackColor: WidgetStateProperty.resolveWith<Color?>((
+        Set<WidgetState> states,
+      ) {
         if (states.contains(WidgetState.disabled)) {
           return null;
         }
@@ -248,6 +236,6 @@ ThemeData theming(ThemeMode mode) {
       thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 4.5),
       valueIndicatorColor: colorPalette.primary,
     ),
-    bottomAppBarTheme: const BottomAppBarTheme(color: Colors.transparent),
+    bottomAppBarTheme: const BottomAppBarThemeData(color: Colors.transparent),
   );
 }

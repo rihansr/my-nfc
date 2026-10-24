@@ -17,10 +17,12 @@ class InfoSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, String value) {
+  void update(String key, String value) {
     block['data'] ??= {};
-    (block['data'] as Map<String, dynamic>)
-        .addEntry(key, MapEntry('text', value));
+    (block['data'] as Map<String, dynamic>).addEntry(
+      key,
+      MapEntry('text', value),
+    );
     onUpdate?.call(block);
   }
 
@@ -40,8 +42,8 @@ class InfoSettings extends StatelessWidget {
       },
       onRemove: () => onUpdate?.call({}),
       padding: const EdgeInsets.fromLTRB(12, 0, 22, 8),
-      children: (block['data'] as Map<String, dynamic>?)
-              ?.entries
+      children:
+          (block['data'] as Map<String, dynamic>?)?.entries
               .map(
                 (e) => InputField(
                   controller: TextEditingController(text: e.value['text']),

@@ -30,7 +30,7 @@ class ButtonSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
@@ -41,8 +41,10 @@ class ButtonSettings extends StatelessWidget {
       case 'border':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
-        (settings['data']['style'] as Map<String, dynamic>)
-            .addEntry(key, value);
+        (settings['data']['style'] as Map<String, dynamic>).addEntry(
+          key,
+          value,
+        );
       case 'advanced':
         settings['settings'] ??= {};
         (settings['settings'] as Map<String, dynamic>).addEntry(key, value);
@@ -56,8 +58,10 @@ class ButtonSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    ThemeModel defaultTheme =
-        Provider.of<DashboardViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme = Provider.of<DashboardViewModel>(
+      context,
+      listen: false,
+    ).theme;
 
     return BlockExpansionTile.settings(
       block['settings'],
@@ -76,15 +80,14 @@ class ButtonSettings extends StatelessWidget {
       maintainState: true,
       children: [
         InputField(
-          controller:
-              TextEditingController(text: block['data']?['label']?['text']),
+          controller: TextEditingController(
+            text: block['data']?['label']?['text'],
+          ),
           title: string.buttonText,
           textCapitalization: TextCapitalization.sentences,
           maxLines: 2,
-          onTyping: (text) => update(
-            'label',
-            MapEntry('text', text.isEmpty ? null : text),
-          ),
+          onTyping: (text) =>
+              update('label', MapEntry('text', text.isEmpty ? null : text)),
         ),
         InputField(
           controller: TextEditingController(text: block['data']?['link']),
@@ -99,10 +102,7 @@ class ButtonSettings extends StatelessWidget {
           onTyping: (text) {
             text = text.trim();
             if (text.isNotEmpty && !text.isValidUrl) return;
-            update(
-              'data',
-              MapEntry('link', text.isEmpty ? null : text),
-            );
+            update('data', MapEntry('link', text.isEmpty ? null : text));
           },
         ),
         BlockExpansionTile(
@@ -110,7 +110,8 @@ class ButtonSettings extends StatelessWidget {
           children: [
             ColourPicker(
               title: string.borderColor,
-              value: block['data']?['style']?['border']?['borderColor']
+              value:
+                  block['data']?['style']?['border']?['borderColor']
                       ?.toString()
                       .hexColor ??
                   defaultTheme.iconColor,
@@ -121,8 +122,8 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderThickness,
               type: 'px',
-              defaultValue: defaultBlock?['data']?['style']?['border']
-                      ?['borderWidth'] ??
+              defaultValue:
+                  defaultBlock?['data']?['style']?['border']?['borderWidth'] ??
                   1,
               value: block['data']?['style']?['border']?['borderWidth'] ?? 1,
               min: 0,
@@ -133,8 +134,8 @@ class ButtonSettings extends StatelessWidget {
             Seekbar(
               title: string.borderRadius,
               type: 'px',
-              defaultValue: defaultBlock?['data']?['style']?['border']
-                      ?['borderRadius'] ??
+              defaultValue:
+                  defaultBlock?['data']?['style']?['border']?['borderRadius'] ??
                   4,
               value: block['data']?['style']?['border']?['borderRadius'] ?? 4,
               min: 0,
@@ -172,8 +173,8 @@ class ButtonSettings extends StatelessWidget {
             ),
             Seekbar(
               title: string.fontSize,
-              defaultValue: defaultBlock?['data']?['style']?['text']
-                  ?['fontSize'],
+              defaultValue:
+                  defaultBlock?['data']?['style']?['text']?['fontSize'],
               value: block['data']?['style']?['text']?['fontSize'] ?? 16,
               min: 8,
               max: 96,
@@ -181,7 +182,8 @@ class ButtonSettings extends StatelessWidget {
             ),
             ColourPicker(
               title: string.textColor,
-              value: block['data']?['style']?['text']?['labelColor']
+              value:
+                  block['data']?['style']?['text']?['labelColor']
                       ?.toString()
                       .hexColor ??
                   defaultTheme.iconColor,
@@ -197,10 +199,11 @@ class ButtonSettings extends StatelessWidget {
               itemBuilder: (item, isSelected) => Text(
                 item,
                 style: theme.textTheme.bodySmall?.copyWith(
-                    color: isSelected
-                        ? theme.colorScheme.primary
-                        : theme.dividerColor,
-                    fontWeight: fontWeight(item)),
+                  color: isSelected
+                      ? theme.colorScheme.primary
+                      : theme.dividerColor,
+                  fontWeight: fontWeight(item),
+                ),
               ),
               onSelect: (weight) =>
                   update('text', MapEntry('fontWeight', weight)),

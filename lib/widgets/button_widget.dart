@@ -62,15 +62,16 @@ class Button<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    TextStyle labelStyle =
-        (this.labelStyle ?? theme.textTheme.bodySmall)!.copyWith(
-      color: disable ? theme.disabledColor : fontColor,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-    );
+    TextStyle labelStyle = (this.labelStyle ?? theme.textTheme.bodySmall)!
+        .copyWith(
+          color: disable ? theme.disabledColor : fontColor,
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+        );
 
-    Color borderTint =
-        disable ? theme.disabledColor : this.borderTint ?? theme.dividerColor;
+    Color borderTint = disable
+        ? theme.disabledColor
+        : this.borderTint ?? theme.dividerColor;
 
     return Padding(
       padding: margin,
@@ -91,18 +92,15 @@ class Button<T> extends StatelessWidget {
                   color: fillColor,
                 )
               : shape is BoxShape
-                  ? BoxDecoration(
-                      shape: shape as BoxShape,
-                      borderRadius: shape == BoxShape.circle
-                          ? null
-                          : BorderRadius.circular(radius),
-                      border: Border.all(color: borderTint, width: borderSize),
-                      color: fillColor,
-                    )
-                  : ShapeDecoration(
-                      shape: shape as ShapeBorder,
-                      color: fillColor,
-                    ),
+              ? BoxDecoration(
+                  shape: shape as BoxShape,
+                  borderRadius: shape == BoxShape.circle
+                      ? null
+                      : BorderRadius.circular(radius),
+                  border: Border.all(color: borderTint, width: borderSize),
+                  color: fillColor,
+                )
+              : ShapeDecoration(shape: shape as ShapeBorder, color: fillColor),
           child: Wrap(
             direction: direction,
             spacing: contentSpacing,
@@ -117,10 +115,10 @@ class Button<T> extends StatelessWidget {
                       child: CupertinoActivityIndicator(
                         color: labelStyle.color,
                       ),
-                    )
+                    ),
                   ]
                 : [
-                    if (leading != null) leading!,
+                    ?leading,
                     if (label != null)
                       Text(
                         label!,
@@ -129,7 +127,7 @@ class Button<T> extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: labelStyle,
                       ),
-                    if (trailing != null) trailing!,
+                    ?trailing,
                   ],
           ),
         ),

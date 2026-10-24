@@ -56,17 +56,9 @@ const List<String> kFontWeights = [
   'extra bold',
 ];
 
-const List<String> kVerticalAlignments = [
-  'top',
-  'center',
-  'bottom',
-];
+const List<String> kVerticalAlignments = ['top', 'center', 'bottom'];
 
-const List<String> kHorizontalAlignments = [
-  'left',
-  'center',
-  'right',
-];
+const List<String> kHorizontalAlignments = ['left', 'center', 'right'];
 
 const List<Color> kColors = [
   Color(0xFF2D2D2D),
@@ -89,49 +81,35 @@ const List<String> kAspectRatios = ['21:9', '16:9', '1:1', '4:5', '9:16'];
 const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 1,
-      colors: [
-        Color(0xFFefefee),
-        Color(0xFFffffff),
-        Color(0xFFf4f3f3),
-      ],
-      stops: [0, 54, 99],
-    
+    colors: [Color(0xFFefefee), Color(0xFFffffff), Color(0xFFf4f3f3)],
+    stops: [0, 54, 99],
+
     textColor: Color(0xFF606060),
     iconColor: Color(0xFF606060),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 2,
-      colors: [
-        Color(0xFFfdfcfb),
-        Color(0xFFE3D3C5),
-      ],
-      stops: [0, 100],
-    
+    colors: [Color(0xFFfdfcfb), Color(0xFFE3D3C5)],
+    stops: [0, 100],
+
     textColor: Color(0xFF606060),
     iconColor: Color(0xFF606060),
     dividerColor: Color(0xFF606060),
   ),
   ThemeModel(
     id: 3,
-      colors: [
-        Color(0xFF414141),
-        Color(0xFF161616),
-      ],
-      stops: [0, 74],
-    
+    colors: [Color(0xFF414141), Color(0xFF161616)],
+    stops: [0, 74],
+
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 4,
-      colors: [
-        Color(0xFF000000),
-        Color(0xFF615f5f),
-        Color(0xFF331e10),
-      ],
-      stops: [0, 37, 100],
+    colors: [Color(0xFF000000), Color(0xFF615f5f), Color(0xFF331e10)],
+    stops: [0, 37, 100],
 
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFBDBDBD),
@@ -139,12 +117,8 @@ const List<ThemeModel> kThemes = [
   ),
   ThemeModel(
     id: 5,
-      colors: [
-        Color(0xFFf7f7f3),
-        Color(0xFFfdf1e3),
-        Color(0xFFb9ceef),
-      ],
-      stops: [28, 53, 100],
+    colors: [Color(0xFFf7f7f3), Color(0xFFfdf1e3), Color(0xFFb9ceef)],
+    stops: [28, 53, 100],
 
     textColor: Color(0xFF3C32A7),
     iconColor: Color(0xFF796DFD),
@@ -152,13 +126,9 @@ const List<ThemeModel> kThemes = [
   ),
   ThemeModel(
     id: 6,
-      colors: [
-        Color(0xFFf0d5d5),
-        Color(0xFFe2b4a7),
-        Color(0xFFe4d9dc),
-      ],
-      stops: [4, 45, 92],
-  
+    colors: [Color(0xFFf0d5d5), Color(0xFFe2b4a7), Color(0xFFe4d9dc)],
+    stops: [4, 45, 92],
+
     textColor: Color(0xFF520000),
     iconColor: Color(0xFF520000),
     dividerColor: Color(0xFFFFFFFF),
@@ -166,13 +136,9 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 7,
 
-      colors: [
-        Color(0xFF385138),
-        Color(0xFF0d210d),
-        Color(0xFF222b22),
-      ],
-      stops: [8, 54, 89],
-    
+    colors: [Color(0xFF385138), Color(0xFF0d210d), Color(0xFF222b22)],
+    stops: [8, 54, 89],
+
     textColor: Color(0xFFF6F8D5),
     iconColor: Color(0xFFF6F8D5),
     dividerColor: Color(0xFF606060),
@@ -180,58 +146,54 @@ const List<ThemeModel> kThemes = [
   ThemeModel(
     id: 8,
 
-      colors: [
-        Color(0xFF78421b),
-        Color(0xFF451f12),
-        Color(0xFF3a1717),
-        Color(0xFFae6b1e),
-      ],
-      stops: [0, 29, 62, 100],
+    colors: [
+      Color(0xFF78421b),
+      Color(0xFF451f12),
+      Color(0xFF3a1717),
+      Color(0xFFae6b1e),
+    ],
+    stops: [0, 29, 62, 100],
 
     textColor: Color(0xFFFBD8BE),
     iconColor: Color(0xFFFBD8BE),
     dividerColor: Color(0xFFFBD8BE),
   ),
-   ThemeModel(
+  ThemeModel(
     id: 9,
 
-      colors: [
-        Color(0xFF000000),
-        Color(0xFF990000),
-        Color(0xFFCC0000),
-        Color(0xFFFF0000),
-      ],
-      stops: [0, 28, 53, 100],
-    
+    colors: [
+      Color(0xFF000000),
+      Color(0xFF990000),
+      Color(0xFFCC0000),
+      Color(0xFFFF0000),
+    ],
+    stops: [0, 28, 53, 100],
+
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFFFFFFFF),
   ),
   ThemeModel(
     id: 10,
-   
-      colors: [
-        Color(0xFFf9f8f8),
-        Color(0xFFd6d6d6),
-        Color(0xFFe7e2e2),
-        Color(0xFFfefefd),
-      ],
-      stops: [13, 29, 46, 100],
-    
+
+    colors: [
+      Color(0xFFf9f8f8),
+      Color(0xFFd6d6d6),
+      Color(0xFFe7e2e2),
+      Color(0xFFfefefd),
+    ],
+    stops: [13, 29, 46, 100],
+
     textColor: Color(0xFF053493),
     iconColor: Color(0xFF053493),
     dividerColor: Color(0xFF053493),
   ),
   ThemeModel(
     id: 11,
-   
-      colors: [
-        Color(0xFF131e34),
-        Color(0xFF020817),
-        Color(0xFF83705d),
-      ],
-      stops: [0, 54, 100],
- 
+
+    colors: [Color(0xFF131e34), Color(0xFF020817), Color(0xFF83705d)],
+    stops: [0, 54, 100],
+
     textColor: Color(0xFFFFFFFF),
     iconColor: Color(0xFFFFFFFF),
     dividerColor: Color(0xFF606060),
@@ -336,60 +298,60 @@ extension IconExtensions on String {
       case "actions":
         return Icons.system_update_alt_outlined;
       default:
-        return FontAwesomeIcons.info;
+        return FontAwesomeIcons.info.data;
     }
   }
 
   IconData get socialIcon {
     switch (this) {
-      case "facebook":
-        return FontAwesomeIcons.facebook;
-      case "instagram":
-        return FontAwesomeIcons.instagram;
-      case "linkedin":
-        return FontAwesomeIcons.linkedin;
-      case "twitter":
-        return FontAwesomeIcons.twitter;
-      case "whatsapp":
-        return FontAwesomeIcons.whatsapp;
-      case "youtube":
-        return FontAwesomeIcons.youtube;
-      case "snapchat":
-        return FontAwesomeIcons.snapchat;
-      case "tiktok":
-        return FontAwesomeIcons.tiktok;
-      case "telegram":
-        return FontAwesomeIcons.telegram;
-      case "pinterest":
-        return FontAwesomeIcons.pinterest;
-      case "reddit":
-        return FontAwesomeIcons.reddit;
-      case "github":
-        return FontAwesomeIcons.github;
-      case "dribbble":
-        return FontAwesomeIcons.dribbble;
-      case "behance":
-        return FontAwesomeIcons.behance;
-      case "medium":
-        return FontAwesomeIcons.medium;
-      case "tumblr":
-        return FontAwesomeIcons.tumblr;
-      case "soundcloud":
-        return FontAwesomeIcons.soundcloud;
-      case "spotify":
-        return FontAwesomeIcons.spotify;
-      case "discord":
-        return FontAwesomeIcons.discord;
-      case "skype":
-        return FontAwesomeIcons.skype;
-      case "viber":
-        return FontAwesomeIcons.viber;
-      case "line":
-        return FontAwesomeIcons.line;
-      case "threads":
-        return FontAwesomeIcons.threads;
+      case 'facebook':
+        return FontAwesomeIcons.facebook.data;
+      case 'instagram':
+        return FontAwesomeIcons.instagram.data;
+      case 'linkedin':
+        return FontAwesomeIcons.linkedin.data;
+      case 'twitter':
+        return FontAwesomeIcons.twitter.data;
+      case 'whatsapp':
+        return FontAwesomeIcons.whatsapp.data;
+      case 'youtube':
+        return FontAwesomeIcons.youtube.data;
+      case 'snapchat':
+        return FontAwesomeIcons.snapchat.data;
+      case 'tiktok':
+        return FontAwesomeIcons.tiktok.data;
+      case 'telegram':
+        return FontAwesomeIcons.telegram.data;
+      case 'pinterest':
+        return FontAwesomeIcons.pinterest.data;
+      case 'reddit':
+        return FontAwesomeIcons.reddit.data;
+      case 'github':
+        return FontAwesomeIcons.github.data;
+      case 'dribbble':
+        return FontAwesomeIcons.dribbble.data;
+      case 'behance':
+        return FontAwesomeIcons.behance.data;
+      case 'medium':
+        return FontAwesomeIcons.medium.data;
+      case 'tumblr':
+        return FontAwesomeIcons.tumblr.data;
+      case 'soundcloud':
+        return FontAwesomeIcons.soundcloud.data;
+      case 'spotify':
+        return FontAwesomeIcons.spotify.data;
+      case 'discord':
+        return FontAwesomeIcons.discord.data;
+      case 'skype':
+        return FontAwesomeIcons.skype.data;
+      case 'viber':
+        return FontAwesomeIcons.viber.data;
+      case 'line':
+        return FontAwesomeIcons.line.data;
+      case 'threads':
+        return FontAwesomeIcons.threads.data;
       default:
-        return FontAwesomeIcons.link;
+        return FontAwesomeIcons.link.data;
     }
   }
 
@@ -443,7 +405,8 @@ extension IconExtensions on String {
         return const Color(0xFF05A9D0);
       default:
         return const Color(
-            0xFF000000); // Default color if none of the cases match
+          0xFF000000,
+        ); // Default color if none of the cases match
     }
   }
 
@@ -458,7 +421,7 @@ extension IconExtensions on String {
       case "websites":
         return Icons.public_outlined;
       default:
-        return FontAwesomeIcons.info;
+        return FontAwesomeIcons.info.data;
     }
   }
 
@@ -467,7 +430,7 @@ extension IconExtensions on String {
       case 'phoneNumbers':
         return PhoneLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'emails':
-      return EmailLabel.values.map((e) => e.name.toLowerCase()).toList();
+        return EmailLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'websites':
         return WebsiteLabel.values.map((e) => e.name.toLowerCase()).toList();
       case 'addresses':

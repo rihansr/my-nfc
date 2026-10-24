@@ -18,10 +18,12 @@ class SpaceSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, int value) {
+  void update(String key, int value) {
     block[key] ??= {};
-    (block[key] as Map<String, dynamic>)
-        .addEntry('style', MapEntry('height', value));
+    (block[key] as Map<String, dynamic>).addEntry(
+      'style',
+      MapEntry('height', value),
+    );
     onUpdate?.call(block);
   }
 

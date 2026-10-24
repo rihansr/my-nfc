@@ -25,9 +25,10 @@ class AppSettings {
     );
   }
 
-  bool get isDarkTheme =>  settings.value.themeMode == ThemeMode.dark;
+  bool get isDarkTheme => settings.value.themeMode == ThemeMode.dark;
 
-  get switchTheme => theme = isDarkTheme ? ThemeMode.light : ThemeMode.dark;
+  ThemeMode get switchTheme =>
+      theme = isDarkTheme ? ThemeMode.light : ThemeMode.dark;
 
   // Locale
   set language(dynamic locale) {
@@ -39,5 +40,5 @@ class AppSettings {
 
   bool get isEnglish => settings.value.locale.languageCode == 'en';
 
-  get switchLanguage => language = isEnglish ? 'bn' : 'en';
+  String get switchLanguage => language = isEnglish ? 'bn' : 'en';
 }

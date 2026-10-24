@@ -89,8 +89,8 @@ class Clipper<T> extends StatelessWidget {
     this.overlayOpacity,
     this.alignment,
     this.constraints,
-  })  : shape = BoxShape.circle as T,
-        borderRadius = null;
+  }) : shape = BoxShape.circle as T,
+       borderRadius = null;
 
   const Clipper.square({
     super.key,
@@ -112,8 +112,8 @@ class Clipper<T> extends StatelessWidget {
     this.overlayOpacity,
     this.alignment,
     this.constraints,
-  })  : height = size,
-        width = size;
+  }) : height = size,
+       width = size;
 
   const Clipper.expand({
     super.key,
@@ -134,13 +134,14 @@ class Clipper<T> extends StatelessWidget {
     this.overlayOpacity,
     this.alignment,
     this.constraints,
-  })  : size = double.infinity,
-        height = double.infinity,
-        width = double.infinity;
+  }) : size = double.infinity,
+       height = double.infinity,
+       width = double.infinity;
 
   @override
   Widget build(BuildContext context) {
-    BorderRadius? kBorderRadius = borderRadius ??
+    BorderRadius? kBorderRadius =
+        borderRadius ??
         (radius != null ? BorderRadius.circular(radius!) : null);
 
     return Container(
@@ -152,25 +153,32 @@ class Clipper<T> extends StatelessWidget {
       clipBehavior: clipBehavior ?? Clip.antiAlias,
       alignment: alignment,
       constraints: constraints,
-      foregroundDecoration: overlayColor != null &&
-              overlayColor != Colors.transparent
+      foregroundDecoration:
+          overlayColor != null && overlayColor != Colors.transparent
           ? shape == null
-              ? BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  borderRadius: kBorderRadius,
-                  color: overlayColor?.withOpacity(overlayOpacity ?? 0.0),
-                )
-              : shape is BoxShape
-                  ? BoxDecoration(
-                      shape: shape as BoxShape,
-                      borderRadius:
-                          shape == BoxShape.circle ? null : kBorderRadius,
-                      color: overlayColor?.withOpacity(overlayOpacity ?? 0.0),
-                    )
-                  : ShapeDecoration(
-                      shape: shape as ShapeBorder,
-                      color: overlayColor?.withOpacity(overlayOpacity ?? 0.0),
-                    )
+                ? BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: kBorderRadius,
+                    color: overlayColor?.withValues(
+                      alpha: overlayOpacity ?? 0.0,
+                    ),
+                  )
+                : shape is BoxShape
+                ? BoxDecoration(
+                    shape: shape as BoxShape,
+                    borderRadius: shape == BoxShape.circle
+                        ? null
+                        : kBorderRadius,
+                    color: overlayColor?.withValues(
+                      alpha: overlayOpacity ?? 0.0,
+                    ),
+                  )
+                : ShapeDecoration(
+                    shape: shape as ShapeBorder,
+                    color: overlayColor?.withValues(
+                      alpha: overlayOpacity ?? 0.0,
+                    ),
+                  )
           : null,
       decoration: shape == null
           ? BoxDecoration(
@@ -183,22 +191,22 @@ class Clipper<T> extends StatelessWidget {
               gradient: gradient,
             )
           : shape is BoxShape
-              ? BoxDecoration(
-                  shape: shape as BoxShape,
-                  borderRadius: shape == BoxShape.circle ? null : kBorderRadius,
-                  border: border,
-                  color: color,
-                  boxShadow: shadows,
-                  image: backdrop,
-                  gradient: gradient,
-                )
-              : ShapeDecoration(
-                  shape: shape as ShapeBorder,
-                  color: color,
-                  shadows: shadows,
-                  image: backdrop,
-                  gradient: gradient,
-                ),
+          ? BoxDecoration(
+              shape: shape as BoxShape,
+              borderRadius: shape == BoxShape.circle ? null : kBorderRadius,
+              border: border,
+              color: color,
+              boxShadow: shadows,
+              image: backdrop,
+              gradient: gradient,
+            )
+          : ShapeDecoration(
+              shape: shape as ShapeBorder,
+              color: color,
+              shadows: shadows,
+              image: backdrop,
+              gradient: gradient,
+            ),
       child: child,
     );
   }

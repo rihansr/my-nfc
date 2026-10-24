@@ -28,7 +28,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
   set selectedAspectRatio(String? ratio) =>
       setState(() => _aspectRatio = _aspectRatio == ratio ? null : ratio);
 
-  generateRatio() {
+  void generateRatio() {
     Object width = _widthController.text.trim();
     Object height = _heightController.text.trim();
     if (_debounce?.isActive ?? false) {
@@ -36,15 +36,12 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
     } else if ('$width'.isEmpty || '$width'.isEmpty) {
       return;
     }
-    _debounce = Timer(
-      const Duration(milliseconds: 500),
-      () {
-        width = int.parse('$width').abs();
-        height = int.parse('$height').abs();
-        if (width == 0 && height == 0) return;
-        widget.onSelected.call("$width:$height");
-      },
-    );
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      width = int.parse('$width').abs();
+      height = int.parse('$height').abs();
+      if (width == 0 && height == 0) return;
+      widget.onSelected.call("$width:$height");
+    });
   }
 
   @override
@@ -52,14 +49,17 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
     _aspectRatios = List.from(kAspectRatios);
     bool ratioExist = _aspectRatios.contains(widget.aspectRatio);
     _aspectRatios.add(
-        widget.aspectRatio == null || ratioExist ? '0:0' : widget.aspectRatio!);
+      widget.aspectRatio == null || ratioExist ? '0:0' : widget.aspectRatio!,
+    );
 
     _aspectRatio = widget.aspectRatio ?? '0:0';
     List<String> splitRatio = (_aspectRatio ?? ':').split(':');
-    _widthController =
-        TextEditingController(text: ratioExist ? splitRatio[0] : '');
-    _heightController =
-        TextEditingController(text: ratioExist ? splitRatio[1] : '');
+    _widthController = TextEditingController(
+      text: ratioExist ? splitRatio[0] : '',
+    );
+    _heightController = TextEditingController(
+      text: ratioExist ? splitRatio[1] : '',
+    );
 
     super.initState();
   }
@@ -140,8 +140,9 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                                   ? string.custom
                                   : string.ratio(width, height),
                               textAlign: TextAlign.center,
-                              style: theme.textTheme.titleMedium
-                                  ?.copyWith(color: selectedColor),
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                color: selectedColor,
+                              ),
                             ),
                           ),
                         ],
@@ -157,10 +158,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  string.width,
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text(string.width, style: theme.textTheme.bodySmall),
                 const SizedBox(width: 8),
                 Expanded(
                   child: InputField(
@@ -172,10 +170,7 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                   ),
                 ),
                 const SizedBox(width: 24),
-                Text(
-                  string.height,
-                  style: theme.textTheme.bodySmall,
-                ),
+                Text(string.height, style: theme.textTheme.bodySmall),
                 const SizedBox(width: 8),
                 Expanded(
                   child: InputField(
@@ -188,8 +183,8 @@ class _AspectRatioSelectorState extends State<AspectRatioSelector> {
                 ),
                 const Spacer(),
               ],
-            )
-          ]
+            ),
+          ],
         ],
       ),
     );

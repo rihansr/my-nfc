@@ -29,12 +29,11 @@ class ImageView extends StatefulWidget {
     this.onStyleChange,
     this.onPick,
     this.onRemove,
-  })  : _scale =
-            style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
-        _defaultScale = defaultStyle?['scale'] == null
-            ? null
-            : (defaultStyle!['scale'] * 10).toInt(),
-        _overlayOpacity = style?['overlayOpacity'];
+  }) : _scale = style?['scale'] == null ? null : (style!['scale'] * 10).toInt(),
+       _defaultScale = defaultStyle?['scale'] == null
+           ? null
+           : (defaultStyle!['scale'] * 10).toInt(),
+       _overlayOpacity = style?['overlayOpacity'];
 
   @override
   State<ImageView> createState() => _ImageViewState();
@@ -53,7 +52,9 @@ class _ImageViewState extends State<ImageView> {
     super.initState();
   }
 
-  Widget get image => photo(bytes, fit: widget.fit ?? BoxFit.cover) ?? const Placeholder() /* Uri.tryParse(bytes!)?.isAbsolute ?? false
+  Widget get image =>
+      photo(bytes, fit: widget.fit ?? BoxFit.cover) ??
+      const Placeholder() /* Uri.tryParse(bytes!)?.isAbsolute ?? false
       ? FadeInImage.memoryNetwork(
           image: bytes!,
           fit: widget.fit,
@@ -64,8 +65,7 @@ class _ImageViewState extends State<ImageView> {
         )
       : kIsWeb
           ? Image.network(widget.bytes!, fit: widget.fit)
-          : Image.file(File(widget.bytes!), fit: widget.fit) */
-      ;
+          : Image.file(File(widget.bytes!), fit: widget.fit) */;
 
   @override
   Widget build(BuildContext context) {
@@ -78,22 +78,18 @@ class _ImageViewState extends State<ImageView> {
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
               focusColor: Colors.transparent,
-              onTap: () => extension.pickPhoto(ImageSource.gallery).then(
-                (path) async {
-                  final bytes = await photoBytes(path);
-                  setState(() => this.bytes = bytes);
-                  widget.onPick?.call(bytes);
-                },
-              ),
+              onTap: () =>
+                  extension.pickPhoto(ImageSource.gallery).then((path) async {
+                    final bytes = await photoBytes(path);
+                    setState(() => this.bytes = bytes);
+                    widget.onPick?.call(bytes);
+                  }),
               child: Clipper.rectangle(
                 size: double.infinity,
                 alignment: Alignment.center,
                 radius: 6,
                 border: Border.all(color: theme.disabledColor),
-                child: Icon(
-                  Icons.add_a_photo_outlined,
-                  color: theme.hintColor,
-                ),
+                child: Icon(Icons.add_a_photo_outlined, color: theme.hintColor),
               ),
             ),
           )
@@ -103,24 +99,21 @@ class _ImageViewState extends State<ImageView> {
               Clipper(
                 shape: BoxShape.rectangle,
                 radius: 6,
-                color: theme.colorScheme.tertiary.withOpacity(0.05),
+                color: theme.colorScheme.tertiary.withValues(alpha: 0.05),
                 border: Border.all(color: theme.disabledColor),
                 child: Stack(
                   children: [
                     Clipper(
                       overlayColor: opacity == null
                           ? null
-                          : Colors.black.withOpacity(opacity! / 100),
+                          : Colors.black.withValues(alpha: opacity! / 100),
                       child: scale != null
                           ? Transform.scale(
                               alignment: Alignment.center,
                               scale: scale! / 10,
                               child: image,
                             )
-                          : AspectRatio(
-                              aspectRatio: 21 / 9,
-                              child: image,
-                            ),
+                          : AspectRatio(aspectRatio: 21 / 9, child: image),
                     ),
                     Positioned(
                       right: 2,
@@ -165,11 +158,12 @@ class _ImageViewState extends State<ImageView> {
                     max: 100,
                     onChanged: (value) {
                       setState(() => opacity = value);
-                      widget.onStyleChange
-                          ?.call(MapEntry('overlayOpacity', value));
+                      widget.onStyleChange?.call(
+                        MapEntry('overlayOpacity', value),
+                      );
                     },
                   ),
-              ]
+              ],
             ],
           );
   }

@@ -24,7 +24,7 @@ class DividerSettings extends StatelessWidget {
     this.onUpdate,
   });
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     switch (key) {
       case "style":
         block.addEntry(key, value);
@@ -37,8 +37,10 @@ class DividerSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeModel defaultTheme =
-        Provider.of<DashboardViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme = Provider.of<DashboardViewModel>(
+      context,
+      listen: false,
+    ).theme;
 
     return BlockExpansionTile.settings(
       block['settings'],
@@ -68,7 +70,7 @@ class DividerSettings extends StatelessWidget {
           title: string.color,
           value:
               block['data']?['style']?['dividerColor']?.toString().hexColor ??
-                  defaultTheme.dividerColor,
+              defaultTheme.dividerColor,
           colors: kColors,
           onPick: (color) =>
               update('data', MapEntry('dividerColor', color.toHex)),

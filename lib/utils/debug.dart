@@ -10,10 +10,11 @@ class Debug {
 
   var enabled = kDebugMode;
 
-  print(dynamic message, {bool bounded = true, String? tag}) =>
-      {if (enabled) _log(message, bounded, tag)};
+  void print(dynamic message, {bool bounded = true, String? tag}) => {
+    if (enabled) _log(message, bounded, tag),
+  };
 
-  _log(dynamic message, bool bounded, String? boundedText) {
+  void _log(dynamic message, bool bounded, String? boundedText) {
     log(
       '${bounded || boundedText != null ? '\n<=====${boundedText ?? ''}=====>\n' : ''}'
       '$message'

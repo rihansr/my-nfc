@@ -20,11 +20,7 @@ class Backdrop extends StatefulWidget {
   final Map<String, dynamic> settings;
   final Function(Map<String, dynamic>)? onUpdate;
 
-  const Backdrop(
-    this.settings, {
-    super.key,
-    this.onUpdate,
-  });
+  const Backdrop(this.settings, {super.key, this.onUpdate});
 
   @override
   State<Backdrop> createState() => _BackdropState();
@@ -58,39 +54,40 @@ class _BackdropState extends State<Backdrop> {
     super.initState();
   }
 
-  searchPhotos({bool reload = true}) {
+  void searchPhotos({bool reload = true}) {
     if (reload) _page = 1;
     String? query = searchController.text.trim();
     query = query.isEmpty ? widget.settings['label'] ?? 'banner' : query;
     setState(() => _isSearching = true);
     api
         .invoke(
-      via: kIsWeb ? InvokeType.http : InvokeType.dio,
-      baseUrl: ServerEnv.searchPhotos,
-      queryParams: {
-        'page': _page,
-        'query': query,
-        'per_page': 12,
-        'orientation': 'landscape',
-      },
-      additionalHeaders: {
-        HttpHeaders.authorizationHeader:
-            "Client-ID ${appConfig.configs['unsplash']['access_key']},"
-      },
-      enableCaching: true,
-      cacheSubKey: '$query-$_page',
-    )
+          via: kIsWeb ? InvokeType.http : InvokeType.dio,
+          baseUrl: ServerEnv.searchPhotos,
+          queryParams: {
+            'page': _page,
+            'query': query,
+            'per_page': 12,
+            'orientation': 'landscape',
+          },
+          additionalHeaders: {
+            HttpHeaders.authorizationHeader:
+                "Client-ID ${appConfig.configs['unsplash']['access_key']},",
+          },
+          enableCaching: true,
+          cacheSubKey: '$query-$_page',
+        )
         .then((response) {
-      if (response.data['results'] != null) {
-        _page++;
-        setState(() {
-          _isSearching = false;
-          if (reload) _photos.clear();
-          _photos.addAll(
-              List<Map<String, dynamic>>.from(response.data['results']));
+          if (response.data['results'] != null) {
+            _page++;
+            setState(() {
+              _isSearching = false;
+              if (reload) _photos.clear();
+              _photos.addAll(
+                List<Map<String, dynamic>>.from(response.data['results']),
+              );
+            });
+          }
         });
-      }
-    });
   }
 
   set imageBytes(Uint8List? bytes) {
@@ -135,17 +132,18 @@ class _BackdropState extends State<Backdrop> {
                       label: string.upload,
                       fontSize: 13,
                       padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
+                        vertical: 5,
+                        horizontal: 10,
+                      ),
                       margin: const EdgeInsets.only(bottom: 12),
                       radius: 6,
-                      onPressed: () =>
-                          extension.pickPhoto(ImageSource.gallery).then(
-                        (path) async {
-                          final bytes = await photoBytes(path);
-                          imageBytes = bytes;
-                        },
-                      ),
-                    )
+                      onPressed: () => extension
+                          .pickPhoto(ImageSource.gallery)
+                          .then((path) async {
+                            final bytes = await photoBytes(path);
+                            imageBytes = bytes;
+                          }),
+                    ),
                   ],
                 ),
         ),
@@ -162,7 +160,8 @@ class _BackdropState extends State<Backdrop> {
             ),
             itemBuilder: (context, i) => InkWell(
               onTap: () async {
-                String? url = _photos[i]['urls']?['regular'] ??
+                String? url =
+                    _photos[i]['urls']?['regular'] ??
                     _photos[i]['urls']?['full'] ??
                     _photos[i]['urls']?['raw'];
                 Uint8List? bytes = url == null ? null : await photoBytes(url);
@@ -173,9 +172,9 @@ class _BackdropState extends State<Backdrop> {
                     _photos[i]['urls']?['thumb'] ?? ServerEnv.placeholderImage,
                 fit: BoxFit.cover,
                 placeholder: kTransparentImage,
-                placeholderErrorBuilder: (_, __, ___) =>
+                placeholderErrorBuilder: (_, _, _) =>
                     const CupertinoActivityIndicator(),
-                imageErrorBuilder: (_, __, ___) => _isSearching
+                imageErrorBuilder: (_, _, _) => _isSearching
                     ? const CupertinoActivityIndicator()
                     : const Placeholder(),
               ),
@@ -186,8 +185,10 @@ class _BackdropState extends State<Backdrop> {
             Center(
               child: Button(
                 label: string.loadMore,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6,
+                  horizontal: 12,
+                ),
                 margin: const EdgeInsets.all(0),
                 fontColor: theme.hintColor,
                 borderTint: theme.hintColor,
@@ -226,7 +227,7 @@ class _BackdropState extends State<Backdrop> {
               ),
               textAlign: TextAlign.center,
             ),
-          )
+          ),
       ],
     );
   }

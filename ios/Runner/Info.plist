@@ -24,8 +24,27 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>FlutterDeepLinkingEnabled</key>
+	<true/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>tel</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>Need NFC permission for scanning your card</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To capture photo please grant camera access</string>
+	<key>NSContactsUsageDescription</key>
+	<string>We need access to the contact list</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To select photo please grant gallery access</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -66,38 +85,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
-	<!-- NFC -->
 	<key>com.apple.developer.nfc.readersession.felica.systemcodes</key>
 	<array>
 		<string>0000</string>
 	</array>
-	<key>NFCReaderUsageDescription</key>
-	<string>Need NFC permission for scanning your card</string>
-	<!-- Camera & Gallery -->
-	<key>NSCameraUsageDescription</key>
-	<string>To capture photo please grant camera access</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To select photo please grant gallery access</string>
-	<!-- Deep Linking -->
-	<key>FlutterDeepLinkingEnabled</key>
-	<true/>
-	<!-- URL Launcher -->
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>tel</string>
-	</array>
-	<!-- Contacts -->
-	<key>NSContactsUsageDescription</key>
-	<string>We need access to the contact list</string>
-	<!-- Player -->
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

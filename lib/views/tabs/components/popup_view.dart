@@ -20,19 +20,19 @@ class ModalBottomSheet extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            theme.scaffoldBackgroundColor.withOpacity(.75),
-            theme.scaffoldBackgroundColor.withOpacity(.85),
-            theme.scaffoldBackgroundColor.withOpacity(1),
+            theme.scaffoldBackgroundColor.withValues(alpha: .75),
+            theme.scaffoldBackgroundColor.withValues(alpha: .85),
+            theme.scaffoldBackgroundColor.withValues(alpha: 1),
           ],
           begin: AlignmentDirectional.topCenter,
           end: AlignmentDirectional.bottomCenter,
         ),
         boxShadow: [
           BoxShadow(
-            color: theme.shadowColor.withOpacity(.1),
+            color: theme.shadowColor.withValues(alpha: .1),
             blurRadius: 16,
             offset: const Offset(0, -8),
-          )
+          ),
         ],
         borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
       ),

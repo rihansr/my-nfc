@@ -12,14 +12,17 @@ class _Style {
   static _Style get value => _Style._();
   _Style._();
 
-  showToast(String message) => Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        fontSize: 14.0,
-      );
+  Future<bool?> showToast(String message) => Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_LONG,
+    gravity: ToastGravity.BOTTOM,
+    fontSize: 14.0,
+  );
 
-  showColorPicker(Color color, {required void Function(Color) onColorChanged}) {
+  void showColorPicker(
+    Color color, {
+    required void Function(Color) onColorChanged,
+  }) {
     ThemeData theme = Theme.of(navigator.context);
     ColorPicker(
       color: color,
@@ -30,10 +33,7 @@ class _Style {
       spacing: 5,
       runSpacing: 5,
       wheelDiameter: 155,
-      heading: Text(
-        string.selectColor,
-        style: theme.textTheme.titleMedium,
-      ),
+      heading: Text(string.selectColor, style: theme.textTheme.titleMedium),
       subheading: Text(
         string.selectColorShade,
         style: theme.textTheme.titleMedium,
@@ -69,8 +69,11 @@ class _Style {
     ).showPickerDialog(
       navigator.context,
       actionsPadding: const EdgeInsets.all(16),
-      constraints:
-          const BoxConstraints(minHeight: 480, minWidth: 300, maxWidth: 320),
+      constraints: const BoxConstraints(
+        minHeight: 480,
+        minWidth: 300,
+        maxWidth: 320,
+      ),
     );
   }
 

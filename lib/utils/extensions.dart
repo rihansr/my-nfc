@@ -35,23 +35,28 @@ class Extension {
     const letters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
     var chars = digitsOnly ? digits : (letters + digits);
     Random rnd = Random();
-    return String.fromCharCodes(Iterable.generate(
-        length, (_) => chars.codeUnitAt(rnd.nextInt(chars.length))));
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => chars.codeUnitAt(rnd.nextInt(chars.length)),
+      ),
+    );
   }
 
-  get unfocus => FocusManager.instance.primaryFocus?.unfocus();
+  void get unfocus => FocusManager.instance.primaryFocus?.unfocus();
 }
 
 extension StringExtension on String {
   String get inCaps =>
       length > 0 ? '${this[0].toUpperCase()}${substring(1)}' : '';
   String get allInCaps => toUpperCase();
-  String get capitalizeFirstOfEach => replaceAll(RegExp(' +'), ' ')
-      .split(" ")
-      .map((str) => str.inCaps)
-      .join(" ");
-  get copy => Clipboard.setData(ClipboardData(text: this))
-      .then((value) => style.showToast('$this ${string.copied}'.trim()));
+  String get capitalizeFirstOfEach => replaceAll(
+    RegExp(' +'),
+    ' ',
+  ).split(" ").map((str) => str.inCaps).join(" ");
+  Future<bool?> get copy => Clipboard.setData(
+    ClipboardData(text: this),
+  ).then((value) => style.showToast('$this ${string.copied}'.trim()));
   Color get hexColor => HexColor.fromHex(this);
   String get camelToNormal =>
       split(RegExp(r"(?=(?!^)[A-Z])")).join(' ').capitalizeFirstOfEach;
@@ -65,20 +70,20 @@ extension StringExtension on String {
       : Duration.zero;
 
   bool get isValidUrl => RegExp(
-          r'^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?')
-      .hasMatch(this);
+    r'^((https?|ftp|smtp):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?',
+  ).hasMatch(this);
 }
 
 extension ContextExtension on BuildContext {
-  get scroll => Scrollable.ensureVisible(
-        this,
-        curve: Curves.easeInOut,
-        duration: const Duration(milliseconds: 300),
-      );
+  Future<void> get scroll => Scrollable.ensureVisible(
+    this,
+    curve: Curves.easeInOut,
+    duration: const Duration(milliseconds: 300),
+  );
 }
 
 extension MapExtension on Map<String, dynamic> {
-  addEntry(String key, MapEntry<String, dynamic> entry) {
+  void addEntry(String key, MapEntry<String, dynamic> entry) {
     if (containsKey(key)) {
       this[key].addEntries([entry]);
     } else {
@@ -93,8 +98,11 @@ extension MapExtension on Map<String, dynamic> {
       if (val is Map) {
         if (val.containsKey('data')) {
           final data = Map<String, dynamic>.from(val['data']);
-          mapList.update('data', (value) => value..add(data),
-              ifAbsent: () => [data]);
+          mapList.update(
+            'data',
+            (value) => value..add(data),
+            ifAbsent: () => [data],
+          );
         } else {
           mapList.addAll(Map<String, dynamic>.from(val).findLinks(by));
         }
@@ -111,7 +119,7 @@ extension MapExtension on Map<String, dynamic> {
 }
 
 extension DynamicMapExtension on Map {
-  addEntry(String key, MapEntry entry) {
+  void addEntry(String key, MapEntry entry) {
     if (containsKey(key)) {
       this[key].addEntries([entry]);
     } else {
@@ -188,9 +196,17 @@ extension HexColor on Color {
     return Color(int.parse(buffer.toString(), radix: 16));
   }
 
-  String get toHex => '#'
-      '${alpha.toRadixString(16).padLeft(2, '0')}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';
+  String get toHex {
+    final argb = toARGB32();
+
+    final alpha = (argb >> 24) & 0xFF;
+    final red = (argb >> 16) & 0xFF;
+    final green = (argb >> 8) & 0xFF;
+    final blue = argb & 0xFF;
+
+    return '#${alpha.toRadixString(16).padLeft(2, '0')}'
+        '${red.toRadixString(16).padLeft(2, '0')}'
+        '${green.toRadixString(16).padLeft(2, '0')}'
+        '${blue.toRadixString(16).padLeft(2, '0')}';
+  }
 }

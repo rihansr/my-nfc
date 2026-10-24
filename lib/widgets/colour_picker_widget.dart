@@ -112,7 +112,7 @@ class _ColorItem extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return InkWell(
       radius: 36,
-      highlightColor: color.withOpacity(0.25),
+      highlightColor: color.withValues(alpha: 0.25),
       onTap: () => onTap?.call(color),
       child: Clipper.circle(
         backdrop: color == Colors.transparent

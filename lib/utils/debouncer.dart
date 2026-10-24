@@ -6,12 +6,12 @@ class Debouncer {
 
   Debouncer({required this.duraction});
 
-  run(void Function() action) {
+  void run(void Function() action) {
     if (_timer != null) _timer?.cancel();
     _timer = Timer(duraction, action);
   }
 
-  dispose() {
+  void dispose() {
     _timer?.cancel();
   }
 }

@@ -28,7 +28,7 @@ class ThemeItem extends StatelessWidget {
         shadows: [
           BoxShadow(
             color: _isSelected
-                ? Theme.of(context).primaryColor.withOpacity(0.12)
+                ? Theme.of(context).primaryColor.withValues(alpha: 0.12)
                 : Colors.black12,
             blurRadius: 2,
             offset: const Offset(0, 2),

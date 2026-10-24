@@ -32,11 +32,11 @@ class ActionsSettings extends StatelessWidget {
     this.defaultBlock,
     required this.block,
     this.onUpdate,
-  })  : primary = block['data']?['primary'],
-        additional = block['data']?['additional'],
-        advancedSettings = Map.from(block['settings']?['advanced'] ?? {});
+  }) : primary = block['data']?['primary'],
+       additional = block['data']?['additional'],
+       advancedSettings = Map.from(block['settings']?['advanced'] ?? {});
 
-  update(String key, MapEntry<String, dynamic> value) {
+  void update(String key, MapEntry<String, dynamic> value) {
     Map<String, dynamic> settings = Map.from(block);
     switch (key) {
       case 'data':
@@ -46,8 +46,10 @@ class ActionsSettings extends StatelessWidget {
       case 'background':
         settings['data'] ??= {};
         settings['data']['style'] ??= {};
-        (settings['data']['style'] as Map<String, dynamic>)
-            .addEntry(key, value);
+        (settings['data']['style'] as Map<String, dynamic>).addEntry(
+          key,
+          value,
+        );
       case 'advanced':
         settings['settings'] ??= {};
         (settings['settings'] as Map<String, dynamic>).addEntry(key, value);
@@ -60,13 +62,16 @@ class ActionsSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeModel defaultTheme =
-        Provider.of<DashboardViewModel>(context, listen: false).theme;
+    ThemeModel defaultTheme = Provider.of<DashboardViewModel>(
+      context,
+      listen: false,
+    ).theme;
     ThemeData theme = Theme.of(context);
     List<Map<String, dynamic>> links =
-        Provider.of<DashboardViewModel>(context, listen: true)
-            .designStructure
-            .findBy('links')
+        Provider.of<DashboardViewModel>(
+            context,
+            listen: true,
+          ).designStructure.findBy('links')
           ..removeWhere((element) => element['id'] == null);
 
     return BlockExpansionTile.settings(
@@ -87,21 +92,26 @@ class ActionsSettings extends StatelessWidget {
         ...(() {
           final list = links.map((e) => jsonEncode(e));
 
-          final primary =
-              this.primary == null ? null : jsonEncode(this.primary);
+          final primary = this.primary == null
+              ? null
+              : jsonEncode(this.primary);
 
-          final additional =
-              this.additional == null ? null : jsonEncode(this.additional);
+          final additional = this.additional == null
+              ? null
+              : jsonEncode(this.additional);
 
           final primaryList = list.where(
-              (element) => element != additional || !list.contains(element));
+            (element) => element != additional || !list.contains(element),
+          );
 
           final additionalList = list.where(
-              (element) => element != primary || !list.contains(element));
+            (element) => element != primary || !list.contains(element),
+          );
 
           Widget dropdownItem(String? val) {
-            final item =
-                val == null ? null : Map<String, dynamic>.from(jsonDecode(val));
+            final item = val == null
+                ? null
+                : Map<String, dynamic>.from(jsonDecode(val));
             return Text.rich(
               TextSpan(
                 style: theme.textTheme.bodySmall,
@@ -188,7 +198,8 @@ class ActionsSettings extends StatelessWidget {
             ),
             ...(() {
               final textStyle = Map<String, dynamic>.from(
-                  block['data']?['style']?['text'] ?? {});
+                block['data']?['style']?['text'] ?? {},
+              );
               return [
                 Dropdown<String?>(
                   title: string.typography,
@@ -212,8 +223,8 @@ class ActionsSettings extends StatelessWidget {
                 Seekbar(
                   title: string.fontSize,
                   value: textStyle['fontSize'] ?? 16,
-                  defaultValue: defaultBlock?['default']?['style']?['text']
-                      ?['fontSize'],
+                  defaultValue:
+                      defaultBlock?['default']?['style']?['text']?['fontSize'],
                   min: 8,
                   max: 96,
                   onChanged: (size) =>
@@ -221,7 +232,8 @@ class ActionsSettings extends StatelessWidget {
                 ),
                 ColourPicker(
                   title: string.textColor,
-                  value: textStyle['labelColor']?.toString().hexColor ??
+                  value:
+                      textStyle['labelColor']?.toString().hexColor ??
                       defaultTheme.iconColor,
                   colors: kColors,
                   onPick: (color) =>
@@ -234,10 +246,11 @@ class ActionsSettings extends StatelessWidget {
                   itemBuilder: (item, isSelected) => Text(
                     item,
                     style: theme.textTheme.bodySmall?.copyWith(
-                        color: isSelected
-                            ? theme.colorScheme.primary
-                            : theme.dividerColor,
-                        fontWeight: fontWeight(item)),
+                      color: isSelected
+                          ? theme.colorScheme.primary
+                          : theme.dividerColor,
+                      fontWeight: fontWeight(item),
+                    ),
                   ),
                   onSelect: (weight) =>
                       update('text', MapEntry('fontWeight', weight)),
@@ -260,7 +273,7 @@ class ActionsSettings extends StatelessWidget {
                 ),
               )
               .toList(),
-        )
+        ),
       ],
     );
   }
